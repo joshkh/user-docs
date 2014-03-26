@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hardware &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="System Requirements" href="../index.html" />
+    <link rel="next" title="Solaris" href="solaris.html" />
+    <link rel="prev" title="System Requirements" href="../index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="solaris.html" title="Solaris"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="System Requirements"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">System Requirements</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hardware</a><ul>
+<li><a class="reference internal" href="#recommendations">Recommendations</a><ul>
+<li><a class="reference internal" href="#database-servers">Database servers</a></li>
+<li><a class="reference internal" href="#web-servers">Web servers</a></li>
+<li><a class="reference internal" href="#os">OS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-we-use">What we use</a><ul>
+<li><a class="reference internal" href="#build">Build</a></li>
+<li><a class="reference internal" href="#production">Production</a></li>
+<li><a class="reference internal" href="#web-server">Web server</a></li>
+<li><a class="reference internal" href="#modencode-identical-machines">modENCODE - identical machines</a></li>
+<li><a class="reference internal" href="#database-sizes-disk-space">Database sizes/ disk space</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">System Requirements</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="solaris.html"
+                        title="next chapter">Solaris</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/system-requirements/hardware/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hardware">
+<h1>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
+<p>The requirements for running InterMine depend on the size of data warehouse you need to create. It is possible to build small InterMine databases on most linux or Mac desktops but with more substantial databases a more powerful dedicated server is required. The recommendations below are the minimum for running substantial servers such as FlyMine or InterMines for the major model organism databases.</p>
+<div class="section" id="database-servers">
+<h3>Database servers<a class="headerlink" href="#database-servers" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>8 cores</li>
+<li>32 GB RAM</li>
+<li>~2TB usable storage (SAS disks are faster than SATA but more expensive)<ul>
+<li>RAID 10 (4TB raw in RAID 10)</li>
+<li>hardware RAID controller with a battery backed cache (gives faster write speeds)</li>
+<li>it doesn&#8217;t matter whether storage is in the same box or a separate disk array, if separate needs a Fibre Channel connection</li>
+</ul>
+</li>
+<li>Linux/Unix capable of running Java and PostgreSQL</li>
+</ul>
+</div></blockquote>
+<p>A less expensive option:</p>
+<blockquote>
+<div><ul class="simple">
+<li>4 cores</li>
+<li>16GB RAM</li>
+<li>~2TB usable storage<ul>
+<li>RAID 10</li>
+<li>hardware RAID controller with a battery backed cache (gives faster write speeds)</li>
+</ul>
+</li>
+<li>Linux/Unix capable of running Java and PostgreSQL</li>
+</ul>
+</div></blockquote>
+<p>Note:  It&#8217;s fairly essential to have separate development and production machines.</p>
+</div>
+<div class="section" id="web-servers">
+<h3>Web servers<a class="headerlink" href="#web-servers" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>4 cores</li>
+<li>8GB RAM (or more)</li>
+<li>~200GB local disks</li>
+</ul>
+</div></blockquote>
+<p>A less expensive option is to run Tomcat on the database machine and not buy separate web servers, we do this for modENCODE and performance is fine.</p>
+</div>
+<div class="section" id="os">
+<h3>OS<a class="headerlink" href="#os" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Any distribution of linux/Unix should be fine as long as it runs Java and Postgres, Debian is our preference.</li>
+<li>Use something mainstream and reliable like Linux or BSD</li>
+<li>Use the system that your friendly sysadmin is most familiar with.</li>
+<li>Not favourites:<ul>
+<li>CentOS</li>
+<li>Tru64</li>
+<li><a class="reference internal" href="solaris.html"><em>Solaris</em></a></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="what-we-use">
+<h2>What we use<a class="headerlink" href="#what-we-use" title="Permalink to this headline">¶</a></h2>
+<p>FlyMine has separate build and production build servers and separate build and production build web servers.</p>
+<div class="section" id="build">
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<p>This runs the Java data integration code to build the warehouse, reading from source files/DBs and loading into an intermediate postgres database then the final postgres database.  This is write intensive; the faster the disks the better, it only needs 4 cores but the more RAM the better.</p>
+</div>
+<div class="section" id="production">
+<h3>Production<a class="headerlink" href="#production" title="Permalink to this headline">¶</a></h3>
+<p>This runs the production postgres database.  More cores and more RAM means better handling of concurrent requests and more of the database in cache.  InterMine often fires a lot of queries at a time for a single user - i.e. when running templates for a report page.</p>
+</div>
+<div class="section" id="web-server">
+<h3>Web server<a class="headerlink" href="#web-server" title="Permalink to this headline">¶</a></h3>
+<p>FlyMine has a separate machine to run Tomcat to serve the webapp, this is the machine that actually runs the live InterMine code.  For us this a 4 core machine with 8GB RAM.  The cores are more important than the speed, disk space not important, more RAM means better caching.</p>
+</div>
+<div class="section" id="modencode-identical-machines">
+<h3>modENCODE - identical machines<a class="headerlink" href="#modencode-identical-machines" title="Permalink to this headline">¶</a></h3>
+<p>For modENCODE we actually have two identical servers that switch roles with each release.  With higher data volumes and more frequent releases this makes more sense as we avoid dumping and reloading.</p>
+</div>
+<div class="section" id="database-sizes-disk-space">
+<h3>Database sizes/ disk space<a class="headerlink" href="#database-sizes-disk-space" title="Permalink to this headline">¶</a></h3>
+<p>Disk space on the build and production machines obviously depends on volume of data.</p>
+<p>Multiply the database size by at least 3 for a corresponding InterMine instance.  This takes into account the various redundant ways we store data and precomputed tables, all to boost query performance.</p>
+<p>Precomputed tables are pre-joined tables that can be swapped in dynamically to reduce table joins in actual queries and improve performance.  This means a lot of duplicated data is stored.</p>
+<p>As a rough guide the current FlyBase database with all 12 genomes is 33GB, an InterMine with this and a couple of extra data sources is 100GB.  A full FlyMine release is typically around 500GB.</p>
+<p>When running an InterMine build with multiple data sources, database copies are made periodically for backups so there needs to be extra space available, at least four times the final database size.</p>
+<p>Related topics:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="solaris.html">Solaris</a></li>
+</ul>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="solaris.html" title="Solaris"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="System Requirements"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

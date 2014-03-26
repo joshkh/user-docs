@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Help &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Linking in to your mine" href="../linking-in/index.html" />
+    <link rel="prev" title="Data Categories" href="../data-categories/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../linking-in/index.html" title="Linking in to your mine"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../data-categories/index.html" title="Data Categories"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Help</a><ul>
+<li><a class="reference internal" href="#top-links">Top Links</a></li>
+<li><a class="reference internal" href="#take-a-tour-link">Take a tour link</a></li>
+<li><a class="reference internal" href="#contextual-help-the-on-each-page">Contextual help, the <cite>?</cite> on each page</a><ul>
+<li><a class="reference internal" href="#set-the-url-in-your-properties-file">Set the URL in your properties file</a></li>
+<li><a class="reference internal" href="#set-the-context">Set the context</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-definitions">Data definitions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../data-categories/index.html"
+                        title="previous chapter">Data Categories</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../linking-in/index.html"
+                        title="next chapter">Linking in to your mine</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/help/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="help">
+<h1>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
+<p>This page lists how you can update the help sections of your InterMine.</p>
+<div class="section" id="top-links">
+<h2>Top Links<a class="headerlink" href="#top-links" title="Permalink to this headline">¶</a></h2>
+<p>To add help links to the top of your website, add an entry to <cite>web.properties</cite> listing the links:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">header.links</span><span class="o">=</span><span class="s">link1, link2</span>
+</pre></div>
+</div>
+<p>Then specify the URLs:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">header.links.link1</span><span class="o">=</span><span class="s">http://www.mysite.com/link1</span>
+<span class="na">header.links.link2</span><span class="o">=</span><span class="s">http://www.mysite.com/link2</span>
+</pre></div>
+</div>
+<p>For example, see FlyMine&#8217;s web.properties file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">header.links</span><span class="o">=</span><span class="s">help,FAQ,about,cite,software</span>
+<span class="na">header.links.FAQ</span><span class="o">=</span><span class="s">http://trac.flymine.org/wiki/FlyMineFAQ</span>
+<span class="na">header.links.about</span><span class="o">=</span><span class="s">http://blog.flymine.org/?page_id=35</span>
+<span class="na">header.links.cite</span><span class="o">=</span><span class="s">http://blog.flymine.org/?page_id=37</span>
+<span class="na">header.links.help</span><span class="o">=</span><span class="s">http://blog.flymine.org/?page_id=45</span>
+<span class="na">header.links.software</span><span class="o">=</span><span class="s">http://blog.flymine.org/?page_id=39</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="take-a-tour-link">
+<h2>Take a tour link<a class="headerlink" href="#take-a-tour-link" title="Permalink to this headline">¶</a></h2>
+<p>The tour link is set in <cite>headMenu.jsp</cite> as:</p>
+<div class="highlight-properties"><pre>&lt;project.helpLocation&gt;/tour/start</pre>
+</div>
+<p>Set <cite>project.helpLocation</cite> property in your mine.properties file.  If you don&#8217;t have help pages set up, link to FlyMine&#8217;s pages:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">project.helpLocation</span><span class="o">=</span><span class="s">http://www.flymine.org/help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contextual-help-the-on-each-page">
+<h2>Contextual help, the <cite>?</cite> on each page<a class="headerlink" href="#contextual-help-the-on-each-page" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="set-the-url-in-your-properties-file">
+<h3>Set the URL in your properties file<a class="headerlink" href="#set-the-url-in-your-properties-file" title="Permalink to this headline">¶</a></h3>
+<p>On each page is a ? that links to help pages.  Specify the main URL that this question mark should link to by setting the <cite>project.helpLocation</cite> property in your mine.properties file.</p>
+<p>If you don&#8217;t have help pages set up, link to FlyMine&#8217;s pages:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">project.helpLocation</span><span class="o">=</span><span class="s">http://www.flymine.org/help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-the-context">
+<h3>Set the context<a class="headerlink" href="#set-the-context" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>If the user is on a webpage defined in the properties file, then when they click the help link they will be forwarded to the help section for the page they were viewing.</li>
+<li>If the page they are on is not specified in the properties file, they will be forwarded to the first page of the help document.</li>
+<li>The context is determined by parsing the URL and taking the name of the current webpage, minus the <cite>.do</cite>.  For example, go to FlyMine and click on the &#8216;templates&#8217; tab, this is the URL:  <a class="reference external" href="http://www.flymine.org/query/templates.do">http://www.flymine.org/query/templates.do</a>.  The parsed name of that webpage is &#8220;templates&#8221;.</li>
+<li>Below are the mappings from parsed webpage name to anchor names on the help page.</li>
+</ol>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">help.page.&lt;parsed webpage name&gt;</span> <span class="o">=</span> <span class="s">&lt;anchor in help.html file&gt;</span>
+
+<span class="na">help.page.begin</span><span class="o">=</span><span class="s">begin</span>
+<span class="na">help.page.templates</span><span class="o">=</span><span class="s">templates</span>
+<span class="na">help.page.bag</span><span class="o">=</span><span class="s">lists</span>
+<span class="na">help.page.bag.upload</span><span class="o">=</span><span class="s">lists:upload</span>
+<span class="na">help.page.bag.view</span><span class="o">=</span><span class="s">lists:view</span>
+<span class="na">help.page.customQuery</span><span class="o">=</span><span class="s">customQuery</span>
+<span class="na">help.page.mymine.lists</span><span class="o">=</span><span class="s">mymine:lists</span>
+<span class="na">help.page.mymine.history</span><span class="o">=</span><span class="s">mymine:queryHistory</span>
+<span class="na">help.page.mymine.saved</span><span class="o">=</span><span class="s">mymine:savedQueries</span>
+<span class="na">help.page.mymine.templates</span><span class="o">=</span><span class="s">mymine:savedTemplates</span>
+<span class="na">help.page.mymine.password</span><span class="o">=</span><span class="s">mymine:changePassword</span>
+<span class="na">help.page.dataCategories</span><span class="o">=</span><span class="s">data</span>
+<span class="na">help.page.objectDetails</span><span class="o">=</span><span class="s">reportPage</span>
+<span class="na">help.page.template</span><span class="o">=</span><span class="s">template</span>
+<span class="na">help.page.results</span><span class="o">=</span><span class="s">results</span>
+<span class="na">help.page.bagDetails</span><span class="o">=</span><span class="s">listAnalysis</span>
+<span class="na">help.page.bagUploadConfirm</span><span class="o">=</span><span class="s">buildList</span>
+<span class="na">help.page.query</span><span class="o">=</span><span class="s">query</span>
+<span class="na">help.page.importQueries</span><span class="o">=</span><span class="s">importQueries</span>
+<span class="na">help.page.importTemplates</span><span class="o">=</span><span class="s">importTemplates</span>
+<span class="na">help.page.tree</span><span class="o">=</span><span class="s">tree</span>
+<span class="na">help.page.aspect</span><span class="o">=</span><span class="s">dataCategory</span>
+</pre></div>
+</div>
+<p>Your mine&#8217;s web.properties file is merged with this web.properties file, so entries you add to web.properties will overwrite the values listed above.</p>
+</div>
+</div>
+<div class="section" id="data-definitions">
+<h2>Data definitions<a class="headerlink" href="#data-definitions" title="Permalink to this headline">¶</a></h2>
+<p>Update these in the classDescriptions.properties file.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../linking-in/index.html" title="Linking in to your mine"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../data-categories/index.html" title="Data Categories"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

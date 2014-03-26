@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Integration &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Database Building" href="index.html" />
+    <link rel="next" title="Model Merging" href="model-merging.html" />
+    <link rel="prev" title="project_build script" href="build-script.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="model-merging.html" title="Model Merging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="build-script.html" title="project_build script"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="build-script.html"
+                        title="previous chapter">project_build script</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model-merging.html"
+                        title="next chapter">Model Merging</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/database/database-building/data-integration.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-integration">
+<h1>Data Integration<a class="headerlink" href="#data-integration" title="Permalink to this headline">¶</a></h1>
+<p>Data integration works by using keys for each class of object to define equivalence for objects of that class.  For example:</p>
+<ul class="simple">
+<li><cite>primaryIdentifier</cite> is used as a key for <cite>Gene</cite></li>
+<li><cite>taxonId</cite> is used as a key for <cite>Organism</cite></li>
+</ul>
+<p>For each <cite>Gene</cite> object loaded, a query is performed in the database to find any existing <cite>Gene</cite> objects with the same <cite>primaryIdentifier</cite>.  If any are found, fields from both objects are merged and the resulting object stored.</p>
+<p>Many performance optimisation steps are applied to this process.  We don&#8217;t actually run a query for each object loaded, requests are batched and queries can be avoided completely if the system can work out no integration will be needed.</p>
+<p>We may also load data from some other source that provides information about genes but doesn&#8217;t use the identifier scheme we have chosen for <cite>primaryIdentifier</cite>.  Instead it only knows about the <cite>symbol</cite>, in that case we would want that source to use the <cite>symbol</cite> to define equivalence for <cite>Gene</cite>.</p>
+<p>Important points:</p>
+<ul class="simple">
+<li>A <cite>primary key</cite> defines a field or fields of a class that can be used to search for equivalent objects</li>
+<li>Multiple primary keys can be defined for a class, sources can use different keys for a class if they provide different identifiers</li>
+<li>One source can use multiple primary keys for a class if the objects of that class don&#8217;t consistently have the same identifier type</li>
+<li><cite>null</cite> - if a source has no value for a field that is defined as a primary key then the key is not used and the data is loaded without being integrated.</li>
+</ul>
+<p>See <a class="reference internal" href="primary-keys.html"><em>Primary Keys</em></a> for more information.</p>
+<span class="target" id="index-0"></span></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="model-merging.html" title="Model Merging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="build-script.html" title="project_build script"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" >Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

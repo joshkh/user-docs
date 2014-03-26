@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Apps/C Usage &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Apps/C Grunt Build" href="index.html" />
+    <link rel="next" title="publication-search" href="publication-search.html" />
+    <link rel="prev" title="Apps/C Grunt Build" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="publication-search.html" title="publication-search"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Apps/C Grunt Build"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Apps/C Grunt Build</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Apps/C Usage</a><ul>
+<li><a class="reference internal" href="#config">Config</a><ul>
+<li><a class="reference internal" href="#eco-templates">Eco Templates</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#commonjs-1-1-modules">CommonJS/1.1 Modules</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Apps/C Grunt Build</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="publication-search.html"
+                        title="next chapter">publication-search</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/embedding/apps-c/usage.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apps-c-usage">
+<span id="index-0"></span><h1>Apps/C Usage<a class="headerlink" href="#apps-c-usage" title="Permalink to this headline">¶</a></h1>
+<p>This document describes how to build JavaScript components using the Apps/C <a class="reference external" href="http://gruntjs.com/">Grunt</a> builder. It compiles CoffeeScript, JavaScript and Eco into CommonJS/1.1 Modules providing AMD/CommonJS/window external interface.</p>
+<p>Example <tt class="docutils literal"><span class="pre">Gruntfile</span></tt>:</p>
+<div class="highlight-coffeescript"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nf">(grunt) -&gt;</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span>
+        <span class="nv">pkg: </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nx">readJSON</span><span class="p">(</span><span class="s">&quot;package.json&quot;</span><span class="p">)</span>
+
+        <span class="nv">apps_c:</span>
+            <span class="nv">commonjs:</span>
+                <span class="nv">src: </span><span class="p">[</span> <span class="s">&#39;src/**/*.{coffee,js,eco}&#39;</span> <span class="p">]</span>
+                <span class="nv">dest: </span><span class="s">&#39;build/app.js&#39;</span>
+                <span class="nv">options:</span>
+                    <span class="nv">main: </span><span class="s">&#39;src/index.js&#39;</span>
+                    <span class="nv">name: </span><span class="s">&#39;MyApp&#39;</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-apps-c&#39;</span><span class="p">)</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;apps_c&#39;</span> <span class="p">])</span>
+</pre></div>
+</div>
+<p>You can now include the <tt class="docutils literal"><span class="pre">build/app.js</span></tt> file and, depending on your surrounding environment, you will be able to load it using RequireJS/AMD, CommonJS or straight from <tt class="docutils literal"><span class="pre">window</span></tt> under the <tt class="docutils literal"><span class="pre">MyApp</span></tt> key.</p>
+<div class="section" id="config">
+<h2>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">options.main</span></tt> property specifies which file will be considered the &#8220;main&#8221; one for your package. Somehow, the external world needs to know what to get when they call <tt class="docutils literal"><span class="pre">require(package_name)</span></tt>. If you do not specify this property the following actions are taken:</p>
+<ol class="arabic simple">
+<li>We try make use of the property <tt class="docutils literal"><span class="pre">main</span></tt> as specified in your app&#8217;s <tt class="docutils literal"><span class="pre">package.json</span></tt> file. Failing that, we...</li>
+<li>try to find the <tt class="docutils literal"><span class="pre">index.[js|coffee]</span></tt> file that is closest to the root of your sources.</li>
+</ol>
+<p>The <tt class="docutils literal"><span class="pre">options.name</span></tt> overrides the name of the package in <tt class="docutils literal"><span class="pre">package.json</span></tt>. It specified the name of the exported package as in: <tt class="docutils literal"><span class="pre">require(name)</span></tt>. One can pass in an array of names, as alternatives, as well.</p>
+<div class="section" id="eco-templates">
+<h3>Eco Templates<a class="headerlink" href="#eco-templates" title="Permalink to this headline">¶</a></h3>
+<p>Are precompiled so when you require them, you need to only pass a <tt class="docutils literal"><span class="pre">context</span></tt> to them to get a string back.</p>
+</div>
+</div>
+<div class="section" id="commonjs-1-1-modules">
+<h2>CommonJS/1.1 Modules<a class="headerlink" href="#commonjs-1-1-modules" title="Permalink to this headline">¶</a></h2>
+<p>The following template wraps your modules:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// filename</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s1">&#39;package/path.js&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">exports</span><span class="p">,</span> <span class="nx">require</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="publication-search.html" title="publication-search"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Apps/C Grunt Build"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" >Apps/C Grunt Build</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

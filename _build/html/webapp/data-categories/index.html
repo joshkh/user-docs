@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Categories &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Help" href="../help/index.html" />
+    <link rel="prev" title="Setting Javascript Options" href="../properties/javascript-options.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../help/index.html" title="Help"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../properties/javascript-options.html" title="Setting Javascript Options"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data Categories</a><ul>
+<li><a class="reference internal" href="#aspects-xml">Aspects.xml</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#data-page-tab">Data page/tab</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../properties/javascript-options.html"
+                        title="previous chapter">Setting Javascript Options</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../help/index.html"
+                        title="next chapter">Help</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/data-categories/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-categories">
+<h1>Data Categories<a class="headerlink" href="#data-categories" title="Permalink to this headline">¶</a></h1>
+<p>Data category pages include various aspects of a concept on a single page.  Category pages include:</p>
+<ul class="simple">
+<li>logo</li>
+<li>short description</li>
+<li>external links</li>
+<li>bulk download queries</li>
+<li>template queries</li>
+<li>direct links to QueryBuilder</li>
+</ul>
+<p>All of the above should relate to a single concept, eg. Genomics or Interactions.</p>
+<p>Data categories are defined in <cite>aspects.xml</cite>.</p>
+<div class="section" id="aspects-xml">
+<h2>Aspects.xml<a class="headerlink" href="#aspects-xml" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;aspect</span> <span class="na">name=</span><span class="s">&quot;Genomics&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;subtitle&gt;</span>Genome annotation<span class="nt">&lt;/subtitle&gt;</span>
+  <span class="nt">&lt;icon-image&gt;</span>model/genomics.gif<span class="nt">&lt;/icon-image&gt;</span>
+  <span class="nt">&lt;large-image&gt;</span>model/genomics.gif<span class="nt">&lt;/large-image&gt;</span>
+  <span class="nt">&lt;intro-text&gt;</span>
+    The gene structure and other genome annotation in FlyMine are provided by
+    a variety of curated source databases.  In most cases FlyMine includes
+    all genome features that have chromosomal locations (eg. genes and repeat regions).
+  <span class="nt">&lt;/intro-text&gt;</span>
+  <span class="nt">&lt;tile-name&gt;</span>model/genomics.jsp<span class="nt">&lt;/tile-name&gt;</span>
+  <span class="nt">&lt;aspect-source</span> <span class="na">name=</span><span class="s">&quot;FlyBase&quot;</span> <span class="na">url=</span><span class="s">&quot;http://www.flybase.org&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;aspect-source</span> <span class="na">name=</span><span class="s">&quot;Ensembl&quot;</span> <span class="na">url=</span><span class="s">&quot;http://www.ensembl.org/Anopheles_gambiae&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/aspect&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>logo<ul>
+<li>&lt;icon-image&gt;model/genomics.gif&lt;/icon-image&gt; - appears on the home and data category pages</li>
+<li>&lt;large-image&gt;model/genomics.gif&lt;/large-image&gt; - appears on the individual data category page</li>
+</ul>
+</li>
+<li>short description<ul>
+<li>&lt;intro-text&gt;TEXT HERE&lt;/intro-text&gt;</li>
+<li>appears on the top of the data category page</li>
+</ul>
+</li>
+<li>external links<ul>
+<li>&lt;aspect-source name=&#8221;FlyBase&#8221; url=&#8221;<a class="reference external" href="http://www.flybase.org">http://www.flybase.org</a>&#8220;/&gt;</li>
+<li>appear on the top right corner of the data category page</li>
+</ul>
+</li>
+<li>bulk download queries<ul>
+<li>appear on the top right corner of the data category page</li>
+</ul>
+</li>
+<li>template queries<ul>
+<li>appear on the data category page</li>
+</ul>
+</li>
+<li>direct links to QueryBuilder<ul>
+<li>links will appear at the bottom of the data categories page</li>
+</ul>
+</li>
+</ul>
+<p>To configure which template queries appear on a data category page, tag the template.</p>
+</div>
+<div class="section" id="data-page-tab">
+<h2>Data page/tab<a class="headerlink" href="#data-page-tab" title="Permalink to this headline">¶</a></h2>
+<p>The data tab points to this JSP file <cite>intermine/webapp/main/resources/webapp/dataCategories.jsp</cite>. You can overwrite this file and display your own customised file by putting a JSP in your <cite>/webapp</cite> directory.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../help/index.html" title="Help"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../properties/javascript-options.html" title="Setting Javascript Options"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

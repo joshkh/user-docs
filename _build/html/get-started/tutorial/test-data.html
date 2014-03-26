@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data files to integrate &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Tutorial" href="index.html" />
+    <link rel="next" title="Tutorial - Configure your InterMine webapp!" href="webapp.html" />
+    <link rel="prev" title="Tutorial" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="webapp.html" title="Tutorial - Configure your InterMine webapp!"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Get started</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data files to integrate</a><ul>
+<li><a class="reference internal" href="#data-sources">Data sources</a><ul>
+<li><a class="reference internal" href="#malaria-genome">malaria-genome</a></li>
+<li><a class="reference internal" href="#uniprot">uniprot</a></li>
+<li><a class="reference internal" href="#gene-ontology">gene_ontology</a></li>
+<li><a class="reference internal" href="#go-annotation">go_annotation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="webapp.html"
+                        title="next chapter">Tutorial - Configure your InterMine webapp!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/get-started/tutorial/test-data.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-files-to-integrate">
+<h1>Data files to integrate<a class="headerlink" href="#data-files-to-integrate" title="Permalink to this headline">¶</a></h1>
+<p>All data required to build an InterMine is included in <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/bio/tutorial/malaria-data.tar.gz">bio/tutorial/malaria-data.tar.gz</a>.  Copy this file to your local directory and extract from the archive.</p>
+<div class="highlight-bash"><div class="highlight"><pre>cp bio/tutorial/malariamine/malaria-data.tar.gz DATA_DIR
+<span class="nb">cd </span>DATA_DIR
+tar -zxvf malaria-data.tar.gz
+</pre></div>
+</div>
+<p>Edit the project.xml file so that all occurances of &#8216;&#8217;DATA_DIR&#8217;&#8217; point to the your local data directory location.</p>
+<div class="section" id="data-sources">
+<h2>Data sources<a class="headerlink" href="#data-sources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="malaria-genome">
+<h3>malaria-genome<a class="headerlink" href="#malaria-genome" title="Permalink to this headline">¶</a></h3>
+<p>The malaria genome as gff3 and fasta, originally downloaded from PlasmoDB</p>
+</div>
+<div class="section" id="uniprot">
+<h3>uniprot<a class="headerlink" href="#uniprot" title="Permalink to this headline">¶</a></h3>
+<p>UniProt XML with protein information and sequences from SwissProt and Trembl.  Downloaded from: <a class="reference external" href="http://www.ebi.ac.uk/uniprot/database/download.html">http://www.ebi.ac.uk/uniprot/database/download.html</a> and filtered on taxon id 36329.</p>
+</div>
+<div class="section" id="gene-ontology">
+<h3>gene_ontology<a class="headerlink" href="#gene-ontology" title="Permalink to this headline">¶</a></h3>
+<p>The Gene Ontology structure.  Downloaded from <a class="reference external" href="http://www.geneontology.org/">http://www.geneontology.org/</a></p>
+</div>
+<div class="section" id="go-annotation">
+<h3>go_annotation<a class="headerlink" href="#go-annotation" title="Permalink to this headline">¶</a></h3>
+<p>GO term assignments for &#8216;&#8217;P. falciparum&#8217;&#8216;.  Downloaded from <a class="reference external" href="http://www.geneontology.org/">http://www.geneontology.org/</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="webapp.html" title="Tutorial - Configure your InterMine webapp!"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Tutorial"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Get started</a> &raquo;</li>
+          <li><a href="index.html" >Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

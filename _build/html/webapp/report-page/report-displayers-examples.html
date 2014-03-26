@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Report Displayers Examples &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Report page" href="index.html" />
+    <link rel="next" title="Webapp Tables CSS &amp; HTML" href="webapp-tables.html" />
+    <link rel="prev" title="Report Displayers" href="report-displayers.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="webapp-tables.html" title="Webapp Tables CSS &amp; HTML"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="report-displayers.html" title="Report Displayers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Report Displayers Examples</a><ul>
+<li><a class="reference internal" href="#sequencefeature-summary">SequenceFeature summary</a></li>
+<li><a class="reference internal" href="#protein-sequence">Protein sequence</a></li>
+<li><a class="reference internal" href="#gbrowse">GBrowse</a></li>
+<li><a class="reference internal" href="#homologues">Homologues</a></li>
+<li><a class="reference internal" href="#gene-structure">Gene structure</a></li>
+<li><a class="reference internal" href="#gene-ontology">Gene Ontology</a></li>
+<li><a class="reference internal" href="#uniprot-comments">UniProt comments</a></li>
+<li><a class="reference internal" href="#interaction-network">Interaction network</a></li>
+<li><a class="reference internal" href="#overlapping-features">Overlapping features</a></li>
+<li><a class="reference internal" href="#specific-displayers">Specific Displayers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="report-displayers.html"
+                        title="previous chapter">Report Displayers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="webapp-tables.html"
+                        title="next chapter">Webapp Tables CSS &amp; HTML</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/report-page/report-displayers-examples.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="report-displayers-examples">
+<span id="index-0"></span><h1>Report Displayers Examples<a class="headerlink" href="#report-displayers-examples" title="Permalink to this headline">¶</a></h1>
+<p>Report displayers you can use in your own Mine and some examples created for specific data types in modMine, FlyMine and metabolicMine.</p>
+<p>The following displayers can all be used for data loaded by standard InterMine parsers. To see how to configure them check out FlyMine&#8217;s <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt>.</p>
+<div class="section" id="sequencefeature-summary">
+<h2>SequenceFeature summary<a class="headerlink" href="#sequencefeature-summary" title="Permalink to this headline">¶</a></h2>
+<p>Applicable for any SequenceFeature - shows length, sequence export, chromosome location, cyto location and SO term (where present).</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.SequenceFeatureDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/sequenceFeatureDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;chromosome,chromosomeLocation,sequence,length,sequenceOntologyTerm,locations,cytoLocation&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;summary&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;SequenceFeature&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/sequence_feature_displayer.png" src="../../_images/sequence_feature_displayer.png" />
+<p class="caption">A Sequence feature displayer in metabolicMine.</p>
+</div>
+</div>
+<div class="section" id="protein-sequence">
+<h2>Protein sequence<a class="headerlink" href="#protein-sequence" title="Permalink to this headline">¶</a></h2>
+<p>Applicable for Protein - shows length, sequence export.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.ProteinSequenceDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/proteinSequenceDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;sequence&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;summary&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;Protein&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/protein_sequence_displayer.png" src="../../_images/protein_sequence_displayer.png" />
+<p class="caption">A Protein sequence displayer in FlyMine.</p>
+</div>
+</div>
+<div class="section" id="gbrowse">
+<h2>GBrowse<a class="headerlink" href="#gbrowse" title="Permalink to this headline">¶</a></h2>
+<p>Show an inline image from a configured GBrowse instance.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.GBrowseDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/gbrowseDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;Genes&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;SequenceFeature&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>This also needs two properties to be configured in the <tt class="docutils literal"><span class="pre">minename.properties</span></tt> file: <tt class="docutils literal"><span class="pre">gbrowse.prefix</span></tt> and <tt class="docutils literal"><span class="pre">gbrowse_image.prefix</span></tt> which give the location of a running GBrowse instance.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">gbrowse.prefix</span><span class="o">=</span><span class="s">http://www.flymine.org/cgi-bin/gbrowse</span>
+<span class="na">gbrowse_image.prefix</span><span class="o">=</span><span class="s">http://www.flymine.org/cgi-bin/gbrowse_img</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/gbrowse_displayer.png" src="../../_images/gbrowse_displayer.png" />
+<p class="caption">A Genome browser view in FlyMine.</p>
+</div>
+</div>
+<div class="section" id="homologues">
+<h2>Homologues<a class="headerlink" href="#homologues" title="Permalink to this headline">¶</a></h2>
+<p>Shows a table of organism and homologous genes of homologues per organism.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.HomologueDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/homologueDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;homologues&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;Homology&quot;</span>
+    <span class="na">parameters=</span><span class="s">&quot;{&#39;dataSets&#39;: [&#39;TreeFam data set&#39;, &#39;KEGG orthologues data set&#39;]}&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;Gene&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/homologues_displayer.png" src="../../_images/homologues_displayer.png" />
+<p class="caption">A Homologues displayer in FlyMine.</p>
+</div>
+<p>Note that FlyMine includes a specific displayer to show the twelve Drosophila species as a phylogenetic tree.</p>
+</div>
+<div class="section" id="gene-structure">
+<h2>Gene structure<a class="headerlink" href="#gene-structure" title="Permalink to this headline">¶</a></h2>
+<p>Displays transcripts, exons, introns, UTRs and CDSs if present in the model and for the particular organism.  Can be added to report pages for any of these feature types and will find the parent gene and show all transcripts, highlighting the feature of the actual report page.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.GeneStructureDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/geneStructureDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;transcripts,exons,CDSs,introns,UTRs,fivePrimeUTR,threePrimeUTR&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;Genomics&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;Gene,Transcript,Exon,Intron,UTR,CDS&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/gene_structure_displayer.png" src="../../_images/gene_structure_displayer.png" />
+<p class="caption">A Gene structure displayer in FlyMine.</p>
+</div>
+</div>
+<div class="section" id="gene-ontology">
+<h2>Gene Ontology<a class="headerlink" href="#gene-ontology" title="Permalink to this headline">¶</a></h2>
+<p>Simple display of GO terms and evidence codes for a gene, grouped by branch in the ontology.  Groups by the three main ontologies (function, process and component) so you may need to run the GO source.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.GeneOntologyDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/geneOntologyDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;goAnnotation,ontologyAnnotations&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;Function&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;Gene&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/go_displayer.png" src="../../_images/go_displayer.png" />
+<p class="caption">A Gene ontology displayer in modMine.</p>
+</div>
+</div>
+<div class="section" id="uniprot-comments">
+<h2>UniProt comments<a class="headerlink" href="#uniprot-comments" title="Permalink to this headline">¶</a></h2>
+<p>A clear view of curated curated comments from UniProt (SwissProt) applied to a protein, or for a gene will show comments from all proteins of the gene.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.UniProtCommentsDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/uniProtCommentsDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;summary&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;Gene,Protein&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/uniprot_comments_displayer.png" src="../../_images/uniprot_comments_displayer.png" />
+<p class="caption">A Uniprot curated comments displayer in metabolicMine.</p>
+</div>
+</div>
+<div class="section" id="interaction-network">
+<h2>Interaction network<a class="headerlink" href="#interaction-network" title="Permalink to this headline">¶</a></h2>
+<p>Uses the <a class="reference external" href="http://cytoscapeweb.cytoscape.org/">Cytoscape Web plugin</a> to display physical and genetics interactions.  The interaction displayer links to report pages, allows creation of a gene list of the whole network and can show tabular interaction data. Read NetworkDisplayer for details.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.CytoscapeNetworkDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/cytoscapeNetworkDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;interactions&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;Interactions&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;Gene,Protein&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/interactions_displayer.png" src="../../_images/interactions_displayer.png" />
+<p class="caption">An Interactions displayer in FlyMine.</p>
+</div>
+</div>
+<div class="section" id="overlapping-features">
+<h2>Overlapping features<a class="headerlink" href="#overlapping-features" title="Permalink to this headline">¶</a></h2>
+<p>A summary view of features that overlap the chromosome location of the reported feature, if the gene structure displayer is also used it will exclude any features that are part of the same gene model - i.e. it won&#8217;t report that a gene overlaps it&#8217;s own exons.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.OverlappingFeaturesDisplayer&quot;</span>
+    <span class="na">jspName=</span><span class="s">&quot;model/overlappingFeaturesDisplayer.jsp&quot;</span>
+    <span class="na">replacesFields=</span><span class="s">&quot;overlappingFeatures&quot;</span>
+    <span class="na">placement=</span><span class="s">&quot;Genomics&quot;</span>
+    <span class="na">types=</span><span class="s">&quot;SequenceFeature&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/overlapping_features_displayer.png" src="../../_images/overlapping_features_displayer.png" />
+<p class="caption">An Overlapping features displayer in modMine.</p>
+</div>
+</div>
+<div class="section" id="specific-displayers">
+<h2>Specific Displayers<a class="headerlink" href="#specific-displayers" title="Permalink to this headline">¶</a></h2>
+<p>There are some displayers created for specific data sets in FlyMine, metabolicMine or modMine that may not be re-usable in other Mines but could be adapted or provide inspiration.</p>
+<div class="figure align-center">
+<img alt="../../_images/jBrowse_displayer.png" src="../../_images/jBrowse_displayer.png" />
+<p class="caption">JBrowse genome browser in metabolicMine.</p>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/FlyAtlas_expression_displayer.png" src="../../_images/FlyAtlas_expression_displayer.png" />
+<p class="caption">FlyAtlas gene experssion data in FlyMine, this uses the Google Data Vizualization API JavaScript library to render an interactive graph in the browser.</p>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/drosophila_homology_displayer.png" src="../../_images/drosophila_homology_displayer.png" />
+<p class="caption">A phylogenetic tree of Drosophila species displayed using the <a class="reference external" href="http://www.jsphylosvg.com/">jsPhyloSVG</a> JavaScript library in FlyMine.</p>
+</div>
+<div class="figure align-center">
+<img alt="../../_images/modMine-heatmap.png" src="../../_images/modMine-heatmap.png" />
+<p class="caption">Heatmap of fly gene expression in modMine, this makes use of <a class="reference external" href="http://www.canvasxpress.org/">canvasXpress</a> JavaScript library.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="webapp-tables.html" title="Webapp Tables CSS &amp; HTML"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="report-displayers.html" title="Report Displayers"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

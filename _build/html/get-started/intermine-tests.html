@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>InterMine Tests &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Get started" href="index.html" />
+    <link rel="next" title="How to set up your InterMine environment on the Amazon Cloud" href="amazon.html" />
+    <link rel="prev" title="Testmodel" href="testmodel.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="amazon.html" title="How to set up your InterMine environment on the Amazon Cloud"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="testmodel.html" title="Testmodel"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">InterMine Tests</a><ul>
+<li><a class="reference internal" href="#running-the-core-tests">Running the core tests</a><ul>
+<li><a class="reference internal" href="#create-databases">Create databases</a></li>
+<li><a class="reference internal" href="#update-properties-file">Update properties file</a></li>
+<li><a class="reference internal" href="#run-the-tests">Run the tests</a></li>
+<li><a class="reference internal" href="#view-results">View results</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-bio-tests">Running the bio tests</a><ul>
+<li><a class="reference internal" href="#id1">Create databases</a></li>
+<li><a class="reference internal" href="#id2">Update properties file</a></li>
+<li><a class="reference internal" href="#build-the-databases">Build the databases</a></li>
+<li><a class="reference internal" href="#id3">Run the tests</a></li>
+<li><a class="reference internal" href="#run-a-single-test">Run a single test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="testmodel.html"
+                        title="previous chapter">Testmodel</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="amazon.html"
+                        title="next chapter">How to set up your InterMine environment on the Amazon Cloud</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/get-started/intermine-tests.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="intermine-tests">
+<h1>InterMine Tests<a class="headerlink" href="#intermine-tests" title="Permalink to this headline">¶</a></h1>
+<p>After getting the source code for InterMine and ensuring you have all of the required prerequisites, the next step is to try the tests to confirm that everything runs well in your environment.</p>
+<div class="section" id="running-the-core-tests">
+<h2>Running the core tests<a class="headerlink" href="#running-the-core-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-databases">
+<h3>Create databases<a class="headerlink" href="#create-databases" title="Permalink to this headline">¶</a></h3>
+<p>Create blank databases required by the tests named:  <cite>unittest</cite>, <cite>truncunittest</cite>, <cite>fulldatatest</cite>, <cite>flatmodetest</cite>, <cite>notxmltest</cite>.  See PostgresBasics and introduction to some Postgres commands.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="k">for </span>db in unittest truncunittest fulldatatest flatmodetest notxmltest; <span class="k">do </span>createdb <span class="nv">$db</span>; <span class="k">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-properties-file">
+<h3>Update properties file<a class="headerlink" href="#update-properties-file" title="Permalink to this headline">¶</a></h3>
+<p>You need to set up a properties file to provide database details to the test code.  In your home directory create a file called <cite>intermine-test.properties</cite> and update the server name, database names, and database username and password.  You can use different database names as long as the actual database name used to create the database and the <cite>db.xxx.datasource.databaseName</cite> value match.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># super user</span>
+<span class="na">superuser.account</span><span class="o">=</span><span class="s">test</span>
+
+<span class="c"># common properties</span>
+
+<span class="na">os.query.max-time</span><span class="o">=</span><span class="s">10000000</span>
+<span class="na">os.query.max-limit</span><span class="o">=</span><span class="s">100000</span>
+<span class="na">os.query.max-offset</span><span class="o">=</span><span class="s">10000000</span>
+<span class="na">os.queue-len</span><span class="o">=</span><span class="s">100</span>
+
+<span class="c"># testing properties</span>
+
+<span class="na">db.notxmlunittest.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.notxmlunittest.datasource.databaseName</span><span class="o">=</span><span class="s">notxmltest</span>
+<span class="na">db.notxmlunittest.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.notxmlunittest.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+
+<span class="na">db.truncunittest.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.truncunittest.datasource.databaseName</span><span class="o">=</span><span class="s">truncunittest</span>
+<span class="na">db.truncunittest.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.truncunittest.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+
+<span class="na">db.flatmodeunittest.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.flatmodeunittest.datasource.databaseName</span><span class="o">=</span><span class="s">flatmodetest</span>
+<span class="na">db.flatmodeunittest.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.flatmodeunittest.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+
+<span class="na">db.fulldatatest.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.fulldatatest.datasource.databaseName</span><span class="o">=</span><span class="s">fulldatatest</span>
+<span class="na">db.fulldatatest.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.fulldatatest.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+
+<span class="na">db.userprofile-test.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.userprofile-test.datasource.databaseName</span><span class="o">=</span><span class="s">userprofile-test</span>
+<span class="na">db.userprofile-test.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.userprofile-test.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+
+<span class="na">db.unittest.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.unittest.datasource.databaseName</span><span class="o">=</span><span class="s">unittest</span>
+<span class="na">db.unittest.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.unittest.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+</pre></div>
+</div>
+<p>There are separate test projects for the main InterMine libraries: core objectstore code, the integration code and the web code.  These are the
+packages/directories:</p>
+<ul class="simple">
+<li>intermine/objectstore/test</li>
+<li>intermine/integrate/test</li>
+</ul>
+</div>
+<div class="section" id="run-the-tests">
+<h3>Run the tests<a class="headerlink" href="#run-the-tests" title="Permalink to this headline">¶</a></h3>
+<p>Run the tests by changing to the appropriate directory and running <cite>ant</cite> with no arguments.  For example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in intermine/objectstore/test/</span>
+<span class="nv">$ </span>ant
+</pre></div>
+</div>
+<p>In this initial setup you may see some Java Exceptions, for diagnosis of common errors see: CommonErrors</p>
+</div>
+<div class="section" id="view-results">
+<h3>View results<a class="headerlink" href="#view-results" title="Permalink to this headline">¶</a></h3>
+<p>The HTML test report will be created in the build directory, eg. <cite>intermine/objectstore/test/build/test/results/index.html</cite></p>
+<p>We aim to keep the tests at a 100% pass rate at all times.</p>
+</div>
+</div>
+<div class="section" id="running-the-bio-tests">
+<h2>Running the bio tests<a class="headerlink" href="#running-the-bio-tests" title="Permalink to this headline">¶</a></h2>
+<p>InterMine includes a <cite>bio</cite> project which contains specific code for biological data and parsers for many data formats.  To run tests on this code you need to set up another properties file and create some more databases.</p>
+<div class="section" id="id1">
+<h3>Create databases<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Create blank databases called <cite>bio-test</cite> and <cite>bio-fulldata-test</cite> (as above you can use different names as long as they match the <cite>db.xxx.datasource.databaseName</cite> values.  For example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>createdb bio-test
+<span class="nv">$ </span>createdb bio-fulldata-test
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Update properties file<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Set up a properties file to provide database details to the test code. In <cite>.intermine</cite> create a file called <cite>intermine-bio-test.properties</cite> and configure the server name, database names, and database username and password.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">os.default</span><span class="o">=</span><span class="s">os.production-client</span>
+
+<span class="c"># common properties</span>
+
+<span class="na">os.query.max-time</span><span class="o">=</span><span class="s">10000000</span>
+<span class="na">os.query.max-limit</span><span class="o">=</span><span class="s">100000</span>
+<span class="na">os.query.max-offset</span><span class="o">=</span><span class="s">10000000</span>
+<span class="na">os.queue-len</span><span class="o">=</span><span class="s">100</span>
+
+<span class="c"># testing properties</span>
+
+<span class="na">db.bio-fulldata-test.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.bio-fulldata-test.datasource.databaseName</span><span class="o">=</span><span class="s">bio-fulldata-test</span>
+<span class="na">db.bio-fulldata-test.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.bio-fulldata-test.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+
+<span class="na">db.bio-test.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.bio-test.datasource.databaseName</span><span class="o">=</span><span class="s">bio-test</span>
+<span class="na">db.bio-test.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.bio-test.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-the-databases">
+<h3>Build the databases<a class="headerlink" href="#build-the-databases" title="Permalink to this headline">¶</a></h3>
+<p>Build database tables automatically generated from the bio model by running the following in <cite>bio/test-all/dbmodel</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant clean build-db
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Run the tests<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Execute the tests, in <cite>bio/test-all</cite> run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant clean; ant
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-a-single-test">
+<h3>Run a single test<a class="headerlink" href="#run-a-single-test" title="Permalink to this headline">¶</a></h3>
+<p>You can also run a test for an individual source by running the ant command with no arguments.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in bio/sources/uniprot/test</span>
+<span class="nv">$ </span>ant
+</pre></div>
+</div>
+<p>The test results will be located at <cite>uniprot/test/build/test/results/index.html</cite>.  You can also run these as JUnit tests directly from Eclipse.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="amazon.html" title="How to set up your InterMine environment on the Amazon Cloud"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="testmodel.html" title="Testmodel"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

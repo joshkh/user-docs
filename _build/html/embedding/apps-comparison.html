@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Apps/* Comparison &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Embedding InterMine components" href="index.html" />
+    <link rel="next" title="Query Results" href="../webapp/query-results/index.html" />
+    <link rel="prev" title="elastic-med" href="apps-c/elastic-med.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../webapp/query-results/index.html" title="Query Results"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="apps-c/elastic-med.html" title="elastic-med"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Apps/* Comparison</a><ul>
+<li><a class="reference internal" href="#apps-a">Apps/A</a></li>
+<li><a class="reference internal" href="#apps-b">Apps/B</a></li>
+<li><a class="reference internal" href="#apps-c">Apps/C</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="apps-c/elastic-med.html"
+                        title="previous chapter">elastic-med</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../webapp/query-results/index.html"
+                        title="next chapter">Query Results</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/embedding/apps-comparison.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apps-comparison">
+<span id="index-0"></span><h1>Apps/* Comparison<a class="headerlink" href="#apps-comparison" title="Permalink to this headline">¶</a></h1>
+<p>We have developed a variety of builders that can be used to make the development and deployment of your <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> components easier.</p>
+<p>Follow the guide below to decide which approach is the best for your situation. If in doubt use <cite>Apps/C</cite>.</p>
+<div class="section" id="apps-a">
+<h2>Apps/A<a class="headerlink" href="#apps-a" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>url</dt>
+<dd><a class="reference external" href="https://github.com/intermine/apps-a-middleware">https://github.com/intermine/apps-a-middleware</a></dd>
+<dt>examples</dt>
+<dd><a class="reference external" href="https://github.com/intermine/intermine-apps-a">https://github.com/intermine/intermine-apps-a</a></dd>
+<dt>languages</dt>
+<dd><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>, <a class="reference external" href="http://www.htmldog.com/guides/css/beginner/">CSS</a>, <a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a>, <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a>, <a class="reference external" href="http://livescript.net/">LiveScript</a>, <a class="reference external" href="http://www.typescriptlang.org/">TypeScript</a>, <a class="reference external" href="https://github.com/sstephenson/eco">Eco</a>, <a class="reference external" href="http://twitter.github.io/hogan.js/">Hogan</a></dd>
+<dt>what</dt>
+<dd>Middleware for loading apps, resolving vendor dependencies at runtime and sandboxing <a class="reference external" href="http://www.htmldog.com/guides/css/beginner/">CSS</a> styles.</dd>
+<dt>when</dt>
+<dd>You are loading a lot of apps on a page and they are likely going to depend on the same vendor library dependencies. These are resolved at runtime, in the browser, and thus you can save on requests by sharing the same libraries over and over. You want to automatically prefix your <a class="reference external" href="http://www.htmldog.com/guides/css/beginner/">CSS</a> styles so that your app does not clash with the rest of the apps/styles on the page. You want to provide an example config that people are to use with your app, but want to give developers the ability to override. You want to create a repository of apps and have a delivery mechanism ready (<cite>git</cite> is supported).</dd>
+<dt>issues</dt>
+<dd>Dynamic resolving of libraries at runtime is nice but it takes one app to crash them all. You could also encounter a situation where one app needs say jQuery <cite>1.9</cite> and another jQuery <cite>2.0</cite>, try solving that one.</dd>
+<dt>alternatives</dt>
+<dd>Use <cite>Apps/C</cite> together with <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> to load apps in an iframe so it has no chance of colliding with the other resources on the page.</dd>
+</dl>
+</div>
+<div class="section" id="apps-b">
+<h2>Apps/B<a class="headerlink" href="#apps-b" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>url</dt>
+<dd><a class="reference external" href="https://github.com/intermine/apps-b-builder">https://github.com/intermine/apps-b-builder</a></dd>
+<dt>examples</dt>
+<dd>NA</dd>
+<dt>languages</dt>
+<dd><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>, <a class="reference external" href="http://www.htmldog.com/guides/css/beginner/">CSS</a></dd>
+<dt>what</dt>
+<dd>Builder for <a class="reference external" href="http://component.io/">ComponentIo</a> based packages.</dd>
+<dt>when</dt>
+<dd>Use it when you want as small a build as possible relying on packages in the <a class="reference external" href="http://component.io/">ComponentIo</a> ecosystem. As all vendor dependencies take the <a class="reference external" href="http://addyosmani.com/writing-modular-js/">CommonJS</a> approach to loading files, you will unlikely going to encounter difficulty running your app besides other apps on the page.</dd>
+<dt>issues</dt>
+<dd>One has to develop in <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>, <a class="reference external" href="http://www.htmldog.com/guides/css/beginner/">CSS</a> and cannot use languages such as <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> if your app is to be available through the <a class="reference external" href="http://component.io/">ComponentIo</a> ecosystem.</dd>
+<dt>alternatives</dt>
+<dd>Use <cite>Apps/C</cite> and use the <cite>grunt-component-io</cite> task to make use of libraries available through the <a class="reference external" href="http://component.io/">ComponentIo</a> ecosystem.</dd>
+</dl>
+</div>
+<div class="section" id="apps-c">
+<h2>Apps/C<a class="headerlink" href="#apps-c" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>url</dt>
+<dd><a class="reference external" href="https://github.com/intermine/grunt-apps-c">https://github.com/intermine/grunt-apps-c</a></dd>
+<dt>examples</dt>
+<dd><a class="reference external" href="https://github.com/intermine/intermine-apps-c">https://github.com/intermine/intermine-apps-c</a></dd>
+<dt>languages</dt>
+<dd><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a>, <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a>, <a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a>, <a class="reference external" href="https://github.com/sstephenson/eco">Eco</a>, <a class="reference external" href="http://canjs.com/docs/can.Mustache.html">Mustache</a>, <a class="reference external" href="http://www.json.org/">JSON</a> <em>and more</em></dd>
+<dt>what</dt>
+<dd>A <a class="reference external" href="gruntjs.com">Grunt</a> based builder. Allowing to run arbitrary tasks and make use of <a class="reference external" href="bower.io">Bower</a> ecosystem for vendor dependencies.</dd>
+<dt>when</dt>
+<dd>You want to use the <em>de-facto</em> standard in building &amp; bundling <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> applications; this gives you access to big ecosystems of libraries to choose from.</dd>
+<dt>issues</dt>
+<dd>You need to prefix your <a class="reference external" href="http://www.htmldog.com/guides/css/beginner/">CSS</a> styles yourself (use <cite>grunt-rework</cite>) and your bundled packages can clash if you are depdending on libraries that export themselves globally (on <cite>window</cite> object). To alleviate these issues you can load your app using the <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> library. Since none of your builds share resources (unless you make a mega-build), your apps can get bulky.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../webapp/query-results/index.html" title="Query Results"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="apps-c/elastic-med.html" title="elastic-med"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Reactome &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../../index.html" />
+    <link rel="up" title="Pathway data sources" href="index.html" />
+    <link rel="next" title="Proteins" href="../proteins/index.html" />
+    <link rel="prev" title="KEGG" href="kegg.html" /><!-- syntax highlighting -->
+<link href="../../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../proteins/index.html" title="Proteins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kegg.html" title="KEGG"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Pathway data sources</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Reactome</a><ul>
+<li><a class="reference internal" href="#types-of-data-loaded">Types of data loaded</a></li>
+<li><a class="reference internal" href="#how-to-download-the-data">How to download the data</a></li>
+<li><a class="reference internal" href="#how-to-load-the-data-into-your-mine">How to load the data into your mine</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="kegg.html"
+                        title="previous chapter">KEGG</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../proteins/index.html"
+                        title="next chapter">Proteins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/database/data-sources/library/pathways/reactome.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="reactome">
+<h1>Reactome<a class="headerlink" href="#reactome" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="types-of-data-loaded">
+<h2>Types of data loaded<a class="headerlink" href="#types-of-data-loaded" title="Permalink to this headline">¶</a></h2>
+<p>genes, pathways</p>
+</div>
+<div class="section" id="how-to-download-the-data">
+<h2>How to download the data<a class="headerlink" href="#how-to-download-the-data" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://reactome.org/download/current/biopax.zip">http://reactome.org/download/current/biopax.zip</a></p>
+</div>
+<div class="section" id="how-to-load-the-data-into-your-mine">
+<h2>How to load the data into your mine<a class="headerlink" href="#how-to-load-the-data-into-your-mine" title="Permalink to this headline">¶</a></h2>
+<p>project XML example</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;reactome&quot;</span> <span class="na">type=</span><span class="s">&quot;biopax&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir&quot;</span> <span class="na">location=</span><span class="s">&quot;/data/reactome&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;biopax.organisms&quot;</span> <span class="na">value=</span><span class="s">&quot;7227&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;biopax.datasourcename&quot;</span> <span class="na">value=</span><span class="s">&quot;Reactome&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;biopax.datasetname&quot;</span> <span class="na">value=</span><span class="s">&quot;Reactome data set&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;biopax.curated&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../proteins/index.html" title="Proteins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="kegg.html" title="KEGG"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" >Pathway data sources</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,984 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Get started" href="../index.html" />
+    <link rel="next" title="Data files to integrate" href="test-data.html" />
+    <link rel="prev" title="Get started" href="../index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="test-data.html" title="Data files to integrate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Get started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#creating-a-new-mine">Creating a new Mine</a><ul>
+<li><a class="reference internal" href="#project-xml">Project.xml</a><ul>
+<li><a class="reference internal" href="#sources">&lt;sources&gt;</a></li>
+<li><a class="reference internal" href="#post-processing">&lt;post-processing&gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-to-load">Data to load</a></li>
+<li><a class="reference internal" href="#properties-file">Properties file</a></li>
+<li><a class="reference internal" href="#create-databases">Create databases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-data-model">The Data Model</a><ul>
+<li><a class="reference internal" href="#defining-the-model">Defining the model</a></li>
+<li><a class="reference internal" href="#creating-a-database">Creating a database</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loading-data">Loading Data</a><ul>
+<li><a class="reference internal" href="#loading-data-from-a-source">Loading data from a source</a></li>
+<li><a class="reference internal" href="#object-relational-mapping">Object relational mapping</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loading-genome-data-from-gff3-and-fasta">Loading Genome Data from GFF3 and FASTA</a><ul>
+<li><a class="reference internal" href="#data-integration">Data integration</a></li>
+<li><a class="reference internal" href="#gff3-files">GFF3 files</a></li>
+<li><a class="reference internal" href="#the-gff3-source">The GFF3 source</a></li>
+<li><a class="reference internal" href="#loading-gff3-data">Loading GFF3 data</a></li>
+<li><a class="reference internal" href="#fasta-files">FASTA files</a></li>
+<li><a class="reference internal" href="#loading-fasta-data">Loading FASTA data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Data Integration</a><ul>
+<li><a class="reference internal" href="#data-integration-in-malariamine">Data integration in MalariaMine</a></li>
+<li><a class="reference internal" href="#how-data-integration-works">How data integration works</a></li>
+<li><a class="reference internal" href="#primary-keys-in-malariamine">Primary keys in MalariaMine</a></li>
+<li><a class="reference internal" href="#dealing-with-conflicts">Dealing with conflicts</a></li>
+<li><a class="reference internal" href="#the-tracker-table">The <cite>tracker</cite> table</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#updating-organism-and-publication-information">Updating Organism and Publication Information</a><ul>
+<li><a class="reference internal" href="#fetching-organism-details">Fetching organism details</a></li>
+<li><a class="reference internal" href="#fetching-publication-details">Fetching publication details</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">Post Processing</a><ul>
+<li><a class="reference internal" href="#malariamine-post-processing">MalariaMine Post Processing</a><ul>
+<li><a class="reference internal" href="#create-references"><cite>create-references</cite></a></li>
+<li><a class="reference internal" href="#transfer-sequences"><cite>transfer-sequences</cite></a></li>
+<li><a class="reference internal" href="#do-sources"><cite>do-sources</cite></a></li>
+<li><a class="reference internal" href="#summarise-objectstore-create-search-index-create-autocomplete-index"><cite>summarise-objectstore</cite>, <cite>create-search-index</cite> &amp; <cite>create-autocomplete-index</cite></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-the-post-procesing">Run the post-procesing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-a-mine">Building a Mine</a><ul>
+<li><a class="reference internal" href="#build-complete-malariamine">Build complete MalariaMine</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deploying-the-web-application">Deploying the web application</a><ul>
+<li><a class="reference internal" href="#configure">Configure</a></li>
+<li><a class="reference internal" href="#userprofile">UserProfile</a></li>
+<li><a class="reference internal" href="#deploying-the-webapp">Deploying the webapp</a><ul>
+<li><a class="reference internal" href="#tomcat">Tomcat</a></li>
+<li><a class="reference internal" href="#webapp">Webapp</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-the-webapp">Using the webapp</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#help">Help</a><ul>
+<li><a class="reference internal" href="#ant">Ant</a></li>
+<li><a class="reference internal" href="#logs">Logs</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Get started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="test-data.html"
+                        title="next chapter">Data files to integrate</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/get-started/tutorial/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Following the steps on this page you will set up an example InterMine.  You will:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Load some real data sets for Malaria (&#8216;&#8217;P. falciparum&#8217;&#8216;)</li>
+<li>Learn about post-processing after data is loaded</li>
+<li>Deploy a webapp to query the data</li>
+</ul>
+</div></blockquote>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>We use <a class="reference external" href="http://git-scm.com">git</a> to manage and distribute source code.  Download InterMine software from <a class="reference internal" href="../../git/index.html"><em>Get the Software</em></a></p>
+</div>
+<div class="section" id="creating-a-new-mine">
+<h2>Creating a new Mine<a class="headerlink" href="#creating-a-new-mine" title="Permalink to this headline">¶</a></h2>
+<p>Change into the directory you checked out the InterMine source code to and look at the sub-directories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>git/intermine
+<span class="nv">$ </span>ls
+</pre></div>
+</div>
+<p>The directories include:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">intermine</span></tt></dt>
+<dd>the core InterMine code, this is generic code to work with any data model.</dd>
+<dt><tt class="docutils literal"><span class="pre">bio</span></tt></dt>
+<dd>code to deal specifically with biological data, it includes <cite>sources</cite> to load data from standard biological formats.</dd>
+<dt><tt class="docutils literal"><span class="pre">flymine</span></tt></dt>
+<dd>the configuration used to create FlyMine, a useful reference when building your own Mine.</dd>
+<dt><tt class="docutils literal"><span class="pre">testmodel</span></tt></dt>
+<dd>a non-biological test data model used for testing the core InterMine system.</dd>
+<dt><tt class="docutils literal"><span class="pre">imbuild</span></tt></dt>
+<dd>InterMine&#8217;s ant-based build system, you shouldn&#8217;t need to edit anything here.</dd>
+</dl>
+<p>All configuration to create a new Mine is held in a directory in <cite>git/intermine</cite>, your Mine will depend on code in <cite>intermine</cite>, <cite>bio</cite> and <cite>imbuild</cite>.  Any Mine needs to be a top level directory in your InterMine checkout.</p>
+<p>There is a script for creating the Mine; in <cite>git/intermine</cite> run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in git/intermine</span>
+<span class="nv">$ </span>bio/scripts/make_mine MalariaMine
+</pre></div>
+</div>
+<p>You will see the message: <tt class="docutils literal"><span class="pre">Created</span> <span class="pre">malariamine</span> <span class="pre">directory</span> <span class="pre">for</span> <span class="pre">MalariaMine</span></tt></p>
+<p>A <cite>malariamine</cite> directory has been created with several sub-directories, change into the directory and look what is created:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>malariamine
+<span class="nv">$ </span>ls
+</pre></div>
+</div>
+<p>We will look at each of the sub-directories in much more detail later, they are:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">dbmodel</span></tt></dt>
+<dd>contains information about the data model to be used and ant targets relating to the data model and database creation.</dd>
+<dt><tt class="docutils literal"><span class="pre">integrate</span></tt></dt>
+<dd>provides ant targets for loading data into the Mine.</dd>
+<dt><tt class="docutils literal"><span class="pre">postprocess</span></tt></dt>
+<dd>ant targets to run post-processing operations on the data in the Mine once it is integrated.</dd>
+<dt><tt class="docutils literal"><span class="pre">webapp</span></tt></dt>
+<dd>basic configuration and commands for building and deploying the web application</dd>
+</dl>
+<p>In addition there are two <tt class="docutils literal"><span class="pre">default.intermine.xxx.properties</span></tt> files which we won&#8217;t need to edit and a <cite>project.xml</cite> file. Most generated directories have a <tt class="docutils literal"><span class="pre">project.properties</span></tt> file and a short <tt class="docutils literal"><span class="pre">build.xml</span></tt> file, these are used by the InterMine build system.</p>
+<div class="section" id="project-xml">
+<h3>Project.xml<a class="headerlink" href="#project-xml" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>project.xml</cite> allows you to configure which data to load into your Mine.  The automatically generated file has empty <cite>&lt;sources&gt;</cite> and <cite>&lt;post-processing&gt;</cite> sections:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less project.xml
+</pre></div>
+</div>
+<p>There is a <cite>project.xml</cite> already prepared to define a new MalariaMine, copy it to this directory now and look at it:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>cp ../bio/tutorial/project.xml .
+<span class="nv">$ </span>less project.xml
+</pre></div>
+</div>
+<div class="section" id="sources">
+<h4>&lt;sources&gt;<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h4>
+<p>The <cite>&lt;source&gt;</cite> elements list and configure the data sources to be loaded, each one has a <cite>type</cite> that corresponds to a directory in <cite>git/intermine/bio/sources</cite> or a subdirectory (the locations of sources to read are defined by <cite>source.location</cite> properties at the top of the file).  These directories include parsers to retrieve data and information on how it will be integrated.  The <cite>name</cite> can be anything and can be the same as <cite>type</cite>, using a more specific name allows you to define specific integration keys (more on this later).</p>
+<p><cite>&lt;source&gt;</cite> elements can have several properties: <cite>src.data.dir</cite>, <cite>src.data.file</cite> and <cite>src.data.includes</cite> are all used to define locations of files that the source should load.  Other properties are used as parameters to specific parsers.</p>
+</div>
+<div class="section" id="post-processing">
+<h4>&lt;post-processing&gt;<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h4>
+<p>Specific operations can be performed on the Mine once data is loaded, these are listed here as <cite>&lt;post-process&gt;</cite> elements.  We will look at these in more detail later.</p>
+</div>
+</div>
+<div class="section" id="data-to-load">
+<h3>Data to load<a class="headerlink" href="#data-to-load" title="Permalink to this headline">¶</a></h3>
+<p>The InterMine checkout includes a tar file with data to load into MalariaMine.  These are real, complete data sets for &#8216;&#8217;P. falciparum&#8217;&#8216;.  We will load genome annotation from PlasmoDB, protein data from UniProt and GO annotation also from PlasmoDB.</p>
+<p>Copy this to some local directory (your home directory is fine for this workshop) and extract the archive:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span>
+<span class="nv">$ </span>cp git/intermine/bio/tutorial/malaria-data.tar.gz .
+<span class="nv">$ </span>tar -zxvf malaria-data.tar.gz
+</pre></div>
+</div>
+<p>In your <cite>malariamine</cite> directory edit <cite>project.xml</cite> to point each source at the extracted data, just replace <cite>DATA_DIR</cite> with <cite>/home/username</cite> (or on a mac <cite>/Users/username</cite>). Do use absolute path.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/git/intermine/malariamine
+<span class="nv">$ </span>sed -i <span class="s1">&#39;s/DATA_DIR/\/home\/username/g&#39;</span> project.xml
+</pre></div>
+</div>
+<p>For example, the <cite>uniprot-malaria</cite> source:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;sources&gt;</span>
+  <span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;uniprot-malaria&quot;</span> <span class="na">type=</span><span class="s">&quot;uniprot&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;uniprot.organisms&quot;</span> <span class="na">value=</span><span class="s">&quot;36329&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir&quot;</span> <span class="na">location=</span><span class="s">&quot;/home/username/malaria/uniprot/&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/source&gt;</span>
+  ...
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All file locations must be absolute not relative paths.</p>
+</div>
+<p>The <cite>project.xml</cite> file is now ready to use.</p>
+</div>
+<div class="section" id="properties-file">
+<h3>Properties file<a class="headerlink" href="#properties-file" title="Permalink to this headline">¶</a></h3>
+<p>Configuration of local databases and tomcat deployment is kept in a <cite>MINE_NAME.properties</cite> file in a <cite>.intermine</cite> directory under your home directory.  We need to set up a <cite>malariamine.properties</cite> file.</p>
+<p>If you don&#8217;t already have a <cite>.intermine</cite> directory in your home directory, create one now:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span>
+<span class="nv">$ </span>mkdir .intermine
+</pre></div>
+</div>
+<p>There is a partially completed properties file for MalariaMine already.   Copy it into your <cite>/intermine</cite> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span>
+<span class="nv">$ </span>cp git/intermine/bio/tutorial/malariamine.properties .intermine/
+</pre></div>
+</div>
+<p>Update this properties file with your postgres server location, username and password information for the two databases you just created.  The rest of the information is needed for the webapp and will be updated in Step 13.</p>
+<p>For the moment you need to change <cite>PSQL_USER</cite> and <cite>PSQL_PWD</cite> in the <cite>db.production</cite> and <cite>db.common-tgt-items</cite> properties.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># Access to the postgres database to build into and access from the webapp</span>
+<span class="na">db.production.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="c"># port: uncomment the next line if use different prot other than 3306</span>
+<span class="c"># db.production.datasource.port=PORT_NUMBER</span>
+<span class="na">db.production.datasource.databaseName</span><span class="o">=</span><span class="s">malariamine</span>
+<span class="na">db.production.datasource.user</span><span class="o">=</span><span class="s">PSQL_USER</span>
+<span class="na">db.production.datasource.password</span><span class="o">=</span><span class="s">PSQL_PWD</span>
+</pre></div>
+</div>
+<p>If you don&#8217;t have a password for your postgres account you can leave <cite>password</cite> blank.</p>
+</div>
+<div class="section" id="create-databases">
+<h3>Create databases<a class="headerlink" href="#create-databases" title="Permalink to this headline">¶</a></h3>
+<p>Finally, we need to create <cite>malariamine</cite> and <cite>items-malariamine</cite> postgres databases as specified in the <cite>malariamine.properties</cite> file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>createdb malariamine
+<span class="nv">$ </span>createdb items-malariamine
+</pre></div>
+</div>
+<p>New postgres databases default to <cite>UTF-8</cite> as the character encoding.  This will work with InterMine but performance is better with <cite>SQL_ASCII</cite>.</p>
+</div>
+</div>
+<div class="section" id="the-data-model">
+<h2>The Data Model<a class="headerlink" href="#the-data-model" title="Permalink to this headline">¶</a></h2>
+<p>Now we&#8217;re ready to set up a database schema and load some data into our MalariaMine, first some information on how data models are defined in InterMine.</p>
+<div class="section" id="defining-the-model">
+<h3>Defining the model<a class="headerlink" href="#defining-the-model" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>InterMine uses an object-oriented data model, classes in the model and relationships between them are defined in an XML file.  Depending on which data types you include you will need different classes and fields in the model, so the model is generated from a core model XML file and any number of <cite>additions</cite> files.  These additions files can define extra classes to be added to the model and define extra fields for additional classes.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Elements of the model are represented by Java classes and references between them.</li>
+<li>These Java classes map automatically to tables in the database schema.</li>
+<li>The object model is defined as an XML file, that defines <cite>classes</cite>, their <cite>attributes</cite> and <cite>references</cite> between classes.</li>
+<li>The Java classes and database schema are automatically generated from an XML file.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>You can easily adapt InterMine to include your own data by creating new additions files, we&#8217;ll see how to do this later.</li>
+<li>All targets relating to the model for a Mine are in the <cite>dbmodel</cite> directory, go there now:</li>
+</ul>
+</div></blockquote>
+<div class="highlight-bash"><div class="highlight"><pre> <span class="nv">$ </span><span class="nb">cd</span> ~/git/intermine/malariamine/dbmodel
+
+* The core data model <span class="o">(</span>and some extra model files<span class="o">)</span> are defined in the <span class="sb">`</span>project.properties<span class="sb">`</span> file:
+</pre></div>
+</div>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">core.model.path</span> <span class="o">=</span> <span class="s">bio/core</span>
+</pre></div>
+</div>
+<p>You can view the contents of the core model:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less ../../bio/core/core.xml
+</pre></div>
+</div>
+<p>Note the fields defined for <cite>Protein</cite>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&quot;</span> <span class="na">extends=</span><span class="s">&quot;BioEntity&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;md5checksum&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;primaryAccession&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;length&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Integer&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;molecularWeight&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Integer&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;sequence&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Sequence&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;genes&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Gene&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;proteins&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<p>Protein is a subclass of <cite>BioEntity</cite>, defined by <cite>extends=&#8221;BioEntity&#8221;</cite>.  The <cite>Protein</cite> class will therefore also inherit all fields of <cite>BioEntity</cite>.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;BioEntity&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;primaryIdentifier&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;secondaryIdentifier&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+...
+</pre></div>
+</div>
+<p>The model is generated from a core model XML file and any number of additions files.  The first file merged into the core model is the <cite>so_additions.xml</cite> file.  This XML file is generated from terms listed in the so_terms file.  The build system creates classes corresponding to the Sequence Ontology terms:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less resources/so_terms
+</pre></div>
+</div>
+<p>The model is then combined with any extra classes and fields defined in the sources to integrate, those listed as <cite>&lt;source&gt;</cite> elements in <cite>project.xml</cite>.  Look at an example &#8216;additions&#8217; file for the UniProt source:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less ../../bio/sources/uniprot/uniprot_additions.xml
+</pre></div>
+</div>
+<p>This defines extra fields for the <cite>Protein</cite> class which will be added to those from the core model.
+* Other model components can be included by specifying in the <cite>dbmodel/project.properties</cite> file, for example we include <cite>bio/core/genomic_additions.xml</cite>
+* The <cite>reverse-reference</cite> elements in definitions of some references and collections, this defines in the model that two references/collections are opposing ends of the same relationship.  The value should be set to the name of the reference/collection in the <cite>referenced-type</cite>.</p>
+</div>
+<div class="section" id="creating-a-database">
+<h3>Creating a database<a class="headerlink" href="#creating-a-database" title="Permalink to this headline">¶</a></h3>
+<p>Now run the ant target to merge all the model components, generate Java classes and create the database schema, in <cite>dbmodel</cite> run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in malariamine/dbmodel</span>
+<span class="nv">$ </span>ant clean build-db
+</pre></div>
+</div>
+<p>The clean is necessary when you have used the target before, it removes the <cite>build</cite> and <cite>dist</cite> directories and any previously generated model.</p>
+<p>This target has done several things:</p>
+<ol class="arabic simple">
+<li>Merged the core model with other model additions and created a new XML file:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less build/model/genomic_model.xml
+</pre></div>
+</div>
+<p>Look for the <cite>Protein</cite> class, you can see it combines fields from the core model and the UniProt additions file.</p>
+<ol class="arabic simple" start="2">
+<li>The <cite>so_additions.xml</cite> file has also been created using the sequence ontology terms in <cite>so_term</cite>:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less build/model/so_additions.xml
+</pre></div>
+</div>
+<p>Each term from <cite>so_term</cite> was added to the model, according to the sequence ontology.</p>
+<ol class="arabic simple" start="3">
+<li>Generated and compiled a Java class for each of the <cite>&lt;class&gt;</cite> elements in the file.  For example <cite>Protein.java</cite>:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less build/gen/src/org/intermine/model/bio/Protein.java
+</pre></div>
+</div>
+<p>Each of the fields has appropriate getters and setters generated for it, note that these are <cite>interfaces</cite> and are turned into actual classes dynamically at runtime - this is how the model copes with multiple inheritance.</p>
+<ol class="arabic simple" start="4">
+<li>Automatically created database tables in the postgres database specified in <cite>malariamine.properties</cite> as <cite>db.production</cite> - in our case <cite>malariamine</cite>.  Log into this database and list the tables and the columns in the protein table:</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It may be necessary to switch to the user <cite>malariamine</cite> before continuing.</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>psql malariamine
+<span class="nv">malariamine</span><span class="o">=</span><span class="c">#  \d</span>
+<span class="nv">malariamine</span><span class="o">=</span><span class="c">#  \d protein</span>
+</pre></div>
+</div>
+<p>The different elements of the model XML file are handled as follows:</p>
+<dl class="docutils">
+<dt><cite>attributes</cite></dt>
+<dd>there is one column for each attribute of <cite>Protein</cite> - e.g. <cite>primaryIdentifer</cite> and <cite>length</cite>.</dd>
+<dt><cite>references</cite></dt>
+<dd>references to other classes are foreign keys to another table - e.g. <cite>Protein</cite> has a reference called <cite>organism</cite> to the <cite>Organism</cite> class so in the database the <cite>protein</cite> table has a column <cite>organismid</cite> which would contain an id that appears in the <cite>organism</cite> table.</dd>
+<dt><cite>collections</cite></dt>
+<dd>indirection tables are create for many-to-many collections, <cite>Protein</cite> has a collection of <cite>Gene</cite> objects, an indirection table called <cite>genesproteins</cite> is created.</dd>
+</dl>
+<p>This has also created necessary indexes on the tables:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">malariamine</span><span class="o">=</span><span class="c">#  \d genesproteins</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Running <cite>build-db</cite> will destroy any existing data loaded in the malariamine database and re-create all the tables.</p>
+</div>
+<p>The model XML file is stored in the database once created, this and some other configuration files are held in the <cite>intermine_metadata</cite> table which has <cite>key</cite> and <cite>value</cite> columns:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">malariamine</span><span class="o">=</span><span class="c"># select key from intermine_metadata;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="loading-data">
+<h2>Loading Data<a class="headerlink" href="#loading-data" title="Permalink to this headline">¶</a></h2>
+<p>We are running several data integration and post-processing steps manually, this is a good way to learn how the system works and to test individual stages.  For running actual builds there is a <cite>project_build</cite> script that will run all steps specified in <cite>project.xml</cite> automatically.  We will cover this later.</p>
+<div class="section" id="loading-data-from-a-source">
+<h3>Loading data from a source<a class="headerlink" href="#loading-data-from-a-source" title="Permalink to this headline">¶</a></h3>
+<p>Loading of data is done by running <cite>ant</cite> in the <cite>integrate</cite> directory.  You can specify one or more sources to load or choose to load all sources listed in the <cite>project.xml</cite> file.  When you specify sources by name the order that they appear in <cite>project.xml</cite> doesn&#8217;t matter.  Now load data from the uniprot-malaria source:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ../integrate
+<span class="nv">$ </span>ant -Dsource<span class="o">=</span>uniprot-malaria -v
+</pre></div>
+</div>
+<p>The <cite>-v</cite> flag is to run <cite>ant</cite> in verbose mode, this will display complete stack traces if there is a problem.</p>
+<p>This will take a couple of minutes to complete, the command runs the following steps:</p>
+<ol class="arabic simple">
+<li>Checks that a source with name <cite>uniprot-malaria</cite> exists in <cite>project.xml</cite></li>
+<li>Reads the UniProt XML files at the location specified by <cite>src.data.dir</cite></li>
+<li>Calls the parser included in the <cite>uniprot</cite> source with the list of files, this reads the original XML and creates <cite>Items</cite> which are metadata representations of the objects that will be loaded into the malariamine database.  These items are stored in an intermediate <cite>items</cite> database (more about <cite>Items</cite> later).</li>
+<li>Reads from the <cite>items</cite> database, converts items to objects and loads them into the malariamine database.</li>
+</ol>
+<p>This should complete after a couple of minutes, if you see an error message, this page should help diagnose the problem: CommonErrors.</p>
+<p>If an error occurred during loading and you need to try again you need to re-initialise the database again by running <cite>clean build-db</cite> in <cite>dbmodel</cite>.  This is only the case if dataloading actually started - if the following was displayed in the terminal:</p>
+<div class="highlight-properties"><pre>[ant] load:
+[ant]      [echo]
+[ant]      [echo]       Loading uniprot-malaria (uniprot) tgt items into production DB
+[ant]      [echo]</pre>
+</div>
+<p>A useful command to initialise the database and load a source from the integrate directory is:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="o">(</span><span class="nb">cd</span> ../dbmodel; ant clean build-db<span class="o">)</span> <span class="o">&amp;&amp;</span> ant -Dsource<span class="o">=</span>uniprot-malaria
+</pre></div>
+</div>
+<p>Now that the data has loaded, log into the database and view the contents of the protein table:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>psql malariamine
+malariamine#  <span class="k">select </span>count<span class="o">(</span>*<span class="o">)</span> from protein;
+</pre></div>
+</div>
+<p>And see the first few rows of data:</p>
+<div class="highlight-bash"><div class="highlight"><pre>malariamine#  <span class="k">select</span> * from protein limit 5;
+</pre></div>
+</div>
+</div>
+<div class="section" id="object-relational-mapping">
+<h3>Object relational mapping<a class="headerlink" href="#object-relational-mapping" title="Permalink to this headline">¶</a></h3>
+<p>InterMine works with objects, objects are loaded into the production system and queries return lists of objects.  These objects are persisted to a relational database.  Internal InterMine code (the ObjectStore) handles the storage and retrieval of objects from the database automatically.  By using an object model InterMine queries benefit from inheritance, for example the <cite>Gene</cite> and <cite>Exon</cite> classes are both subclasses of <cite>SequenceFeature</cite>.  When querying for SequenceFeatures (representing any genome feature) both Genes and Exons will be returned automatically.</p>
+<p>We can see how see how inheritance is represented in the database:</p>
+<ul class="simple">
+<li>One table is created for each class in the data model.</li>
+<li>Where one class inherits from another, entries are written to both tables.  For example:</li>
+</ul>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>malariamine#  <span class="k">select</span> * from gene limit 5;
+</pre></div>
+</div>
+<p>The same rows appear in the <cite>sequencefeature</cite> table:</p>
+</div></blockquote>
+<div class="highlight-bash"><div class="highlight"><pre>malariamine#  <span class="k">select</span> * from sequencefeature limit 5;
+</pre></div>
+</div>
+<p>All classes in the object model inherit from <cite>InterMineObject</cite>.  Querying the <cite>intermineobject</cite> table in the database is a useful way to find the total number of objects in a Mine:</p>
+<div class="highlight-bash"><div class="highlight"><pre>malariamine#  <span class="k">select </span>count<span class="o">(</span>*<span class="o">)</span> from intermineobject;
+</pre></div>
+</div>
+<p>All tables include an <cite>id</cite> column for unique ids and a <cite>class</cite> column with the actual class of that object.  Querying the <cite>class</cite> column of <cite>intermineobject</cite> you can find the
+counts of different objects in a Mine:</p>
+<div class="highlight-bash"><div class="highlight"><pre>malariamine#  <span class="k">select </span>class, count<span class="o">(</span>*<span class="o">)</span> from intermineobject group by class;
+</pre></div>
+</div>
+<p>A technical detail: for speed when retrieving objects and to deal with inheritance correctly (e.g. to ensure a <cite>Gene</cite> object with all of its fields is returned even if the query was on the <cite>SequenceFeature</cite> class) a serialised copy of each object is stored in the <cite>intermineobject</cite> table.  When queries are run by the ObjectStore they actually return the ids of objects - these objects are may already be in a cache, if not the are retrieved from the <cite>intermineobject</cite> table.</p>
+</div>
+</div>
+<div class="section" id="loading-genome-data-from-gff3-and-fasta">
+<h2>Loading Genome Data from GFF3 and FASTA<a class="headerlink" href="#loading-genome-data-from-gff3-and-fasta" title="Permalink to this headline">¶</a></h2>
+<p>We will load genome annotation data for <em>P. falciparum</em> from PlasmoDB</p>
+<ul class="simple">
+<li>genes, mRNAs, exons and their chromosome locations - in GFF3 format:</li>
+<li>chromosome sequences - in FASTA format</li>
+</ul>
+<div class="section" id="data-integration">
+<h3>Data integration<a class="headerlink" href="#data-integration" title="Permalink to this headline">¶</a></h3>
+<p>Note that genes from the gff3 file will have the same <cite>primaryIdentifier</cite> as those already loaded from UniProt.  These will  merge in the database such that there is only one copy of each gene with information from both data sources. We will load the genome data then look at how data integration in InterMine works.</p>
+<p>First, look at the information currently loaded for gene &#8220;PFL1385c&#8221; from UniProt:</p>
+<div class="highlight-sql"><div class="highlight"><pre><span class="n">malariamine</span><span class="o">=#</span>  <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">gene</span> <span class="k">where</span> <span class="n">primaryIdentifier</span> <span class="o">=</span> <span class="s1">&#39;PFL1385c&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gff3-files">
+<h3>GFF3 files<a class="headerlink" href="#gff3-files" title="Permalink to this headline">¶</a></h3>
+<p>GFF3 is a standard format use to represent genome features and their locations.  It is flexible and expressive and defined by a clear standard - <a class="reference external" href="http://www.sequenceontology.org/gff3.shtml">http://www.sequenceontology.org/gff3.shtml</a>.  An example of the file will load can be used to explain the format, each line represents one feature and has nine tab-delimited columns:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">MAL1    ApiDB   gene    183057  184457  .       -       .       ID</span><span class="o">=</span><span class="s">gene.46311;description=hypothetical%20protein;Name=PFA0210c</span>
+<span class="na">MAL1    ApiDB   mRNA    183057  184457  .       +       .       ID</span><span class="o">=</span><span class="s">mRNA.46312;Parent=gene.46311</span>
+<span class="na">MAL1    ApiDB   exon    183057  184457  .       -       0       ID</span><span class="o">=</span><span class="s">exon.46313;Parent=mRNA.46312</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>col 1: &#8220;seqid&#8221;</dt>
+<dd>an identifier for a &#8216;landmark&#8217; on which the current feature is locatated, in this case &#8216;MAL1&#8217;, a &#8216;&#8217;P. falciparum&#8217;&#8217; chromosome.</dd>
+<dt>col 2: &#8220;source&#8221;</dt>
+<dd>the database or algorithm that provided the feature</dd>
+<dt>col 3: &#8220;type&#8221;</dt>
+<dd>a valid SO term defining the feature type - here <cite>gene</cite> or <cite>mRNA</cite></dd>
+<dt>col 4 &amp; 5: &#8220;start&#8221; and &#8220;end&#8221;</dt>
+<dd>coordinates of the feature on the landmark in col 1</dd>
+<dt>col 6: &#8220;score&#8221;</dt>
+<dd>an optional score, used if the feature has been generated by an algorithm</dd>
+<dt>col 7: &#8220;strand&#8221;</dt>
+<dd>&#8216;+&#8217; or &#8216;-&#8216; to indicate the strand the feature is on</dd>
+<dt>col 8: &#8220;phase&#8221;</dt>
+<dd>for <cite>CDS</cite> features to show where the feature begins with reference to the reading frame</dd>
+<dt>col 9: &#8220;attributes&#8221;</dt>
+<dd>custom attributes to describe the feature, these are name/value pairs separated by &#8216;;&#8217;.  Some attributes have predefined meanings, relevant here:</dd>
+</dl>
+<ul class="simple">
+<li><cite>ID</cite> - identifier of feature, unique in scope of the GFF3 file</li>
+<li><cite>Name</cite> - a display name for the feature</li>
+<li><cite>Parent</cite> - the <cite>ID</cite> of another feature in the file that is a parent of this one.  In our example the <cite>gene</cite> is a <cite>Parent</cite> of the <cite>mRNA</cite>.</li>
+</ul>
+<p>A dot means there is no value provided for the column.</p>
+<p>The files we are loading are from PlasmoDB and contain <cite>gene</cite>, <cite>exon</cite> and <cite>mRNA</cite> features, there is one file per chromosome.  Look at an example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less DATA_DIR/malaria/genome/gff/MAL1.gff3
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-gff3-source">
+<h3>The GFF3 source<a class="headerlink" href="#the-gff3-source" title="Permalink to this headline">¶</a></h3>
+<p>InterMine includes a parser to load valid GFF3 files.  The creation of features, sequence features (usually chromosomes), locations and standard attributes is taken care of automatically.</p>
+<p>Many elements can be configured by properties in <cite>project.xml</cite>, to deal with any specific attributes or perform custom operations on each feature you can  write a handler in Java which will get called when reading each line of GFF.</p>
+<p>Other <cite>gff3</cite> properties can be congfigured in the <cite>project.xml</cite> The properties set for <cite>malaria-gff</cite> are:</p>
+<dl class="docutils">
+<dt>gff3.seqClsName = Chromosome</dt>
+<dd>the ids in the first column represent <cite>Chromosome</cite> objects, e.g. MAL1</dd>
+<dt>gff3.taxonId = 36329</dt>
+<dd>taxon id of malaria</dd>
+<dt>gff3.dataSourceName = PlasmoDB</dt>
+<dd>the data source for features and their identifiers, this is used for the DataSet (evidence) and synonyms.</dd>
+<dt>gff3.seqDataSourceName = PlasmoDB</dt>
+<dd>the source of the seqids (chromosomes) is sometimes different to the features described</dd>
+<dt>gff3.dataSetTitle = PlasmoDB P. falciparum genome</dt>
+<dd>a DataSet object is created as evidence for the features, it is linked to a DataSource (PlasmoDB)</dd>
+</dl>
+<p>In some cases specific code is required to deal with attributes in the gff file and any special cases.  A specific <cite>source</cite> can be created to contain the code to do this and any additions to the data model necessary.  For malaria gff we need a handler to switch which fields from the file are set as <cite>primaryIdentifier</cite> and <cite>symbol</cite>/<cite>secondaryIdentifier</cite> in the features created.  This is to match the identifiers from UniProt, it is quite a common issue when integrating from multiple data sources.</p>
+<p>From the example above, by default: <cite>ID=gene.46311;description=hypothetical%20protein;Name=PFA0210c</cite> would make <cite>Gene.primaryIdentifier</cite> be <cite>gene.46311</cite> and <cite>Gene.symbol</cite> be <cite>PFA0210c</cite>.  We need <cite>PFA0210c</cite> to be the <cite>primaryIdentifier</cite>.</p>
+<p>The <cite>malaria-gff</cite> source is held in the <cite>bio/sources/example-sources/malaria-gff</cite> directory.  Look at the <cite>project.properties</cite> file in this directory, there are two properties of interest:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># set the source type to be gff</span>
+<span class="na">have.file.gff</span><span class="o">=</span><span class="s">true</span>
+
+<span class="c"># specify a Java class to be called on each row of the gff file to cope with attributes</span>
+<span class="na">gff3.handlerClassName</span> <span class="o">=</span> <span class="s">org.intermine.bio.dataconversion.MalariaGFF3RecordHandler</span>
+</pre></div>
+</div>
+<p>Look at the <cite>MalariaGFF3RecordHandler</cite> class in <cite>bio/sources/example-sources/malaria-gff/main/src/org/intermine/bio/dataconversion</cite>.  This code changes which fields the <cite>ID</cite> and <cite>Name</cite> attributes from the GFF file have been assigned to.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less ~/git/intermine/bio/sources/example-sources/malaria-gff/main/src/org/intermine/bio/dataconversion/MalariaGFF3RecordHandler.java
+</pre></div>
+</div>
+</div>
+<div class="section" id="loading-gff3-data">
+<h3>Loading GFF3 data<a class="headerlink" href="#loading-gff3-data" title="Permalink to this headline">¶</a></h3>
+<p>Now load the <cite>malaria-gff</cite> source by running this command in <cite>malariamine/integrate</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -Dsource<span class="o">=</span>malaria-gff -v
+</pre></div>
+</div>
+<p>This will take a few minutes to run.  Note that this time we don&#8217;t run <cite>build-db</cite> in <cite>dbmodel</cite> as we are loading this data into the same database as UniProt.  As before you can run a query to see how many objects of each class are loaded:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>psql malariamine
+malariamine#  <span class="k">select </span>class, count<span class="o">(</span>*<span class="o">)</span> from intermineobject group by class;
+</pre></div>
+</div>
+</div>
+<div class="section" id="fasta-files">
+<h3>FASTA files<a class="headerlink" href="#fasta-files" title="Permalink to this headline">¶</a></h3>
+<p>FASTA is a minimal format for representing sequence data.  Files comprise a header with some identifier information preceded by &#8216;&gt;&#8217; and a sequence.  At present the InterMine FASTA parser loads just the first entry in header after <cite>&gt;</cite> and assigns it to be an attribute of the feature created.  Here we will load one FASTA file for each malaria chromosome.  Look at an example of the files we will load:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less DATA_DIR/malaria/genome/fasta/MAL1.fasta
+</pre></div>
+</div>
+<p>The type of feature created is defined by a property in <cite>project.xml</cite>, the attribute set defaults to <cite>primaryIdentifier</cite> but can be changed with the <cite>fasta.classAttribute</cite> property.  The following properties are defined in <cite>project.xml</cite> for <cite>malaria-chromosome-fasta</cite>:</p>
+<dl class="docutils">
+<dt><cite>fasta.className = org.flymine.model.genomic.Chromosome</cite></dt>
+<dd>the type of feature that each sequence is for</dd>
+<dt><cite>fasta.dataSourceName = PlasmoDB</cite></dt>
+<dd>the source of identifiers to be created</dd>
+<dt><cite>fasta.dataSetTitle = PlasmoDB chromosome sequence</cite></dt>
+<dd>a DataSet object is created as evidence</dd>
+<dt><cite>fasta.taxonId = 36329</cite></dt>
+<dd>the organism id for malaria</dd>
+</dl>
+<p>This will create features of the class <cite>Chromosome</cite> with <cite>primaryIdentifier</cite> set and the <cite>Chromosome.sequence</cite> reference set to a <cite>Sequence</cite> object.  Also created are a <cite>DataSet</cite> and <cite>DataSource</cite> as evidence.</p>
+</div>
+<div class="section" id="loading-fasta-data">
+<h3>Loading FASTA data<a class="headerlink" href="#loading-fasta-data" title="Permalink to this headline">¶</a></h3>
+<p>Now load the <cite>malaria-chromosome-fasta</cite> source by running this command in <cite>malariamine/integrate</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -Dsource<span class="o">=</span>malaria-chromosome-fasta -v
+</pre></div>
+</div>
+<p>This has integrated the chromosome objects with those already in the database.  In the next step we will look at how this data integration works.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Data Integration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-integration-in-malariamine">
+<h3>Data integration in MalariaMine<a class="headerlink" href="#data-integration-in-malariamine" title="Permalink to this headline">¶</a></h3>
+<p>The sources <cite>uniprot-malaria</cite> and <cite>malaria-gff</cite> have both loaded information about the same genes.  Before loading genome data we ran a query to look at the information UniProt provided about the gene &#8220;PFL1385c&#8221;:</p>
+<div class="highlight-python"><pre>malariamine=# select id, primaryidentifier, secondaryidentifier, symbol, length , chromosomeid, chromosomelocationid, organismid from gene where primaryIdentifier = 'PFL1385c';
+    id    | primaryidentifier | secondaryidentifier | symbol | length | chromosomeid | chromosomelocationid | organismid
+----------+-------------------+---------------------+--------+--------+--------------+----------------------+------------
+83000626 | PFL1385c          |                     | ABRA   |        |              |                      |   83000003
+(1 row)</pre>
+</div>
+<p>Which showed that UniProt provided <cite>primaryIdentifier</cite> and <cite>symbol</cite> attributes and set the <cite>organism</cite> reference.  The <cite>id</cite> was set automatically by the ObjectStore and will be different each time you build your Mine.</p>
+<p>Running the same query after <cite>malaria-gff</cite> is added shows that more fields have been filled in for same gene and that it has kept the same id:</p>
+<div class="highlight-python"><pre>malariamine=# select id, primaryidentifier, secondaryidentifier, symbol, length , chromosomeid, chromosomelocationid, organismid from gene where primaryIdentifier = 'PFL1385c';
+    id    | primaryidentifier | secondaryidentifier | symbol | length | chromosomeid | chromosomelocationid | organismid
+----------+-------------------+---------------------+--------+--------+--------------+----------------------+------------
+83000626 | PFL1385c          | gene.33449          | ABRA   |   2232 |     84017653 |             84018828 |   83000003
+(1 row)</pre>
+</div>
+<p>This means that when the second source was loaded the integration code was able to identify that an equivalent gene already existed and merged the values for each source, the equivalence was based on <cite>primaryIdentifier</cite> as this was the field that the two sources had in common.</p>
+<p>Note that <cite>malaria-gff</cite> does not include a value for <cite>symbol</cite> but it did not write over the <cite>symbol</cite> provided by UniProt, actual values always take precedence over null values (unless configured otherwise).</p>
+<p>Now look at the organism table:</p>
+<div class="highlight-python"><pre>malariamine=# select * from organism;
+genus | taxonid | species | abbreviation |    id    | shortname | name |               class
+-------+---------+---------+--------------+----------+-----------+------+------------------------------------
+      |   36329 |         |              | 83000003 |           |      | org.flymine.model.genomic.Organism
+(1 row)</pre>
+</div>
+<p>Three sources have been loaded so far that all included the organism with <cite>taxonId</cite> 36329, and more importantly they included objects that reference the organism.  There is still only one row in the organism table so the data from three sources has merged, in this case <cite>taxonId</cite> was the field used to define equivalence.</p>
+</div>
+<div class="section" id="how-data-integration-works">
+<h3>How data integration works<a class="headerlink" href="#how-data-integration-works" title="Permalink to this headline">¶</a></h3>
+<p>Data integration works by defining keys for each class of object to describe fields that can be used to define equivalence for objects of that class.  For the examples above:</p>
+<ul class="simple">
+<li><cite>primaryIdentifier</cite> was used as a key for <cite>Gene</cite></li>
+<li><cite>taxonId ` was used as a key for `Organism</cite></li>
+</ul>
+<p>For each <cite>Gene</cite> object loaded by <cite>malaria-gff</cite> a query was performed in the <cite>malariamine</cite> database to find any existing <cite>Gene</cite> objects with the same <cite>primaryIdentifier</cite>.  If any were found fields from both objects were merged and the resulting object stored.</p>
+<p>Many performance optimisation steps are applied to this process.  We don&#8217;t actually run a query for each object loaded, requests are batched and queries can be avoided completely if the system can work out no integration will be needed.</p>
+<p>We may also load data from some other source that provides information about genes but doesn&#8217;t use the identifier scheme we have chosen for <cite>primaryIdentifier</cite> (in our example <cite>PFL1385c</cite>).  Instead it only knows about the <cite>symbol</cite> (<cite>ABRA</cite>), in that case we would want that source to use the <cite>symbol</cite> to define equivalence for <cite>Gene</cite>.</p>
+<p>Important points:</p>
+<ul class="simple">
+<li>A <cite>primary key</cite> defines a field or fields of a class that can be used to search for equivalent objects</li>
+<li>Multiple primary keys can be defined for a class, sources can use different keys for a class if they provide different identifiers</li>
+<li>One source can use multiple primary keys for a class if the objects of that class don&#8217;t consistently have the same identifier type</li>
+<li><cite>null</cite> - if a source has no value for a field that is defined as a primary key then the key is not used and the data is loaded without being integrated.</li>
+</ul>
+</div>
+<div class="section" id="primary-keys-in-malariamine">
+<h3>Primary keys in MalariaMine<a class="headerlink" href="#primary-keys-in-malariamine" title="Permalink to this headline">¶</a></h3>
+<p>The keys used by each source are configured in the corresponding <cite>bio/sources/</cite> directory.</p>
+<p>For <cite>uniprot-malaria</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less ../../bio/sources/uniprot/resources/uniprot_keys.properties
+</pre></div>
+</div>
+<p>And <cite>malaria-gff</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>less ../../bio/sources/example-sources/malaria-gff/resources/malaria-gff_keys.properties
+</pre></div>
+</div>
+<p>The key on <cite>Gene.primaryIdentifier</cite> is defined in both sources, that means that the same final result would have been achieved regardless of the order in the two sources were loaded.</p>
+<p>These <cite>_keys.properties</cite> files define keys in the format:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">Class.name_of_key</span> <span class="o">=</span> <span class="s">field1, field2</span>
+</pre></div>
+</div>
+<p>The <cite>name_of_key</cite> can be any string but you must use different names if defining more than one key for the same class, for example in <cite>uniprot_keys.properties</cite> there are two different keys defined for <cite>Gene</cite>:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">Gene.key_primaryidentifier</span> <span class="o">=</span> <span class="s">primaryIdentifier</span>
+<span class="na">Gene.key_secondaryidentifier</span> <span class="o">=</span> <span class="s">secondaryIdentifier</span>
+</pre></div>
+</div>
+<p>It is better to use common names for identical keys between sources as this will help avoid duplicating database indexes.</p>
+<p>Each key should list one or more fields that can be a combination of <cite>attributes</cite> of the class specified or <cite>references</cite> to other classes, in this cases there should usually be a key defined for the referenced class as well.</p>
+<p>It is still possible to use a legacy method of configuring keys, where keys are defined centrally in <cite>dbmodel/resources/genomic_keyDefs.properties</cite> and referenced in source <cite>_keys.properties</cite> files.</p>
+</div>
+<div class="section" id="dealing-with-conflicts">
+<h3>Dealing with conflicts<a class="headerlink" href="#dealing-with-conflicts" title="Permalink to this headline">¶</a></h3>
+<p>It is possible that two different sources could have a value for the same field, in this case we need to define which source should take precedence.</p>
+<p>Try loading data from the <cite>interpro</cite> source which will cause a conflict with <cite>uniprot-malaria</cite>.  UniProt loads a list of protein domains for each protein but doesn&#8217;t include the full names and descriptions of ProteinDomain objects, the <cite>interpro</cite> source adds this information:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -Dsource<span class="o">=</span>interpro
+</pre></div>
+</div>
+<p>You will see a message that includes the text:</p>
+<div class="highlight-bash"><div class="highlight"><pre>Conflicting values <span class="k">for </span>field ProteinDomain.shortName between uniprot-malaria <span class="o">(</span>value <span class="s2">&quot;NAD-dep_Gly3P_DHase_N&quot;</span> in database with ID 1017490<span class="o">)</span> and interpro <span class="o">(</span>value <span class="s2">&quot;NAD_Gly3P_DH_N&quot;</span> being stored<span class="o">)</span>. This field needs configuring in the genomic_priorities.properties file
+</pre></div>
+</div>
+<p>Slightly different values have been provided for the <cite>shortName</cite> of a particular <cite>ProteinDomain</cite>.  In this case we want to take the value from <cite>interpro</cite>.  Edit <cite>dbmodel/resources/genomic_priorities.properties</cite> and add the line:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">ProteinDomain.shortName</span> <span class="o">=</span> <span class="s">interpro, uniprot-malaria</span>
+</pre></div>
+</div>
+<p>Now run try to load <cite>interpro</cite> again:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -Dsource<span class="o">=</span>interpro
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-tracker-table">
+<h3>The <cite>tracker</cite> table<a class="headerlink" href="#the-tracker-table" title="Permalink to this headline">¶</a></h3>
+<p>A special <cite>tracker</cite> table is created in the target database by the data integration system.  This tracks which sources have loaded data for each field of each object.  The data is used along with priorities configuration when merging objects but is also useful to view where objects have come from.</p>
+<ul class="simple">
+<li>Look at the columns in the tracker table, <cite>objectid</cite> references an object from some other table</li>
+<li>Query tracker information for the objects in the examples above:</li>
+</ul>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">select</span> <span class="k">distinct</span> <span class="n">sourcename</span> <span class="k">from</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">gene</span> <span class="k">where</span> <span class="n">objectid</span> <span class="o">=</span> <span class="n">id</span> <span class="k">and</span> <span class="n">primaryidentifier</span> <span class="o">=</span> <span class="s1">&#39;PFL1385c&#39;</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="n">objectid</span><span class="p">,</span> <span class="n">sourcename</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="k">version</span> <span class="k">from</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">gene</span> <span class="k">where</span> <span class="n">objectid</span> <span class="o">=</span> <span class="n">id</span> <span class="k">and</span> <span class="n">primaryidentifier</span> <span class="o">=</span> <span class="s1">&#39;PFL1385c&#39;</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="k">distinct</span> <span class="n">sourcename</span> <span class="k">from</span> <span class="n">tracker</span><span class="p">,</span> <span class="n">organism</span> <span class="k">where</span> <span class="n">objectid</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="updating-organism-and-publication-information">
+<h2>Updating Organism and Publication Information<a class="headerlink" href="#updating-organism-and-publication-information" title="Permalink to this headline">¶</a></h2>
+<p>Organisms and publications in InterMine are loaded by their taxon id and PubMed id respectively.  The <cite>entrez-organism</cite> and <cite>update-publications</cite> sources can be run at the end of the build to examine the ids loaded, fetch details via the NCBI Entrez web service and add those details to the Mine.</p>
+<div class="section" id="fetching-organism-details">
+<h3>Fetching organism details<a class="headerlink" href="#fetching-organism-details" title="Permalink to this headline">¶</a></h3>
+<p>You will have noticed that in previous sources and in <cite>project.xml</cite> we have referred to organisms by their NCBI Taxonomy id.  These are numerical ids assigned to each species and strain.  We use these for convenience in integrating data, the taxon id is a good unique identifier for organisms whereas names can come in many different formats: for example in fly data sources we see: &#8216;&#8217;Drosophila melanogaster&#8217;&#8216;, &#8216;&#8217;D. melanogaster&#8217;&#8216;, Dmel, DM, etc.</p>
+<p>Looking at the <cite>organism</cite> table in the database you will see that the only column filled in is <cite>taxonid</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>psql malariamine
+malariamine#  <span class="k">select</span> * from organism;
+</pre></div>
+</div>
+<p>From the <cite>integrate</cite> directory run the <cite>entrez-organism</cite> source:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v -Dsource<span class="o">=</span>entrez-organism
+</pre></div>
+</div>
+<p>This should only take a few seconds.  This source does the following:</p>
+<ul class="simple">
+<li>runs a query in the production database for all of the taxon ids</li>
+<li>creates an NCBI Entrez web service request to fetch details of those organisms</li>
+<li>converts the data returned from Entrez into a temporary Items XML file</li>
+<li>loads the Items XML file into the production database</li>
+</ul>
+<p>Now run the same query in the production database, you should see details for &#8216;&#8217;P. falciparum&#8217;&#8217; added:</p>
+<div class="highlight-psql"><div class="highlight"><pre><span class="gp">$</span> psql malariamine
+<span class="go">malariamine#  select * from organism;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As this source depends on organism data previously loaded it should be one of the last sources run and should appear at the end of <cite>&lt;sources&gt;</cite> in <cite>project.xml</cite>.</p>
+</div>
+</div>
+<div class="section" id="fetching-publication-details">
+<h3>Fetching publication details<a class="headerlink" href="#fetching-publication-details" title="Permalink to this headline">¶</a></h3>
+<p>Publications are even more likely to be cited in different formats and are prone to errors in their description.  We will often load data referring to the same publication from multiple sources and need to ensure those publications are integrated correctly.  Hence we load only the PubMed id and fetch the details from the NCBI Entrez web service as above.</p>
+<p>Several sources InterMine sources load publications:</p>
+<div class="highlight-psql"><div class="highlight"><pre><span class="n">malariamine</span><span class="o">#</span>  <span class="k">select</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">publication</span><span class="p">;</span>
+<span class="go">malariamine#  select * from publication limit 5;</span>
+</pre></div>
+</div>
+<p>Now run the <cite>update-publications</cite> source to fill in the details:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v -Dsource<span class="o">=</span>update-publications
+</pre></div>
+</div>
+<p>As there are often large numbers of publications they are retrieved in batches from the web service.</p>
+<p>Now details will have been added to the <cite>publication</cite> table:</p>
+<div class="highlight-psql"><div class="highlight"><pre><span class="n">malariamine</span><span class="o">#</span>  <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">publication</span> <span class="k">where</span> <span class="n">title</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">limit</span> <span class="mf">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Sometimes, especially with very large numbers of publications, this source will fail to fetch details correctly.  Usually running it again will work correctly.</p>
+<p>Occasionally erroneous PubMed ids are included from some sources and their details will not be updated, there is no good way to deal with this situation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As this source depends on publication data previously loaded it should be one of the last sources run and should appear at the end of <cite>&lt;sources&gt;</cite> in <cite>project.xml</cite>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Post Processing<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Post-processing steps are run after all data is loaded, they are specified as <cite>&lt;post-process&gt;</cite> elements in <cite>project.xml</cite>.</p>
+<p>Some of these can only be run after data from multiple sources are loaded.  For example, for the Malaria genome information we load features and their locations on chromosomes from <cite>malaria-gff</cite> but the sequences of chromosomes from <cite>malaria-chromosome-fasta</cite>.  These are loaded independently and the <cite>Chromosome</cite> objects from each are integrated, neither of these on their own could set the sequence of each <cite>Exon</cite>.  However, now they are both loaded the <cite>transfer-sequences</cite> post-process can calculate and set the sequences for all features located on a <cite>Chromosome</cite> for which the sequence is known.</p>
+<p>Some post-process steps are used to homogenize data from different sources or fill in shortcuts in the data model to improve usability - e.g. <cite>create-references</cite>.</p>
+<p>Finally, there are post-process operations that create summary information to be used by the web application: <cite>summarise-objectstore</cite>, <cite>create-search-index</cite> and <cite>create-autocomplete-indexes</cite>.</p>
+<div class="section" id="malariamine-post-processing">
+<h3>MalariaMine Post Processing<a class="headerlink" href="#malariamine-post-processing" title="Permalink to this headline">¶</a></h3>
+<p>The following <cite>&lt;post-process&gt;</cite> targets are included in the MalariaMine <cite>project.xml</cite>.
+The post-processes are run as a single stage of the build process. (see step 11.2 below for how to run the post-processing steps).</p>
+<p>Run queries listed here before and after running the post-processing to see examples of what each step does.</p>
+<div class="section" id="create-references">
+<h4><cite>create-references</cite><a class="headerlink" href="#create-references" title="Permalink to this headline">¶</a></h4>
+<p>This fills in some shortcut references in the data model to make querying easier.  For example, <cite>Gene</cite> has a collection of <cite>transcripts</cite> and <cite>Transcript</cite> has a collection of <cite>exons</cite>.  <cite>create-references</cite> will follow these collections and create a <cite>gene</cite> reference in <cite>Exon</cite> and the corresponding <cite>exons</cite> collection in <cite>Gene</cite>.</p>
+<div class="highlight-sql"><div class="highlight"><pre><span class="n">malariamine</span><span class="o">#</span>  <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">exon</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The empty <cite>geneid</cite> column will be filled in representing the reference to gene.</p>
+</div>
+<div class="section" id="transfer-sequences">
+<h4><cite>transfer-sequences</cite><a class="headerlink" href="#transfer-sequences" title="Permalink to this headline">¶</a></h4>
+<p>The sequence for chromosomes is loaded by <cite>malaria-chromosome-fasta</cite> but no sequence is set for the features located on them.  This step reads the locations of features, calculates and stores their sequence and sets the <cite>sequenceid</cite> column.  The <cite>sequenceid</cite> column for this exon is empty:</p>
+<div class="highlight-sql"><div class="highlight"><pre><span class="n">malariamine</span><span class="o">#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">exon</span> <span class="k">where</span> <span class="n">primaryidentifier</span> <span class="o">=</span> <span class="s1">&#39;exon.32017&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>After running <cite>transfer-sequences</cite> the <cite>sequenceid</cite> column is filled in.</p>
+</div>
+<div class="section" id="do-sources">
+<h4><cite>do-sources</cite><a class="headerlink" href="#do-sources" title="Permalink to this headline">¶</a></h4>
+<p>Each source can also provide code to execute post-process steps if required.  This command loops through all of the sources and checks whether there are any post-processing steps configured.  There aren&#8217;t any for the sources we are using for MalariaMine but you should always include the <cite>do-sources</cite> element.</p>
+</div>
+<div class="section" id="summarise-objectstore-create-search-index-create-autocomplete-index">
+<h4><cite>summarise-objectstore</cite>, <cite>create-search-index</cite> &amp; <cite>create-autocomplete-index</cite><a class="headerlink" href="#summarise-objectstore-create-search-index-create-autocomplete-index" title="Permalink to this headline">¶</a></h4>
+<p>These generate summary data and indexes used by the web application, see WebappConfig.</p>
+</div>
+</div>
+<div class="section" id="run-the-post-procesing">
+<h3>Run the post-procesing<a class="headerlink" href="#run-the-post-procesing" title="Permalink to this headline">¶</a></h3>
+<p>To run all the post-processing steps:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ../postprocess
+<span class="nv">$ </span>ant -v
+</pre></div>
+</div>
+<p>This will take a few minutes.  When complete you can re-run the queries above to see what has been added.</p>
+<p>Post-processing steps can also be run individually,</p>
+</div>
+</div>
+<div class="section" id="building-a-mine">
+<h2>Building a Mine<a class="headerlink" href="#building-a-mine" title="Permalink to this headline">¶</a></h2>
+<p>So far we have created databases, integrated data and run post-processing with individual <cite>ant</cite> targets.  InterMine includes a perl program called <cite>project_build</cite> that reads the <cite>project.xml</cite> definition and runs all of the steps in sequence.  It also has the option of dumping the production database during the build and recovering from these dumps in case of problems.</p>
+<div class="section" id="build-complete-malariamine">
+<h3>Build complete MalariaMine<a class="headerlink" href="#build-complete-malariamine" title="Permalink to this headline">¶</a></h3>
+<p>Build MalariaMine now using the <cite>project_build</cite> script, we will need a completed MalariaMine for the webapp.</p>
+<p>Run the <cite>project_build</cite> script from your <cite>malariamine</cite> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>../bio/scripts/project_build -b -v localhost ~/malariamine-dump
+</pre></div>
+</div>
+<p>This will take ~15-30mins to complete.</p>
+</div>
+</div>
+<div class="section" id="deploying-the-web-application">
+<h2>Deploying the web application<a class="headerlink" href="#deploying-the-web-application" title="Permalink to this headline">¶</a></h2>
+<p>Once you have read access to a production database, you can build and release a web application against it.</p>
+<div class="section" id="configure">
+<h3>Configure<a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h3>
+<p>In the <cite>~/.intermine</cite> directory, update the webapp properties in your malariamine.properties file].  Update the following properties:</p>
+<ul class="simple">
+<li>tomcat username and password</li>
+<li>superuser username and password</li>
+</ul>
+</div>
+<div class="section" id="userprofile">
+<h3>UserProfile<a class="headerlink" href="#userprofile" title="Permalink to this headline">¶</a></h3>
+<p>The userprofile database] stores all user-related information such as username and password, tags, queries, lists and templates.</p>
+<ol class="arabic simple">
+<li>Configure</li>
+</ol>
+<p>Update your malariamine.properties file  with correct information for the <cite>db.userprofile-production</cite> database:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">db.userprofile-production.datasource.serverName</span><span class="o">=</span><span class="s">DB_SERVER</span>
+<span class="na">db.userprofile-production.datasource.databaseName</span><span class="o">=</span><span class="s">userprofile-malariamine</span>
+<span class="na">db.userprofile-production.datasource.user</span><span class="o">=</span><span class="s">USER_NAME</span>
+<span class="na">db.userprofile-production.datasource.password</span><span class="o">=</span><span class="s">USER_PASSWORD</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Create the empty database:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>createdb userprofile-malariamine
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Build the database:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in malariamine/webapp</span>
+<span class="nv">$ </span>ant build-db-userprofile
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The build-db and build-db-userprofile commands rebuild the database and thus will delete any data.</p>
+</div>
+<p>This command creates the SuperUser account and loads the <cite>default-template-queries.xml</cite> file. You only need to build the userprofile database once.</p>
+</div>
+<div class="section" id="deploying-the-webapp">
+<h3>Deploying the webapp<a class="headerlink" href="#deploying-the-webapp" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="tomcat">
+<h4>Tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h4>
+<p>Tomcat is the webserver we use to launch InterMine webapps.  Start Tomcat with this command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># from the directory where tomcat is installed.</span>
+<span class="nv">$ </span>bin/startup.sh
+</pre></div>
+</div>
+<p>Visit the Tomcat manager at <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a>.  The username and password required to access the manager are <cite>webapp.manager</cite> and <cite>webapp.password</cite> as specified in  malariamine.properties.</p>
+</div>
+<div class="section" id="webapp">
+<h4>Webapp<a class="headerlink" href="#webapp" title="Permalink to this headline">¶</a></h4>
+<p>Run the following command to release your webapp:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in malariamine/webapp</span>
+<span class="nv">$ </span>ant default remove-webapp release-webapp
+</pre></div>
+</div>
+<p>This will fetch the model from the database and generate the model java code, remove and release the webapp.  The <cite>default</cite> target forces a rebuild of the .war file.  If you&#8217;ve made updates, you may want to add <cite>clean</cite>, which removes temporary directories.</p>
+</div>
+</div>
+<div class="section" id="using-the-webapp">
+<h3>Using the webapp<a class="headerlink" href="#using-the-webapp" title="Permalink to this headline">¶</a></h3>
+<p>Navigate to <a class="reference external" href="http://localhost:8080/malariamine">http://localhost:8080/malariamine</a> to view your webapp.  The path to your webapp is the <cite>webapp.path</cite> value set in malariamine.properties.</p>
+<div class="topic">
+<p class="topic-title first">Next</p>
+<p>Now that you have a database and a working webapp, you&#8217;ll want to know how to add your own logo, pick a colour scheme, modify how data is displayed etc. Our <a class="reference internal" href="webapp.html"><em>webapp tutorial</em></a> is a detailed guide on how to customise all parts of the InterMine web application.</p>
+</div>
+</div>
+</div>
+<div class="section" id="help">
+<h2>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ant">
+<h3>Ant<a class="headerlink" href="#ant" title="Permalink to this headline">¶</a></h3>
+<p>Anytime you run <cite>ant</cite> and something bad happens, add the verbose tag:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v
+</pre></div>
+</div>
+<p>This will give you more detailed output and hopefully a more helpful error message.</p>
+</div>
+<div class="section" id="logs">
+<h3>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h3>
+<p>If the error occurs while you are integrating data, the error message will be in the <cite>intermine.log</cite> file in the directory you are in.</p>
+<p>If the error occurs while you are browsing your webapp, the error message will be located in the Tomcat logs:  <cite>$TOMCAT/logs</cite>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="test-data.html">Data files to integrate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test-data.html#data-sources">Data sources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="test-data.html" title="Data files to integrate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Get started"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

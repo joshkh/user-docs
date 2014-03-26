@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Home page &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Report page" href="../report-page/index.html" />
+    <link rel="prev" title="Guide to Customising your Web Application" href="../index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../report-page/index.html" title="Report page"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Guide to Customising your Web Application"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Home page</a><ul>
+<li><a class="reference internal" href="#boxes-customization">Boxes Customization</a><ul>
+<li><a class="reference internal" href="#search-box">Search box</a></li>
+<li><a class="reference internal" href="#second-box">Second box</a></li>
+<li><a class="reference internal" href="#third-box">Third box</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#popular-templates-customization">Popular Templates Customization</a></li>
+<li><a class="reference internal" href="#featured-lists">Featured Lists</a></li>
+<li><a class="reference internal" href="#rss-blog-feed">RSS/Blog Feed</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Guide to Customising your Web Application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../report-page/index.html"
+                        title="next chapter">Report page</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/homepage/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="home-page">
+<h1>Home page<a class="headerlink" href="#home-page" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This text describes how to customize the homepage of your mine.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../layout/index.html"><em>General Layout</em></a> for whole app look &amp; feel.</p>
+</div>
+<p>If you have just installed a new mine, your homepage probably looks something like the following:</p>
+<img alt="../../_images/initial_homepage.jpg" src="../../_images/initial_homepage.jpg" />
+<p>In order to do any sort of customizations, one has to add/edit a configuration file for the mine. You will find this file in <tt class="docutils literal"><span class="pre">&lt;your_mine_name&gt;/webapp/resources/web.properties</span></tt>.</p>
+<p>Open this file in your editor of choice and follow the text below.</p>
+<div class="section" id="boxes-customization">
+<h2>Boxes Customization<a class="headerlink" href="#boxes-customization" title="Permalink to this headline">¶</a></h2>
+<p>The three prominent boxes on the homepage will contain a search functionality a list upload functionality and an info box. You can customise the text these contain and the box title.</p>
+<div class="section" id="search-box">
+<h3>Search box<a class="headerlink" href="#search-box" title="Permalink to this headline">¶</a></h3>
+<p>The first search box is configured thusly:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.searchBox.title</span> <span class="o">=</span> <span class="s">Search</span>
+<span class="na">begin.searchBox.description</span> <span class="o">=</span> <span class="s">Search FlyMine. Enter &lt;strong&gt;names&lt;/strong&gt;, &lt;strong&gt;identifiers&lt;/strong&gt; \</span>
+<span class="s">or &lt;strong&gt;keywords&lt;/strong&gt; for genes, proteins, pathways, ontology terms, authors, etc. (e.g. \</span>
+<span class="s">&lt;em&gt;eve&lt;/em&gt;, HIPPO_DROME, glycolysis, &lt;em&gt;hb&lt;/em&gt; allele).</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will find that only the description field accepts HTML.</p>
+</div>
+</div>
+<div class="section" id="second-box">
+<h3>Second box<a class="headerlink" href="#second-box" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.listBox.title</span> <span class="o">=</span> <span class="s">List Upload</span>
+<span class="na">begin.listBox.description</span> <span class="o">=</span> <span class="s">Enter a &lt;strong&gt;list&lt;/strong&gt; of identifiers.</span>
+
+<span class="na">bag.example.identifiers</span><span class="o">=</span><span class="s">CG9151, FBgn0000099, CG3629, TfIIB, Mad, CG1775, CG2262, TWIST_DROME, \</span>
+<span class="s">tinman, runt, E2f, CG8817, FBgn0010433, CG9786, CG1034, ftz, FBgn0024250, FBgn0001251, tll, \</span>
+<span class="s">CG1374, CG33473, ato, so, CG16738, tramtrack,  CG2328, gt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="third-box">
+<h3>Third box<a class="headerlink" href="#third-box" title="Permalink to this headline">¶</a></h3>
+<p>The third/info box can contain a descriptive text about your mine or it can offer a link to a tour of the project. Take the example from FlyMine project:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.thirdBox.title</span> <span class="o">=</span> <span class="s">First Time Here?</span>
+<span class="na">begin.thirdBox.description</span> <span class="o">=</span> <span class="s">FlyMine integrates many types of data for &lt;em&gt;Drosophila&lt;/em&gt;, \</span>
+<span class="s">&lt;em&gt;Anopheles&lt;/em&gt; and other organisms. You can run flexible queries, export results and analyse lists of \</span>
+<span class="s">data.</span>
+<span class="na">begin.thirdBox.link</span> <span class="o">=</span> <span class="s">http://www.flymine.org/help/tour/start.html</span>
+<span class="na">begin.thirdBox.linkTitle</span> <span class="o">=</span> <span class="s">Take a tour</span>
+</pre></div>
+</div>
+<p>By providing the .link parameter a button will be shown at the bottom of the box with a custom link of choice.</p>
+<p>You can serve up a custom text in the third &#8220;information&#8221; box to the user, based on whether they have visited the homepage before or not. We do this through a cookie that will, for a year, indicate for your computer, that the homepage has been visited.</p>
+<p>In order to change the values of the third box based on whether the user has visited the page or not, prepend the text &#8220;visited&#8221; before an uppercased key. For example, if one wanted to say &#8220;Welcome Back&#8221; instead of &#8220;First Time Here?&#8221; as the title of the box, we would add the following key=value pair:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.thirdBox.visitedTitle</span> <span class="o">=</span> <span class="s">Welcome Back</span>
+</pre></div>
+</div>
+<p>The fields that you do NOT set in this way, will simply show the text configured in the normal way. So even though someone has visited the homepage before, unless I add a &#8220;visited&#8221; property, the text stays the same as before.</p>
+</div>
+</div>
+<div class="section" id="popular-templates-customization">
+<h2>Popular Templates Customization<a class="headerlink" href="#popular-templates-customization" title="Permalink to this headline">¶</a></h2>
+<p>To show the ten most popular template queries per category on your homepage:</p>
+<img alt="../../_images/popular_templates.jpg" src="../../_images/popular_templates.jpg" />
+<p>Example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># web.properties</span>
+<span class="na">begin.tabs.1.id</span> <span class="o">=</span> <span class="s">Genomics</span>
+</pre></div>
+</div>
+<p>What this configuration does is it creates a tab on the homepage with (up to) 10 most popular templates from a <cite>Genomics</cite> category. For a template to appear in this section, tag it with the Genomics aspect: <cite>im:aspect:Genomics</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The tag you apply to the template (e.g. <cite>im:aspect:Genomics</cite>) must match the value of the <cite>id</cite> attribute (e.g. <cite>begin.tabs.1.id = Genomics</cite>).</p>
+</div>
+<p>The number in the config key specifies the order in which we want to show them. So if we have two categories, Genomics and Proteins, and they should appear in this order, we would write this:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.tabs.1.id</span> <span class="o">=</span> <span class="s">Genomics</span>
+<span class="na">begin.tabs.2.id</span> <span class="o">=</span> <span class="s">Proteins</span>
+</pre></div>
+</div>
+<p>The other customisation we can do is specify an informative text that is to appear in the tab above the templates listing (again, this text accepts HTML.):</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.tabs.1.id</span> <span class="o">=</span> <span class="s">Genomics</span>
+<span class="na">begin.tabs.1.description</span> <span class="o">=</span> <span class="s">This is some descriptive text</span>
+</pre></div>
+</div>
+<p>The last thing we will show is how to specify a custom category name to show as a link on the tab (entirely optional):</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.tabs.1.id</span> <span class="o">=</span> <span class="s">Genomics</span>
+<span class="na">begin.tabs.1.description</span> <span class="o">=</span> <span class="s">This is some descriptive text</span>
+<span class="na">begin.tabs.1.name</span> <span class="o">=</span> <span class="s">Genes</span>
+</pre></div>
+</div>
+<p>Example configuration file: <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/flymine/webapp/resources/web.properties#L554-L570">FlyMine</a></p>
+</div>
+<div class="section" id="featured-lists">
+<h2>Featured Lists<a class="headerlink" href="#featured-lists" title="Permalink to this headline">¶</a></h2>
+<p>Lists with tag <tt class="docutils literal"><span class="pre">im:homepage</span></tt> will be shown on the homepage below the templates listing in a natural order, and/or an order specified by <tt class="docutils literal"><span class="pre">im:order:n</span></tt>.</p>
+<p>To change the description text associated with this set of lists, edit the properties file like so:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">begin.listsBox.description</span> <span class="o">=</span> <span class="s">These are the best lists ever</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rss-blog-feed">
+<h2>RSS/Blog Feed<a class="headerlink" href="#rss-blog-feed" title="Permalink to this headline">¶</a></h2>
+<p>To add the RSS feed at the bottom right corner of the page, add the following to your MINE properties file (in <tt class="docutils literal"><span class="pre">.intermine</span></tt> file):</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">project.rss</span> <span class="o">=</span> <span class="s">http://&lt;your_blog&gt;/&lt;your_feed_url&gt;</span>
+</pre></div>
+</div>
+<p>eg:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">project.rss</span><span class="o">=</span><span class="s">http://blog.flymine.org/?feed=rss2</span>
+</pre></div>
+</div>
+<p>Two latest entries will be shown in the box. If you want to provide a link underneath the entry listing to your blog, add the following to the config file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">links.blog</span> <span class="o">=</span> <span class="s">http://&lt;your_blog&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../report-page/index.html" title="Report page"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Guide to Customising your Web Application"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

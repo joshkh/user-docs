@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cytoscape network viewer &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Third party tools" href="index.html" />
+    <link rel="next" title="Heatmap" href="heatmap.html" />
+    <link rel="prev" title="GBrowse" href="gbrowse.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="heatmap.html" title="Heatmap"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gbrowse.html" title="GBrowse"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Third party tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cytoscape network viewer</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#data-format">Data format</a></li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gbrowse.html"
+                        title="previous chapter">GBrowse</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="heatmap.html"
+                        title="next chapter">Heatmap</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/third-party-tools/cytoscape.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="cytoscape-network-viewer">
+<h1>Cytoscape network viewer<a class="headerlink" href="#cytoscape-network-viewer" title="Permalink to this headline">¶</a></h1>
+<p>The network viewer is based on the CytoscapeWeb flash component.</p>
+<p>The current working example is gene interaction displayer, it links to gene/protein report pages, and displays the gene on the report page, its interacting genes, and physical and genetics interactions between them.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>add the following entry to your &#8216;&#8217;&#8216;webconfig-model.xml&#8217;&#8216;&#8217; file:</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.CytoscapeNetworkDisplayer&quot;</span>
+        <span class="na">jspName=</span><span class="s">&quot;model/cytoscapeNetworkDisplayer.jsp&quot;</span>
+        <span class="na">replacesFields=</span><span class="s">&quot;interactions&quot;</span>
+        <span class="na">placement=</span><span class="s">&quot;Interactions&quot;</span>
+        <span class="na">types=</span><span class="s">&quot;Gene,Protein&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>add the following entries to your &#8216;&#8217;&#8216;struts-config-model.xml&#8217;&#8216;&#8217; file:</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/cytoscapeNetworkExport&quot;</span> <span class="na">type=</span><span class="s">&quot;org.intermine.bio.web.struts.CytoscapeNetworkExportAction&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/cytoscapeNetworkAjax&quot;</span> <span class="na">type=</span><span class="s">&quot;org.intermine.bio.web.struts.CytoscapeNetworkAjaxAction&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>add the following entries to your &#8216;&#8217;&#8216;aspects.xml&#8217;&#8216;&#8217; file:</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;aspect</span> <span class="na">name=</span><span class="s">&quot;Interactions&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;subtitle&gt;</span>IntAct<span class="nt">&lt;/subtitle&gt;</span>
+  <span class="nt">&lt;icon-image&gt;</span>model/images/interaction.gif<span class="nt">&lt;/icon-image&gt;</span>
+  <span class="nt">&lt;large-image&gt;</span>model/images/interaction.gif<span class="nt">&lt;/large-image&gt;</span>
+  <span class="nt">&lt;tile-name&gt;&lt;/tile-name&gt;</span>
+  <span class="nt">&lt;intro-text&gt;</span>
+    Protein-protein interactions from IntAct (PSI-MI format), genetic interactions from the BioGRID and miRNA target predictions from miRBase.
+  <span class="nt">&lt;/intro-text&gt;</span>
+  <span class="nt">&lt;tile-name&gt;</span>model/interactions.jsp<span class="nt">&lt;/tile-name&gt;</span>
+  <span class="nt">&lt;aspect-source</span> <span class="na">name=</span><span class="s">&quot;IntAct&quot;</span> <span class="na">url=</span><span class="s">&quot;http://www.ebi.ac.uk/intact/&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;aspect-source</span> <span class="na">name=</span><span class="s">&quot;BioGRID&quot;</span> <span class="na">url=</span><span class="s">&quot;http://www.thebiogrid.org/&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;aspect-source</span> <span class="na">name=</span><span class="s">&quot;miRBase&quot;</span> <span class="na">url=</span><span class="s">&quot;http://microrna.sanger.ac.uk/targets/v4/&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/aspect&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>re-release your webapp and you should see the interaction displayer on gene report pages.</li>
+</ol>
+</div>
+<div class="section" id="data-format">
+<h2>Data format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h2>
+<p>CytoscapeWeb can parse the following date formats:</p>
+<ul class="simple">
+<li>SIF</li>
+<li>XGMML</li>
+<li>JSON</li>
+</ul>
+<p>Network can be exported as:</p>
+<ul class="simple">
+<li>SIF</li>
+<li>XGMML</li>
+<li>PNG</li>
+<li>SVG</li>
+<li>TSV</li>
+<li>CSV</li>
+</ul>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>What we do for the interactions viewer (the one that targetmine has) is generate the query in Java, e.g.:</p>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">interactions</span><span class="p">,</span> <span class="n">genes</span> <span class="k">where</span> <span class="n">gene</span> <span class="o">=</span> <span class="p">[</span><span class="n">the</span> <span class="n">gene</span> <span class="k">on</span> <span class="n">the</span> <span class="n">report</span> <span class="n">page</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This query returns all the interactions for that gene of interest.  Then we do another query to find out how the genes in the interactions are
+related.  These data are then sent to the Cytoscape viewer via ajax call in SIF/XGMML/JSON format, and the Cytoscape viewer displays those data.</p>
+<p>Table of some source files and their functions:</p>
+<dl class="docutils">
+<dt>CytoscapeNetworkDisplayer.java</dt>
+<dd>the report displayer class, get a set of genes interacting with the report gene, in your case, the genes/proteins on the same pathway as the report gene/protein||</dd>
+<dt>CytoscapeNetworkDisplayer.jsp</dt>
+<dd>the web page to display the network</dd>
+<dt>CytoscapeNetworkAjaxAction.java</dt>
+<dd>the Structs action class (config in struts-config-model.xml) to handle the http request and call CytoscapeNetworkService to generate the network data</dd>
+<dt>CytoscapeNetworkGenerator.java</dt>
+<dd>generate network data in SIF/XGMML/JSON format</dd>
+<dt>CytoscapeNetworkService.java</dt>
+<dd>service class</dd>
+<dt>CytoscapeNetworkNodeData.java</dt>
+<dd>netowrk work node model</dd>
+<dt>CytoscapeNetworkEdgeData.java</dt>
+<dd>netowrk work edge model</dd>
+</dl>
+<p>After fetching the data to the web page, you can customise the outlook of the network by using CytoscapeWeb javascript API.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="heatmap.html" title="Heatmap"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gbrowse.html" title="GBrowse"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Third party tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

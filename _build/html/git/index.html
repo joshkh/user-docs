@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Get the Software &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="next" title="Get started" href="../get-started/index.html" />
+    <link rel="prev" title="Setting up InterMine projects in Eclipse" href="../system-requirements/software/eclipse.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../get-started/index.html" title="Get started"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../system-requirements/software/eclipse.html" title="Setting up InterMine projects in Eclipse"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../system-requirements/software/eclipse.html"
+                        title="previous chapter">Setting up InterMine projects in Eclipse</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../get-started/index.html"
+                        title="next chapter">Get started</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/git/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="get-the-software">
+<h1>Get the Software<a class="headerlink" href="#get-the-software" title="Permalink to this headline">¶</a></h1>
+<p>The latest InterMine release is hosted on GitHub in the InterMine organization: <a class="reference external" href="https://github.com/intermine/intermine">https://github.com/intermine/intermine</a></p>
+<ol class="arabic">
+<li><p class="first">Create an account at GitHub.</p>
+</li>
+<li><p class="first">Visit the InterMine GitHub repository at <a class="reference external" href="https://github.com/intermine/intermine">https://github.com/intermine/intermine</a> and click on the &#8220;Fork&#8221; button in the top right corner of the page.</p>
+</li>
+<li><p class="first">Clone the <a class="reference external" href="https://help.github.com/articles/fork-a-repo">forked</a> InterMine repo to your local machine where <cite>git_username</cite> is the name of your GitHub account:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone git@github.com:git_username/intermine.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Check out the latest stable InterMine release from the &#8216;&#8217;&#8216;master&#8217;&#8216;&#8217; branch:</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>intermine
+<span class="nv">$ </span>git checkout master
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="loweralpha simple">
+<li>The other branches are used by InterMine developers for testing.</li>
+<li>If you would like to use a specific release of InterMine, you can use one of our tags</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">To keep track of the original InterMine repo, assign the original repo to a remote called &#8220;upstream&#8221;</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git remote add upstream git@github.com:intermine/intermine.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">To pull changes in your local repository and merge them into your working files:</p>
+<blockquote>
+<div><blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git pull upstream
+</pre></div>
+</div>
+</div></blockquote>
+<p>You can also pull changes in your local repository without modifying your files</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git fetch upstream
+</pre></div>
+</div>
+</div></blockquote>
+<p>and merge any changes fetched into your working files</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git merge upstream/master
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
+<p>All InterMine code is freely available under the open source <a class="reference external" href="http://www.gnu.org/licenses/lgpl.html">LGPL</a>  license.</p>
+<span class="target" id="index-0"></span></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../get-started/index.html" title="Get started"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../system-requirements/software/eclipse.html" title="Setting up InterMine projects in Eclipse"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

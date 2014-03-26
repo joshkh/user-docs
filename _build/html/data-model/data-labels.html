@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using Class and Field Labels &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Data Model" href="index.html" />
+    <link rel="next" title="Querying over genomic ranges" href="overlaps.html" />
+    <link rel="prev" title="Model Description" href="model.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="overlaps.html" title="Querying over genomic ranges"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model.html" title="Model Description"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using Class and Field Labels</a><ul>
+<li><a class="reference internal" href="#configuring-classes-and-fields-individually">Configuring classes and fields individually</a></li>
+<li><a class="reference internal" href="#configuring-classes-and-fields-globally">Configuring classes and fields globally</a></li>
+<li><a class="reference internal" href="#using-these-labels-in-your-webapp">Using these labels in your webapp</a></li>
+<li><a class="reference internal" href="#using-labels-in-javascript">Using Labels in JavaScript</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model.html"
+                        title="previous chapter">Model Description</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="overlaps.html"
+                        title="next chapter">Querying over genomic ranges</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/data-model/data-labels.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-class-and-field-labels">
+<h1>Using Class and Field Labels<a class="headerlink" href="#using-class-and-field-labels" title="Permalink to this headline">¶</a></h1>
+<p>The InterMine webapp, and to a limited extent web services, supports the use of labels for classes and fields. Unlabelled classes and fields are formatted for enhanced legibility.</p>
+<p>The current system for determining a label is as follows:</p>
+<ol class="arabic simple">
+<li>If the class or field has a pre-set label, that is used</li>
+<li>Otherwise the class or field name is</li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Split from its camel case parts as specified in <a class="reference external" href="http://commons.apache.org/lang/api-2.6/org/apache/commons/lang/StringUtils.html#splitByCharacterTypeCamelCase(java.lang.String)">Apache Commons StringUtils</a></li>
+<li>Each part is given an initial upper-case</li>
+<li>The parts are then joined by spaces</li>
+</ol>
+</div></blockquote>
+<p>Handling paths is similar, except that the dots (&#8221;.&#8221;) between class and field names are replaced by right angle-brackets (&#8220;&gt;&#8221;).</p>
+<p>Examples</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Before</th>
+<th class="head">After</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ChromosomeLocation</td>
+<td>Chromosome Location</td>
+</tr>
+<tr class="row-odd"><td>shortName</td>
+<td>Short Name</td>
+</tr>
+<tr class="row-even"><td>Organism</td>
+<td>Organism</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>Name</td>
+</tr>
+<tr class="row-even"><td>Organism.shortName</td>
+<td>Organism &gt; Short Name</td>
+</tr>
+</tbody>
+</table>
+<p>Well named fields and classes thus do not need explicit labelling.</p>
+<p>Labels can be configured however in two ways, in order of precedence:
+#. Classes and fields can be configured individually. This configuration respects inheritance, and subclasses automatically inherit the field labels of their parents.
+#. Translation tables can be set up for classes and fields. These are for cases where <cite>ALL</cite> classes/fields with a certain name should be relabelled. Examples are <cite>url</cite> -&gt; <cite>URL</cite>, which would otherwise be rendered as &#8216;&#8217;Url&#8217;&#8216;. This is especially useful for acroynms.</p>
+<div class="section" id="configuring-classes-and-fields-individually">
+<h2>Configuring classes and fields individually<a class="headerlink" href="#configuring-classes-and-fields-individually" title="Permalink to this headline">¶</a></h2>
+<p>To apply individual configuration, the file <cite>webconfig-model.xml</cite> needs to be edited, and a <cite>label</cite> attribute added to items you want to configure. eg:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">className=</span><span class="s">&quot;org.intermine.model.bio.Allele&quot;</span> <span class="na">label=</span><span class="s">&quot;SOME CLASS LABEL&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fields&gt;</span>
+      <span class="nt">&lt;fieldconfig</span> <span class="na">fieldExpr=</span><span class="s">&quot;primaryIdentifier&quot;</span> <span class="na">label=</span><span class="s">&quot;SOME FIELD LABEL&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;fieldconfig</span> <span class="na">fieldExpr=</span><span class="s">&quot;symbol&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;fieldconfig</span> <span class="na">fieldExpr=</span><span class="s">&quot;alleleClass&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;fieldconfig</span> <span class="na">fieldExpr=</span><span class="s">&quot;organism.name&quot;</span> <span class="na">label=</span><span class="s">&quot;Organism&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/fields&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<p>This is most helpful in the case of compound field-expressions (&#8220;organism.name&#8221;), which can this be configured to display as just a single expression.</p>
+</div>
+<div class="section" id="configuring-classes-and-fields-globally">
+<h2>Configuring classes and fields globally<a class="headerlink" href="#configuring-classes-and-fields-globally" title="Permalink to this headline">¶</a></h2>
+<p>For this, the mine needs to be made aware of properties files that hold the appropriate translations. Biological mines automatically get three of these files:</p>
+<dl class="docutils">
+<dt><cite>bio/webapp/resources/webapp/WEB-INF/soClassName.properties</cite></dt>
+<dd>used to generate readable names using the SO term a class represents</dd>
+<dt><cite>bio/webapp/resources/webapp/WEB-INF/bioClassNames.properties</cite></dt>
+<dd>used to map non-SO classes to readable names</dd>
+<dt><cite>bio/webapp/resources/webapp/WEB-INF/bioFieldNames.properties</cite></dt>
+<dd>uses to map field names to readable names</dd>
+</dl>
+<p>Additional files can be specified. Add the the following properties to your web.properties:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">web.config.classname.mappings.{SOME_ID}</span><span class="o">=</span><span class="s">{RESOURCE_NAME}</span>
+<span class="na">web.config.fieldname.mappings.{SOME_ID}</span><span class="o">=</span><span class="s">{RESOURCE_NAME}</span>
+</pre></div>
+</div>
+<p>All resources should be names relative to the WEB-INF directory where they will end up.</p>
+<p>You can have as many additional files as you wish, but:</p>
+<ul class="simple">
+<li>They should all have a different id. If they do not, all but one will be silently ignored.</li>
+<li>They should not have configuration for the same class/field. If they do, and exception will be thrown on initialisation, and your webapp will not start.</li>
+</ul>
+</div>
+<div class="section" id="using-these-labels-in-your-webapp">
+<h2>Using these labels in your webapp<a class="headerlink" href="#using-these-labels-in-your-webapp" title="Permalink to this headline">¶</a></h2>
+<p>A new tag library is available to help with labelling. Add the following to the top
+of any jsp you write that you want to use labels in:</p>
+<div class="highlight-html"><pre>&lt;%@ taglib uri="/WEB-INF/functions.tld" prefix="imf" %&gt;</pre>
+</div>
+<p>This library provides five functions, which expose static methods from the org.intermine.web.logic.WebUtil class:</p>
+<dl class="docutils">
+<dt><cite>formatPath(Path p, WebConfig wcf)</cite></dt>
+<dd><dl class="first last docutils">
+<dt>This function produces a fully configured string from an arbitrarily long path. eg:</dt>
+<dd><cite>&lt;c:out value=&#8221;${imf:formatColumnName(path, WEBCONFIG)}&#8221;/&gt;</cite></dd>
+</dl>
+</dd>
+<dt><cite>formatPathStr(String s, InterMineAPI api, Webconfig wcf)</cite></dt>
+<dd><dl class="first last docutils">
+<dt>This function produces a fully configured string from an arbitrarily long path, where that path is represented as a string. eg:</dt>
+<dd><cite>&lt;c:out value=&#8221;${imf:formatColumnName(pathString, INTERMINE_API, WEBCONFIG)}&#8221;/&gt;</cite></dd>
+</dl>
+</dd>
+<dt><cite>formatField(Path p, Webconfig wcf)</cite></dt>
+<dd><dl class="first last docutils">
+<dt>This function produces a fully configured field name from the last field of an arbitrarily long path. eg:</dt>
+<dd><cite>&lt;c:out value=&#8221;${imf:formatField(path, WEBCONFIG)}&#8221;/&gt;</cite></dd>
+</dl>
+</dd>
+<dt><cite>formatFieldStr(String s, InterMineAPI api, Webconfig wcf)</cite></dt>
+<dd><dl class="first last docutils">
+<dt>This function produces a fully configured field name from the last field of an arbitrarily long path, where that path is represented by a string. eg:</dt>
+<dd><cite>&lt;c:out value=&#8221;${imf:formatFieldStr(pathString, INTERMINE_API, WEBCONFIG)}&#8221;/&gt;</cite></dd>
+</dl>
+</dd>
+<dt><cite>formatFieldChain(String s, InterMineAPI api, Webconfig wcf)</cite></dt>
+<dd><dl class="first last docutils">
+<dt>This function produces a string of fully configured field names from all the fields in an arbitrarily long path, where that path is represented by a string (ie. without the root class). eg:</dt>
+<dd><cite>&lt;c:out value=&#8221;${imf:formatFieldStr(pathString, INTERMINE_API, WEBCONFIG)}&#8221;/&gt;</cite></dd>
+</dl>
+</dd>
+</dl>
+<p>The values <cite>INTERMINE_API</cite> and <cite>WEBCONFIG</cite> are automatically available within jsps at all times.</p>
+<p>While it is possible to call the formatting methods of WebUtil directly from Java controllers, it is not advisable, from design principles, to do so. Labels are an aspect of presentation (the view) and thus not the responsibility of Java classes (the controllers). The only justifiable place to call presentation methods from is in action classes that directly return data to the user, eg. in webservices and ajax calls.</p>
+</div>
+<div class="section" id="using-labels-in-javascript">
+<h2>Using Labels in JavaScript<a class="headerlink" href="#using-labels-in-javascript" title="Permalink to this headline">¶</a></h2>
+<p>Pages in the InterMine webapp have a variable in the global scope named <cite>$MODEL_TRANSLATION_TABLE</cite>. This contains information on how all classes and their fields should be displayed.</p>
+<p>To access its information, for classes:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">className</span> <span class="o">=</span> <span class="o">??</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">displayName</span> <span class="o">=</span> <span class="nx">$MODEL_TRANSLATION_TABLE</span><span class="p">[</span><span class="nx">className</span><span class="p">].</span><span class="nx">displayName</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And for fields of this class:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">fieldName</span> <span class="o">=</span> <span class="o">??</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">fieldDisplayName</span> <span class="o">=</span> <span class="nx">$MODEL_TRANSLATION_TABLE</span><span class="p">[</span><span class="nx">className</span><span class="p">].</span><span class="nx">fields</span><span class="p">[</span><span class="nx">fieldName</span><span class="p">]</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="overlaps.html" title="Querying over genomic ranges"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model.html" title="Model Description"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

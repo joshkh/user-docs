@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Linking in to your mine &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Third party tools" href="../third-party-tools/index.html" />
+    <link rel="prev" title="Help" href="../help/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../third-party-tools/index.html" title="Third party tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../help/index.html" title="Help"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Linking in to your mine</a><ul>
+<li><a class="reference internal" href="#link-directly-to-query-results">Link directly to query results</a><ul>
+<li><a class="reference internal" href="#template-name">Template name</a></li>
+<li><a class="reference internal" href="#query-xml">Query XML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#link-to-list-analysis-page">Link to List Analysis page</a><ul>
+<li><a class="reference internal" href="#template-results">Template results</a></li>
+<li><a class="reference internal" href="#list-of-identifiers">List of Identifiers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#query-builder">Query builder</a></li>
+<li><a class="reference internal" href="#report-page">Report page</a></li>
+<li><a class="reference internal" href="#link-into-mine-with-orthologues">Link into Mine with Orthologues</a></li>
+<li><a class="reference internal" href="#convert-any-identifiers-to-genes">Convert any identifiers to Genes</a></li>
+<li><a class="reference internal" href="#more-examples">More examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../help/index.html"
+                        title="previous chapter">Help</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../third-party-tools/index.html"
+                        title="next chapter">Third party tools</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/linking-in/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="linking-in-to-your-mine">
+<h1>Linking in to your mine<a class="headerlink" href="#linking-in-to-your-mine" title="Permalink to this headline">¶</a></h1>
+<p>This page aims to describe the various ways to link to a Mine.</p>
+<div class="section" id="link-directly-to-query-results">
+<h2>Link directly to query results<a class="headerlink" href="#link-directly-to-query-results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template-name">
+<h3>Template name<a class="headerlink" href="#template-name" title="Permalink to this headline">¶</a></h3>
+<p>Links to results of specified template.  URL generated on template form in webapp.</p>
+<p><a class="reference external" href="http://www.flymine.org/query/loadTemplate.do?name=Chromosome_Gene&amp;constraint1=Gene.chromosome.primaryIdentifier&amp;op1=eq&amp;value1=2L&amp;constraint2=Gene.organism.name&amp;op2=eq&amp;value2=Drosophila+melanogaster&amp;method=results">http://www.flymine.org/query/loadTemplate.do?name=Chromosome_Gene&amp;constraint1=Gene.chromosome.primaryIdentifier&amp;op1=eq&amp;value1=2L&amp;constraint2=Gene.organism.name&amp;op2=eq&amp;value2=Drosophila+melanogaster&amp;method=results</a></p>
+</div>
+<div class="section" id="query-xml">
+<h3>Query XML<a class="headerlink" href="#query-xml" title="Permalink to this headline">¶</a></h3>
+<p>Links to results of query.  Can run any query built by QueryBuilder; QueryBuilder generates the XML.</p>
+<p><a class="reference external" href="http://www.flymine.org/query/loadQuery.do?skipBuilder=true&amp;query=%0A%3Cquery+name%3D%22%22+model%3D%22genomic%22+view%3D%22Gene.primaryIdentifier+Gene.secondaryIdentifier+Gene.goAnnotation.ontologyTerm.name+Gene.goAnnotation.ontologyTerm.identifier+Gene.goAnnotation.ontologyTerm.namespace%22+sortOrder%3D%22Gene.primaryIdentifier+asc%22%3E%0A++%3Cconstraint+path%3D%22Gene.organism.shortName%22+op%3D%22%3D%22+value%3D%22A.+gambiae%22%2F%3E%0A%3C%2Fquery%3E%0A&amp;trail=%7Cquery&amp;method=xml">http://www.flymine.org/query/loadQuery.do?skipBuilder=true&amp;query=%0A%3Cquery+name%3D%22%22+model%3D%22genomic%22+view%3D%22Gene.primaryIdentifier+Gene.secondaryIdentifier+Gene.goAnnotation.ontologyTerm.name+Gene.goAnnotation.ontologyTerm.identifier+Gene.goAnnotation.ontologyTerm.namespace%22+sortOrder%3D%22Gene.primaryIdentifier+asc%22%3E%0A++%3Cconstraint+path%3D%22Gene.organism.shortName%22+op%3D%22%3D%22+value%3D%22A.+gambiae%22%2F%3E%0A%3C%2Fquery%3E%0A&amp;trail=%7Cquery&amp;method=xml</a></p>
+</div>
+</div>
+<div class="section" id="link-to-list-analysis-page">
+<h2>Link to List Analysis page<a class="headerlink" href="#link-to-list-analysis-page" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template-results">
+<h3>Template results<a class="headerlink" href="#template-results" title="Permalink to this headline">¶</a></h3>
+<p>Links to list analysis page comprised of results of template query.  &#8220;path&#8221; attribute determines which column used to create list.  URL available on template form in webapp.</p>
+<p><a class="reference external" href="http://www.flymine.org/query/loadTemplate.do?name=Pathway_Genes&amp;constraint1=Pathway.name&amp;op1=eq&amp;value1=Pentose+phosphate+pathway&amp;constraint2=Pathway.genes.organism.name&amp;op2=eq&amp;value2=Drosophila+melanogaster&amp;constraint3=Pathway.dataSets.name&amp;op3=eq&amp;value3=KEGG+pathways+data+set&amp;method=list&amp;path=Pathway.genes">http://www.flymine.org/query/loadTemplate.do?name=Pathway_Genes&amp;constraint1=Pathway.name&amp;op1=eq&amp;value1=Pentose+phosphate+pathway&amp;constraint2=Pathway.genes.organism.name&amp;op2=eq&amp;value2=Drosophila+melanogaster&amp;constraint3=Pathway.dataSets.name&amp;op3=eq&amp;value3=KEGG+pathways+data+set&amp;method=list&amp;path=Pathway.genes</a></p>
+</div>
+<div class="section" id="list-of-identifiers">
+<h3>List of Identifiers<a class="headerlink" href="#list-of-identifiers" title="Permalink to this headline">¶</a></h3>
+<p>Links to list analysis page for specified objects.  For a very long list, use a form instead of a link.  Can use any identifiers.</p>
+<p><a class="reference external" href="http://www.flymine.org/query/portal.do?externalids=CG2262,CG3069,CG2859,CG5041,FBgn0036513&amp;class=Gene">http://www.flymine.org/query/portal.do?externalids=CG2262,CG3069,CG2859,CG5041,FBgn0036513&amp;class=Gene</a></p>
+</div>
+</div>
+<div class="section" id="query-builder">
+<h2>Query builder<a class="headerlink" href="#query-builder" title="Permalink to this headline">¶</a></h2>
+<p>Links directly to query builder, starts a query using the provided list.</p>
+<p><a class="reference external" href="http://beta.flymine.org/beta/loadQuery.do?name=copy&amp;method=list">http://beta.flymine.org/beta/loadQuery.do?name=copy&amp;method=list</a></p>
+</div>
+<div class="section" id="report-page">
+<h2>Report page<a class="headerlink" href="#report-page" title="Permalink to this headline">¶</a></h2>
+<p>Links directly to report page.  URL available on report page in webapp.</p>
+<p><a class="reference external" href="http://www.flymine.org/query/portal.do?externalid=FBgn0004053&amp;class=Gene&amp;origin=flybase">http://www.flymine.org/query/portal.do?externalid=FBgn0004053&amp;class=Gene&amp;origin=flybase</a></p>
+</div>
+<div class="section" id="link-into-mine-with-orthologues">
+<h2>Link into Mine with Orthologues<a class="headerlink" href="#link-into-mine-with-orthologues" title="Permalink to this headline">¶</a></h2>
+<p>The example URL contains &#8216;&#8217;D. melanogaster&#8217;&#8217; genes.  The results will contain the corresponding &#8216;&#8217;C. elegans&#8217;&#8217; genes, if any.  This will only work if you have orthologue data loaded into your Mine. Will forward to report page OR list analysis page.</p>
+<p><a class="reference external" href="http://www.flymine.org/query/portal.do?externalids=CG2262,CG3069,CG2859,CG5041,FBgn0036513&amp;class=Gene&amp;orthologue=C.%20elegans">http://www.flymine.org/query/portal.do?externalids=CG2262,CG3069,CG2859,CG5041,FBgn0036513&amp;class=Gene&amp;orthologue=C.%20elegans</a></p>
+</div>
+<div class="section" id="convert-any-identifiers-to-genes">
+<h2>Convert any identifiers to Genes<a class="headerlink" href="#convert-any-identifiers-to-genes" title="Permalink to this headline">¶</a></h2>
+<p>When linking to a report page or a list analysis page you can convert the data type, for instance if you provide a Protein identifier and want to link to the corresponding Gene, you need to specify the class as Gene.  Will only work if you have a converter template available</p>
+<p><a class="reference external" href="http://www.flymine.org/query/portal.do?externalid=EVE_DROME&amp;class=Gene">http://www.flymine.org/query/portal.do?externalid=EVE_DROME&amp;class=Gene</a></p>
+</div>
+<div class="section" id="more-examples">
+<h2>More examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></h2>
+<p>See FlyMine for more examples: <a class="reference external" href="http://blog.flymine.org/link-to-flymine">http://blog.flymine.org/link-to-flymine</a></p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../third-party-tools/index.html" title="Third party tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../help/index.html" title="Help"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

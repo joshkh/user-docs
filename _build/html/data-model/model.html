@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Model Description &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Data Model" href="index.html" />
+    <link rel="next" title="Using Class and Field Labels" href="data-labels.html" />
+    <link rel="prev" title="Data Model Overview" href="overview.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="data-labels.html" title="Using Class and Field Labels"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Data Model Overview"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Model Description</a><ul>
+<li><a class="reference internal" href="#what-the-model-governs">What the Model governs</a></li>
+<li><a class="reference internal" href="#naming-conventions">Naming conventions</a></li>
+<li><a class="reference internal" href="#the-model-file-format">The Model File Format</a></li>
+<li><a class="reference internal" href="#the-model-tag">The &#8220;&lt;model&gt;&#8221; Tag</a></li>
+<li><a class="reference internal" href="#the-class-tag">The &#8220;&lt;class&gt;&#8221; Tag</a></li>
+<li><a class="reference internal" href="#the-attribute-tag">The &#8220;&lt;attribute&gt;&#8221; Tag</a></li>
+<li><a class="reference internal" href="#the-reference-and-collection-tags">The &#8220;&lt;reference&gt;&#8221; and &#8220;&lt;collection&gt;&#8221; Tags</a></li>
+<li><a class="reference internal" href="#a-short-example">A short example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">Data Model Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="data-labels.html"
+                        title="next chapter">Using Class and Field Labels</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/data-model/model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-description">
+<h1>Model Description<a class="headerlink" href="#model-description" title="Permalink to this headline">¶</a></h1>
+<p>A database stored using the InterMine system is object-oriented and it loads data defined by a model description.  This model description is defined in a file, &lt;MINENAME&gt;_model.xml.  This page describes the format of this file and its implications.</p>
+<div class="section" id="what-the-model-governs">
+<h2>What the Model governs<a class="headerlink" href="#what-the-model-governs" title="Permalink to this headline">¶</a></h2>
+<p>The Model is a description of the class hierarchy that is expected to be stored in the database, so it includes a description of the classes and fields of the data that will be stored. The model will typically be used to generate Java code for those classes automatically. The auto-generated classes will be pure Java beans, with fields as described in the Model, with getters and setters. Each class can have any number of attributes (which store primitive data, like numbers, dates, and strings), references to other objects in the database, and collections of other objects in the database.</p>
+<p>Since all objects in the database (except SimpleObjects) are instances of InterMineObject, which has a field called &#8220;id&#8221; which is unique, all objects in the database can be fetched individually by searching for that unique &#8220;id&#8221; value.</p>
+</div>
+<div class="section" id="naming-conventions">
+<h2>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
+<p>The model expects standard Java names for classes and attributes.  That is:</p>
+<dl class="docutils">
+<dt>classes</dt>
+<dd>start with an upper case letter and be CamelCase.  The name can&#8217;t include underscores or spaces.</dd>
+<dt>fields</dt>
+<dd>(attributes, references, collections) should start with a lower case letter and be lowerCamelCase.  The name shouldn&#8217;t include underscores or spaces.</dd>
+</dl>
+<p>It&#8217;s possible to specify friendly names that will be displayed in place of the actual java-ised name in the web interface.</p>
+</div>
+<div class="section" id="the-model-file-format">
+<h2>The Model File Format<a class="headerlink" href="#the-model-file-format" title="Permalink to this headline">¶</a></h2>
+<p>The Model is defined in an XML file, with only a few different tags. The document root tag is &#8220;&lt;model&gt;&#8221;, and contains a list of &#8220;&lt;class&gt;&#8221; tags, each of which describes a single class in the model. Class tags are not nested - the hierarchy is defined elsewhere, which allows multiple inheritance if necessary. All classes inherit all the fields of all its parent classes, so they should not be defined again.</p>
+</div>
+<div class="section" id="the-model-tag">
+<h2>The &#8220;&lt;model&gt;&#8221; Tag<a class="headerlink" href="#the-model-tag" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The &#8220;&lt;model&gt;&#8221; tag has two attributes, which are mandatory:</div></blockquote>
+<dl class="docutils">
+<dt>name</dt>
+<dd>this is the name of the model. It should match the name of the file (that is, a model called &#8220;testmodel&#8221; must be in a file called &#8220;testmodel_model.xml&#8221;). A model can be fetched by name in Java by calling Model.getInstanceByName(String name) as long as this file is in the classpath.</dd>
+<dt>package</dt>
+<dd>this is a unique path that defines the model.</dd>
+</dl>
+</div>
+<div class="section" id="the-class-tag">
+<h2>The &#8220;&lt;class&gt;&#8221; Tag<a class="headerlink" href="#the-class-tag" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>name</dt>
+<dd>this is the name of the class. All the classes must be in the same Java package.</dd>
+<dt>is-interface</dt>
+<dd>this must be &#8220;true&#8221; or &#8220;false&#8221;. If this is true, then the class is generated as a Java interface, which will allow multiple inheritance from this class. Objects can be created which are instances of an interface, by using dynamic code generation using Java reflection, and there is surprisingly little performance cost. If this is false, then the class will be a normal Java class, and instances will be normal Java objects. However, a Java class can only have one non-interface parent class. The main FlyMine Model is entirely interface.  <em>In practice this field should always be set to true</em></dd>
+<dt>extends</dt>
+<dd>this is an optional space-separated list of other classes, specifying the parent classes of this class. Only one of these parents may be a non-interface. If this attribute is not present, then the parent of the class will be &#8220;InterMineObject&#8221;, which is therefore indirectly the parent of all classes in the model (except SimpleObjects).</dd>
+</dl>
+<p>Inside the &#8220;&lt;class&gt;&#8221; tags are tags describing the fields of the class. These are &#8220;&lt;attribute&gt;&#8221;, &#8220;&lt;reference&gt;&#8221;, and &#8220;&lt;collection&gt;&#8221;, none of which enclose any other XML tags. You should not define two fields with the same name for a particular class, taking into account that classes inherit all the fields of their parent classes. The InterMineObject class (which everything except SimpleObjects inherit) has a field called &#8220;id&#8221;.</p>
+</div>
+<div class="section" id="the-attribute-tag">
+<h2>The &#8220;&lt;attribute&gt;&#8221; Tag<a class="headerlink" href="#the-attribute-tag" title="Permalink to this headline">¶</a></h2>
+<p>This tag defines a field in the class for storing primitive data, like numbers, dates, and Strings. It has two attributes:</p>
+<dl class="docutils">
+<dt>name</dt>
+<dd>this is the name of the field, as it will appear in the Java class, and in queries.</dd>
+<dt>type</dt>
+<dd><p class="first">this is the type of data that can be stored in the field, and must be one of the following:</p>
+<ul class="last simple">
+<li>boolean  or  java.lang.Boolean  - this stores a simple &#8220;true&#8221; or &#8220;false&#8221; value. The first type is a primitive value with only those two possible values, whereas the latter type is the Java Boolean Object, which can contain a third value of &#8220;null&#8221;.</li>
+<li>short  or  java.lang.Short  - this stores a 16-bit signed integer value. Again, the latter type may also have a null value, as is the case with the rest of the numbers.</li>
+<li>int  or  java.lang.Integer  - this stores a 32-bit signed integer value.</li>
+<li>long  or  java.lang.Long  - this stores a 64-bit signed integer value.</li>
+<li>float  or  java.lang.Float  - this stores a 32-bit floating-point number.</li>
+<li>double  or  java.lang.Double  - this stores a 64-bit floating-point number.</li>
+<li>java.math.BigDecimal  - this stores an arbitrary-precision floating point number. There is no Java primitive equivalent, so this field type may contain a null value.</li>
+<li>java.util.Date  - this stores a date and time, with a resolution of one millisecond, or null.</li>
+<li>java.lang.String  - this stores a portion of text of arbitrary length, or null.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="the-reference-and-collection-tags">
+<h2>The &#8220;&lt;reference&gt;&#8221; and &#8220;&lt;collection&gt;&#8221; Tags<a class="headerlink" href="#the-reference-and-collection-tags" title="Permalink to this headline">¶</a></h2>
+<p>The &#8220;&lt;reference&gt;&#8221; tag defines a field in the class for storing a reference to another object in the database. The &#8220;&lt;collection&gt;&#8221; tag defines a field in the class for storing a collection of references to other objects in the database. Both of these relationships may be unidirectional or bidirectional. If they are bidirectional, that means that there is an equivalent relationship in the referenced class that points in the reverse direction, and two relationships will agree on their contents. All referenced objects must be in the database for the references and collections to be valid. Both of these tags have several attributes:</p>
+<dl class="docutils">
+<dt>name</dt>
+<dd>this is the name of the field, as it will appear in the Java class, and in queries.</dd>
+<dt>referenced-type</dt>
+<dd>this is the class name of the class of object that is referenced by the reference, or present in the collection.</dd>
+<dt>reverse-reference</dt>
+<dd>this is an optional name of a reference or collection in the referenced-type that is the reverse of this relationship. Specifying this turns the relationship into a bidirectional relationship.</dd>
+</dl>
+<p>There are effectively two types of reference and two types of collection, depending on the type or presence of a reverse relationship:</p>
+<dl class="docutils">
+<dt>One to one relationship</dt>
+<dd>this is where a reference has a reverse-relationship that is also a reference. Use of these is discouraged, because they suffer from performance and consistency problems, and can possibly be better modelled by combining the two classes into one.</dd>
+<dt>Many to one relationship</dt>
+<dd>this is where a reference has a reverse-relationship that is a collection, or where a reference does not have a reverse-relationship.</dd>
+<dt>One to many relationship</dt>
+<dd>this is where a collection has a reverse-relationship that is a reference. This kind of relationship is a side-effect of a many to one relationship, and cannot be written to from this end. All alterations should be made on the many to one relationship instead.</dd>
+<dt>Many to many relationship</dt>
+<dd>this is where a collection has a reverse-relationship that is a collection, or where a collection does not have a reverse-relationship. This type of collection can be altered from either side, and the changes will be observed from both sides.</dd>
+</dl>
+</div>
+<div class="section" id="a-short-example">
+<h2>A short example<a class="headerlink" href="#a-short-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">&quot;testing&quot;</span> <span class="na">package=</span><span class="s">&quot;org.intermine.model.bio&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&gt;&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;extraData&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;features&quot;</span>  <span class="na">referenced-type=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;protein&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/class&gt;</span>
+
+  <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;identifier&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;confidence&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Double&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;protein&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Protein&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;features&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/model&gt;</span>
+</pre></div>
+</div>
+<p>For a more complete example, see <a class="reference external" href="http://www.flymine.org/query/service/model">FlyMine</a> which covers all the features available in the model.</p>
+<p>The Model defines the set of data that is  searchable  in the database. Other data can be written to the database, but only the classes and attributes that are defined in the model are searchable. So you may, if you wish, compile a Java class which inherits InterMineObject (to allow it to stored in the database) or some other class in the model, with extra fields, and store instances of that class in the database, but you will not be able to search for instances of that class, or for instances with a particular value for the field that is not in the model.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="data-labels.html" title="Using Class and Field Labels"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Data Model Overview"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

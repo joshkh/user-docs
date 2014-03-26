@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing Your Own Data Source &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Data Sources" href="../index.html" />
+    <link rel="next" title="Oracle Data Source" href="oracle.html" />
+    <link rel="prev" title="Uberon" href="../library/uberon.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="oracle.html" title="Oracle Data Source"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../library/uberon.html" title="Uberon"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Data Sources</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Writing Your Own Data Source</a><ul>
+<li><a class="reference internal" href="#create-source-files">Create source files</a><ul>
+<li><a class="reference internal" href="#run-make-source-script">Run make_source script</a><ul>
+<li><a class="reference internal" href="#possible-source-types">Possible source types</a><ul>
+<li><a class="reference internal" href="#custom-file">custom-file</a></li>
+<li><a class="reference internal" href="#intermine-items-xml-file">intermine-items-xml-file</a></li>
+<li><a class="reference internal" href="#intermine-items-large-xml-file">intermine-items-large-xml-file</a></li>
+<li><a class="reference internal" href="#db">db</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#gff">gff</a></li>
+<li><a class="reference internal" href="#obo">obo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#additions-file">Additions file</a></li>
+<li><a class="reference internal" href="#keys">Keys</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#including-your-source-in-a-mine">Including your source in a Mine</a><ul>
+<li><a class="reference internal" href="#project-xml">Project XML</a></li>
+<li><a class="reference internal" href="#run-build-db">Run build-db</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../library/uberon.html"
+                        title="previous chapter">Uberon</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="oracle.html"
+                        title="next chapter">Oracle Data Source</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/data-sources/custom/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="writing-your-own-data-source">
+<h1>Writing Your Own Data Source<a class="headerlink" href="#writing-your-own-data-source" title="Permalink to this headline">¶</a></h1>
+<p>The aim of this tutorial is to create a new source, specifically to import data from an InterMine data format XML file.  This is achieved in two parts; the first creates the files to describe the new source while the second configures an individual mine to use these files.  The XML file containing the data could be created in any language. InterMine includes Java and Perl APIs to assist.</p>
+<p>Thanks to Anthony Smith from the MRC Dunn Human Nutrition Unit for providing this tutorial.</p>
+<div class="section" id="create-source-files">
+<h2>Create source files<a class="headerlink" href="#create-source-files" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-make-source-script">
+<h3>Run make_source script<a class="headerlink" href="#run-make-source-script" title="Permalink to this headline">¶</a></h3>
+<p>This script creates the basic skeleton for a source.   It should be run in the top level directory of an InterMine checkout, like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./bio/scripts/make_source &lt;<span class="nb">source</span>-name&gt; &lt;<span class="nb">source</span>-type&gt;
+</pre></div>
+</div>
+<div class="section" id="possible-source-types">
+<h4>Possible source types<a class="headerlink" href="#possible-source-types" title="Permalink to this headline">¶</a></h4>
+<p>Run <cite>make_source</cite> with no arguments to get a full list of source types.</p>
+<div class="section" id="custom-file">
+<h5>custom-file<a class="headerlink" href="#custom-file" title="Permalink to this headline">¶</a></h5>
+<p>This a source that reads from a file in a custom format.  A custom FileConverter will be needed.  The <cite>make_source</cite> script will
+create a skeleton <cite>FileConverter</cite> in <cite>bio/sources/&lt;source-name&gt;/main/src/org/intermine/bio/dataconversion</cite>.  Edit this code to process the particular file you need to load, using the <a class="reference internal" href="../apis/java-items-api.html"><em>Java Items API</em></a> Java Items API to create and store items to the database.</p>
+</div>
+<div class="section" id="intermine-items-xml-file">
+<h5>intermine-items-xml-file<a class="headerlink" href="#intermine-items-xml-file" title="Permalink to this headline">¶</a></h5>
+<p>This type of source can read a in InterMine XML format and store the results in a mine.  It should be configured like this in the <cite>project.xml</cite> file for the mine:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;my-new-source-name&quot;</span> <span class="na">type=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.file&quot;</span> <span class="na">location=</span><span class="s">&quot;/some/directory/objects_in_intermine_format.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>The InterMine Perl Items API can be used to generate these XML files.  Or you can create XML from any language.  This source type doesn&#8217;t generate any stub Java code.</p>
+</div>
+<div class="section" id="intermine-items-large-xml-file">
+<h5>intermine-items-large-xml-file<a class="headerlink" href="#intermine-items-large-xml-file" title="Permalink to this headline">¶</a></h5>
+<p>This source works as above but writes the XML to an intermediate Items database to avoid reading the whole file into memory at once.  This is the best choice for large XML files, where large is several hundred megabytes (although this depends on the amount of RAM specified in your <cite>ANT_OPTS</cite> environment variable).</p>
+</div>
+<div class="section" id="db">
+<h5>db<a class="headerlink" href="#db" title="Permalink to this headline">¶</a></h5>
+<p>This source reads directly from a relational database, it will generate a skeleton <cite>DBConverter</cite> in <cite>bio/sources/&lt;source-name&gt;/main/src/org/intermine/bio/dataconversion</cite>.  To connect to the database you need to add properties in xxxmine.properties with the prefix <cite>db.sourcename</cite>.  This is tested for PostgreSQL and MySQL.</p>
+<p>Common properties:</p>
+<div class="highlight-xml"><div class="highlight"><pre>db.sourcename.datasource.dataSourceName=db.sourcename
+db.sourcename.datasource.maxConnections=10
+db.sourcename.datasource.serverName=SERVER_NAME
+db.sourcename.datasource.databaseName=DB_NAME
+db.sourcename.datasource.user=USER_NAME
+db.sourcename.datasource.password=USER_PASSWORD
+</pre></div>
+</div>
+<p>Add these for PostgreSQL:</p>
+<div class="highlight-xml"><div class="highlight"><pre>db.sourcename.datasource.class=org.postgresql.jdbc3.Jdbc3PoolingDataSource
+db.sourcename.driver=org.postgresql.Driver
+db.sourcename.platform=PostgreSQL
+</pre></div>
+</div>
+<p>Add these for MySQL:</p>
+<div class="highlight-xml"><div class="highlight"><pre>db.sourcename.datasource.class=com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource
+db.sourcename.driver=com.mysql.jdbc.Driver
+db.sourcename.platform=MySQL
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="oracle.html">Oracle Data Source</a></li>
+</ul>
+</div>
+<p>It is good practice to put the properties that won&#8217;t change in <cite>MINE_NAME/default.intermine.integrate.properties</cite> and those that may change (<cite>serverName</cite>, <cite>databaseName</cite>, <cite>user</cite>, <cite>password</cite>) in <cite>~/.intermine/MINE_NAME.properties</cite>.</p>
+<p>The db value has to match the &#8216;&#8217;&#8216;source.db.name&#8217;&#8216;&#8217; in your project XML entry, for example:</p>
+<div class="highlight-xml"><div class="highlight"><pre># project XML
+<span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;chado-db-flybase-dmel&quot;</span> <span class="na">type=</span><span class="s">&quot;chado-db&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;source.db.name&quot;</span> <span class="na">value=</span><span class="s">&quot;flybase&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># flymine.properties</span>
+
+<span class="na">db.flybase.datasource.class</span><span class="o">=</span><span class="s">org.postgresql.ds.PGPoolingDataSource</span>
+<span class="na">db.flybase.datasource.dataSourceName</span><span class="o">=</span><span class="s">db.flybase</span>
+<span class="na">db.flybase.datasource.serverName</span><span class="o">=</span><span class="s">LOCALHOST</span>
+<span class="na">db.flybase.datasource.databaseName</span><span class="o">=</span><span class="s">FB2011_01</span>
+<span class="na">db.flybase.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.flybase.datasource.password</span><span class="o">=</span><span class="s">SECRET</span>
+<span class="na">db.flybase.datasource.maxConnections</span><span class="o">=</span><span class="s">10</span>
+<span class="na">db.flybase.driver</span><span class="o">=</span><span class="s">org.postgresql.Driver</span>
+<span class="na">db.flybase.platform</span><span class="o">=</span><span class="s">PostgreSQL</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gff">
+<h5>gff<a class="headerlink" href="#gff" title="Permalink to this headline">¶</a></h5>
+<p>Create a gff source to load genome annotation in GFF3 format.  This creates an empty <cite>GFF3RecordHandler</cite> in <cite>bio/sources/&lt;source-name&gt;/main/src/org/intermine/bio/dataconversion</cite>.  The source will work without any changes but you can edit the <cite>GFF3RecordHandler</cite> to read specific attributes from the last column of the GFF3 file.  See the InterMine tutorial for more information on integrating GFF3.</p>
+</div>
+<div class="section" id="obo">
+<h5>obo<a class="headerlink" href="#obo" title="Permalink to this headline">¶</a></h5>
+<p>Create a obo source to load ontology in BO format.</p>
+</div>
+</div>
+</div>
+<div class="section" id="additions-file">
+<h3>Additions file<a class="headerlink" href="#additions-file" title="Permalink to this headline">¶</a></h3>
+<p>Update the file in the source folder called <cite>new-source_additions.xml</cite>.  This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model.  The file is in the same format as a complete Model description.</p>
+<p>To add to an existing class the contents should be similar to the example code below. The class name is a class already in the model, the attribute name is the name of the new field to be added and the type describes the type of data to be stored. In the example the <cite>Protein</cite> class will be extended to include a new attribute called <cite>extraData</cite> which will hold data as a string.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;classes&gt;</span>
+  <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&gt;&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;extraData&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/classes&gt;</span>
+</pre></div>
+</div>
+<p>To create a new class the <cite>new-source_additions.xml</cite> file should include contents similar to the example below:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;classes&gt;</span>
+  <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">extends=</span><span class="s">&quot;SequenceFeature&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;identifier&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;confidence&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Double&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/classes&gt;</span>
+</pre></div>
+</div>
+<p>The extends clause is optional and is used to inherit (include all the attributes of) an existing class, in this case we extend <cite>SequenceFeature</cite>, an InterMine class that represents any genome feature.  <cite>is-interface</cite> should always be set to true.  The attribute lines as before define the names and types of data to be stored.  A new class will be created with the name <cite>NewFeature</cite> that extends <cite>SequenceFeature</cite>.</p>
+<p>To cross reference this with another class, similar XML should be used as the example below:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">extends=</span><span class="s">&quot;SequenceFeature&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;protein&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Protein&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;features&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<p>In the example above the we create a link from NewFeature to the Protein class via the reference named protein. To complete the link a reverse reference may be added to Protein to point back at the NewFeature, this is optional - the reference could be one-way.  Here we define a collection called features, this means that for every NewFeature that references a Protein, that protein will include it in its features collection.  Note that as this is a collection a Protein can link to multiple NewFeatures but NewFeature.protein is a reference so each can only link to one Protein.</p>
+<p>The reverse entry needs to be added to Protein (still in the same file):</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;features&quot;</span>  <span class="na">referenced-type=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;protein&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<p>The final additions XML should look like:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;classes&gt;</span>
+  <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&gt;&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;extraData&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;features&quot;</span>  <span class="na">referenced-type=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;protein&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/class&gt;</span>
+  <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;NewFeature&quot;</span> <span class="na">extends=</span><span class="s">&quot;SequenceFeature&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;identifier&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;confidence&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Double&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;protein&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Protein&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;features&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/classes&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If all the data you wish to load is already modelled in InterMine then you don&#8217;t need an additions file.</p>
+</div>
+</div>
+<div class="section" id="keys">
+<h3>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h3>
+<p>Within the <cite>resources</cite> directory is a file called <cite>new-source_keys.properties</cite>.  Here we can define primary keys that will be used to integrate data from this source with any exiting objects in the database.  We want to integrate proteins by their (UniProt) primaryAccession attribute so we define that this source should use the key:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">Protein</span><span class="o">=</span><span class="s">key_primaryacc</span>
+</pre></div>
+</div>
+<p>Note that we don&#8217;t expect any other data sources to provide interesting features so we don&#8217;t need to integrate them - no key is defined.  The possible keys are defined in <cite>dbmodel/resources/genomic_keyDefs.properties</cite>, new keys can be added if necessary.</p>
+</div>
+</div>
+<div class="section" id="including-your-source-in-a-mine">
+<h2>Including your source in a Mine<a class="headerlink" href="#including-your-source-in-a-mine" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="project-xml">
+<h3>Project XML<a class="headerlink" href="#project-xml" title="Permalink to this headline">¶</a></h3>
+<p>In the <cite>project.xml</cite> file, in the root of your mine directory (e.g. /malariamine), the following entries should be added and altered accordingly:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;new-source-name&quot;</span> <span class="na">type=</span><span class="s">&quot;new-source&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.file&quot;</span> <span class="na">location=</span><span class="s">&quot;my_data_dir/example.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>If you have more that one file you can set this up to point at a &#8216;&#8217;&#8216;directory&#8217;&#8216;&#8217;:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;new-source-name&quot;</span> <span class="na">type=</span><span class="s">&quot;new-source&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir&quot;</span> <span class="na">location=</span><span class="s">&quot;my_data_dir/source_files/&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>The first line defines the name you wish to give to the of the source and the type - the name of the directory in &#8216;bio/sources&#8217;.  The second line defines the location and name of the data file.</p>
+<p>The data file should have the same format as the XML below:</p>
+<div class="highlight-xml"><pre>&lt;items&gt;
+   &lt;item id="0_1" class="" implements="http://www.intermine.org/model/bio#NewFeature&gt;
+      &lt;attribute name="identifier" value="feature2" /&gt;
+      &lt;attribute name="confidence" value="0.8" /&gt;
+      &lt;reference name="protein" ref_id="0_3" /&gt;
+  &lt;/item&gt;
+  &lt;item id="0_2" class="" implements="http://www.intermine.org/model/bio#NewFeature&gt;
+      &lt;attribute name="identifier" value="feature2" /&gt;
+      &lt;attribute name="confidence" value="0.37" /&gt;
+      &lt;reference name="protein" ref_id="0_3" /&gt;
+  &lt;/item&gt;
+  &lt;item id="0_3" class="" implements="http://www.intermine.org/model/bio#Protein"&gt;
+      &lt;attribute name="primaryAccession" value="Q8I5D2" /&gt;
+      &lt;attribute name="extraData" value="proteinInfo"/&gt;
+      &lt;collection name="features"&gt;
+       &lt;reference ref_id="0_1" /&gt;
+       &lt;reference ref_id="0_2" /&gt;
+      &lt;/collection&gt;
+  &lt;/item&gt;
+&lt;/items&gt;</pre>
+</div>
+<p>An example of a perl script to create InterMine data XML can be found at: <cite>bio/scripts/intermine_items_example.pl</cite></p>
+<p>If you are using data from a database:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;new-source-name&quot;</span> <span class="na">type=</span><span class="s">&quot;new-source&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;source.db.name&quot;</span> <span class="na">value=</span><span class="s">&quot;db.NAME&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>The value of <cite>source.db.name</cite> must match the value set in the MINE_NAME.properties file.</p>
+</div>
+<div class="section" id="run-build-db">
+<h3>Run build-db<a class="headerlink" href="#run-build-db" title="Permalink to this headline">¶</a></h3>
+<p>Create the database as usual. The source should now be included when building the mine.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unless the &#8216;clean&#8217; is run (which deletes the build directory) in <cite>MINE_NAME/dbmodel</cite> any changes will append to the current model structure and any unwanted classes/attributes will remain.</p>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="oracle.html" title="Oracle Data Source"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../library/uberon.html" title="Uberon"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Google Analytics &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Monitoring Site Usage" href="index.html" />
+    <link rel="next" title="InterMine User Tracking" href="trackers.html" />
+    <link rel="prev" title="Monitoring Site Usage" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="trackers.html" title="InterMine User Tracking"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Monitoring Site Usage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Monitoring Site Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Monitoring Site Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="trackers.html"
+                        title="next chapter">InterMine User Tracking</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/monitoring-site-usage/google-analytics.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="google-analytics">
+<h1>Google Analytics<a class="headerlink" href="#google-analytics" title="Permalink to this headline">¶</a></h1>
+<p>To enable Google Analytics to track usage of your webapp you need to set up your Analytics account and get a &#8216;&#8217;&#8216;code&#8217;&#8216;&#8217; from Google then add a property to your <cite>.intermine/xxxmine.properties</cite> file:</p>
+<div class="highlight-xml"><div class="highlight"><pre>google.analytics.id=CODE
+</pre></div>
+</div>
+<p>This places the Google javascript to track usage views to every page of the webapp.</p>
+<p>To modify the message that is going to be displayed to the user asking if they agree to the usage of cookies modify:</p>
+<div class="highlight-xml"><div class="highlight"><pre>google.analytics.message=I accept cookies from this site
+</pre></div>
+</div>
+<p>If no key - message is provided, no message is shown and cookies are accepted by default.</p>
+<span class="target" id="index-0"></span></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="trackers.html" title="InterMine User Tracking"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Monitoring Site Usage"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Monitoring Site Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tomcat &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Software" href="index.html" />
+    <link rel="next" title="Mac Installation Notes" href="macs.html" />
+    <link rel="prev" title="BioSeg" href="postgres/bioseg.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="macs.html" title="Mac Installation Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="postgres/bioseg.html" title="BioSeg"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Software</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tomcat</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#after-installation">After Installation</a><ul>
+<li><a class="reference internal" href="#tomcat-6-0-xx">Tomcat 6.0.xx</a></li>
+<li><a class="reference internal" href="#tomcat-7-0-xx">Tomcat 7.0.xx</a></li>
+<li><a class="reference internal" href="#server-xml">Server XML</a></li>
+<li><a class="reference internal" href="#tomcat-7-0">Tomcat 7.0</a></li>
+<li><a class="reference internal" href="#starting-tomcat">Starting Tomcat</a></li>
+<li><a class="reference internal" href="#stopping-tomcat">Stopping Tomcat</a></li>
+<li><a class="reference internal" href="#common-errors">Common Errors</a><ul>
+<li><a class="reference internal" href="#out-of-memory-errors">Out of Memory Errors</a></li>
+<li><a class="reference internal" href="#session-errors">Session Errors</a><ul>
+<li><a class="reference internal" href="#tomcat-6-0">Tomcat 6.0</a></li>
+<li><a class="reference internal" href="#id1">Tomcat 7.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="postgres/bioseg.html"
+                        title="previous chapter">BioSeg</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="macs.html"
+                        title="next chapter">Mac Installation Notes</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/system-requirements/software/tomcat.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tomcat">
+<h1>Tomcat<a class="headerlink" href="#tomcat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Several people have had problems with Tomcat installations set up by Linux package managers.  We recommend installing according to the these instructions instead.</p>
+</div>
+<p>The quickest way to get a working Tomcat:</p>
+<ol class="arabic simple">
+<li>Download the latest stable binary distribution <cite>tar.gz</cite> from the Apache Tomcat site.</li>
+<li>Unpack it:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>tar -zxvf apache-tomcat-x.y.z.tar.gz
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Use the <cite>startup.sh</cite> and <cite>shutdown.sh</cite> scripts in <cite>apache-tomcat-x.y.z/bin/</cite> to start and stop Tomcat.<ol class="arabic">
+<li>You can run it as your own user for development purposes, you should never run tomcat as <cite>root</cite>.</li>
+</ol>
+</li>
+<li>Set up the manager user as below.</li>
+</ol>
+<p>See Tomcat&#8217;s installation instructions - <a class="reference external" href="http://tomcat.apache.org/tomcat-6.0-doc/setup.html">http://tomcat.apache.org/tomcat-6.0-doc/setup.html</a>.</p>
+</div>
+<div class="section" id="after-installation">
+<h2>After Installation<a class="headerlink" href="#after-installation" title="Permalink to this headline">¶</a></h2>
+<p>Set up a tomcat user with the &#8216;manager&#8217; role by editing <cite>conf/tomcat-users.xml</cite>:</p>
+<div class="section" id="tomcat-6-0-xx">
+<h3>Tomcat 6.0.xx<a class="headerlink" href="#tomcat-6-0-xx" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;tomcat-users&gt;</span>
+   <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;manager&quot;</span> <span class="na">password=</span><span class="s">&quot;manager&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/tomcat-users&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tomcat-7-0-xx">
+<h3>Tomcat 7.0.xx<a class="headerlink" href="#tomcat-7-0-xx" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;tomcat-users&gt;</span>
+   <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-script&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;manager&quot;</span> <span class="na">password=</span><span class="s">&quot;manager&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager-gui,manager-script&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/tomcat-users&gt;</span>
+</pre></div>
+</div>
+<p>You can check this works by accessing the manager interface at <a class="reference external" href="http://localhost:8080/manager/html">http://localhost:8080/manager/html</a></p>
+<p>If you used a package manager to get Tomcat, the manager may not be included. Here&#8217;s the Debian command you need:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>apt-get install tomcat6-admin
+</pre></div>
+</div>
+</div>
+<div class="section" id="server-xml">
+<h3>Server XML<a class="headerlink" href="#server-xml" title="Permalink to this headline">¶</a></h3>
+<p>You also need to check in your <cite>server.xml</cite> file that the correct <cite>UTF-8</cite> encoding has been applied to all connectors in use (see  <a class="reference external" href="http://wiki.apache.org/tomcat/FAQ/CharacterEncoding">CharacterEncoding</a>). Make sure that every connector element in use reads as follows:</p>
+<div class="highlight-xml"><pre>&lt;Connector ... URIEncoding="UTF-8"/&gt;
+      ...
+&lt;/Connector&gt;</pre>
+</div>
+<p>Without this, permalinks may break.</p>
+</div>
+<div class="section" id="tomcat-7-0">
+<h3>Tomcat 7.0<a class="headerlink" href="#tomcat-7-0" title="Permalink to this headline">¶</a></h3>
+<p>Starting from InterMine 1.1, you can now deploy your mine using Tomcat 7.0</p>
+<p>Update your config files:</p>
+<p>in <cite>$TOMCAT/conf/tomcat-users.xml</cite> set:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-script&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;manager&quot;</span> <span class="na">password=</span><span class="s">&quot;manager&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager-gui,manager-script&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Add the property in startup.sh:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">JAVA_OPTS</span><span class="o">=</span><span class="s2">&quot;$JAVA_OPTS -Dorg.apache.el.parser.SKIP_IDENTIFIER_CHECK=true&quot;</span>
+<span class="nb">export </span>JAVA_OPTS
+</pre></div>
+</div>
+<p>Tomcat 7.0 has improved the enforcement of the Expression Language rules and doesn&#8217;t allow to use java key words.
+The flag makes Tomcat 7 more permissive.</p>
+</div>
+<div class="section" id="starting-tomcat">
+<h3>Starting Tomcat<a class="headerlink" href="#starting-tomcat" title="Permalink to this headline">¶</a></h3>
+<p>If Tomcat isn&#8217;t already running, start it with this command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># from tomcat/bin</span>
+<span class="nv">$ </span>./startup.sh
+</pre></div>
+</div>
+<p>Visit the Tomcat manager at <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a>.  The username and password required to access the manager are <cite>webapp.manager</cite> and <cite>webapp.password</cite> as specified in your Mine properties file.</p>
+</div>
+<div class="section" id="stopping-tomcat">
+<h3>Stopping Tomcat<a class="headerlink" href="#stopping-tomcat" title="Permalink to this headline">¶</a></h3>
+<p>To stop Tomcat, run this command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># from tomcat/bin</span>
+<span class="nv">$ </span>./shutdown.sh
+</pre></div>
+</div>
+<p>You can&#8217;t drop a database if Tomcat has an open connection to a Postgres database. You have to:</p>
+<ol class="arabic simple">
+<li>undeploy your webapp</li>
+<li>restart tomcat</li>
+<li>dropdb</li>
+</ol>
+</div>
+<div class="section" id="common-errors">
+<h3>Common Errors<a class="headerlink" href="#common-errors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="out-of-memory-errors">
+<h4>Out of Memory Errors<a class="headerlink" href="#out-of-memory-errors" title="Permalink to this headline">¶</a></h4>
+<p>To avoid <cite>java.lang.OutOfMemory</cite> errors, specify the JVM heap size in <cite>$TOMCAT_HOME/bin/tomcat.sh</cite>. You can specify the size as part of <cite>TOMCAT_OPTS</cite>:</p>
+<div class="highlight-properties"><pre>'-Xmx256m -Xms128m'</pre>
+</div>
+</div>
+<div class="section" id="session-errors">
+<h4>Session Errors<a class="headerlink" href="#session-errors" title="Permalink to this headline">¶</a></h4>
+<p>If you get a &#8220;Session Error&#8221; when you start up your webapp, you may need to update your Tomcat configuration to remove application path in front of sessions&#8217; cookies.</p>
+<p>You get this error because the home page makes several requests but your session is lost between transactions with a new session started with the first query. For instance, when you go to the beta.flymine.org home page your cookie path will initially be &#8220;/&#8221;. To display the &#8220;most popular&#8221; template queries, a query is run on full URL using the path &#8220;/beta&#8221;. The session with the &#8220;/&#8221; path is discarded and a new session cookie is created with the &#8220;/beta&#8221; path. (You can view the values stored in your cookies via your web browser.)</p>
+<div class="section" id="tomcat-6-0">
+<h5>Tomcat 6.0<a class="headerlink" href="#tomcat-6-0" title="Permalink to this headline">¶</a></h5>
+<p>Add <cite>emptySessionPath</cite> to <cite>$TOMCAT/conf/server.xml</cite></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">&quot;8080&quot;</span> <span class="na">protocol=</span><span class="s">&quot;HTTP/1.1&quot;</span>
+  <span class="na">connectionTimeout=</span><span class="s">&quot;20000&quot;</span>
+  <span class="na">redirectPort=</span><span class="s">&quot;8443&quot;</span>
+  <span class="na">emptySessionPath=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">&quot;8009&quot;</span> <span class="na">protocol=</span><span class="s">&quot;AJP/1.3&quot;</span>
+  <span class="na">redirectPort=</span><span class="s">&quot;8443&quot;</span>
+  <span class="na">emptySessionPath=</span><span class="s">&quot;true&quot;</span>  <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://tomcat.apache.org/tomcat-6.0-doc/config/http.html">Tomcat 6.0 HTTP connector documentation</a>  - mentions potential security hole</p>
+</div>
+<div class="section" id="id1">
+<h5>Tomcat 7.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p>Add these 2 attributes to <cite>$TOMCAT/conf/conf/context.xml</cite></p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">sessionCookiePath</span><span class="o">=</span><span class="s">&quot;/&quot;</span>
+<span class="na">useHttpOnly</span><span class="o">=</span><span class="s">&quot;false&quot;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://tomcat.apache.org/tomcat-7.0-doc/config/context.html">Tomcat 7.0 context documentation</a></p>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="macs.html" title="Mac Installation Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="postgres/bioseg.html" title="BioSeg"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" >Software</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

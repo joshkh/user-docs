@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Mac Installation Notes &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Software" href="index.html" />
+    <link rel="next" title="Setting up InterMine projects in Eclipse" href="eclipse.html" />
+    <link rel="prev" title="Tomcat" href="tomcat.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eclipse.html" title="Setting up InterMine projects in Eclipse"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tomcat.html" title="Tomcat"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Software</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Mac Installation Notes</a><ul>
+<li><a class="reference internal" href="#installing-tomcat">Installing Tomcat</a></li>
+<li><a class="reference internal" href="#installing-eclipse">Installing Eclipse</a></li>
+<li><a class="reference internal" href="#installing-postgres">Installing Postgres</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tomcat.html"
+                        title="previous chapter">Tomcat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eclipse.html"
+                        title="next chapter">Setting up InterMine projects in Eclipse</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/system-requirements/software/macs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mac-installation-notes">
+<h1>Mac Installation Notes<a class="headerlink" href="#mac-installation-notes" title="Permalink to this headline">¶</a></h1>
+<p>This is a work in progress, at the moment just some notes and useful links.</p>
+<div class="section" id="installing-tomcat">
+<h2>Installing Tomcat<a class="headerlink" href="#installing-tomcat" title="Permalink to this headline">¶</a></h2>
+<p>Tomcat is easy to install by downloading the tar.gz file of the latest release and extracting it, then you can get started almost immediately.</p>
+<p>From the Tomcat website find the latest stable version in the Downloads section, currently 6.0.x.  Scroll to &#8216;Binary Distributions&#8217;, &#8216;Core&#8217; and save the <cite>tar.gz</cite> file.</p>
+<p>Extract this file with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>tar -zxvf apache-tomcat-6.0.x
+</pre></div>
+</div>
+<p>Change into the apache-tomcat-6.0.x, the following directories are of interest:</p>
+<ul class="simple">
+<li><cite>bin</cite> - scripts to startup and shutdown tomcat</li>
+<li><cite>logs</cite> - error logs are written here</li>
+<li><cite>webapps</cite> - the directory web applications are deployed to</li>
+<li><cite>conf</cite> - configuration files</li>
+</ul>
+<p>Before starting you need to set up a mananger user so you can deploy web applications and we recommend you allocate more RAM to tomcat - [wiki:Prerequisites#Tomcat see here]</p>
+<p>Start up tomcat by running:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>apache-tomcat-6.0.x/bin/startup.sh
+</pre></div>
+</div>
+<p>To check tomcat is running try to access <cite>localhost:8080</cite> in a web browser, you should see a Tomcat home page.  If you don&#8217;t see the tomcat page check <cite>apache-tomcat-6.0.x/catalina.out</cite> and <cite>apache-tomcat-6.0.x/localhost-&lt;data&gt;.log</cite> for error messages and consult the Tomcat docs</p>
+</div>
+<div class="section" id="installing-eclipse">
+<h2>Installing Eclipse<a class="headerlink" href="#installing-eclipse" title="Permalink to this headline">¶</a></h2>
+<p>Eclipse is a free, open-source Java editing environment, configuration to open the various code modules in InterMine as Eclipse projects is included in the checkout.  You can download the Mac OS X version of Eclipse from <a class="reference external" href="http://www.eclipse.org/downloads">http://www.eclipse.org/downloads</a>, either the standard or EE edition will work fine.  Just unzip the download and it will work immediately.</p>
+<p>See our guide to setting up InterMine in Eclipse: EclipseSetup.</p>
+<p>For convenient startup from the Terminal command line you can put <cite>eclipse</cite> in your <cite>$PATH</cite> or create a link to it, for example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo ln -s /Applications/eclipse/eclipse /usr/local/bin/eclipse
+</pre></div>
+</div>
+<p>Apple has a guide to Eclipse at <a class="reference external" href="http://developer.apple.com/tools/eclipse.html">http://developer.apple.com/tools/eclipse.html</a>.</p>
+</div>
+<div class="section" id="installing-postgres">
+<h2>Installing Postgres<a class="headerlink" href="#installing-postgres" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="http://www.postgresql.org/download/macosx">http://www.postgresql.org/download/macosx</a>.  We&#8217;ve had the most success with MacPorts.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eclipse.html" title="Setting up InterMine projects in Eclipse"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tomcat.html" title="Tomcat"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" >Software</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

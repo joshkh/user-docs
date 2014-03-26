@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Query Results &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Embedding InterMine components" href="../../embedding/index.html" />
+    <link rel="next" title="InterMine JavaScript API Loader" href="../../embedding/api-loader.html" />
+    <link rel="prev" title="Apps/* Comparison" href="../../embedding/apps-comparison.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../embedding/api-loader.html" title="InterMine JavaScript API Loader"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../embedding/apps-comparison.html" title="Apps/* Comparison"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../embedding/index.html" accesskey="U">Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Query Results</a><ul>
+<li><a class="reference internal" href="#export">export</a></li>
+<li><a class="reference internal" href="#column-headers">column headers</a></li>
+<li><a class="reference internal" href="#links">links</a></li>
+<li><a class="reference internal" href="#weird-brackets">weird brackets</a></li>
+<li><a class="reference internal" href="#the-initial-page-size">The initial Page Size</a></li>
+<li><a class="reference internal" href="#the-initial-state-of-sub-tables">The initial state of Sub-Tables</a></li>
+<li><a class="reference internal" href="#cell-formatters">Cell Formatters</a><ul>
+<li><a class="reference internal" href="#the-formatting-function">The Formatting Function</a></li>
+<li><a class="reference internal" href="#the-formatting-configuration">The Formatting Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#branding">Branding</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../embedding/apps-comparison.html"
+                        title="previous chapter">Apps/* Comparison</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../embedding/api-loader.html"
+                        title="next chapter">InterMine JavaScript API Loader</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/query-results/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="query-results">
+<h1>Query Results<a class="headerlink" href="#query-results" title="Permalink to this headline">¶</a></h1>
+<p>Query results can be configured in a number of ways, including:</p>
+<div class="section" id="export">
+<h2>export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>See <a class="reference internal" href="export.html"><em>Export</em></a> for details on exporting options.</div></blockquote>
+</div>
+<div class="section" id="column-headers">
+<h2>column headers<a class="headerlink" href="#column-headers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>See <a class="reference internal" href="../../data-model/data-labels.html"><em>Using Class and Field Labels</em></a> to change column headers.</div></blockquote>
+</div>
+<div class="section" id="links">
+<h2>links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Only unique fields (class keys) are links in results pages.  Add to <a class="reference internal" href="../properties/class-keys.html"><em>Class keys</em></a> to make the fields links on results pages.
+Instead of linking to an intermine report page, you can set the links to redirect to external page.  See <a class="reference internal" href="redirects.html"><em>Link redirects</em></a></div></blockquote>
+</div>
+<div class="section" id="weird-brackets">
+<h2>weird brackets<a class="headerlink" href="#weird-brackets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>You may see the following in query results:  <cite>GO:0007480 [GOTerm]</cite>.  This happens when a column is a parent type but the individual result is a subclass.  The subclass will by in brackets.</div></blockquote>
+</div>
+<div class="section" id="the-initial-page-size">
+<h2>The initial Page Size<a class="headerlink" href="#the-initial-page-size" title="Permalink to this headline">¶</a></h2>
+<p>This can be configured on a table by table basis when the table is initialised:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#my-table&#39;</span><span class="p">).</span><span class="nx">imWidget</span><span class="p">({</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;www.flymine.org/query&#39;</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="nx">select</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">symbol</span><span class="o">:</span> <span class="s1">&#39;foo*&#39;</span><span class="p">}},</span>
+  <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">pageSize</span><span class="o">:</span> <span class="mi">20</span> <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-initial-state-of-sub-tables">
+<h2>The initial state of Sub-Tables<a class="headerlink" href="#the-initial-state-of-sub-tables" title="Permalink to this headline">¶</a></h2>
+<p>Outer-Joined collections are rendered in subtables within a single cell. By default
+these are not immediately rendered, and just the number of rows are indicated. This
+means that even sections with very large sub-tables are rendered efficiently - in the
+worst case the sub-tables may contain thousands of rows, and so a table with even 10
+main rows might present 10,000 sub-rows or more, which can significantly impact
+browser performance (an example of this would be a table that contained publications
+with an outer-joined selection of genes; genome publications can list every gene in an
+organism, and this scenario easily leads to very large sub-tables).</p>
+<p>However, if you don&#8217;t like the default behaviour and would prefer for the sub-tables to be open
+when the main table is rendered onto the page, this is simply altered, through the
+following configuration snippet:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span><span class="nx">SubtableInitialState</span><span class="o">:</span> <span class="s1">&#39;open&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>If you would like to set this property on a table by table basis, then you must
+set the <cite>SubtableInitialState</cite> property to <cite>open</cite>, in the same manner as you would
+for pageSize.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#my-table&#39;</span><span class="p">).</span><span class="nx">imWidget</span><span class="p">({</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;www.flymine.org/query&#39;</span><span class="p">,</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">from</span><span class="o">:</span> <span class="s1">&#39;Gene&#39;</span><span class="p">,</span>
+    <span class="nx">select</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;pathways.*&#39;</span><span class="p">],</span>
+    <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">symbol</span><span class="o">:</span> <span class="s1">&#39;foo*&#39;</span><span class="p">},</span>
+    <span class="nx">joins</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;pathways&#39;</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">SubtableInitialState</span><span class="o">:</span> <span class="s1">&#39;open&#39;</span> <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cell-formatters">
+<h2>Cell Formatters<a class="headerlink" href="#cell-formatters" title="Permalink to this headline">¶</a></h2>
+<p>The cells in each table can be configured to display their information in
+custom manners. To do this a javascript function must be registered to handle
+certain types of cell, and configured to respond to certain paths.</p>
+<p>Formatters are not enabled by default, as they may be unexpected, and in could
+cause unneccessary requests to the server. Fortunately they are easily enabled. There
+are four formatter included (but not enabled) by default:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Location - formats a chromosome location as eg: &#8220;2L:123..456&#8221;</li>
+<li>Sequence - formats a DNA or Protein sequence in FASTA lines.</li>
+<li>Publication - formats a publication in a citable format with title, first author and year.</li>
+<li>Organism - formats an organism&#8217;s name in italics, using the short-name format.</li>
+</ul>
+</div></blockquote>
+<p>To enable these formatters register the formatted path (see below), eg:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">scope</span><span class="p">(</span><span class="s1">&#39;intermine.results.formatsets.genomic&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="s1">&#39;Organism.name&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s1">&#39;Organism.shortName&#39;</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>To enable all the default formatters, you can use the following snippet:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">keyPath</span><span class="p">,</span> <span class="nx">formatsets</span> <span class="o">=</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">results</span><span class="p">.</span><span class="nx">formatsets</span><span class="p">.</span><span class="nx">genomic</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="nx">keyPath</span> <span class="k">in</span> <span class="nx">formatsets</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">formatsets</span><span class="p">[</span><span class="nx">keyPath</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Such customisation javascript should be placed in a custom model-includes.js file.</p>
+<div class="section" id="the-formatting-function">
+<h3>The Formatting Function<a class="headerlink" href="#the-formatting-function" title="Permalink to this headline">¶</a></h3>
+<p>The interface expected for a formatting function is:</p>
+<div class="highlight-python"><pre>(Backbone.Model intermineObject) -&gt; String|HtmlElement</pre>
+</div>
+<p>Where the Model instance represents an intermine object. Fields of the object can be retrieved
+through the standard <tt class="docutils literal"><span class="pre">#get(String)</span></tt> method. The return value will be inserted into the table using
+the <tt class="docutils literal"><span class="pre">jQuery#html</span></tt> function, so both html strings and HtmlElements can be accepted as return values.</p>
+<p>This function is executed as a method on a intermine.results.table.Cell (which will be bound as
+<tt class="docutils literal"><span class="pre">this</span></tt>), supplying the following properties as part of its interface:</p>
+<div class="highlight-python"><pre>this.el :: HtmlElement - The cell element in the DOM.
+this.$el :: jQuery - The cached jQuery selector for the cell element.
+this.options :: Object - The arguments supplied when constructing the cell, this includes:
+  options.query :: intermine.Query</pre>
+</div>
+<p>The function may also support two optional parts of the formatter interface:</p>
+<div class="highlight-python"><pre>Formatter.replaces :: Array&lt;String&gt; - The list of fields of the class that this formatter replaces.
+Formatter.merge :: (Backbone.Model, Backbone.Model) -&gt; () - A function to merge information
+  from different objects into a single model.</pre>
+</div>
+<p>A typical pattern would be to check to see whether the object currently has all the information
+required to render it, and if not then make a request to retrieve the missing information. Any changes
+to the model will cause the cell to be re-rendered, thus a request that gets missing information
+and sets it onto the model will cause the function to be called again with the complete information.</p>
+<p>For examples of implementations of this interface please see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/intermine/im-tables/blob/dev/src/formatters/bio/core/organism.coffee">https://github.com/intermine/im-tables/blob/dev/src/formatters/bio/core/organism.coffee</a></li>
+<li><a class="reference external" href="https://github.com/intermine/im-tables/blob/dev/src/formatters/bio/core/chromosome-location.coffee">https://github.com/intermine/im-tables/blob/dev/src/formatters/bio/core/chromosome-location.coffee</a></li>
+</ul>
+</div>
+<div class="section" id="the-formatting-configuration">
+<h3>The Formatting Configuration<a class="headerlink" href="#the-formatting-configuration" title="Permalink to this headline">¶</a></h3>
+<p>To register a function to respond to specific types of data, it must be referenced under the
+<tt class="docutils literal"><span class="pre">intermine.results.formatters</span></tt> namespace by the name of the class that it handles. For example this
+can be done with the <tt class="docutils literal"><span class="pre">intermine.scope</span></tt> function:</p>
+<p>eg:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">scope</span><span class="p">(</span><span class="s1">&#39;intermine.results.formatters&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">Exon</span><span class="o">:</span> <span class="nx">myExonFormatter</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>A separate entry must be made under the &#8216;intermine.results.formatsets.{modelname}&#8217; namespace to
+register which paths trigger cell formatting. For example to register a formatter for the &#8216;Exon&#8217;
+class which only formats the &#8216;symbol&#8217; field:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">scope</span><span class="p">(</span><span class="s1">&#39;intermine.results.formatsets.genomic&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Exon.symbol&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>In a similar way, we can disable any currently configured formatter by setting the value of this
+value to &#8216;false&#8217;:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">scope</span><span class="p">(</span><span class="s1">&#39;intermine.results.formatsets.genomic&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Exon.symbol&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>individual formatters can be configured to respond to different fields of an object. So you could
+have one formatter for <cite>Gene.length</cite> and another for <cite>Gene.symbol</cite>, if you are unable to achieve what
+you need with css alone. To do this, the value in the formatset should be the formatter itself, rather
+than a boolean value, eg:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">scope</span><span class="p">(</span><span class="s1">&#39;intermine.results.formatsets.genomic&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="s1">&#39;Gene.symbol&#39;</span><span class="o">:</span> <span class="nx">geneSymbolFormatter</span><span class="p">,</span>
+  <span class="s1">&#39;Gene.length&#39;</span><span class="o">:</span> <span class="nx">geneLengthFormatter</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="branding">
+<h2>Branding<a class="headerlink" href="#branding" title="Permalink to this headline">¶</a></h2>
+<p>Links to your site (or others) can be branded with icons. This is configurable by setting option
+as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">scope</span><span class="p">(</span><span class="s1">&#39;intermine.options.ExternalLinkIcons&#39;</span><span class="p">,</span>
+  <span class="p">{</span><span class="s2">&quot;http://myhostname&quot;</span><span class="o">:</span> <span class="s2">&quot;http://myhostname/my-branding.png&quot;</span><span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>All links in table cells with the prefix <cite>http://myhostname</cite> will use the given image as a logo.</p>
+<p>This requires that <cite>intermine.options.IndicateOffHostLinks</cite> is set to true.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../embedding/api-loader.html" title="InterMine JavaScript API Loader"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../embedding/apps-comparison.html" title="Apps/* Comparison"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../embedding/index.html" >Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Workshop &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Workshop</a><ul>
+<li><a class="reference internal" href="#logging-in-authenticating">Logging In / Authenticating</a></li>
+<li><a class="reference internal" href="#managing-your-personal-data-lists">Managing your Personal Data: Lists</a></li>
+<li><a class="reference internal" href="#running-a-simple-workflow">Running a simple workflow:</a></li>
+<li><a class="reference internal" href="#regions">Regions</a></li>
+<li><a class="reference internal" href="#queries">Queries</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/web-services/tutorial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api-workshop">
+<h1>API Workshop<a class="headerlink" href="#api-workshop" title="Permalink to this headline">¶</a></h1>
+<p>The InterMine API is made more accessible through
+the publication of a number of client libraries in
+different languages. For the purposes of this tutorial
+we will use the Python client library for the illustration
+of examples, but any of the client libraries (in Perl, Java,
+Ruby and JavaScript) provides similar functionality.
+Similarly we will use FlyMine (www.flymine.org) as an
+example of an InterMine web-service, but the techniques
+discussed here are applicable for any of available
+implementations.</p>
+<div class="section" id="logging-in-authenticating">
+<h2>Logging In / Authenticating<a class="headerlink" href="#logging-in-authenticating" title="Permalink to this headline">¶</a></h2>
+<p>In the web-application interface we &#8216;log in&#8217; to gain
+access to our personal data. When using the web-service
+API we speak of authentication as the process whereby
+your requests are mapped to a particular user account.</p>
+<p>The recommended manner of authentication is through the
+use of API tokens; you can get yours by visiting the
+appropriate section of the web-application
+(<a class="reference external" href="http://www.flymine.org/query/mymine?tab=api">http://www.flymine.org/query/mymine?tab=api</a>). The token
+is a long string which is unique across the mine - since
+its use is equivalent to your password, remember to keep
+it safe.</p>
+<p>You can authenticate with a mine as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">intermine.webservice</span> <span class="kn">import</span> <span class="n">Service</span>
+
+<span class="n">flymine</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="s">&#39;www.flymine.org/query&#39;</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s">&#39;abcd&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the URL for the mine is incorrect, or the token is, an error
+will be thrown.</p>
+<p>While it is also possible use your username and password to
+authenticate with the webservice. This is strongly discouraged,
+due to the security implications of transmitting your password,
+not to mention storing it on disk in order to use it in code.</p>
+</div>
+<div class="section" id="managing-your-personal-data-lists">
+<h2>Managing your Personal Data: Lists<a class="headerlink" href="#managing-your-personal-data-lists" title="Permalink to this headline">¶</a></h2>
+<p>One of the main reasons to use the webservices is to read and
+manipulate the data important to you, and lists are the main way to
+manage this.</p>
+<p>To read the set of lists you have access to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">intermine.webservice</span> <span class="kn">import</span> <span class="n">Service</span>
+
+<span class="n">flymine</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="s">&#39;www.flymine.org/query&#39;</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="n">TOKEN</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">imlist</span> <span class="ow">in</span> <span class="n">flymine</span><span class="o">.</span><span class="n">get_all_lists</span><span class="p">():</span>
+  <span class="k">print</span> <span class="n">imlist</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<p>To calculate the enrichment results for a given list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mylist</span> <span class="o">=</span> <span class="n">flymine</span><span class="o">.</span><span class="n">get_list</span><span class="p">(</span><span class="s">&#39;demo-list&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">mylist</span><span class="o">.</span><span class="n">calculate_enrichment</span><span class="p">(</span><span class="s">&#39;pathway_enrichment&#39;</span><span class="p">):</span>
+  <span class="k">print</span> <span class="n">item</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">p_value</span>
+</pre></div>
+</div>
+<p>Creating a list from a file with identifiers in it is as
+straight-forward as naming that file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">new_list</span> <span class="o">=</span> <span class="n">flymine</span><span class="o">.</span><span class="n">create_list</span><span class="p">(</span><span class="s">&quot;some/file/with.ids&quot;</span><span class="p">,</span> <span class="s">&quot;Gene&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the identifiers are already in memory, in anything iterable,
+then that can be used instead. In the following case a string will
+be built up by reading the results of a database query.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">idents</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;SELECT identifier FROM GENE WHERE ...&#39;</span><span class="p">)</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="n">flymine</span><span class="o">.</span><span class="n">create_list</span><span class="p">(</span><span class="n">idents</span><span class="p">,</span> <span class="s">&quot;Gene&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Lists can be combined with standard set operations, which are
+overloaded in the languages that support such features:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">list_on_server</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">get_list</span><span class="p">(</span><span class="s">&quot;On server&quot;</span><span class="p">)</span>
+<span class="n">in_both</span> <span class="o">=</span> <span class="n">new_list</span> <span class="o">&amp;</span> <span class="n">list_on_server</span>
+<span class="n">in_both</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Intersection </span><span class="si">%s</span><span class="s"> and </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">new_list</span><span class="p">,</span> <span class="n">list_on_server</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">in_both</span><span class="p">:</span>
+   <span class="n">do_something_with</span><span class="p">(</span><span class="n">gene</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-a-simple-workflow">
+<h2>Running a simple workflow:<a class="headerlink" href="#running-a-simple-workflow" title="Permalink to this headline">¶</a></h2>
+<p>We should have enough pieces now to put together a simple workflow,
+that demonstrates the kinds of operations we want to put together and
+how they may be combined.</p>
+<dl class="docutils">
+<dt>Try and develop a script which will:</dt>
+<dd><ul class="first last simple">
+<li>Read all the files in a directory</li>
+<li>Create a list for each one from their contents, named after the
+file.</li>
+<li>Find the pathways for which the genes in each list are enriched
+above a certaint threshold.</li>
+<li>Create a list of those pathways.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="regions">
+<h2>Regions<a class="headerlink" href="#regions" title="Permalink to this headline">¶</a></h2>
+<p>One can query for features in a region as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">interminebio</span> <span class="kn">import</span> <span class="n">RegionQuery</span>
+
+<span class="n">org</span> <span class="o">=</span> <span class="s">&quot;D. melanogaster&quot;</span>
+<span class="n">feature_types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Exon&quot;</span><span class="p">,</span> <span class="s">&quot;Intron&quot;</span><span class="p">]</span>
+<span class="n">regions</span> <span class="o">=</span>  <span class="p">[</span><span class="s">&quot;2L:14614843..14619614&quot;</span><span class="p">]</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">RegionQuery</span><span class="p">(</span><span class="n">flymine</span><span class="p">,</span> <span class="n">org</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">regions</span><span class="p">,</span> <span class="n">is_interbase</span> <span class="o">=</span> <span class="n">false</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">fasta</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">fasta</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">fasta</span>
+</pre></div>
+</div>
+<p>The items can be saved in a list and then used in any other query.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">flymine</span><span class="o">.</span><span class="n">create_list</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;List from Regions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>The interface for creating queries borrows syntax and terminology from
+other DB query libraries.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">query</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&quot;Gene&quot;</span><span class="p">)</span><span class="o">.</span>\
+          <span class="n">select</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">,</span> <span class="s">&quot;pathways.*&quot;</span><span class="p">)</span><span class="o">.</span>\
+          <span class="n">where</span><span class="p">(</span><span class="s">&quot;GENE&quot;</span><span class="p">,</span> <span class="s">&quot;IN&quot;</span><span class="p">,</span> <span class="s">&quot;demo-list&quot;</span><span class="p">)</span><span class="o">.</span>\
+          <span class="n">order_by</span><span class="p">(</span><span class="s">&quot;symbol&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">query</span><span class="o">.</span><span class="n">rows</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">handle_row</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

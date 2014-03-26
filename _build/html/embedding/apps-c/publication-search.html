@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>publication-search &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Apps/C Grunt Build" href="index.html" />
+    <link rel="next" title="elastic-med" href="elastic-med.html" />
+    <link rel="prev" title="Apps/C Usage" href="usage.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="elastic-med.html" title="elastic-med"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Apps/C Usage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Apps/C Grunt Build</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">publication-search</a><ul>
+<li><a class="reference internal" href="#initialize-project">Initialize Project</a><ul>
+<li><a class="reference internal" href="#node-js-platform">Node.js platform</a></li>
+<li><a class="reference internal" href="#bower-vendor-dependencies">Bower vendor dependencies</a></li>
+<li><a class="reference internal" href="#grunt-building">Grunt building</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#source-files">Source files</a><ul>
+<li><a class="reference internal" href="#example-page">Example page</a></li>
+<li><a class="reference internal" href="#app-index">App index</a><ul>
+<li><a class="reference internal" href="#observable">Observable</a></li>
+<li><a class="reference internal" href="#components">Components</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#layout">Layout</a></li>
+<li><a class="reference internal" href="#search-component">Search component</a></li>
+<li><a class="reference internal" href="#search-template">Search template</a></li>
+<li><a class="reference internal" href="#query-module">Query module</a></li>
+<li><a class="reference internal" href="#state-module">State module</a></li>
+<li><a class="reference internal" href="#imjs-module">IMJS module</a></li>
+<li><a class="reference internal" href="#publications-list">Publications list</a></li>
+<li><a class="reference internal" href="#alert-component">Alert component</a></li>
+<li><a class="reference internal" href="#alert-template">Alert template</a></li>
+<li><a class="reference internal" href="#results-table-component">Results table component</a></li>
+<li><a class="reference internal" href="#results-table-template">Results table template</a></li>
+<li><a class="reference internal" href="#style">Style</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fin">Fin</a></li>
+<li><a class="reference internal" href="#appendix">Appendix</a><ul>
+<li><a class="reference internal" href="#pomme-js">pomme.js</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="previous chapter">Apps/C Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="elastic-med.html"
+                        title="next chapter">elastic-med</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/embedding/apps-c/publication-search.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="publication-search">
+<h1>publication-search<a class="headerlink" href="#publication-search" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can view the source files for this project in the <a class="reference external" href="https://github.com/intermine/intermine-apps-c/tree/master/publication-search">intermine/intermine-apps-c</a> repo.</p>
+</div>
+<p>This document will guide you through the process of writing a JavaScript client side app (running completely in a browser) using <a class="reference external" href="http://bower.io/">Bower</a> and <a class="reference external" href="http://gruntjs.com/">Grunt</a> tools. This app will connect to an <a class="reference external" href="http://intermine.org">InterMine</a> instance to run a query. The objective will be to fetch a list of publications for each <em>bio entity</em> found that is <em>like</em> our query.</p>
+<p>The libraries we will be using:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://bower.io/">Bower</a> to fetch vendor dependencies such as JavaScript, CSS or Fonts.</li>
+<li><a class="reference external" href="http://canjs.com/">canJS</a> is a framework for client-side development handling routing, events etc.</li>
+<li><a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> a language that compiles down to JavaScript and makes writing an app easier.</li>
+<li><a class="reference external" href="http://foundation.zurb.com/">Foundation</a> is a CSS framework of reusable UI components.</li>
+<li><a class="reference external" href="http://gruntjs.com/">Grunt</a> to build/transpile our source files.</li>
+<li><a class="reference external" href="http://jquery.com/">jQuery</a> is a DOM manipulation library (and more).</li>
+<li><a class="reference external" href="http://mustache.github.io/">Mustache</a> is a multi-platform templating language allowing us to embed dynamic objects in HTML.</li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Nodejs">Node</a> JavaScript desktop software platform.</li>
+<li><a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a> allows us to be more expressive and dynamic with CSS.</li>
+<li><a class="reference external" href="http://lodash.com/">Lodash</a> is a utility toolbelt making actions such as iterating over items easier.</li>
+<li><a class="reference external" href="https://github.com/alexkalderimis/imjs">imjs</a> used to query InterMines from browser or Node. Saves you having to write raw HTTP requests.</li>
+</ol>
+<div class="section" id="initialize-project">
+<h2>Initialize Project<a class="headerlink" href="#initialize-project" title="Permalink to this headline">¶</a></h2>
+<p>The first step will be to setup our directory structure.</p>
+<dl class="docutils">
+<dt><cite>build/</cite></dt>
+<dd>Will be the directory where our final app package will live. We will develop in languages like <a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a> or <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> and need a way to package all these resources into one whole... directory. This is where all these files will live.</dd>
+<dt><cite>bower_components/</cite></dt>
+<dd>This directory will be automatically created and will contain libraries we have requested through the Bower system.</dd>
+<dt><cite>example/</cite></dt>
+<dd>Contains an example of our app in use.</dd>
+<dt><cite>src/</cite></dt>
+<dd>Source files that our code will consist of.</dd>
+<dt><cite>bower.json</cite></dt>
+<dd>Will contain a listing of libraries we want to download using <a class="reference external" href="http://bower.io/">Bower</a>.</dd>
+<dt><cite>package.json</cite></dt>
+<dd>Lists libraries we will need to compile and build our app with.</dd>
+</dl>
+<div class="section" id="node-js-platform">
+<h3>Node.js platform<a class="headerlink" href="#node-js-platform" title="Permalink to this headline">¶</a></h3>
+<p>Since our application is targeting JavaScript in the browser, it is pretty useful if we use JavaScript on our computer (desktop) too. Enter <a class="reference external" href="http://en.wikipedia.org/wiki/Nodejs">Node</a> which allows us to execute JavaScript on our computers instead of just our browsers.</p>
+<p>You can fetch <a class="reference external" href="http://nodejs.org/download/">binaries</a> from the homepage or use your (hopefully Linux) <a class="reference external" href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">packman</a>.</p>
+<p>Once Node is installed, edit the <tt class="docutils literal"><span class="pre">package.json</span></tt> file like so:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;publication-search&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;bower&quot;</span><span class="p">:</span> <span class="s2">&quot;~1.2.7&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;grunt&quot;</span><span class="p">:</span> <span class="s2">&quot;~0.4.1&quot;</span><span class="p">,</span>
+
+        <span class="nt">&quot;grunt-apps-c&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.14&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;grunt-contrib-concat&quot;</span><span class="p">:</span> <span class="s2">&quot;~0.3.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;grunt-contrib-stylus&quot;</span><span class="p">:</span> <span class="s2">&quot;~0.9.0&quot;</span><span class="p">,</span>
+
+        <span class="nt">&quot;grunt-contrib-uglify&quot;</span><span class="p">:</span> <span class="s2">&quot;~0.2.5&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;grunt-contrib-cssmin&quot;</span><span class="p">:</span> <span class="s2">&quot;~0.6.2&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This file tells Node which libraries will be used to build our app. These are not client-side libraries, but server-side if you will.</p>
+<p>The top bit of the <tt class="docutils literal"><span class="pre">devDependencies</span></tt> lists a bunch of Grunt and Bower related libraries.</p>
+<p>In order to install all of these, execute the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>npm install -d
+</pre></div>
+</div>
+</div>
+<div class="section" id="bower-vendor-dependencies">
+<h3>Bower vendor dependencies<a class="headerlink" href="#bower-vendor-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Now we want to fetch libraries that our app, when running, will depend on.</p>
+<p>Edit the <tt class="docutils literal"><span class="pre">bower.json</span></tt> file like so:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;publication-search&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;jquery&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.3&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;lodash&quot;</span><span class="p">:</span> <span class="s2">&quot;2.4.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;canjs&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.4&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;foundation&quot;</span><span class="p">:</span> <span class="s2">&quot;5.0.2&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;imjs&quot;</span><span class="p">:</span> <span class="s2">&quot;3.2.1&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The file has a bunch of key-value pairs.</p>
+<dl class="docutils">
+<dt><cite>name</cite></dt>
+<dd>Name of our application in the Bower ecosystem, required.</dd>
+<dt><cite>version</cite></dt>
+<dd>Version number in the Bower ecosystem, required.</dd>
+<dt><cite>dependencies</cite></dt>
+<dd>Lists the actual libraries and their versions to fetch. You can populate this list by executing <tt class="docutils literal"><span class="pre">$</span> <span class="pre">bower</span> <span class="pre">install</span> <span class="pre">jquery</span> <span class="pre">--save</span></tt> for example. That will download the latest version of the <tt class="docutils literal"><span class="pre">jquery</span></tt> component into the <tt class="docutils literal"><span class="pre">bower_components/</span></tt> directory. You can <a class="reference external" href="http://sindresorhus.com/bower-components/">search</a> for available components using <tt class="docutils literal"><span class="pre">$</span> <span class="pre">bower</span> <span class="pre">search</span> <span class="pre">jquery</span></tt>. To actually trigger a search, execute <tt class="docutils literal"><span class="pre">$</span> <span class="pre">bower</span> <span class="pre">install</span></tt>. The different libraries will be introduced as we code along.</dd>
+</dl>
+</div>
+<div class="section" id="grunt-building">
+<h3>Grunt building<a class="headerlink" href="#grunt-building" title="Permalink to this headline">¶</a></h3>
+<p>Grunt is used to munge files together and execute commands on them. Create a file called <tt class="docutils literal"><span class="pre">Gruntfile.coffee</span></tt>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="nf">(grunt) -&gt;</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span>
+        <span class="nv">pkg: </span><span class="nx">grunt</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nx">readJSON</span><span class="p">(</span><span class="s">&quot;package.json&quot;</span><span class="p">)</span>
+
+        <span class="nv">apps_c:</span>
+            <span class="nv">commonjs:</span>
+                <span class="nv">src: </span><span class="p">[</span> <span class="s">&#39;src/**/*.{coffee,mustache}&#39;</span> <span class="p">]</span>
+                <span class="nv">dest: </span><span class="s">&#39;build/js/ps.js&#39;</span>
+                <span class="nv">options:</span>
+                    <span class="nv">main: </span><span class="s">&#39;src/app.coffee&#39;</span>
+                    <span class="nv">name: </span><span class="s">&#39;ps&#39;</span>
+
+        <span class="nv">stylus:</span>
+            <span class="nv">compile:</span>
+                <span class="nv">src: </span><span class="p">[</span> <span class="s">&#39;src/styles/app.styl&#39;</span> <span class="p">]</span>
+                <span class="nv">dest: </span><span class="s">&#39;build/css/ps.css&#39;</span>
+
+        <span class="nv">concat:</span>
+            <span class="nv">scripts:</span>
+                <span class="nv">src: </span><span class="p">[</span>
+                    <span class="c1"># Vendor dependencies.</span>
+                    <span class="s">&#39;bower_components/jquery/jquery.js&#39;</span>
+                    <span class="s">&#39;bower_components/lodash/dist/lodash.js&#39;</span>
+                    <span class="s">&#39;bower_components/canjs/can.jquery.js&#39;</span>
+                    <span class="s">&#39;bower_components/canjs/can.map.setter.js&#39;</span>
+                    <span class="s">&#39;bower_components/imjs/js/im.js&#39;</span>
+                    <span class="c1"># Our app.</span>
+                    <span class="s">&#39;build/js/ps.js&#39;</span>
+                <span class="p">]</span>
+                <span class="nv">dest: </span><span class="s">&#39;build/js/ps.bundle.js&#39;</span>
+                <span class="nv">options:</span>
+                    <span class="nv">separator: </span><span class="s">&#39;;&#39;</span> <span class="c1"># for minification purposes</span>
+
+            <span class="nv">styles:</span>
+                <span class="nv">src: </span><span class="p">[</span>
+                    <span class="s">&#39;bower_components/foundation/css/normalize.css&#39;</span>
+                    <span class="s">&#39;bower_components/foundation/css/foundation.css&#39;</span>
+                    <span class="c1"># Our app.</span>
+                    <span class="s">&#39;build/css/ps.css&#39;</span>
+                <span class="p">]</span>
+                <span class="nv">dest: </span><span class="s">&#39;build/css/ps.bundle.css&#39;</span>
+
+        <span class="nv">uglify:</span>
+            <span class="nv">scripts:</span>
+                <span class="nv">files:</span>
+                    <span class="s">&#39;build/js/ps.min.js&#39;</span><span class="o">:</span> <span class="s">&#39;build/js/ps.js&#39;</span>
+                    <span class="s">&#39;build/js/ps.bundle.min.js&#39;</span><span class="o">:</span> <span class="s">&#39;build/js/ps.bundle.js&#39;</span>
+
+        <span class="nv">cssmin:</span>
+            <span class="nv">combine:</span>
+                <span class="nv">files:</span>
+                    <span class="s">&#39;build/css/ps.bundle.min.css&#39;</span><span class="o">:</span> <span class="s">&#39;build/css/ps.bundle.css&#39;</span>
+                    <span class="s">&#39;build/css/ps.min.css&#39;</span><span class="o">:</span> <span class="s">&#39;build/css/ps.css&#39;</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-apps-c&#39;</span><span class="p">)</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-contrib-stylus&#39;</span><span class="p">)</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-contrib-concat&#39;</span><span class="p">)</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-contrib-uglify&#39;</span><span class="p">)</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-contrib-cssmin&#39;</span><span class="p">)</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s">&#39;apps_c&#39;</span>
+        <span class="s">&#39;stylus&#39;</span>
+        <span class="s">&#39;concat&#39;</span>
+    <span class="p">])</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s">&#39;minify&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s">&#39;uglify&#39;</span>
+        <span class="s">&#39;cssmin&#39;</span>
+    <span class="p">])</span>
+</pre></div>
+</div>
+<p>This file is written in <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> and lists the tasks to run when we want to build our app. From the top:</p>
+<dl class="docutils">
+<dt><cite>apps_c</cite></dt>
+<dd>This directive says that we want to take any <a class="reference external" href="http://coffeescript.org/">CoffeeScript</a> and <a class="reference external" href="http://mustache.github.io/">Mustache</a> files we find in <tt class="docutils literal"><span class="pre">src/</span></tt> and combine them into one JavaScript package.</dd>
+<dt><cite>stylus</cite></dt>
+<dd>Take a <a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a> file and turn it into CSS.</dd>
+<dt><cite>concat</cite></dt>
+<dd>Take our vendor files (installed using <a class="reference external" href="http://bower.io/">Bower</a>) and, together with our app, make them into a bundle. If someone else wants to use our app they need our app and its deps too, so this one file will do it for them. Do the same to CSS too.</dd>
+<dt><cite>uglify</cite></dt>
+<dd>Minify our built JavaScript files. This makes them small, but unreadable so not great for debugging.</dd>
+<dt><cite>cssmin</cite></dt>
+<dd>The same as <cite>uglify</cite> but for CSS</dd>
+</dl>
+<p>Then we have two calls to <tt class="docutils literal"><span class="pre">grunt.registerTask</span></tt> which bundle a bunch of tasks together. For example running <tt class="docutils literal"><span class="pre">$</span> <span class="pre">grunt</span> <span class="pre">minify</span></tt> will run the <tt class="docutils literal"><span class="pre">uglify</span></tt> and <tt class="docutils literal"><span class="pre">cssmin</span></tt> tasks.</p>
+<p>While developing it is quite useful to watch the source files and re-run the build task:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>watch --color grunt
+</pre></div>
+</div>
+<p>This will run the default Grunt task every 2s.</p>
+</div>
+</div>
+<div class="section" id="source-files">
+<h2>Source files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-page">
+<h3>Example page<a class="headerlink" href="#example-page" title="Permalink to this headline">¶</a></h3>
+<p>One needs an access point where our app will get loaded with particular configuration. This is where the <tt class="docutils literal"><span class="pre">example/index.html</span></tt> comes in:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Publication Search<span class="nt">&lt;/title&gt;</span>
+
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;build/css/ps.bundle.css&quot;</span> <span class="na">media=</span><span class="s">&quot;all&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;build/js/ps.bundle.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="c1">// Once scripts have loaded.</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// ...show the app.</span>
+            <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ps&#39;</span><span class="p">)({</span>
+                <span class="s1">&#39;el&#39;</span><span class="o">:</span>   <span class="s1">&#39;#app&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;mine&#39;</span><span class="o">:</span> <span class="s1">&#39;http://www.mousemine.org/mousemine&#39;</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>This file does not do anything else other then load our built CSS and JS files and starts our app once the page loads. In our example we are pointing to a <tt class="docutils literal"><span class="pre">build</span></tt> directory relative to the <tt class="docutils literal"><span class="pre">example</span></tt> directory. So let&#8217;s make a symbolic link to the actual <tt class="docutils literal"><span class="pre">build</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ln -s ../build build/
+</pre></div>
+</div>
+<p>Such links get preserved when version controlling using <a class="reference external" href="http://git-scm.com/">Git</a>. We are linking to our bundled builds that contain vendor dependencies too.</p>
+<p>Then we are waiting for the page to load and call our (future) app with some config.</p>
+<p>The name <tt class="docutils literal"><span class="pre">ps</span></tt> is being configured in the <tt class="docutils literal"><span class="pre">Gruntfile.coffee</span></tt> file in the <tt class="docutils literal"><span class="pre">apps-c</span></tt> task.</p>
+<p>As for the config:</p>
+<dl class="docutils">
+<dt><cite>el</cite></dt>
+<dd>Selector where our app should be displayed.</dd>
+<dt><cite>mine</cite></dt>
+<dd>Points to an <a class="reference external" href="http://intermine.org">InterMine</a>.</dd>
+</dl>
+<p>The <tt class="docutils literal"><span class="pre">require</span></tt> call relates to <a class="reference external" href="http://addyosmani.com/writing-modular-js/">CommonJS</a>. It is one way of loading JavaScript modules. It avoids having to expose all of our functions and objects on the global (<tt class="docutils literal"><span class="pre">window</span></tt>) object and implements a way of relating between different files. For example, to load a module on the same <em>directory</em> level as me:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nx">require</span> <span class="s">&#39;./module&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-index">
+<h3>App index<a class="headerlink" href="#app-index" title="Permalink to this headline">¶</a></h3>
+<p>We have asked to load an app in our <tt class="docutils literal"><span class="pre">example/index.html</span></tt> page, now we are going to write the backing code.</p>
+<p>The <tt class="docutils literal"><span class="pre">apps-c</span></tt> task (in <tt class="docutils literal"><span class="pre">Gruntfile.coffee</span></tt>) contains the following two options:</p>
+<dl class="docutils">
+<dt><cite>name</cite></dt>
+<dd>How do we call our app for <a class="reference external" href="http://addyosmani.com/writing-modular-js/">CommonJS</a> <tt class="docutils literal"><span class="pre">require</span></tt> call.</dd>
+<dt><cite>main</cite></dt>
+<dd>Contains a path (an index) that will be called when we actually call the <tt class="docutils literal"><span class="pre">require</span></tt> function.</dd>
+</dl>
+<p>We have specified that our app index lives in <tt class="docutils literal"><span class="pre">src/app.coffee</span></tt> so let&#8217;s create this file:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">render  = </span><span class="nx">require</span> <span class="s">&#39;./modules/render&#39;</span>
+<span class="nv">query   = </span><span class="nx">require</span> <span class="s">&#39;./modules/query&#39;</span>
+<span class="nv">imjs    = </span><span class="nx">require</span> <span class="s">&#39;./modules/imjs&#39;</span>
+<span class="nv">state   = </span><span class="nx">require</span> <span class="s">&#39;./modules/state&#39;</span>
+
+<span class="nv">layout  = </span><span class="nx">require</span> <span class="s">&#39;./templates/layout&#39;</span>
+
+<span class="nv">components = </span><span class="p">[</span>
+    <span class="s">&#39;alert&#39;</span>
+    <span class="s">&#39;search&#39;</span>
+    <span class="s">&#39;table&#39;</span>
+<span class="p">]</span>
+
+<span class="nv">module.exports = </span><span class="nf">(opts) -&gt;</span>
+    <span class="c1"># Load the components.</span>
+    <span class="p">(</span> <span class="nx">require</span> <span class="s">&quot;./components/</span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">components</span> <span class="p">)</span>
+
+    <span class="c1"># Setup the UI.</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">el</span><span class="p">).</span><span class="nx">html</span> <span class="nx">render</span> <span class="nx">layout</span>
+
+    <span class="c1"># Do we have mine set?</span>
+    <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">attr</span> <span class="p">{</span> <span class="s">&#39;type&#39;</span><span class="o">:</span> <span class="s">&#39;warning&#39;</span><span class="p">,</span> <span class="s">&#39;text&#39;</span><span class="o">:</span> <span class="s">&#39;Mine is not set&#39;</span> <span class="p">}</span> <span class="k">unless</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">mine</span>
+
+    <span class="c1"># Setup the client.</span>
+    <span class="nx">imjs</span><span class="p">.</span><span class="nx">attr</span> <span class="p">{</span> <span class="s">&#39;client&#39;</span><span class="o">:</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">Service</span> <span class="s">&#39;root&#39;</span><span class="o">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">mine</span> <span class="p">}</span>
+
+    <span class="c1"># Manually change the query to init the search?</span>
+    <span class="nx">query</span><span class="p">(</span><span class="nx">q</span><span class="p">)</span> <span class="k">if</span> <span class="nv">q = </span><span class="nx">opts</span><span class="p">.</span><span class="nx">symbol</span>
+</pre></div>
+</div>
+<p>Each module (file) in our app needs to export some functionality. When we call <tt class="docutils literal"><span class="pre">require</span></tt> we will be getting this functionality.</p>
+<div class="section" id="observable">
+<h4>Observable<a class="headerlink" href="#observable" title="Permalink to this headline">¶</a></h4>
+<p>We are going to be using <a class="reference external" href="http://canjs.com/">canJS</a> which gives us objects that can be <em>observed</em>. What this means is that when their values change, others listening to these changes will be notified. When we want to <a class="reference external" href="http://canjs.com/docs/can.Map.prototype.attr.html">change</a> their value we call <tt class="docutils literal"><span class="pre">attr</span></tt> function on them. One such example is where we setup the client. We are passing an object which is set on <cite>imjs</cite> which is a <a class="reference external" href="http://canjs.com/docs/can.Map.html">canMap</a>. Or the line below where we set a symbol on a <cite>query</cite> which is a <a class="reference external" href="http://canjs.com/docs/can.compute.html">canCompute</a>. The advantage here is that whenever we set a new symbol on <cite>query</cite>, anyone else will be told it has changed and do something. This something means to trigger a search.</p>
+</div>
+<div class="section" id="components">
+<h4>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h4>
+<p>But first we are requireing some components into the memory. These are <a class="reference external" href="http://canjs.com/docs/can.Component.html">canComponent</a> instances. They wrap some user interface functionality (think widget) and are tied to a DOM tag. Whenever this tag appears on the page, a component gets automatically created with the appropriate template and data. For now, let&#8217;s just say these need to be loaded before we inject our first template into the page. An example of a tag:</p>
+<div class="highlight-html"><pre>&lt;app-component&gt;&lt;/app-component&gt;</pre>
+</div>
+<p>We inject the said template, layout, on the line below. Layout will represent the HTML that is true for our app/page. It will have custom tags in it that automatically get rendered as components (as above).</p>
+</div>
+</div>
+<div class="section" id="layout">
+<h3>Layout<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
+<p>Let us take a look at the layout template then; in <cite>/src/templates/layout.mustache</cite>:</p>
+<div class="highlight-mustache"><pre>&lt;div class="row collapse"&gt;
+    &lt;div class="small-2 columns"&gt;
+        &lt;span class="prefix"&gt;Search:&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="small-10 columns"&gt;
+        &lt;app-search&gt;&lt;/app-search&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row collapse"&gt;
+    &lt;div class="small-12 columns"&gt;
+        &lt;app-alert&gt;&lt;/app-alert&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row collapse"&gt;
+    &lt;div class="small-12 columns"&gt;
+        &lt;app-table&gt;&lt;/app-table&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+</div>
+<p>Our app will consist of 3 components:</p>
+<dl class="docutils">
+<dt><cite>app-search</cite></dt>
+<dd>A component that will represent our input search field.</dd>
+<dt><cite>app-alert</cite></dt>
+<dd>An alert message showing in what state the app is in.</dd>
+<dt><cite>app-table</cite></dt>
+<dd>A table with results of our search.</dd>
+</dl>
+</div>
+<div class="section" id="search-component">
+<h3>Search component<a class="headerlink" href="#search-component" title="Permalink to this headline">¶</a></h3>
+<p>The search component will bind the <cite>query</cite> to our input field; in <cite>/src/components/search.coffee</cite>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">query = </span><span class="nx">require</span> <span class="s">&#39;../modules/query&#39;</span>
+
+<span class="c1"># Search form.</span>
+<span class="nv">module.exports = </span><span class="nx">can</span><span class="p">.</span><span class="nx">Component</span><span class="p">.</span><span class="nx">extend</span>
+
+    <span class="nv">tag: </span><span class="s">&#39;app-search&#39;</span>
+
+    <span class="nv">template: </span><span class="nx">require</span> <span class="s">&#39;../templates/search&#39;</span>
+
+    <span class="nv">scope: </span><span class="nf">-&gt;</span> <span class="p">{</span> <span class="s">&#39;query&#39;</span><span class="o">:</span> <span class="p">{</span> <span class="s">&#39;value&#39;</span><span class="o">:</span> <span class="nx">query</span> <span class="p">}</span> <span class="p">}</span>
+
+    <span class="nv">events:</span>
+        <span class="s">&#39;input keyup&#39;</span><span class="o">:</span> <span class="nf">(el, evt) -&gt;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">or</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">which</span><span class="p">)</span> <span class="o">is</span> <span class="mi">13</span>
+                <span class="nx">query</span> <span class="nx">do</span> <span class="nx">el</span><span class="p">.</span><span class="nx">val</span>
+</pre></div>
+</div>
+<p>To do so we need to require the <cite>query</cite> module. It is the same module we have seen in our app index. And then we are off using the standard <a class="reference external" href="http://canjs.com/docs/can.Component.html">canComponent</a> notation. There is:</p>
+<dl class="docutils">
+<dt><cite>tag</cite></dt>
+<dd>Which is the custom DOM tag/element for this component. Again, if this tag appears on the page, this component will spring to life.</dd>
+<dt><cite>template</cite></dt>
+<dd>This is the template that will get injected into the <cite>tag</cite>.</dd>
+<dt><cite>scope</cite></dt>
+<dd>Ah, the magic. You can either pass in an object of key-value pairs that will be accessible within our <cite>template</cite>. A more interesting approach is to return a function that returns said object. Doing so will make this component listen in on any changes in the object. In our example we are (using slightly convoluted notation) listening to changes to <cite>query</cite>, which is a <a class="reference external" href="http://canjs.com/docs/can.compute.html">canCompute</a>.</dd>
+<dt><cite>events</cite></dt>
+<dd>Makes this component listen to events in the template and then do something. The syntax is: <cite>&lt;selector&gt; &lt;event&gt;</cite>. In our example, whenever the user has pressed (and raised their finger) from a key on a keyboard, we call a function. This function checks that the key was <cite>Enter</cite> and updates the <cite>query</cite>.</dd>
+</dl>
+</div>
+<div class="section" id="search-template">
+<h3>Search template<a class="headerlink" href="#search-template" title="Permalink to this headline">¶</a></h3>
+<p>The search template just outputs the current value of the query:</p>
+<div class="highlight-mustache"><pre>&lt;input type="text" placeholder="e.g. brca, gamma" value="{{ query.value }}" autofocus&gt;</pre>
+</div>
+<p>We are also giving this field the focus on the page so a user can just start typing.</p>
+</div>
+<div class="section" id="query-module">
+<h3>Query module<a class="headerlink" href="#query-module" title="Permalink to this headline">¶</a></h3>
+<p>We have been talking about this <cite>query</cite> for a while, it is time to write its code; in <cite>/src/modules/query.coffee</cite>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">pubs  = </span><span class="nx">require</span> <span class="s">&#39;./pubs&#39;</span>
+<span class="nv">imjs  = </span><span class="nx">require</span> <span class="s">&#39;./imjs&#39;</span>
+<span class="nv">state = </span><span class="nx">require</span> <span class="s">&#39;./state&#39;</span>
+
+<span class="c1"># The default search query.</span>
+<span class="nv">query = </span><span class="nx">can</span><span class="p">.</span><span class="nx">compute</span> <span class="s">&#39;&#39;</span>
+
+<span class="c1"># Keep track of requests.</span>
+<span class="nv">gid = </span><span class="mi">0</span>
+
+<span class="c1"># Observe query changes to trigger a service search.</span>
+<span class="nx">query</span><span class="p">.</span><span class="nx">bind</span> <span class="s">&#39;change&#39;</span><span class="p">,</span> <span class="nf">(ev, q) -&gt;</span>
+    <span class="nx">state</span><span class="p">.</span><span class="nx">attr</span> <span class="p">{</span> <span class="s">&#39;type&#39;</span><span class="o">:</span> <span class="s">&#39;info&#39;</span><span class="p">,</span> <span class="s">&#39;text&#39;</span><span class="o">:</span> <span class="s">&#39;Searching &amp;hellip;&#39;</span> <span class="p">}</span>
+    <span class="nv">id = </span><span class="o">++</span><span class="nx">gid</span>
+
+    <span class="nx">imjs</span><span class="p">.</span><span class="nx">search</span> <span class="nx">q</span><span class="p">,</span> <span class="nf">(err, res) -&gt;</span>
+        <span class="c1"># Too late?</span>
+        <span class="k">return</span> <span class="k">if</span> <span class="nx">id</span> <span class="o">&lt;</span> <span class="nx">gid</span>
+        <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">attr</span> <span class="p">{</span> <span class="s">&#39;type&#39;</span><span class="o">:</span> <span class="s">&#39;warning&#39;</span><span class="p">,</span> <span class="s">&#39;Oops &amp;hellip&#39;</span> <span class="p">}</span> <span class="k">if</span> <span class="nx">err</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">attr</span> <span class="p">{</span> <span class="s">&#39;type&#39;</span><span class="o">:</span> <span class="s">&#39;success&#39;</span><span class="p">,</span> <span class="s">&#39;text&#39;</span><span class="o">:</span> <span class="s">&quot;Found </span><span class="si">#{</span><span class="nx">res</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="s"> results&quot;</span> <span class="p">}</span>
+        <span class="nx">pubs</span><span class="p">.</span><span class="nx">replace</span> <span class="nx">res</span>
+
+<span class="nv">module.exports = </span><span class="nx">query</span>
+</pre></div>
+</div>
+<p>First we are requiring some other modules:</p>
+<dl class="docutils">
+<dt><cite>pubs</cite></dt>
+<dd>Will represent our results collection/list.</dd>
+<dt><cite>imjs</cite></dt>
+<dd>A module doing the actual search.</dd>
+<dt><cite>state</cite></dt>
+<dd>Will be told what the state of the app is for alerts.</dd>
+</dl>
+<p>We initialize the query to be empty using <cite>&#8216;&#8217;</cite>. If a developer wants to pass an initial query, we have seen the relevant code in app index.</p>
+<p>Then we have a function that listens in on our changes. Whenever query changes, this function is triggered. We use it to first say that we are starting a search. Then we actually call the <cite>imjs</cite> module to do the search. If all went fine, we inject the new results into the <cite>pubs</cite> module.</p>
+<p>There are two things that could go wrong:</p>
+<ol class="arabic simple">
+<li>The search might not be succesfull (mine down, malformed query etc.)</li>
+<li>The results may arrive too late when the user asks for another set of results before seeing the first set.</li>
+</ol>
+<p>Both cases are handled.</p>
+</div>
+<div class="section" id="state-module">
+<h3>State module<a class="headerlink" href="#state-module" title="Permalink to this headline">¶</a></h3>
+<p>Is a <a class="reference external" href="http://canjs.com/docs/can.Map.html">canMap</a> that keeps track of the app state; it lives in <cite>/src/modules/state.coffee</cite>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="k">new</span> <span class="nx">can</span><span class="p">.</span><span class="nx">Map</span>
+    <span class="s">&#39;type&#39;</span><span class="o">:</span> <span class="s">&#39;info&#39;</span>
+    <span class="s">&#39;text&#39;</span><span class="o">:</span> <span class="s">&#39;Search is ready&#39;</span>
+</pre></div>
+</div>
+<p>The map has two attributes, one for a type of state we are in <cite>[ info|success|warning ]</cite> and the other for the actual message.</p>
+</div>
+<div class="section" id="imjs-module">
+<h3>IMJS module<a class="headerlink" href="#imjs-module" title="Permalink to this headline">¶</a></h3>
+<p>This module will do the actual search on the mine. It is called imjs since it is going to be using the <a class="reference external" href="https://github.com/alexkalderimis/imjs">imjs</a> library behind the scenes. We will find it in <cite>/src/modules/imjs.coffee</cite>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">query =</span>
+    <span class="s">&#39;select&#39;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&#39;Publication.title&#39;</span>
+        <span class="s">&#39;Publication.year&#39;</span>
+        <span class="s">&#39;Publication.journal&#39;</span>
+        <span class="s">&#39;Publication.pubMedId&#39;</span>
+        <span class="s">&#39;Publication.authors.name&#39;</span>
+        <span class="s">&#39;Publication.bioEntities.symbol&#39;</span>
+        <span class="s">&#39;Publication.bioEntities.id&#39;</span>
+    <span class="p">]</span>
+    <span class="s">&#39;orderBy&#39;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s">&#39;Publication.title&#39;</span><span class="o">:</span> <span class="s">&#39;ASC&#39;</span> <span class="p">}</span>
+    <span class="p">]</span>
+    <span class="s">&#39;joins&#39;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s">&#39;Publication.authors&#39;</span>
+    <span class="p">]</span>
+
+<span class="nv">module.exports = </span><span class="k">new</span> <span class="nx">can</span><span class="p">.</span><span class="nx">Map</span>
+
+    <span class="c1"># Needs to be initialized.</span>
+    <span class="nv">client: </span><span class="kc">null</span>
+
+    <span class="c1"># Search publications by bio entity symbol.</span>
+    <span class="nv">search: </span><span class="nf">(symbol, cb) -&gt;</span>
+        <span class="k">return</span> <span class="nx">cb</span> <span class="s">&#39;Client is not setup&#39;</span> <span class="k">unless</span> <span class="nx">@client</span>
+
+        <span class="nx">@client</span><span class="p">.</span><span class="nx">query</span> <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">({},</span> <span class="nx">query</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s">&#39;where&#39;</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s">&#39;path&#39;</span><span class="o">:</span> <span class="s">&#39;Publication.bioEntities.symbol&#39;</span>
+                    <span class="s">&#39;op&#39;</span><span class="o">:</span>   <span class="s">&#39;CONTAINS&#39;</span>
+                    <span class="s">&#39;value&#39;</span><span class="o">:</span> <span class="nx">symbol</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}),</span> <span class="nf">(err, q) -&gt;</span>
+            <span class="k">return</span> <span class="nx">cb</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
+            <span class="c1"># Run the query.</span>
+            <span class="nx">q</span><span class="p">.</span><span class="nx">tableRows</span> <span class="nf">(err, res) -&gt;</span>
+                <span class="k">return</span> <span class="nx">cb</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
+
+                <span class="c1"># Re-map to a useful format.</span>
+                <span class="nv">remap = </span><span class="nf">(rows) -&gt;</span>
+                    <span class="nv">type = </span><span class="kc">null</span>
+                    <span class="nx">_</span><span class="p">.</span><span class="nx">extend</span> <span class="nx">_</span><span class="p">.</span><span class="nx">zipObject</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">map</span> <span class="nx">rows</span><span class="p">,</span> <span class="nf">(row) -&gt;</span>
+                        <span class="c1"># Add our type.</span>
+                        <span class="nv">type = </span><span class="nx">row</span><span class="p">.</span><span class="nx">class</span> <span class="k">if</span> <span class="nx">row</span><span class="p">.</span><span class="nx">column</span> <span class="o">is</span> <span class="s">&#39;Publication.bioEntities.id&#39;</span>
+                        <span class="c1"># Tuple of column - value.</span>
+                        <span class="p">[</span>
+                            <span class="nx">row</span><span class="p">.</span><span class="nx">column</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">).</span><span class="nx">pop</span><span class="p">()</span>
+                            <span class="k">if</span> <span class="nx">row</span><span class="p">.</span><span class="nx">rows</span> <span class="k">then</span> <span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">row</span><span class="p">.</span><span class="nx">rows</span><span class="p">,</span> <span class="nx">remap</span><span class="p">)</span> <span class="k">else</span> <span class="nx">row</span><span class="p">.</span><span class="nx">value</span>
+                        <span class="p">]</span>
+                    <span class="p">),</span> <span class="p">{</span> <span class="nx">type</span> <span class="p">}</span>
+
+                <span class="nx">cb</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">map</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">remap</span>
+</pre></div>
+</div>
+<p>At the top we are defining the query that will be used to run the query. The format is that of an InterMine PathQuery. You can see <a class="reference external" href="https://github.com/alexkalderimis/imjs">imjs</a> for syntax and more information. One can generate this syntax by visiting the mine in question, running a query in QueryBuilder and then choosing to export to JavaScript in the Results Table.</p>
+<p>Our query will be looking for publications, fetching their bio entities (genes, alleles, proteins etc.) and authors. Authors is a separate collection mapped to a publication.</p>
+<p>Then we are using the <a class="reference external" href="http://canjs.com/docs/can.Map.html">canMap</a> syntax to define a <cite>client</cite> attribute and a <cite>search</cite> function. An object can have both attributes and functions defined.</p>
+<p>We took care of initializing the <cite>client</cite> in app index. In that step, we were intiializing the <a class="reference external" href="https://github.com/alexkalderimis/imjs">imjs</a> library to use a specific mine, MouseMine in our case.</p>
+<p>The search function takes two parameters, a symbol and a callback. The first is the search symbol coming from <cite>query</cite> module, the second a function that will be called when we have errors or results. Hopefully the latter.</p>
+<p>We are then using <a class="reference external" href="https://github.com/alexkalderimis/imjs">imjs</a> syntax to extend our <cite>query</cite> with a constraint on a bio entity symbol, matching our symbol and returning <cite>tableRows</cite>.</p>
+<p>The <cite>remap</cite> function is just formatting the results into a format that is useful to us. In our case we want to have the following data structure which is conducive to being traversed in a <a class="reference external" href="http://mustache.github.io/">Mustache</a> template:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Distinct negative regulatory mechanisms involved in the repression of human embryonic epsilon- and fetal G gamma-globin genes in transgenic mice.&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1994</span><span class="p">,</span>
+        <span class="nt">&quot;journal&quot;</span><span class="p">:</span> <span class="s2">&quot;J Biol Chem&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;pubMedId&quot;</span><span class="p">:</span> <span class="s2">&quot;7806539&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Perez-Stable C&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="kc">null</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;Tg(Ggamma-T)15Cps&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1678446</span><span class="p">,</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Transgene&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>We are extracting the type of the bio entity matched and creating a nested <cite>authors</cite> field.</p>
+<p>Once we have the new data we are calling back using the <cite>cb</cite> function. It is customary to specify an error as the first argument into said function. Since all is well, we are passing a <cite>null</cite> value.</p>
+</div>
+<div class="section" id="publications-list">
+<h3>Publications list<a class="headerlink" href="#publications-list" title="Permalink to this headline">¶</a></h3>
+<p>We still have one module to cover. This is the <cite>pubs</cite> we have refered to elsewhere; in <cite>/src/modules/pubs.coffee</cite>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">module.exports = </span><span class="k">new</span> <span class="nx">can</span><span class="p">.</span><span class="nx">List</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>We are using the <a class="reference external" href="http://canjs.com/docs/can.List.html">canList</a> object to store an observable array of values. To be honest, we don&#8217;t need to use an observable object here, but you may want to if you are going to be changing values in the array rather than replacing the whole thing outright.</p>
+</div>
+<div class="section" id="alert-component">
+<h3>Alert component<a class="headerlink" href="#alert-component" title="Permalink to this headline">¶</a></h3>
+<p>When doing our searches we have decided to keep track of the state of the application. Are we searching? Do we have errors? That sort of thing.</p>
+<p>We already wrote a module, a <a class="reference external" href="http://canjs.com/docs/can.Map.html">canMap</a>, to represent the data structure. Now we just need to write the <a class="reference external" href="http://canjs.com/docs/can.Component.html">canComponent</a> for it.</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">state = </span><span class="nx">require</span> <span class="s">&#39;../modules/state&#39;</span>
+
+<span class="c1"># An alert.</span>
+<span class="nv">module.exports = </span><span class="nx">can</span><span class="p">.</span><span class="nx">Component</span><span class="p">.</span><span class="nx">extend</span>
+
+    <span class="nv">tag: </span><span class="s">&#39;app-alert&#39;</span>
+
+    <span class="nv">template: </span><span class="nx">require</span> <span class="s">&#39;../templates/alert&#39;</span>
+
+    <span class="nv">scope: </span><span class="nf">-&gt;</span> <span class="nx">state</span>
+</pre></div>
+</div>
+<p>It does what it does. Which is to show up when <cite>app-alert</cite> appears and then display a template and observe when <cite>state</cite> changes.</p>
+</div>
+<div class="section" id="alert-template">
+<h3>Alert template<a class="headerlink" href="#alert-template" title="Permalink to this headline">¶</a></h3>
+<p>Each component needs a template. the alert one will look like this:</p>
+<div class="highlight-mustache"><pre>&lt;div class="alert-box {{ type }}"&gt;
+    {{{ text }}}.
+&lt;/div&gt;</pre>
+</div>
+<p>What we are saying here is to display a <a class="reference external" href="http://foundation.zurb.com/">Foundation</a> alert box with a custom type and a text. We use <cite>{{{ }}}</cite> to display the text which allows us to use HTML in the <cite>text</cite> string and have it unescaped.</p>
+</div>
+<div class="section" id="results-table-component">
+<h3>Results table component<a class="headerlink" href="#results-table-component" title="Permalink to this headline">¶</a></h3>
+<p>Now that we are searching for and updating <cite>pubs</cite> with new data, we have to observe them in a <a class="reference external" href="http://canjs.com/docs/can.Component.html">canComponent</a> and render them. In <cite>/src/components/table.coffee</cite>:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">pubs = </span><span class="nx">require</span> <span class="s">&#39;../modules/pubs&#39;</span>
+
+<span class="c1"># Table of publication results.</span>
+<span class="nv">module.exports = </span><span class="nx">can</span><span class="p">.</span><span class="nx">Component</span><span class="p">.</span><span class="nx">extend</span>
+
+    <span class="nv">tag: </span><span class="s">&#39;app-table&#39;</span>
+
+    <span class="nv">template: </span><span class="nx">require</span> <span class="s">&#39;../templates/table&#39;</span>
+
+    <span class="nv">scope: </span><span class="nf">-&gt;</span> <span class="p">{</span> <span class="nx">pubs</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>This will make an array of publications available to us in a template under the <cite>pubs</cite> key.</p>
+</div>
+<div class="section" id="results-table-template">
+<h3>Results table template<a class="headerlink" href="#results-table-template" title="Permalink to this headline">¶</a></h3>
+<p>As for the template that displays the results; in <cite>/src/templates/table.mustache</cite>:</p>
+<div class="highlight-mustache"><pre>{{ #if pubs.length }}
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Title&lt;/th&gt;
+            &lt;th&gt;Author(s)&lt;/th&gt;
+            &lt;th&gt;Journal&lt;/th&gt;
+            &lt;th&gt;Year&lt;/th&gt;
+            &lt;th&gt;Match&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+    {{ #pubs }}
+        &lt;tr&gt;
+            &lt;td class="title"&gt;
+                &lt;a target="_{{ pubMedId }}" href="http://www.ncbi.nlm.nih.gov/pubmed/{{ pubMedId }}"&gt;{{ title }}&lt;/a&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+            {{ #authors }}
+                &lt;span class="author"&gt;{{ name }}&lt;/span&gt;
+            {{ /authors }}
+            &lt;/td&gt;
+            &lt;td&gt;{{ journal }}&lt;/td&gt;
+            &lt;td&gt;{{ year }}&lt;/td&gt;
+            &lt;td class="nowrap"&gt;
+                &lt;a target="_{{ id }}" href="http://www.mousemine.org/mousemine/report.do?id={{ id }}"&gt;
+                    {{ symbol }}
+                &lt;/a&gt;
+                &lt;span class="label"&gt;{{ type }}&lt;/span&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    {{ /pubs }}
+    &lt;/tbody&gt;
+&lt;/table&gt;
+{{ /if }}</pre>
+</div>
+<p>Firstly we are checking if we actually have any results to speak of. If so we render a table &lt;tr/&gt; element for each publication.</p>
+<p>We can see that <cite>{{ #pubs }}</cite> and <cite>{{ #authors }}</cite> both reresent a for loop.</p>
+</div>
+<div class="section" id="style">
+<h3>Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h3>
+<p>We are going to wrap up by writing a stylesheet. For this we are going to use <a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a>; in <cite>/src/styles/app.styl</cite>:</p>
+<div class="highlight-stylus"><pre>@import 'nib'
+
+body
+    padding: 20px
+
+table
+    width: 100%
+
+    td
+        .author
+            &amp;:not(:last-child)
+                &amp;:after
+                    content: ", "
+                    display: inline-block
+
+        .label
+            padding: 0 4px
+            line-height: 16px
+
+        &amp;.title
+            width: 40%
+
+        &amp;.nowrap
+            white-space: nowrap</pre>
+</div>
+<p>Stylus allows us to write nested rules, such as when we want to select a table cell, <cite>&lt;td/&gt;</cite> in a <cite>&lt;table/&gt;</cite>.</p>
+<p>At the top we can see a reference to <a class="reference external" href="http://visionmedia.github.io/nib/">nib</a>. This will make any of our rules be generated with browser vendor prefixed, where appropriate and allows us to use shorthand notation for various oft repeated rules.</p>
+</div>
+</div>
+<div class="section" id="fin">
+<h2>Fin<a class="headerlink" href="#fin" title="Permalink to this headline">¶</a></h2>
+<p>This concludes our application. Running a static web server to view the <cite>/example</cite> folder we are presented with a page that displays our app. Typing a symbol into the input box and pressing <cite>Enter</cite> then launches a request against MouseMine and, if succesfull, shows us results.</p>
+</div>
+<div class="section" id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pomme-js">
+<h3>pomme.js<a class="headerlink" href="#pomme-js" title="Permalink to this headline">¶</a></h3>
+<p>What we have not covered is the case when we want to embed our app besides other apps on a page. If that were the case, all our CSS rules would start conflicting with other rules on the page. Not to speak of canComponents that may pop up in all kinds of places if we are using the same tags across different apps.</p>
+<p>One way to deal with this issue is to make use of the <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> library. What it does is create a sandbox (using an <cite>&lt;iframe/&gt;</cite>) which is isolated from anything else on the page. One would load an app inside one such sandbox and not have to worry about library collusion.</p>
+<p>For example, we would create a pure <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> <em>build</em> in <a class="reference external" href="http://gruntjs.com/">Grunt</a>; in <cite>Gruntfile.coffee</cite> add the following task:</p>
+<div class="highlight-coffee-script"><div class="highlight"><pre><span class="nv">copy:</span>
+    <span class="nv">pomme:</span>
+        <span class="nv">src: </span><span class="p">[</span> <span class="s">&#39;bower_components/pomme.js/build/app.bundle.js&#39;</span> <span class="p">]</span>
+        <span class="nv">dest: </span><span class="s">&#39;build/js/pomme.bundle.js&#39;</span>
+        <span class="nv">expand: </span><span class="kc">yes</span>
+        <span class="nv">flatten: </span><span class="kc">yes</span>
+
+<span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s">&#39;grunt-contrib-copy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This requires you to have the following task installed:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>npm install grunt-contrib-copy
+</pre></div>
+</div>
+<p>In order to download the library itself using <a class="reference external" href="http://bower.io/">Bower</a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>bower install pomme.js
+</pre></div>
+</div>
+<p>Now we are copying a bundled version of <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> into our build directory.</p>
+<p>Do create this sandbox we are going to require <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> instead; in <cite>/example/index.html</cite>:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Publication Search<span class="nt">&lt;/title&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;build/js/pomme.bundle.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="c1">// Once scripts have loaded.</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">Pomme</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pomme.js&#39;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pomme</span><span class="p">({</span>
+                <span class="s1">&#39;target&#39;</span><span class="o">:</span> <span class="s1">&#39;#app&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;template&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="s1">&#39;&lt;MY TEMPLATE HERE&gt;&#39;</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>In the section above we can see a placeholder for a template. In that place we need to return a string which will correspond to the html that needs to be executed within the sandbox. It should look something like this (but as a string!):</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Publication Search<span class="nt">&lt;/title&gt;</span>
+
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;build/css/ps.bundle.css&quot;</span> <span class="na">media=</span><span class="s">&quot;all&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;build/js/ps.bundle.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="c1">// Once scripts have loaded.</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// ...show the app.</span>
+            <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ps&#39;</span><span class="p">)({</span>
+                <span class="s1">&#39;el&#39;</span><span class="o">:</span>   <span class="s1">&#39;#app&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;mine&#39;</span><span class="o">:</span> <span class="s1">&#39;http://www.mousemine.org/mousemine&#39;</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>So our example <cite>index.html</cite> has moved into a string and is being executed inside an iframe.</p>
+<p>Refer to the <a class="reference external" href="https://github.com/radekstepan/pomme.js">pommejs</a> documentation if you&#8217;d like to know how to open a two way communication channel between the parent page and the iframe window.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="elastic-med.html" title="elastic-med"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Apps/C Usage"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" >Apps/C Grunt Build</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

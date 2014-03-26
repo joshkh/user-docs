@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Model Merging &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Database Building" href="index.html" />
+    <link rel="next" title="Primary Keys" href="primary-keys.html" />
+    <link rel="prev" title="Data Integration" href="data-integration.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="primary-keys.html" title="Primary Keys"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="data-integration.html" title="Data Integration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Model Merging</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="data-integration.html"
+                        title="previous chapter">Data Integration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="primary-keys.html"
+                        title="next chapter">Primary Keys</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/database/database-building/model-merging.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-merging">
+<h1>Model Merging<a class="headerlink" href="#model-merging" title="Permalink to this headline">¶</a></h1>
+<p>An InterMine model describes the classes available to the InterMine system and their relationships.  The model is used to generate the database tables, the Java class files and the web application.</p>
+<p>A model can be described using a model file.  The model can be either read from one file or built up from several files using &#8220;model merging&#8221;.  An example of a single file model is used in the testmodel project.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>An InterMine datamine is built from sources.  Each source can contribute to the data model and also provides data.  When a mine is built with the <cite>ant build-db</cite> command, the model is created from small &#8220;additions&#8221; file contributed by each source.  Specifically, the model is created by reading the <cite>project.xml</cite> file and merging the model fragment from each addition file for each source.  As an example the additions file for uniprot is <cite>bio/sources/uniprot/uniprot_additions.xml</cite></p>
+<p>Other additions files (ie. not from sources) can be explicitly merged by setting the <cite>extra.model.paths.start</cite> and <cite>extra.model.paths.end</cite> properties in the <cite>project.properties</cite> of your <cite>dbmodel</cite> directory.  An example from FlyMine is:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">extra.model.paths.start</span> <span class="o">=</span> <span class="s">bio/core/genomic_additions.xml bio/sources/so/so_additions.xml</span>
+<span class="na">extra.model.paths.end</span> <span class="o">=</span> <span class="s">bio/core/shortcuts.xml</span>
+</pre></div>
+</div>
+<p>Here <cite>genomic_additions.xml</cite> and <cite>so_additions.xml</cite> will be merged first and <cite>shortcuts.xml</cite> will be merged after all other model fragments.</p>
+<p>Note that the <cite>bio/core/core.xml</cite> model fragment is always used as a base for the merging - everything will be merge into the classes in <cite>core.xml</cite></p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>From <cite>core.xml</cite>:</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&quot;</span> <span class="na">extends=</span><span class="s">&quot;BioEntity&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;primaryAccession&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;length&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Integer&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;molecularWeight&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Integer&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;sequence&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Sequence&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;genes&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Gene&quot;</span> <span class="na">ordered=</span><span class="s">&quot;true&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;proteins&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+...
+</pre></div>
+</div>
+<p>From the uniprot source (<cite>uniprot_additions.xml</cite>):</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;ecNumber&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;publications&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Publication&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+...
+</pre></div>
+</div>
+<p>Final, merged, model definition:</p>
+<div class="highlight-xml"><div class="highlight"><pre>...
+<span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;Protein&quot;</span> <span class="na">extends=</span><span class="s">&quot;BioEntity&quot;</span> <span class="na">is-interface=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;ecNumber&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;primaryAccession&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;length&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Integer&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;attribute</span> <span class="na">name=</span><span class="s">&quot;molecularWeight&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.Integer&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;sequence&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Sequence&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;publications&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Publication&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">&quot;genes&quot;</span> <span class="na">referenced-type=</span><span class="s">&quot;Gene&quot;</span> <span class="na">ordered=</span><span class="s">&quot;true&quot;</span> <span class="na">reverse-reference=</span><span class="s">&quot;proteins&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+...
+</pre></div>
+</div>
+<p>The resulting class has all attributes of the <cite>Protein</cite> from <cite>core.xml</cite> and from <cite>uniprot_additions.xml</cite>.  Note that in uniprot we don&#8217;t need to declare a base class for <cite>Protein</cite> (like as <cite>extends=&#8221;BioEntity&#8221;</cite>) as the base class from <cite>core.xml</cite> is merged into the final class.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="primary-keys.html" title="Primary Keys"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="data-integration.html" title="Data Integration"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" >Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

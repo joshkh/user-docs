@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Post processing &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Database Building" href="../index.html" />
+    <link rel="next" title="Data Integrity Checks" href="../../data-integrity-checks/index.html" />
+    <link rel="prev" title="Priority Configuration" href="../priority-config.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../data-integrity-checks/index.html" title="Data Integrity Checks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../priority-config.html" title="Priority Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Post processing</a><ul>
+<li><a class="reference internal" href="#sequence-features">Sequence Features</a><ul>
+<li><a class="reference internal" href="#create-chromosome-locations-and-lengths">create-chromosome-locations-and-lengths</a></li>
+<li><a class="reference internal" href="#transfer-sequences">transfer-sequences</a></li>
+<li><a class="reference internal" href="#create-references">create-references</a></li>
+<li><a class="reference internal" href="#create-intron-features">create-intron-features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overlapping-and-flanking-features">Overlapping and Flanking Features</a><ul>
+<li><a class="reference internal" href="#create-intergenic-region-features">create-intergenic-region-features</a></li>
+<li><a class="reference internal" href="#create-bioseg-location-index">create-bioseg-location-index</a></li>
+<li><a class="reference internal" href="#create-overlap-view">create-overlap-view</a></li>
+<li><a class="reference internal" href="#create-gene-flanking-features">create-gene-flanking-features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data">Data</a><ul>
+<li><a class="reference internal" href="#do-sources">do-sources</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#webapp">Webapp</a><ul>
+<li><a class="reference internal" href="#create-search-index">create-search-index</a></li>
+<li><a class="reference internal" href="#create-attribute-indexes">create-attribute-indexes</a></li>
+<li><a class="reference internal" href="#summarise-objectstore">summarise-objectstore</a></li>
+<li><a class="reference internal" href="#create-autocomplete-index">create-autocomplete-index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../priority-config.html"
+                        title="previous chapter">Priority Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../data-integrity-checks/index.html"
+                        title="next chapter">Data Integrity Checks</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/database-building/post-processing/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="post-processing">
+<h1>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h1>
+<p>Some operations are performed on the integrated data before the webapp is released - post-processing. For example, setting sequences of SequenceFeatures, filling in additional references and collections or transferring orthologues from translations to genes.  These are steps that run after the data loading is completed.  They are used to set calculate/set fields that are difficult to do when data loading or that require multiple sources to be loaded. Some postprocessing steps are core to InterMine.bio and should always be run, others are contributed by particular sources.</p>
+<p>Post-processing steps are specified in the project XML file and run from the <cite>MINE_NAME/postprocess</cite> project with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v
+</pre></div>
+</div>
+<p>To run individual post-process steps use, for example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v -Daction<span class="o">=</span>create-references
+</pre></div>
+</div>
+<p>When running one postprocess step like this (multiple steps separated by comma is not supported), the <cite>action</cite> used must match an <cite>post-process</cite> in the <cite>post-processing</cite> section of the <cite>project.xml</cite> file.</p>
+<p>Post-processing is run automatically after integrating if using the <cite>project_build</cite> script (see above).</p>
+<p>To add a post-process step to InterMine, you need to add the Java definition to the project and call the post-process from the <cite>PostProcessOperationsTask</cite> class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be sure to put the postprocesses in the correct order.  Each task is executed in the order listed on your project XML so be sure to put the webapp tasks last in the last, for example.  Take a look at the FlyMine or modMine project XML file if you need help.</p>
+</div>
+<div class="section" id="sequence-features">
+<h2>Sequence Features<a class="headerlink" href="#sequence-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-chromosome-locations-and-lengths">
+<h3>create-chromosome-locations-and-lengths<a class="headerlink" href="#create-chromosome-locations-and-lengths" title="Permalink to this headline">¶</a></h3>
+<p>For genome features this will set the <cite>chromosome</cite>, <cite>chromosomeLocation</cite> and <cite>length</cite> fields which are added to make querying more convenient.  Some parts of the webapp specific to genome features expect <cite>chromosomeLocation</cite> to be filled in.</p>
+<p><em>Should I use it?</em> Yes, if you have loaded genome annotation.</p>
+</div>
+<div class="section" id="transfer-sequences">
+<h3>transfer-sequences<a class="headerlink" href="#transfer-sequences" title="Permalink to this headline">¶</a></h3>
+<p>Where a Chromosome has a sequence this will find genome features located on it that don&#8217;t have sequence set this will calculate and set the sequence for those features.</p>
+<p><em>Should I use it?</em> Yes, if you have loaded genome annotation without sequence set for all features.</p>
+</div>
+<div class="section" id="create-references">
+<h3>create-references<a class="headerlink" href="#create-references" title="Permalink to this headline">¶</a></h3>
+<p>Create shortcut references/collections to make querying more obvious.  We are trying to eliminate the need to use this.</p>
+<p><em>Should I use it?</em> Yes, for the moment if you are using standard InterMine sources.</p>
+</div>
+<div class="section" id="create-intron-features">
+<h3>create-intron-features<a class="headerlink" href="#create-intron-features" title="Permalink to this headline">¶</a></h3>
+<p>If you have loaded genome annotation that include exons but does not specify introns this will create Intron objects and name them appropriately.</p>
+<p><em>Should I use it?</em> If genome annotation you have loaded does not include introns.</p>
+</div>
+</div>
+<div class="section" id="overlapping-and-flanking-features">
+<h2>Overlapping and Flanking Features<a class="headerlink" href="#overlapping-and-flanking-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-intergenic-region-features">
+<h3>create-intergenic-region-features<a class="headerlink" href="#create-intergenic-region-features" title="Permalink to this headline">¶</a></h3>
+<p>Looks at gene locations on chromosomes and calculates new IntergenicRegion features to represent the intergenic regions.  These are useful in combination with overlaps for working out, e.g. binding sites that overlap the upstream intergenic region of a gene.  Each Gene gets a reference to its upstream and downstream intergenic regions.</p>
+<p><em>Should I use it?</em> Yes, if you have loaded genome annotation and think IntergenicRegions sound useful.</p>
+</div>
+<div class="section" id="create-bioseg-location-index">
+<h3>create-bioseg-location-index<a class="headerlink" href="#create-bioseg-location-index" title="Permalink to this headline">¶</a></h3>
+<p>Create a bioseg GIST index on the location table to help with overlap queries.</p>
+<p><em>Should I use it?</em> Yes, if you have genome annotation and would like to query overlaps and have [BiosegInstallation bioseg] installed.</p>
+</div>
+<div class="section" id="create-overlap-view">
+<h3>create-overlap-view<a class="headerlink" href="#create-overlap-view" title="Permalink to this headline">¶</a></h3>
+<p>Replace the <cite>sequencefeatureoverlappingfeatures</cite> table with a view that uses the [BiosegInstallation bioseg] type to calculate the overlaps.</p>
+<p><em>Should I use it?</em> Yes, if you have genome annotation and would like to query overlaps and have [BiosegInstallation bioseg] installed.</p>
+</div>
+<div class="section" id="create-gene-flanking-features">
+<h3>create-gene-flanking-features<a class="headerlink" href="#create-gene-flanking-features" title="Permalink to this headline">¶</a></h3>
+<p>Create features to represent flanking regions of configurable distance either side of gene features.  These will be used in overlap queries.</p>
+<p><em>Should I use it?</em> Yes, if you have genome annotation and would like to query flanking regions.</p>
+</div>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="do-sources">
+<h3>do-sources<a class="headerlink" href="#do-sources" title="Permalink to this headline">¶</a></h3>
+<p>This searches through all sources included in project.xml and runs post-processing steps if any exist.  Looks for the property <cite>postprocessor.class</cite> in the <cite>project.properties</cite> of each source, the class specified should be a subclass of <cite>org.intermine.postprocess.PostProcessor</cite>.</p>
+<p><em>Should I use it?</em> - Yes, if you are using standard InterMine sources, they may have post-processing steps.</p>
+</div>
+</div>
+<div class="section" id="webapp">
+<h2>Webapp<a class="headerlink" href="#webapp" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-search-index">
+<h3>create-search-index<a class="headerlink" href="#create-search-index" title="Permalink to this headline">¶</a></h3>
+<p>Creates the lucene search index used by the webapp.</p>
+<p><em>Should I use it?</em>  Yes, if you are releasing a webapp.</p>
+</div>
+<div class="section" id="create-attribute-indexes">
+<h3>create-attribute-indexes<a class="headerlink" href="#create-attribute-indexes" title="Permalink to this headline">¶</a></h3>
+<p>Create indexes on all attributes to help speed up queries.</p>
+<p><em>Should I use it?</em> Always.  It should be run last of all post-processing steps.</p>
+</div>
+<div class="section" id="summarise-objectstore">
+<h3>summarise-objectstore<a class="headerlink" href="#summarise-objectstore" title="Permalink to this headline">¶</a></h3>
+<p>Counts of the number of objects of each class and for class fields that have a small number of value, a list of those values.  See ObjectStoreSummaryProperties for more information.</p>
+<p><em>Should I use it?</em> - Always.</p>
+</div>
+<div class="section" id="create-autocomplete-index">
+<h3>create-autocomplete-index<a class="headerlink" href="#create-autocomplete-index" title="Permalink to this headline">¶</a></h3>
+<p>Creates the indexes for the fields set to be autocompleted in the ObjectStoreSummaryProperties file.</p>
+<p><em>Should I use it?</em> Yes, if you have a webapp.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../data-integrity-checks/index.html" title="Data Integrity Checks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../priority-config.html" title="Priority Configuration"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

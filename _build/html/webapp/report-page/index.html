@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Report page &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Report Page" href="report-page.html" />
+    <link rel="prev" title="Home page" href="../homepage/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="report-page.html" title="Report Page"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../homepage/index.html" title="Home page"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../homepage/index.html"
+                        title="previous chapter">Home page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="report-page.html"
+                        title="next chapter">Report Page</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/report-page/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="report-page">
+<h1>Report page<a class="headerlink" href="#report-page" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="report-page.html">Report Page</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#object-title-s">Object Title(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#custom-header-link">Custom Header Link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#references-collections">References &amp; Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#inline-lists">Inline Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#custom-displayers">Custom Displayers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#templates">Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#external-links">External Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page.html#data">Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-displayers.html">Report Displayers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers.html#configuring-displayers">Configuring displayers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers.html#useful-displayers">Useful displayers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers.html#creating-a-new-displayer">Creating a new Displayer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="report-displayers.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-displayers-examples.html">Report Displayers Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#sequencefeature-summary">SequenceFeature summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#protein-sequence">Protein sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#gbrowse">GBrowse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#homologues">Homologues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#gene-structure">Gene structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#gene-ontology">Gene Ontology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#uniprot-comments">UniProt comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#interaction-network">Interaction network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#overlapping-features">Overlapping features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-displayers-examples.html#specific-displayers">Specific Displayers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="webapp-tables.html">Webapp Tables CSS &amp; HTML</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="webapp-tables.html#inline-list">Inline List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#inline-list-inactive-no-results">Inline List (Inactive, No Results)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#inline-list-tagging-right">Inline List (Tagging, Right)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#header-inline-list">&#8216;Header&#8217; Inline List</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="webapp-tables.html#collection-table">Collection Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-table-type-column-text-highlight">Collection Table (Type Column, Text Highlight)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-table-vertical-column-border">Collection Table (Vertical Column Border)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-table-vertical-column-border-by-2">Collection Table (Vertical Column Border by 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-table-inactive-no-results">Collection Table (Inactive, No Results)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-table-tagging-right">Collection Table (Tagging, Right)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-table-persistent-table-headers">Collection Table (Persistent Table Headers)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#basic-table-generic">Basic Table (Generic)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#collection-of-collection-tables">Collection of Collection Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webapp-tables.html#table-togglers-less-more-expand-collapse-show-in-table">Table Togglers (Less, More, Expand, Collapse, Show in table)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="webapp-tables.html#title-level-3">Title (Level 3)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webapp-tables.html#smallfont-display-one-per-line">Smallfont, Display one-per-line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webapp-tables.html#loading-spinner-ajax">Loading spinner (AJAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webapp-tables.html#table-warning">Table Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../embedding/report-widgets.html">Report Widgets</a></li>
+</ul>
+</div>
+<span class="target" id="index-0"></span></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="report-page.html" title="Report Page"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../homepage/index.html" title="Home page"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

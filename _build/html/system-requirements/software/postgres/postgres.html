@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing PostgreSQL &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="PostgreSQL" href="index.html" />
+    <link rel="next" title="BioSeg" href="bioseg.html" />
+    <link rel="prev" title="PostgreSQL" href="index.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="bioseg.html" title="BioSeg"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="PostgreSQL"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="../index.html" >Software</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">PostgreSQL</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing PostgreSQL</a><ul>
+<li><a class="reference internal" href="#required-configuration">Required Configuration</a></li>
+<li><a class="reference internal" href="#recommended-configuration">Recommended Configuration</a></li>
+<li><a class="reference internal" href="#character-set-encoding">Character Set Encoding</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">PostgreSQL</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bioseg.html"
+                        title="next chapter">BioSeg</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/system-requirements/software/postgres/postgres.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installing-postgresql">
+<h1>Installing PostgreSQL<a class="headerlink" href="#installing-postgresql" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.postgresql.org/download">http://www.postgresql.org/download</a> has packages for most systems that set up everything for you.</p>
+<dl class="docutils">
+<dt>Fedora/CentOS</dt>
+<dd><a class="reference external" href="http://wiki.openscg.com/index.php/PostgreSQL_RPM_Installation">http://wiki.openscg.com/index.php/PostgreSQL_RPM_Installation</a></dd>
+<dt>Debian/Ubuntu</dt>
+<dd><cite>sudo apt-get install postgresql</cite></dd>
+<dt>Mac</dt>
+<dd><a class="reference external" href="http://www.postgresql.org/download/macosx">http://www.postgresql.org/download/macosx</a>.  We&#8217;ve had the most success with MacPorts.</dd>
+</dl>
+<p>After installation, you need to update <cite>postgresql.conf</cite></p>
+<ul class="simple">
+<li>This file is usually located in <cite>/etc/postgres/</cite>:</li>
+<li>If you are going to install Postgres 9.x:<ul>
+<li>It&#8217;s not easy to change the default encoding to SQL_ASCII anymore, so you should do this before creating any production databases.</li>
+<li>There are special instructions for installing BioSeg</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="required-configuration">
+<h2>Required Configuration<a class="headerlink" href="#required-configuration" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>listen_addresses</td>
+<td>&#8216;*&#8217;</td>
+</tr>
+<tr class="row-even"><td>port</td>
+<td>5432</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="recommended-configuration">
+<h2>Recommended Configuration<a class="headerlink" href="#recommended-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default configuration is fine for a development server. It is conservative however, so for better performance we recommend you make the changes below.</p>
+</div>
+<p>For optimum performance. Read <a class="reference external" href="http://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server">http://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server</a> for more information.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>shared_buffers</td>
+<td>Set to around 1/4 or more of total RAM (config SHMMAX first)</td>
+</tr>
+<tr class="row-even"><td>temp_buffers</td>
+<td>Set to around 80MB</td>
+</tr>
+<tr class="row-odd"><td>work_mem</td>
+<td>Set to around 500MB but not more than 1/10 of available RAM</td>
+</tr>
+<tr class="row-even"><td>maintenance_work_mem</td>
+<td>Set to around 3000MB but not more than 1/5 of available RAM</td>
+</tr>
+<tr class="row-odd"><td>default_statistics_target</td>
+<td>Set to around 250</td>
+</tr>
+<tr class="row-even"><td>random_page_cost</td>
+<td>Set to around 2.0, rather than 4.0</td>
+</tr>
+<tr class="row-odd"><td>effective_cache_size</td>
+<td>Set to about 1/2 - 3/4 the amount of RAM in the computer</td>
+</tr>
+<tr class="row-even"><td>geqo_threshold</td>
+<td>Set to 14</td>
+</tr>
+<tr class="row-odd"><td>from_collapse_limit</td>
+<td>Set to 14</td>
+</tr>
+<tr class="row-even"><td>join_collapse_limit</td>
+<td>Set to 14</td>
+</tr>
+<tr class="row-odd"><td>max_locks_per_transaction</td>
+<td>Set to 640</td>
+</tr>
+</tbody>
+</table>
+<p>You should also add a line to the pg_hba.conf file to allow logging in via password:</p>
+<div class="highlight-properties"><pre>host    all         all         0.0.0.0/0             password</pre>
+</div>
+<p>Note that changing some settings requires stopping/starting postgres, restart has no effect.</p>
+<p>You may also need to configure (increase) your shared memory (SHMMAX), e.g.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># SHMMAX should not exceed 4294967295 on a 32-bit system. On x86-64 platforms, SHMMAX can be much larger than 4GB since the virtual address space is not limited by 32 bits.</span>
+<span class="nv">$ </span>ipcs -lm <span class="c"># Determine current shared memory limits, e.g. max seg size is SHMMAX in kbytes</span>
+
+<span class="nv">$ </span>cat /proc/sys/kernel/shmmax <span class="c"># Determine the value of SHMMAX</span>
+
+<span class="nv">$ </span>sudo vim /etc/sysctl.conf <span class="c"># Configure SHMMAX value (Bytes) in sysctl.conf, 50% of total memory is advised, e.g. add</span>
+<span class="c"># kernel.shmmax = 268435456</span>
+
+<span class="nv">$ </span>sudo sysctl -p <span class="c"># make the config take effect at runtime.</span>
+<span class="c"># Or simply do: sudo sysctl -w kernel.shmmax=268435456</span>
+</pre></div>
+</div>
+<p>You also need to install the <cite>bioseg</cite> data type, and the <cite>contrib btree_gist</cite> plug-in, as described in <a class="reference internal" href="bioseg.html"><em>BioSeg</em></a>.</p>
+</div>
+<div class="section" id="character-set-encoding">
+<h2>Character Set Encoding<a class="headerlink" href="#character-set-encoding" title="Permalink to this headline">¶</a></h2>
+<p>We recommend using either <cite>SQL_ASCII</cite> or <cite>UTF-8</cite>. Theoretically, we should be using <cite>UTF-8</cite>, which is more correct, however its performance is rather poor, so we use <cite>SQL_ASCII</cite>.</p>
+<p>The InterMine system stores all text in the database in <cite>UTF-8</cite> format. If you set Postgres to <cite>LATIN-9</cite>, then Postgres will perform some incorrect conversions, and may even give an error. Setting the format to <cite>UTF-8</cite> results in Postgres treating the text completely correctly, which is quite a complicated and slow operation in <cite>UTF-8</cite>.</p>
+<p>If you set Postgres to <cite>SQL_ASCII</cite>, then that is a special character set in Postgres, which basically means &#8220;do no conversions&#8221;. This is sufficient for almost all operations. All comparisons and index lookups will be done on a byte-by-byte basis, which is much faster than having to deal with Unicode&#8217;s complications.</p>
+<p>Please try to treat InterMine as a black box. The fact that it uses Postgres to store its data should be a detail that should be hidden as much as possible. The InterMine system is written in Java, and therefore handles all text in Unicode.</p>
+<p>Procedures to change character encoding to <cite>SQL_ASCII</cite> in PostgreSQL 9.1.x - <a class="reference external" href="https://gist.github.com/boboppie/4148428">https://gist.github.com/boboppie/4148428</a></p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="bioseg.html" title="BioSeg"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="PostgreSQL"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="../index.html" >Software</a> &raquo;</li>
+          <li><a href="index.html" >PostgreSQL</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

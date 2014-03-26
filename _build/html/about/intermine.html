@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>InterMine Features &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="About Us" href="index.html" />
+    <link rel="next" title="Contact us" href="contact-us.html" />
+    <link rel="prev" title="About Us" href="index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="contact-us.html" title="Contact us"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="About Us"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">About Us</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">InterMine Features</a><ul>
+<li><a class="reference internal" href="#sophisticated-data-integration-facilities">Sophisticated data integration facilities</a></li>
+<li><a class="reference internal" href="#fast-flexible-querying">Fast, flexible querying</a></li>
+<li><a class="reference internal" href="#user-friendly-web-interface-and-analysis-tools">User-friendly web interface and analysis tools</a></li>
+<li><a class="reference internal" href="#extensive-set-of-apis-and-web-tools">Extensive set of APIs and web tools</a></li>
+<li><a class="reference internal" href="#highly-developed-and-extensible-system">Highly developed and extensible system</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">About Us</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contact-us.html"
+                        title="next chapter">Contact us</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/about/intermine.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="intermine-features">
+<h1>InterMine Features<a class="headerlink" href="#intermine-features" title="Permalink to this headline">¶</a></h1>
+<p>InterMine is a powerful open source data warehouse system, created specifically for integrating and analysing complex biological data. Benefiting from over a decade of data warehousing experience and input from a wide range of research collaborators, InterMine is still in active development, and is used by a number of major model organism databases among others. InterMine features include:</p>
+<div class="section" id="sophisticated-data-integration-facilities">
+<h2>Sophisticated data integration facilities<a class="headerlink" href="#sophisticated-data-integration-facilities" title="Permalink to this headline">¶</a></h2>
+<p>While a core biological model based on the Sequence Ontology is provided, the data model is flexible and extensible – new data types can be added easily by editing an XML file. A range of data parsers is provided to facilitate the data loading, and a number of consistency checks after the database build ensure that the data has been integrated correctly. Sophisticated identifier resolution ensures that all data identifiers are correctly updated to their most current form.</p>
+</div>
+<div class="section" id="fast-flexible-querying">
+<h2>Fast, flexible querying<a class="headerlink" href="#fast-flexible-querying" title="Permalink to this headline">¶</a></h2>
+<p>The sophisticated query optimisation means that users can construct and perform a wide range of queries across the data model, while retaining good query speed. The query optimisation method is constructed around the use of precomputed tables, meaning that the data schema does not need to be denormalized in order to speed up query time. The system is also fast enough to deal with large quantities of data - the modMine database contains 130 million objects, and its size with precomputed tables is 750 GB, with metabolicMine being even larger, containing 260 million objects and almost 2000GB including precomputed tables.</p>
+</div>
+<div class="section" id="user-friendly-web-interface-and-analysis-tools">
+<h2>User-friendly web interface and analysis tools<a class="headerlink" href="#user-friendly-web-interface-and-analysis-tools" title="Permalink to this headline">¶</a></h2>
+<p>The web application is included with the InterMine package, and is an accessible starting point for first time users. It contains a number of features focused around list analysis (a common need in biology) including graphical data displayers and tools that automatically calculate a set of enrichment statistics. It also includes report pages, interactive results tables, saved template queries, a regions search tool and a query builder. This setup makes it possible to browse and explore data without any programming knowledge. Users can save their data and queries in a private workspace.</p>
+</div>
+<div class="section" id="extensive-set-of-apis-and-web-tools">
+<h2>Extensive set of APIs and web tools<a class="headerlink" href="#extensive-set-of-apis-and-web-tools" title="Permalink to this headline">¶</a></h2>
+<p>InterMine can be accessed programmatically, and we provide client libraries for five commonly used programming languages (Python, Perl, Ruby, Java, JavaScript). This enables bioinformatician users to access InterMine functionality without using the web application and to query data from a number of different InterMine instances using a single script, or as part of an automated workflow. It also enables the easy embedding of InterMine analysis tools into external websites, as well as the development of external applications that access InterMine data.</p>
+</div>
+<div class="section" id="highly-developed-and-extensible-system">
+<h2>Highly developed and extensible system<a class="headerlink" href="#highly-developed-and-extensible-system" title="Permalink to this headline">¶</a></h2>
+<p>InterMine has been in development for over 10 years, and during this time, based on user demand, we have introduced a large number of features. These range from faceted filtering options and enabling Boolean logic and set operations, to table sorting and filtering, a range of standardised export options, integration of other tools such as Cytoscape, and enabling embedding of individual analysis tools as part of external websites. With funding secured for a further 5 years, we plan to continue adding features to InterMine. Furthermore, the open source, extensible framework means InterMine is also open to other developers to build upon.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="contact-us.html" title="Contact us"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="About Us"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >About Us</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

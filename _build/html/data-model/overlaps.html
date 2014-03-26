@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Querying over genomic ranges &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Data Model" href="index.html" />
+    <link rel="next" title="Database" href="../database/index.html" />
+    <link rel="prev" title="Using Class and Field Labels" href="data-labels.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../database/index.html" title="Database"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="data-labels.html" title="Using Class and Field Labels"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Querying over genomic ranges</a><ul>
+<li><a class="reference internal" href="#install-bioseg">Install BIOSEG</a></li>
+<li><a class="reference internal" href="#create-the-bioseg-index">Create the BIOSEG index</a></li>
+<li><a class="reference internal" href="#create-the-overlappingfeatures-view">Create the <cite>overlappingFeatures</cite> view</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="data-labels.html"
+                        title="previous chapter">Using Class and Field Labels</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../database/index.html"
+                        title="next chapter">Database</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/data-model/overlaps.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="querying-over-genomic-ranges">
+<h1>Querying over genomic ranges<a class="headerlink" href="#querying-over-genomic-ranges" title="Permalink to this headline">¶</a></h1>
+<p>InterMine includes functionality for querying features with overlapping genome coordinates.  We have a custom <cite>BIOSEG</cite> index for postgres that is created on the <cite>Location</cite> table.  This is used by a &#8216;virtual&#8217; <cite>SequenceFeature.overlappingFeatures</cite> collection that is a <cite>view</cite> in the postgres database using the <cite>BIOSEG</cite> index to find other features that overlap it.</p>
+<p>In modMine (the InterMine for the modENCODE project] we also create <cite>GeneFlankingRegion</cite> features to represent specific distances upstream and downstream of genes to query for genes that are nearby other features.</p>
+<p>To use the overlapping queries in InterMine you need to:</p>
+<div class="section" id="install-bioseg">
+<h2>Install BIOSEG<a class="headerlink" href="#install-bioseg" title="Permalink to this headline">¶</a></h2>
+<p><cite>BIOSEG</cite> is a custom index type that you need to add to postgres. See <a class="reference internal" href="../system-requirements/software/postgres/bioseg.html"><em>BioSeg</em></a> for details</p>
+</div>
+<div class="section" id="create-the-bioseg-index">
+<h2>Create the BIOSEG index<a class="headerlink" href="#create-the-bioseg-index" title="Permalink to this headline">¶</a></h2>
+<p>You need to create the bioseg index on the location table in your production database.  This is done simply by adding the <cite>create-bioseg-location-index</cite> post-process step to your <cite>project.xml</cite> file:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;post-process</span> <span class="na">name=</span><span class="s">&quot;create-bioseg-location-index&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-overlappingfeatures-view">
+<h2>Create the <cite>overlappingFeatures</cite> view<a class="headerlink" href="#create-the-overlappingfeatures-view" title="Permalink to this headline">¶</a></h2>
+<p>Now create the view in the <cite>SequenceFeature.overlappingFeatures</cite> view in the database.  This allows you to query for any features that overlap any other types of features in the web interface or query API.  Just add the <cite>create-overlap-view</cite> post-process step, it needs to be after <cite>create-bioseg-location-index</cite>.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;post-process</span> <span class="na">name=</span><span class="s">&quot;create-overlap-view&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>See FlyMine&#8217;s project.xml for an example of including these steps.</p>
+<p>Now any queries on the <cite>overlappingFeatures</cite> collections will use this view and bioseg.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../database/index.html" title="Database"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="data-labels.html" title="Using Class and Field Labels"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

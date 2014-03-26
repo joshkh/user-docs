@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Performance &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Diagnostic" href="../diagnostic/index.html" />
+    <link rel="prev" title="Open ID" href="../user-accounts/open-id.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../diagnostic/index.html" title="Diagnostic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../user-accounts/open-id.html" title="Open ID"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Performance</a><ul>
+<li><a class="reference internal" href="#setting-up-your-own-content-delivery-network">Setting up your own Content Delivery Network</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../user-accounts/open-id.html"
+                        title="previous chapter">Open ID</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../diagnostic/index.html"
+                        title="next chapter">Diagnostic</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/performance/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="performance">
+<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
+<p>InterMine web-applications rely on a server to deliver static files such as JavaScript and CSS. The default location for this server is &#8220;<a class="reference external" href="http://cdn.intermine.org">http://cdn.intermine.org</a>&#8221;. Installing your own CDN may increase web site performance.</p>
+<div class="section" id="setting-up-your-own-content-delivery-network">
+<h2>Setting up your own Content Delivery Network<a class="headerlink" href="#setting-up-your-own-content-delivery-network" title="Permalink to this headline">¶</a></h2>
+<p>This dependency is easy to remove. You can host all these files yourself from any location.
+We recommend doing the following:</p>
+<ul class="simple">
+<li>Cloning your own copy of the  <a class="reference external" href="http://github.com/intermine/CDN">CDN</a> This means you have local copies of all the files.</li>
+<li>Making the root directory of your checkout visible through a web-server (an Apache &#8216;alias&#8217; directive is sufficient). These resources should be accessible through CORS enabled web-servers - see: <a class="reference external" href="http://enable-cors.org">http://enable-cors.org</a></li>
+<li>Change the value of the &#8216;head.cdn.location&#8217; property in your web-app. This is currently configured in &#8216;global.web.properties&#8217; as <cite>head.cdn.location = http://cdn.intermine.org</cite></li>
+<li>Supply the location of your CDN at runtime to JavaScript components that may use it: Set the option &#8220;CDN.server&#8221; to the
+appropriate URL (see <a class="reference external" href="http://intermine.readthedocs.org/en/latest/webapp/properties/javascript-options/">http://intermine.readthedocs.org/en/latest/webapp/properties/javascript-options/</a>)</li>
+</ul>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../diagnostic/index.html" title="Diagnostic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../user-accounts/open-id.html" title="Open ID"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

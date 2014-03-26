@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Primary Keys &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Database Building" href="index.html" />
+    <link rel="next" title="Priority Configuration" href="priority-config.html" />
+    <link rel="prev" title="Model Merging" href="model-merging.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="priority-config.html" title="Priority Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model-merging.html" title="Model Merging"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Primary Keys</a><ul>
+<li><a class="reference internal" href="#data-source-keys-configuration-files">Data source keys configuration files</a></li>
+<li><a class="reference internal" href="#defining-keys-in-a-central-file">Defining keys in a central file</a><ul>
+<li><a class="reference internal" href="#global-primary-key-configuration-file">Global primary key configuration file</a></li>
+<li><a class="reference internal" href="#using-global-keys-in-each-source">Using global keys in each source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model-merging.html"
+                        title="previous chapter">Model Merging</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="priority-config.html"
+                        title="next chapter">Priority Configuration</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/database/database-building/primary-keys.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="primary-keys">
+<h1>Primary Keys<a class="headerlink" href="#primary-keys" title="Permalink to this headline">¶</a></h1>
+<p>This document describes the configuration used by the InterMine integration system to identify objects that are identical to each other. Two objects are deemed to be identical if they have matching fields for at least one primary key used for the class of object. Primary keys are defined in a global file called &#8220;MODEL-NAME_keyDefs.properties&#8221; which must be in the classpath.  Each data source needs an additional configuration file defining which primary keys should be used when integrating data, which can also define some extra keys. These files should be in the resources directory of the data source, and should be called &#8220;DATA-SOURCE-NAME_keys.properties&#8221;.</p>
+<div class="section" id="data-source-keys-configuration-files">
+<h2>Data source keys configuration files<a class="headerlink" href="#data-source-keys-configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>For each data source, there is a properties file providing a list of the primary keys that can be used when integrating that data source. The file lists the primary keys by name for each class.  When loading objects of a particular class the keys define which fields should be used to look up in the database for existing objects to merge with.</p>
+<p>The keys are specified in each source in a file: <cite>bio/sources/sourcename/resources/sourcename_keys.properties</cite>.</p>
+<p>These <cite>_keys.properties</cite> files define keys in the format:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">Class.name_of_key</span> <span class="o">=</span> <span class="s">field1, field2</span>
+</pre></div>
+</div>
+<p>The <cite>name_of_key</cite> can be any string but you must use different names if defining more than one key for the same class, for example in <cite>uniprot_keys.properties</cite> there are two different keys defined for <cite>Gene</cite>:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">Gene.key_primaryidentifier</span> <span class="o">=</span> <span class="s">primaryIdentifier</span>
+<span class="na">Gene.key_secondaryidentifier</span> <span class="o">=</span> <span class="s">secondaryIdentifier</span>
+</pre></div>
+</div>
+<p>It is better to use common names for identical keys between sources as this will help avoid duplicating database indexes.</p>
+<p>Each key should list one or more fields that can be a combination of <cite>attributes</cite> of the class specified or <cite>references</cite> to other classes - in which case there should be a key defined for the referenced class as well.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The build system will use any valid key it finds - so be careful! e.g. if you have keys for BioEntity and SequenceFeature and Gene in your keys file, any of the three keys may be used to merge a Gene into the database.</p>
+</div>
+<p>It is still possible to use a legacy method of configuring keys, where keys are defined centrally in <cite>dbmodel/resources/genomic_keyDefs.properties</cite> and referenced in source <cite>_keys.properties</cite> files.</p>
+</div>
+<div class="section" id="defining-keys-in-a-central-file">
+<h2>Defining keys in a central file<a class="headerlink" href="#defining-keys-in-a-central-file" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is an older method of defining keys in a central configuration file and just specifying which of those keys should be used in each.</p>
+</div>
+<div class="section" id="global-primary-key-configuration-file">
+<h3>Global primary key configuration file<a class="headerlink" href="#global-primary-key-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>This file is a Java properties file, so all the data is in form of single lines of the form &#8220;property name = property value&#8221;. A line is a comment if it begins with a hash character, and blank lines may be present. This file defines a set of primary keys by name for each class. Defining a primary key on a class makes it apply to all the subclasses too.  This file should be located in <cite>MINE_NAME/dbmodel/resources</cite>.</p>
+<p>To define a primary key, enter a line in the following form:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># &lt;name of model&gt;_keyDefs.properties file in MINE_NAME/dbmodel/resources</span>
+<span class="na">Classname.primary_key_name</span> <span class="o">=</span> <span class="s">field1, field2</span>
+</pre></div>
+</div>
+<p>This line means that the class &#8220;Classname&#8221; and all its subclasses have a primary key called &#8220;primary_key_name&#8221; that matches two objects if the values of both of the fields &#8220;field1&#8221; and &#8220;field2&#8221; are identical. Only attributes and references can be used as fields in a primary key, not collections.</p>
+<p>Here is a short example of the configuration file. The configuration file we use for the FlyMine system is a good example.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># some keys defined in flymine/dbmodel/resources/genomic_keyDefs.properties</span>
+<span class="na">Gene.key_identifier_org</span><span class="o">=</span><span class="s">identifier, organism</span>
+<span class="na">Gene.key_symbol_org</span><span class="o">=</span><span class="s">symbol, organism</span>
+<span class="na">Gene.key_organismdbid</span><span class="o">=</span><span class="s">organismDbId</span>
+<span class="na">Gene.key_ncbiGeneNumber</span><span class="o">=</span><span class="s">ncbiGeneNumber</span>
+<span class="na">Protein.key_identifier_org</span><span class="o">=</span><span class="s">identifier, organism</span>
+<span class="na">Protein.key_primaryacc</span><span class="o">=</span><span class="s">primaryAccession</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-global-keys-in-each-source">
+<h3>Using global keys in each source<a class="headerlink" href="#using-global-keys-in-each-source" title="Permalink to this headline">¶</a></h3>
+<p>In this case the properties file for each data source lists primary key names from the the central <cite>genomic_keyDefs.properties</cite> file that can be used when integrating that data source. The file lists the primary keys by name for each class; the primary key names must be defined in the global keyDefs file mentioned in the previous section. If a class is not mentioned, then instances of that class will never be merged with other objects. Each class must be mentioned only once in this file, unlike the global configuration. For each class, there should be a line like the following:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># keys file in SOURCE/resources that references keys defined in global keyDefs properties file.</span>
+<span class="na">Classname</span> <span class="o">=</span> <span class="s">primary_key_name, primary_key_name2</span>
+</pre></div>
+</div>
+<p>This line means that the class &#8220;Classname&#8221; and all its subclasses have a two primary keys available for this data source, called &#8220;primary_key_name&#8221; and &#8220;primary_key_name2&#8221;, which should be defined properly in the global configuration.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="priority-config.html" title="Priority Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model-merging.html" title="Model Merging"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" >Database Building</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

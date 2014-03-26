@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Source Library &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Data Sources" href="../index.html" />
+    <link rel="next" title="Gene Ontology" href="go/index.html" />
+    <link rel="prev" title="Data Sources" href="../index.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="go/index.html" title="Gene Ontology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Data Sources"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Data Sources</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data Source Library</a><ul>
+<li><a class="reference internal" href="#core-intermine-sources">Core InterMine sources</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#flymine-specific-sources">FlyMine Specific sources</a></li>
+<li><a class="reference internal" href="#other-loaders">Other loaders</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Data Sources</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="go/index.html"
+                        title="next chapter">Gene Ontology</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/data-sources/library/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-source-library">
+<h1>Data Source Library<a class="headerlink" href="#data-source-library" title="Permalink to this headline">¶</a></h1>
+<p>This page lists the current sources available for use in InterMine.  All the sources here are found in <cite>bio/sources</cite>.  Look at <cite>flymine/project.xml</cite> for examples of how to use these sources.</p>
+<p>You can also add your own sources to load custom file formats, see <a class="reference internal" href="../custom/index.html"><em>Writing Your Own Data Source</em></a> for more information.  In addition, the <a class="reference internal" href="../../../get-started/tutorial/index.html"><em>Tutorial</em></a> contains detailed steps on creating sources for a variety of different data formats.</p>
+<p>Most of the configuration done in the config files is optional, if no config entry exists the default behaviour is followed.  There are exceptions to this rule, however.</p>
+<div class="section" id="core-intermine-sources">
+<h2>Core InterMine sources<a class="headerlink" href="#core-intermine-sources" title="Permalink to this headline">¶</a></h2>
+<p>These are commonly used sources that you may want to use to load data into your own InterMine instance.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="go/index.html">Gene Ontology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="go/go-annotation.html">GO Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="go/go-obo.html">GO OBO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="homologues/index.html">Homologue Data Sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="homologues/treefam.html">Treefam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homologues/homologene.html">Homologene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homologues/orthodb.html">OrthoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homologues/panther.html">Panther</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homologues/compara.html">Ensembl Compara</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homologues/index.html#identifiers">Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homologues/index.html#how-to-use-an-id-resolver">How to use an ID resolver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interactions/index.html">Interactions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactions/biogrid.html">BioGRID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactions/intact.html">IntAct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactions/psi-mi-ontology.html">PSI-MI Ontology</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pathways/index.html">Pathway data sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pathways/kegg.html">KEGG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pathways/reactome.html">Reactome</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proteins/index.html">Proteins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proteins/uniprot.html">UniProt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proteins/pdb.html">Protein Data Bank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proteins/interpro.html">InterPro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="publications/index.html">Publications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="publications/pubmed.html">PubMed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="publications/publications.html">Publications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="variation/index.html">Variation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variation/ensembl-snp.html">Ensembl SNP</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chado.html">Chado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensembl-core.html">Ensembl Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fasta.html">FASTA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gff.html">GFF3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="identifiers/index.html">Identifier Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intermine-items-xml.html">InterMine items XML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="omim.html">OMIM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organism.html">Organisms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="so.html">Sequence Ontology (SO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uberon.html">Uberon</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="flymine-specific-sources">
+<h2>FlyMine Specific sources<a class="headerlink" href="#flymine-specific-sources" title="Permalink to this headline">¶</a></h2>
+<p>These are sources that load Drosophila specific data sets into FlyMine, we don&#8217;t expect you will re-use these unless you are creating a Drosophila warehouse.  All of these sources are located in <cite>bio/sources/fly</cite>.</p>
+<ul class="simple">
+<li>affy-probes</li>
+<li>anoest</li>
+<li>anopheles-identifiers</li>
+<li>anoph-expr</li>
+<li>arbeitman-items-xml</li>
+<li>bdgp-clone</li>
+<li>bdgp-insitu</li>
+<li>drosdel-gff</li>
+<li>drosophila-homology</li>
+<li>fly-anatomy-ontology</li>
+<li>flyatlas</li>
+<li>fly-development-ontology</li>
+<li>fly-fish</li>
+<li>fly-misc-cvterms</li>
+<li>flyreg</li>
+<li>flyrnai-screens</li>
+<li>homophila</li>
+<li>long_oligo</li>
+<li>protein_structure</li>
+<li>redfly</li>
+<li>rnai</li>
+<li>tiffin</li>
+<li>tiffin-expression</li>
+<li>tiling_path</li>
+</ul>
+<p>See FlyMine for more information about these datasets.  Look at <cite>flymine/project.xml</cite> for examples of how to use these sources.</p>
+</div>
+<div class="section" id="other-loaders">
+<h2>Other loaders<a class="headerlink" href="#other-loaders" title="Permalink to this headline">¶</a></h2>
+<p>These loaders were written by InterMine users.</p>
+<ul class="simple">
+<li>CHEBI</li>
+<li>Disease ontology</li>
+<li>haem-atlas</li>
+<li>HGNC</li>
+<li>HuGE</li>
+<li>Mammalian phenotypes</li>
+<li>pride</li>
+<li>stitch</li>
+<li>huge gwas</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="go/index.html" title="Gene Ontology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Data Sources"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

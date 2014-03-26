@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>List enrichment widgets statistics &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="List Widgets" href="index.html" />
+    <link rel="next" title="Apps/A" href="../apps-a.html" />
+    <link rel="prev" title="List Widgets Questions &amp; Answers" href="q-and-a.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../apps-a.html" title="Apps/A"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="q-and-a.html" title="List Widgets Questions &amp; Answers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">List Widgets</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">List enrichment widgets statistics</a><ul>
+<li><a class="reference internal" href="#method">Method</a></li>
+<li><a class="reference internal" href="#multiple-test-correction">Multiple Test Correction</a><ul>
+<li><a class="reference internal" href="#none">None</a></li>
+<li><a class="reference internal" href="#bonferroni">Bonferroni</a></li>
+<li><a class="reference internal" href="#holm-bonferroni">Holm-Bonferroni</a></li>
+<li><a class="reference internal" href="#benjamini-hochberg">Benjamini Hochberg</a></li>
+<li><a class="reference internal" href="#gene-length-correction">Gene length correction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="q-and-a.html"
+                        title="previous chapter">List Widgets Questions &amp; Answers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../apps-a.html"
+                        title="next chapter">Apps/A</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/embedding/list-widgets/enrichment-widgets.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="list-enrichment-widgets-statistics">
+<h1>List enrichment widgets statistics<a class="headerlink" href="#list-enrichment-widgets-statistics" title="Permalink to this headline">¶</a></h1>
+<p>Enrichment widgets are located on the list analysis page. There are a number of different types of enrichment widgets, but all list a term, a count and an associated p-value. The term can be something like a publication name or a GO term. The count is the number of times that term appears for objects in your list.  The p-value is the probability that result occurs by chance, thus a lower p-value indicates greater enrichment.</p>
+<div class="section" id="method">
+<h2>Method<a class="headerlink" href="#method" title="Permalink to this headline">¶</a></h2>
+<p>The p-value is calculated using the <a class="reference external" href="http://en.wikipedia.org/wiki/Hypergeometric_distribution">Hypergeometric distribution</a>. Four numbers are used to calculate each p-value:</p>
+<div class="highlight-matlab"><div class="highlight"><pre>     <span class="p">(</span><span class="n">M</span> <span class="n">choose</span> <span class="n">k</span><span class="p">)</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">M</span> <span class="n">choose</span> <span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+<span class="n">P</span> <span class="p">=</span>   <span class="o">-----------------------------</span>
+              <span class="n">N</span> <span class="n">choose</span> <span class="n">n</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>n</dt>
+<dd>the number of objects in your list</dd>
+<dt>N</dt>
+<dd>the number of objects in the reference population</dd>
+<dt>k</dt>
+<dd>the number of objects annotated with this item in your list</dd>
+<dt>M</dt>
+<dd>the number of objects annotated with item in the reference population</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The relevant <a class="reference external" href="http://commons.apache.org/math/apidocs/org/apache/commons/math/distribution/HypergeometricDistributionImpl.html#getDomainUpperBound%28double%29HypergeometricDistributionImpl.java">Java source</a>.</p>
+</div>
+</div>
+<div class="section" id="multiple-test-correction">
+<h2>Multiple Test Correction<a class="headerlink" href="#multiple-test-correction" title="Permalink to this headline">¶</a></h2>
+<p>When multiple tests (statistical inferences)are run in parallel, the probability of false positive (Type I) errors increases. To address this issue, many multiple test corrections have been developed to take into account the number of tests being carried out and to correct the p-values accordingly. Enrichment widgets have three different multiple test corrections: Bonferroni, Holm-Bonferroni, and Benjamini Hochberg.</p>
+<p>In enrichment widgets the number of &#8220;tests run&#8221; is the number of terms associated with objects in the &#8220;reference list&#8221;. Please Note, in earlier versions of InterMine (0.95 and below) the number of &#8220;tests run&#8221; was the number of terms associated with objects in the &#8220;query list&#8221;. This change has made the multiple test correction more rigorous, and will reduce the occurrence of spuriously low p-values.</p>
+<p>Each enrichment widget has four test correction options:</p>
+<div class="section" id="none">
+<h3>None<a class="headerlink" href="#none" title="Permalink to this headline">¶</a></h3>
+<p>No test correction performed, these are the raw results. These p-values will be lower (more significant) than if test correction was applied.</p>
+</div>
+<div class="section" id="bonferroni">
+<h3>Bonferroni<a class="headerlink" href="#bonferroni" title="Permalink to this headline">¶</a></h3>
+<p>Bonferroni is the simplest and most conservative method of multiple test correction. The number of tests run (the number of terms associated with objects in the reference list) is multiplied by the un-corrected  p-value of each term to give the corrected p-value.</p>
+</div>
+<div class="section" id="holm-bonferroni">
+<h3>Holm-Bonferroni<a class="headerlink" href="#holm-bonferroni" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">Adjusted</span> <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="p">=</span> <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="n">x</span> <span class="p">(</span><span class="n">number</span> <span class="n">of</span> <span class="n">tests</span> <span class="o">-</span> <span class="n">rank</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="benjamini-hochberg">
+<h3>Benjamini Hochberg<a class="headerlink" href="#benjamini-hochberg" title="Permalink to this headline">¶</a></h3>
+<p>This correction is the less stringent than the Bonferroni, and therefore tolerates more false positives.</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">Adjusted</span> <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="p">=</span> <span class="n">p</span><span class="o">-</span><span class="n">value</span> <span class="n">x</span> <span class="p">(</span><span class="n">number</span> <span class="n">of</span> <span class="n">tests</span><span class="o">/</span><span class="n">rank</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>The p-values of each gene are ranked from the smallest to largest.</li>
+<li>The p-value is multiplied by the total number of tests divided by its rank.</li>
+</ol>
+</div>
+<div class="section" id="gene-length-correction">
+<h3>Gene length correction<a class="headerlink" href="#gene-length-correction" title="Permalink to this headline">¶</a></h3>
+<p>The probability of a given set of genes being hit in a ChIP experiment is amongst other things proportional to their length – very long genes are much more likely to be randomly hit than very short genes are.
+This is an issue for some widgets – for example, if a given GO term (such as gene expression regulation) is associated with very long genes in general, these will be much more likely to be hit in a ChIP experiment than the ones belonging to a GO term with very short genes on average.
+The p-values should be scaled accordingly to take this into account.
+There are a number of different implementations of corrections, we have choosen the simplest one.
+The algorithm was developed by Taher and Ovcharenko (2009) for correcting GO enrichment.
+Corrected probability of observing a given GO term is equal to the original GO probability times the correction coefficient CCGO defined for each GO term.</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">Adjusted</span> <span class="n">P</span> <span class="p">=</span> <span class="n">P</span> <span class="n">x</span> <span class="n">CCGO</span>
+</pre></div>
+</div>
+<p>where the correction coefficient CCGO is calculated as:</p>
+<div class="highlight-matlab"><div class="highlight"><pre>           <span class="n">LGO</span><span class="o">/</span><span class="n">LWH</span>
+<span class="n">CCGO</span> <span class="p">=</span> <span class="o">----------------</span>
+           <span class="n">NGO</span><span class="o">/</span><span class="n">NWG</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>LGO</dt>
+<dd>Average gene length of genes associated with a GO term</dd>
+<dt>LWG</dt>
+<dd>Average length of the genes in the whole genome</dd>
+<dt>NGO</dt>
+<dd>Number of genes in the genome associated with this GO term</dd>
+<dt>NWG</dt>
+<dd>Total number of genes in the whole genome.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The relevant <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/intermine/web/main/src/org/intermine/web/logic/widget/ErrorCorrection.java">InterMine source</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><strong>GOstat: Find statistically overrepresented Gene Ontologies within a group of genes</strong></div>
+<div class="line">Beissbarth T, Speed TP.</div>
+<div class="line"><a class="reference external" href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/20/9/1464">Bioinformatics</a>. 6.2004; 20(9): 1464-1465.</div>
+<div class="line">PubMed id: <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/14962934">14962934</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>GO::TermFinder&#8211;open source software for accessing Gene Ontology information and finding significantly enriched Gene Ontology terms associated with a list of genes</strong></div>
+<div class="line">Boyle EI, Weng S, Gollub J, Jin H, Botstein D, Cherry JM, Sherlock G.</div>
+<div class="line"><a class="reference external" href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bth456v1">Bioinformatics</a>. 2004 Dec 12;20(18):3710-5. Epub 2004 Aug 5.</div>
+<div class="line">PubMed id: <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/15297299?dopt=Abstract15297299">15297299</a></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Controlling the false discovery rate: a practical and powerful approach to multiple testing</strong></div>
+<div class="line">Benjamini, Yoav; Hochberg, Yosef</div>
+<div class="line"><a class="reference external" href="http://www.jstor.org/stable/2346101">Journal of the Royal Statistical Society</a>. 1995, Series B (Methodological) 57 (1): 289–300.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Augmentation Procedures for Control of the Generalized Family-Wise Error Rate and Tail Probabilities for the Proportion of False Positives</strong></div>
+<div class="line">van der Laan, Mark J.; Dudoit, Sandrine; and Pollard, Katherine S.</div>
+<div class="line"><a class="reference external" href="http://www.bepress.com/sagmb/vol3/iss1/art15">Statistical Applications in Genetics and Molecular Biology</a>: Vol. 3 : Iss. 1, Article 15, 2004.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>What&#8217;s wrong with Bonferroni adjustments</strong></div>
+<div class="line">Perneger, TV.</div>
+<div class="line"><a class="reference external" href="http://www.bmj.com/content/316/7139/1236">BMJ Publishing Group</a>. 1998;316:1236.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Variable locus length in the human genome leads to ascertainment bias in functional inference for non-coding elements</strong></div>
+<div class="line">Taher, L. and Ovcharenko, I. (2009), <cite>Bioinformatics &lt;http://bioinformatics.oxfordjournals.org/content/25/5/578&gt;</cite> Vol. : Iss. 5: 578–584.</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can read more about <strong>Hypergeometric Distribution</strong> at <a class="reference external" href="http://www.quantitativeskills.com/sisa/distributions/hypghlp.htm">Simple Interactive Statistical Analysis</a> or <a class="reference external" href="http://mathworld.wolfram.com/HypergeometricDistribution.html">Wolfram MathWorld</a>. <strong>Bonferroni Correction</strong> is discussed in this <a class="reference external" href="http://mathworld.wolfram.com/BonferroniCorrection.html">Wolfram MathWorld</a> article.</p>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../apps-a.html" title="Apps/A"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="q-and-a.html" title="List Widgets Questions &amp; Answers"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" >List Widgets</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

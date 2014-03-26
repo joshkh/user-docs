@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ant &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Software" href="index.html" />
+    <link rel="next" title="Git" href="git.html" />
+    <link rel="prev" title="Software" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="git.html" title="Git"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Software"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Software</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Ant</a><ul>
+<li><a class="reference internal" href="#installation-notes">Installation Notes</a></li>
+<li><a class="reference internal" href="#intermine-and-ant">InterMine and Ant</a></li>
+<li><a class="reference internal" href="#common-ant-targets">Common Ant targets</a><ul>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+<li><a class="reference internal" href="#dbmodel">DBmodel</a></li>
+<li><a class="reference internal" href="#webapp">Webapp</a></li>
+<li><a class="reference internal" href="#test-model">Test-model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Software</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="git.html"
+                        title="next chapter">Git</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/system-requirements/software/ant.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ant">
+<h1>Ant<a class="headerlink" href="#ant" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation-notes">
+<h2>Installation Notes<a class="headerlink" href="#installation-notes" title="Permalink to this headline">¶</a></h2>
+<p>Several people have had problems with Ant installations set up by Linux package managers. We recommend installing Ant manually.</p>
+<blockquote>
+<div><p><a class="reference external" href="http://ant.apache.org/manual/index.html">Ant&#8217;s manual</a> has detailed instructions on how to install Ant.</p>
+<p>Make sure you don&#8217;t have any ant-related jars on your classpath already, or else the InterMine build will fail.</p>
+</div></blockquote>
+</div>
+<div class="section" id="intermine-and-ant">
+<h2>InterMine and Ant<a class="headerlink" href="#intermine-and-ant" title="Permalink to this headline">¶</a></h2>
+<p>The InterMine project uses Ant for compiling code, building data models and databases and for running the data loading/integration process.  You shouldn&#8217;t ever have to write new Ant XML, but you will run lots of Ant targets we have already defined.  These will usually compile some code, create databases or run particular Java code.</p>
+<p>An example use is to create the tables and indexes for a new Mine in an empty PostgreSQL database.  In the <cite>&lt;mine&gt;/dbmodel</cite> directory we would do:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant build-db
+</pre></div>
+</div>
+<p>Whenever you use <cite>ant</cite> you can add a <cite>-v</cite> flag to get verbose output. We recommend doing this as it will give you detailed stack straces if a command fails:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v build-db
+</pre></div>
+</div>
+<p>You can pass parameters from the command line using <cite>-Dparameter=value</cite>. For example, when integrating data you can pass in a particular source name:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v -Dsource<span class="o">=</span>malaria-gff
+</pre></div>
+</div>
+<p>Ant and the InterMine build system will ensure that all prerequisite code is compiled, the model is created and will create all tables and indexes based on the model.</p>
+</div>
+<div class="section" id="common-ant-targets">
+<h2>Common Ant targets<a class="headerlink" href="#common-ant-targets" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>clean</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>clean-all</td>
+<td>clean this project and all dependencies</td>
+</tr>
+<tr class="row-even"><td>compile</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>jar</td>
+<td>produce jar/war</td>
+</tr>
+<tr class="row-even"><td>generate</td>
+<td>create generated code</td>
+</tr>
+<tr class="row-odd"><td>action</td>
+<td>do the action for this project, if any</td>
+</tr>
+<tr class="row-even"><td>javadoc</td>
+<td>build javadoc to build/javadoc</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>default</td>
+<td>will produce a jar and run tests</td>
+</tr>
+<tr class="row-odd"><td>test</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>test-all</td>
+<td>test all dependencies as well as this project</td>
+</tr>
+</tbody>
+</table>
+<p>To run a single test class:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -Dtest.includes<span class="o">=</span>org/intermine/ClassToTest.class
+</pre></div>
+</div>
+</div>
+<div class="section" id="dbmodel">
+<h3>DBmodel<a class="headerlink" href="#dbmodel" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>build-db</td>
+<td>build the objectstore</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="webapp">
+<h3>Webapp<a class="headerlink" href="#webapp" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>clean</td>
+<td>removes temporary directories</td>
+</tr>
+<tr class="row-odd"><td>default</td>
+<td>forces rebuild of .war file</td>
+</tr>
+<tr class="row-even"><td>release-webapp</td>
+<td>deploy to tomcat</td>
+</tr>
+<tr class="row-odd"><td>remove-webapp</td>
+<td>remove from tomcat</td>
+</tr>
+<tr class="row-even"><td>build-db-userprofile</td>
+<td>initialise/clear the userprofile database (loads default templates too)</td>
+</tr>
+<tr class="row-odd"><td>load-default-templates</td>
+<td>load default-template-queries.xml to the superuser account</td>
+</tr>
+<tr class="row-even"><td>write-userprofile-xml</td>
+<td>exports user profile database xml file to build/userprofile.xml</td>
+</tr>
+<tr class="row-odd"><td>read-userprofile-xml</td>
+<td>imports user profile database from build/userprofile.xml</td>
+</tr>
+<tr class="row-even"><td>drop-precomputed-tables</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>precompute-queries</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>precompute-queries-test</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>precompute-templates</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="test-model">
+<h3>Test-model<a class="headerlink" href="#test-model" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Target</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>insert-data-unittest</td>
+<td>insert test data into database</td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="git.html" title="Git"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Software"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" >Software</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
