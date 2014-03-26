@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>List Widgets Questions &amp; Answers &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="List Widgets" href="index.html" />
+    <link rel="next" title="List enrichment widgets statistics" href="enrichment-widgets.html" />
+    <link rel="prev" title="List Widgets" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="enrichment-widgets.html" title="List enrichment widgets statistics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="List Widgets"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">List Widgets</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">List Widgets Questions &amp; Answers</a><ul>
+<li><a class="reference internal" href="#source-files">Source files</a></li>
+<li><a class="reference internal" href="#using-a-temporary-list-on-the-fly">Using a temporary list on the fly</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#code">Code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#defining-custom-actions-on-widget-events">Defining custom actions on widget events</a></li>
+<li><a class="reference internal" href="#showing-a-results-table">Showing a Results Table</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">List Widgets</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="enrichment-widgets.html"
+                        title="next chapter">List enrichment widgets statistics</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/embedding/list-widgets/q-and-a.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="list-widgets-questions-answers">
+<span id="index-0"></span><h1>List Widgets Questions &amp; Answers<a class="headerlink" href="#list-widgets-questions-answers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="source-files">
+<h2>Source files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>
+<p>Source files for the <a class="reference external" href="https://github.com/intermine/intermine-list-widgets">List widgets client</a>.</p>
+</div>
+<div class="section" id="using-a-temporary-list-on-the-fly">
+<h2>Using a temporary list on the fly<a class="headerlink" href="#using-a-temporary-list-on-the-fly" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>InterMine Generic WebService Client Library from GitHub or InterMine CDN.</li>
+<li>InterMine List Widgets Client Library from GitHub or InterMine CDN.</li>
+<li>A mine that has the desired Enrichment Widget configured.</li>
+<li>An API Access Key generated by logging in to MyMine and visiting the API Key tab, then clicking on Generate a new API key. This assumes that you do not want to automatically provide the API key as is the case of within mine embedding that can be seen for example here.</li>
+</ol>
+</div>
+<div class="section" id="code">
+<h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<p>First require the JavaScript libraries needed to run the example. You probably have your own version of a Twitter Bootstrap compatible CSS style included on the page already.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="c">&lt;!-- dependencies --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/js/jquery/1.9.1/jquery-1.9.1.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/js/underscore.js/1.3.3/underscore-min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/js/backbone.js/0.9.2/backbone-min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- intermine --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/api&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/js/intermine/imjs/latest/im.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/js/intermine/widgets/latest/intermine.widgets.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>The next step is defining a couple of variables.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">root</span> <span class="o">=</span> <span class="s1">&#39;http://www.flymine.org/query&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">tokn</span> <span class="o">=</span> <span class="s1">&#39;U1p3r9Jb95r2Efrbu1P1CdfvKeF&#39;</span><span class="p">;</span> <span class="c1">// API token</span>
+<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;temp-list-from-js-query&#39;</span><span class="p">;</span> <span class="c1">// temporary list name</span>
+</pre></div>
+</div>
+<p>Now we connect with the mine through <a class="reference internal" href="../imjs.html"><em>InterMine JavaScript Library</em></a>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// Service connection.</span>
+<span class="kd">var</span> <span class="nx">flymine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span>
+    <span class="s1">&#39;root&#39;</span><span class="o">:</span>  <span class="nx">root</span><span class="p">,</span>
+    <span class="s1">&#39;token&#39;</span><span class="o">:</span> <span class="nx">tokn</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Then we define the query whose results will be converted into a list later on.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// The query herself.</span>
+<span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;select&#39;</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="s1">&#39;primaryIdentifier&#39;</span> <span class="p">],</span>
+    <span class="s1">&#39;from&#39;</span><span class="o">:</span> <span class="s1">&#39;Gene&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;where&#39;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">&#39;symbol&#39;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s1">&#39;contains&#39;</span><span class="o">:</span> <span class="s1">&#39;ze&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;limit&#39;</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Now we call the mine converting the results of the query into a list.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">flymine</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="nx">madeQuery</span> <span class="p">(</span><span class="nx">q</span><span class="p">)</span> <span class="p">{</span>
+         <span class="c1">// q is an instance of intermine.Query.</span>
+         <span class="k">return</span> <span class="nx">q</span><span class="p">.</span><span class="nx">saveAsList</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="nx">name</span><span class="p">});</span> <span class="p">})</span>
+       <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="nx">savedList</span> <span class="p">(</span><span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+         <span class="c1">// list is an instance of intermine.List.</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">size</span><span class="p">);</span> <span class="p">});</span>
+       <span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="nx">onError</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Something went wrong&quot;</span><span class="p">);});</span>
+</pre></div>
+</div>
+<p>Now, in the function <cite>savedList</cite>, we can instantiate the List Widgets client and display the result.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">widgets</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">widgets</span><span class="p">(</span><span class="nx">root</span> <span class="o">+</span> <span class="s1">&#39;/service/&#39;</span><span class="p">,</span> <span class="nx">tokn</span><span class="p">);</span>
+<span class="c1">// A new Chart List Widget for a particular list in the target #widget.</span>
+<span class="nx">widgets</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="s1">&#39;flyfish&#39;</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;#widget&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The only problem with this approach is that if we make this sort of call multiple times, we will
+fail on the second and subsequent ocassions as we will get a WebService exception telling us that
+the &#8216;temporary&#8217; list name is taken. <em>Thus inspect the code of the example to see how to make a
+call to the service to delete/reuse the list if it exists</em>.</p>
+</div>
+</div>
+<div class="section" id="defining-custom-actions-on-widget-events">
+<h2>Defining custom actions on widget events<a class="headerlink" href="#defining-custom-actions-on-widget-events" title="Permalink to this headline">¶</a></h2>
+<p>In a mine context, List Widgets are configured automatically to e.g. display a <a class="reference internal" href="../../webapp/query-results/index.html"><em>Query Results</em></a> when clicking on &#8220;Create a List&#8221;.</p>
+<p>Outside of a mine context, one needs to pass in what happens when one interacts with the Widgets. You can also decide whether to show/hide either/and/or title or description of the widget (for everything else use CSS).</p>
+<p>Clicking on an individual match (Gene, Protein etc.) in popover window:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">matchCb</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">mineURL</span> <span class="o">+</span> <span class="s2">&quot;/portal.do?class=&quot;</span> <span class="o">+</span> <span class="nx">type</span> <span class="o">+</span> <span class="s2">&quot;&amp;externalids=&quot;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">enrichment</span><span class="p">(</span><span class="s1">&#39;pathway_enrichment&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Clicking on View results button in a popover window:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">resultsCb</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pq</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">enrichment</span><span class="p">(</span><span class="s1">&#39;pathway_enrichment&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Clicking on Create list button in a popover window:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">listCb</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pq</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">enrichment</span><span class="p">(</span><span class="s1">&#39;pathway_enrichment&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>I want to hide the title or description of a widget.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">};</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">enrichment</span><span class="p">(</span><span class="s1">&#39;pathway_enrichment&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="showing-a-results-table">
+<h2>Showing a Results Table<a class="headerlink" href="#showing-a-results-table" title="Permalink to this headline">¶</a></h2>
+<p>The example below assumes that you have resolved all <a class="reference internal" href="../../webapp/query-results/index.html"><em>Query Results</em></a> dependencies
+and have a PathQuery in JSON/JavaScript format that you want to display in a <tt class="docutils literal"><span class="pre">#container</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// Define a query as above</span>
+<span class="kd">var</span> <span class="nx">pq</span> <span class="o">=</span> <span class="p">{</span><span class="nx">from</span><span class="o">:</span> <span class="s2">&quot;Gene&quot;</span><span class="p">,</span> <span class="nx">select</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">,</span> <span class="s2">&quot;organism.name&quot;</span><span class="p">],</span> <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">Gene</span><span class="o">:</span> <span class="p">{</span><span class="k">in</span><span class="o">:</span> <span class="s2">&quot;my-list&quot;</span><span class="p">}}};</span>
+<span class="c1">// use an instance of a Service or perhaps you already have one.</span>
+<span class="kd">var</span> <span class="nx">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span><span class="s1">&#39;root&#39;</span><span class="o">:</span> <span class="nx">service</span><span class="p">,</span> <span class="s1">&#39;token&#39;</span><span class="o">:</span> <span class="nx">token</span><span class="p">});</span>
+<span class="c1">// Create a new ResultsTable.</span>
+<span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">results</span><span class="p">.</span><span class="nx">CompactView</span><span class="p">(</span><span class="nx">service</span><span class="p">,</span> <span class="nx">pq</span><span class="p">);</span>
+<span class="c1">// Say where to put it.</span>
+<span class="nx">view</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="s2">&quot;#container&quot;</span><span class="p">);</span>
+<span class="c1">// Show it.</span>
+<span class="nx">view</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="enrichment-widgets.html" title="List enrichment widgets statistics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="List Widgets"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li>
+          <li><a href="index.html" >List Widgets</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

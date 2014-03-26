@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Perl &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Software" href="index.html" />
+    <link rel="next" title="PostgreSQL" href="postgres/index.html" />
+    <link rel="prev" title="Java" href="java.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="postgres/index.html" title="PostgreSQL"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="java.html" title="Java"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Software</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Perl</a><ul>
+<li><a class="reference internal" href="#cpan">CPAN</a></li>
+<li><a class="reference internal" href="#deb-packages">DEB Packages</a></li>
+<li><a class="reference internal" href="#manually-installing-intermine-modules">Manually installing InterMine modules</a></li>
+<li><a class="reference internal" href="#list-of-perl-modules-to-install">List of Perl Modules to Install</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="java.html"
+                        title="previous chapter">Java</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="postgres/index.html"
+                        title="next chapter">PostgreSQL</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/system-requirements/software/perl.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="perl">
+<h1>Perl<a class="headerlink" href="#perl" title="Permalink to this headline">¶</a></h1>
+<p>Many of the build processes are carried out by Perl programs. You will need Perl
+installed on your system to build or maintain an InterMine installation. Linux
+and MacOS systems will have a suitable Perl already installed. Perl is available for Windows,
+but is not actively supported by InterMine.</p>
+<p>You are encouraged to use [<a class="reference external" href="http://perlbrew.pl/">http://perlbrew.pl/</a> perlbrew] to set up your Perl environment, and
+make use of the modern toolchain, such as [<a class="reference external" href="https://metacpan.org/pod/cpanm">https://metacpan.org/pod/cpanm</a> cpanm].</p>
+<p>At various times you will be requested to install various Perl modules. Here you can
+find instructions for how to do this using the native CPAN tool which comes with every
+Perl distribution on Linux and OSX, using Debian/Ubuntu package managers, as well as manual installs:</p>
+<div class="section" id="cpan">
+<h2>CPAN<a class="headerlink" href="#cpan" title="Permalink to this headline">¶</a></h2>
+<p>CPAN stands for the Comprehensive Perl Archive Network - and is the software repository for
+Perl modules. (you can compare it to [<a class="reference external" href="http://pypi.python.org/pypi">http://pypi.python.org/pypi</a> PyPi in Python], Yum/Apt
+repositories in Linux, or even Apple&#8217;s App Store). If you have Perl you have CPAN. (To check
+type <cite>cpan</cite> in a terminal).</p>
+<p>To install modules with CPAN you may first need to set up the installer: in a terminal run</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>cpan
+</pre></div>
+</div>
+<p>This will take you to a cpan shell, which will allow you to configure your properties. to review your current configuration type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>o conf
+</pre></div>
+</div>
+<p>When you first run cpan should run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>o conf init
+</pre></div>
+</div>
+<p>This will guide you through the set-up procedure. You can run this later change the settings which are set automatically.</p>
+<p>To change a setting manually, type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>o conf <span class="o">[</span>SETTING NAME<span class="o">]</span> <span class="s2">&quot;NEW VALUE&quot;</span>
+</pre></div>
+</div>
+<p>eg to make modules installed uninstall previous versions and use sudo to elevate permissions (very good ideas), type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>o conf mbuild_install_arg <span class="s2">&quot;--uninst 1&quot;</span>
+<span class="nv">$ </span>o conf mbuild_install_build_command <span class="s2">&quot;sudo ./Build&quot;</span>
+<span class="nv">$ </span>o conf make_install_make_command <span class="s2">&quot;sudo make&quot;</span>
+</pre></div>
+</div>
+<p>If you change options, remember to save your changes with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>o conf commit
+</pre></div>
+</div>
+<p>To install modules, type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>cpan Module::Name Another::Module::Name
+</pre></div>
+</div>
+<p>To force the install for any reason, use the &#8220;-f&#8221; flag, so type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>cpan -f Module::Name
+</pre></div>
+</div>
+<p>Don&#8217;t forget to use sudo in front of the CPAN command if you have not set the sudo option in the CPAN configuration</p>
+</div>
+<div class="section" id="deb-packages">
+<h2>DEB Packages<a class="headerlink" href="#deb-packages" title="Permalink to this headline">¶</a></h2>
+<p>Many Perl libraries are packaged for different Linux distributions. Debian/Ubuntu has a great number of these, and in many cases this is a good alternative to the CPAN install.</p>
+<p>The procedure is the same as for any other package:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install libxml-writer-perl <span class="c"># installs XML::Writer</span>
+</pre></div>
+</div>
+<p>There is a predictable name to package mapping: &#8221;::&#8221; becomes &#8220;-&#8221;, there will be a &#8220;lib&#8221; on the front, and a &#8220;-perl&#8221; on the end, so:</p>
+<ul class="simple">
+<li>&#8220;<cite>XML::DOM</cite>&#8221; becomes &#8220;<cite>libxml-dom-perl</cite>&#8220;</li>
+<li>&#8220;<cite>Moose</cite>&#8221; becomes &#8220;<cite>libmoose-perl</cite>&#8220;</li>
+<li>and so on</li>
+</ul>
+<p>To search for a package you can type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>apt-cache search package-name
+</pre></div>
+</div>
+</div>
+<div class="section" id="manually-installing-intermine-modules">
+<h2>Manually installing InterMine modules<a class="headerlink" href="#manually-installing-intermine-modules" title="Permalink to this headline">¶</a></h2>
+<p>The InterMine Perl modules are available on CPAN, and you are encouraged to download them from there. However, you can install them manually too. First you will need to check-out the source code. (It is recommended you update your version of Module::Build to at least version 0.36, as this will allow you to automate the dependency installation.)</p>
+<p>From your check out (or unzipped tar file) go to the directory &#8220;<cite>intermine/perl/</cite>&#8220;</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>git/intermine/perl
+</pre></div>
+</div>
+<p>Here there are three &#8220;distributions&#8221; of modules you may want to install:</p>
+<ul class="simple">
+<li>InterMine-Model</li>
+<li>InterMine-Item (depends on InterMine::Model)</li>
+<li>Webservice-InterMine (depends on InterMine::Model)</li>
+</ul>
+<p>The installation procedure for these is the same:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> <span class="o">[</span>DISTRIBUTION-DIRECTORY<span class="o">]</span>
+<span class="nv">$ </span>perl Build.PL            <span class="c"># Checks your system</span>
+<span class="nv">$ </span>sudo ./Build installdeps <span class="c"># If you have Module::Build &gt;= 0.36</span>
+<span class="nv">$ </span>./Build <span class="nb">test</span>             <span class="c"># tests the modules: optional but HIGHLY recommended</span>
+<span class="nv">$ </span>sudo ./Build install     <span class="c"># Installs the modules</span>
+</pre></div>
+</div>
+<p>If you do not have Module::Build 0.36 or above, you can install the
+dependencies using the above methods (CPAN and Packages).</p>
+</div>
+<div class="section" id="list-of-perl-modules-to-install">
+<h2>List of Perl Modules to Install<a class="headerlink" href="#list-of-perl-modules-to-install" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For the InterMine modules:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>List::MoreUtils (utility functions for handling lists)</li>
+<li>LWP (Handling network communication)</li>
+<li>Module::Find (Automatically locating modules by name)</li>
+<li>Moose (Object system)</li>
+<li>MooseX::Roles::WithOverloading (Allows roles to overload operators)</li>
+<li>MooseX::Types (Type constraint system)</li>
+<li>Text::CSV_XS (Processing .csv and .tsv files)</li>
+<li>URI (Handling urls)</li>
+<li>XML::Parser::PerlSAX (Parsing XML)</li>
+<li>XML::DOM (XML processing and output)</li>
+<li>Glob</li>
+<li>Text::Glob</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>for the download scripts:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Log::Handler</li>
+<li>DateTime</li>
+<li>Module::Find</li>
+<li>Web::Scraper</li>
+<li>Ouch</li>
+<li>Number::Format</li>
+<li>PerlIO::gzip</li>
+<li>Perl6::Junction</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>for generating InterMine Items XML:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Getopt::Std</li>
+<li>Log::Handler;</li>
+<li>Digest::MD5</li>
+</ul>
+</div></blockquote>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="postgres/index.html" title="PostgreSQL"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="java.html" title="Java"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >System Requirements</a> &raquo;</li>
+          <li><a href="index.html" >Software</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

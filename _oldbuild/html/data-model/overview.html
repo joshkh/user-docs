@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Model Overview &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Data Model" href="index.html" />
+    <link rel="next" title="Model Description" href="model.html" />
+    <link rel="prev" title="Data Model" href="index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="model.html" title="Model Description"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Data Model"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data Model Overview</a><ul>
+<li><a class="reference internal" href="#data-source-and-data-set">Data source and Data set</a></li>
+<li><a class="reference internal" href="#organism">Organism</a></li>
+<li><a class="reference internal" href="#chromosome-location">Chromosome location</a></li>
+<li><a class="reference internal" href="#identifiers">Identifiers</a></li>
+<li><a class="reference internal" href="#sequence-ontology-term">Sequence Ontology term</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Data Model</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model.html"
+                        title="next chapter">Model Description</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/data-model/overview.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-model-overview">
+<h1>Data Model Overview<a class="headerlink" href="#data-model-overview" title="Permalink to this headline">¶</a></h1>
+<p>InterMine uses an object-oriented data model, classes in the model and relationships between them are defined in an XML file. Depending on which data types you include you will need different classes and fields in the model, so the model is generated from a core model XML file and any number of additions files. These additions files can define extra classes to be added to the model and define extra fields for additional classes.</p>
+<ul class="simple">
+<li>Elements of the model are represented by Java classes and references between them.</li>
+<li>These Java classes map automatically to tables in the database schema.</li>
+<li>The object model is defined as an XML file, that defines classes, their attributes and references between classes.</li>
+<li>The Java classes and database schema are automatically generated from an XML file.</li>
+</ul>
+<p>You can easily adapt InterMine to include your own data by creating new additions files, see the tutorial for a detailed walk though on how to do this.</p>
+<div class="section" id="data-source-and-data-set">
+<h2>Data source and Data set<a class="headerlink" href="#data-source-and-data-set" title="Permalink to this headline">¶</a></h2>
+<p>Most data types in the InterMine core model have a reference to a &#8220;data set&#8221; and a corresponding &#8220;data source&#8221;.</p>
+<dl class="docutils">
+<dt>Data source</dt>
+<dd>The origin of the data. Usually an organisation, e.g. UniProt, InterPro</dd>
+<dt>Data set</dt>
+<dd>A set of results or data from a data source. e.g. InterPro GO Annotation data set</dd>
+</dl>
+<p>These data are meant to enable your users to easily trace the provenance of your data.</p>
+</div>
+<div class="section" id="organism">
+<h2>Organism<a class="headerlink" href="#organism" title="Permalink to this headline">¶</a></h2>
+<p>Include the <a class="reference internal" href="../database/data-sources/library/organism.html"><em>Organisms</em></a> data source in your build. Many of the tools available in InterMine assume this source will be loaded and expect a populated organism table.</p>
+</div>
+<div class="section" id="chromosome-location">
+<h2>Chromosome location<a class="headerlink" href="#chromosome-location" title="Permalink to this headline">¶</a></h2>
+<p>InterMine uses the -1 / 1 convention for strands.</p>
+</div>
+<div class="section" id="identifiers">
+<h2>Identifiers<a class="headerlink" href="#identifiers" title="Permalink to this headline">¶</a></h2>
+<p>All sequence features must have a non-NULL, unique identifier set for their <cite>primaryIdentifier</cite> field.</p>
+</div>
+<div class="section" id="sequence-ontology-term">
+<h2>Sequence Ontology term<a class="headerlink" href="#sequence-ontology-term" title="Permalink to this headline">¶</a></h2>
+<p>All sequence features should have a reference to the appropriate <a class="reference external" href="http://www.sequenceontology.org">sequence ontology term</a>. The Java data parsers do this for you automatically.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="model.html" title="Model Description"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Data Model"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Data Model</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

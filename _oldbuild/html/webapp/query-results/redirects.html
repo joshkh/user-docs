@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Link redirects &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Link redirects</a><ul>
+<li><a class="reference internal" href="#config">config</a></li>
+<li><a class="reference internal" href="#examples">examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/query-results/redirects.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="link-redirects">
+<h1>Link redirects<a class="headerlink" href="#link-redirects" title="Permalink to this headline">¶</a></h1>
+<p>You can add a property to WebProperties to have links in results forward the user to a URL instead of the InterMine report page.</p>
+<div class="section" id="config">
+<h2>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
+<p>Add the following to your WebProperties file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># used to redirect links in webapp</span>
+<span class="na">webapp.linkRedirect</span><span class="o">=</span><span class="s">org.intermine.bio.web.BioLinkRedirectManager</span>
+
+<span class="c"># links to intermine report pages will be replaced with these URLs</span>
+<span class="na">externallink.[uniqueID].[class].[taxonId].[field].url</span> <span class="o">=</span> <span class="s">[full URL]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>uniqueId</dt>
+<dd>any string, should be different for each entry, internal use only</dd>
+<dt>class</dt>
+<dd>class of Object to redirect, eg. Gene or Protein</dd>
+<dt>taxonId</dt>
+<dd>taxon ID or * if config should apply to all</dd>
+<dt>field</dt>
+<dd>which identifier field to pass to the URL, eg. if field is primaryIdentifier, the value of primary identifier will be used as the attribute value</dd>
+<dt>full URL</dt>
+<dd>full http address, eg. <a class="reference external" href="http://www.google.co.uk/#q=monkey">http://www.google.co.uk/#q=monkey</a></dd>
+</dl>
+<p>All columns in the results for the configured class will be links to the external URL.</p>
+</div>
+<div class="section" id="examples">
+<h2>examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>In results pages, all dmel genes will link to FlyBase with Gene.primaryIdentifier instead of the Mine report page:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">externallink.flybaseResults.Gene.7227.primaryIdentifier.url</span><span class="o">=</span><span class="s">http://www.flybase.org/.bin/fbidq.html?&lt;&lt;attributeValue&gt;&gt;</span>
+</pre></div>
+</div>
+<p>One could also use a common URL with a common hostname and different subdirectory names. Intermine then figures out what URL to build with the given subdirectory name and redirects your query to that mine Report page using the Identifier you provide as an external identifier.
+common subdirectory names include:</p>
+<p>MOUSEMINE = intermine.org/mgi</p>
+<p>YEASTMINE = intermine.org/sgd</p>
+<p>ZEBRAFISHMINE = intermine.org/zfin</p>
+<p>WORMMINE = intermine.org/wormbase</p>
+<p>RATMINE = intermine.org/rgd</p>
+<p>METABOLICMINE = (Please update)</p>
+<p>So an externallink to RATMINE will look like this:
+.. code-block:: properties</p>
+<blockquote>
+<div>externallink.flybaseResults.Gene.10116.primaryIdentifier.url=http://www.intermine.org/rgd/portal.do?externalids&lt;&lt;attributeValue&gt;&gt;&amp;class=Gene&amp;origin=Ratmine</div></blockquote>
+<p>In results pages, all probesets will link to Google instead of the Mine report page:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">externallink.foo.ProbeSet.*.primaryIdentifier.url</span><span class="o">=</span><span class="s">http://www.google.com?q=&lt;&lt;attributeValue&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Next to the value in the column will be a small icon indicating an external link</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

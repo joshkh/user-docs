@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Report Widgets &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Report page" href="../webapp/report-page/index.html" />
+    <link rel="next" title="Lists" href="../webapp/lists/index.html" />
+    <link rel="prev" title="Webapp Tables CSS &amp; HTML" href="../webapp/report-page/webapp-tables.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../webapp/lists/index.html" title="Lists"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../webapp/report-page/webapp-tables.html" title="Webapp Tables CSS &amp; HTML"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../webapp/index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="../webapp/report-page/index.html" accesskey="U">Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../webapp/report-page/webapp-tables.html"
+                        title="previous chapter">Webapp Tables CSS &amp; HTML</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../webapp/lists/index.html"
+                        title="next chapter">Lists</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/embedding/report-widgets.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="report-widgets">
+<h1>Report Widgets<a class="headerlink" href="#report-widgets" title="Permalink to this headline">¶</a></h1>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.1.</span></p>
+<p>Have been retired and made into something better. See <a class="reference internal" href="apps-a.html"><em>Apps/A</em></a> or <a class="reference internal" href="apps-c/index.html"><em>Apps/C Grunt Build</em></a>. The changes are as follows:</p>
+<ol class="arabic simple">
+<li>Widget becomes an App.</li>
+<li>The main class in <tt class="docutils literal"><span class="pre">presenter.[js|ts|ls|coffee]</span></tt> has been changed from <tt class="docutils literal"><span class="pre">Widget</span></tt> to <tt class="docutils literal"><span class="pre">App</span></tt>.</li>
+<li>A config file with dependencies for a particular App is moved to its folder in the form of a <tt class="docutils literal"><span class="pre">config.js</span></tt> file. The contents of this file is being <tt class="docutils literal"><span class="pre">exported</span></tt> and contains example config to be passed from middleware and/or client.</li>
+<li>The Java service serving Report Widgets has been retired from InterMine core.</li>
+<li>The Node.js service now works as a middleware. You can plug it into your (Node.js) app by passing an array of paths on local or remote systems where it can find the App sources.</li>
+<li>There is a repo for the <a class="reference external" href="https://github.com/intermine/apps-a-middleware">Middleware</a> and for the <a class="reference external" href="https://github.com/intermine/intermine-apps-a">Sources</a>.</li>
+<li>Folders and modules are now allowed and can be required across.</li>
+<li>The root <tt class="docutils literal"><span class="pre">App</span></tt> now needs to be exported from the main class.</li>
+<li>To use a template you need to include its suffix.</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../webapp/lists/index.html" title="Lists"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../webapp/report-page/webapp-tables.html" title="Webapp Tables CSS &amp; HTML"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../webapp/index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="../webapp/report-page/index.html" >Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

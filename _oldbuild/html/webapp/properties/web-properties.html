@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Features &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Customise Web Application" href="index.html" />
+    <link rel="next" title="Data and Widget Configuration" href="webconfig-model.html" />
+    <link rel="prev" title="Text and messages" href="model-properties.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="webconfig-model.html" title="Data and Widget Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model-properties.html" title="Text and messages"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Customise Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Features</a><ul>
+<li><a class="reference internal" href="#home-page">Home page</a></li>
+<li><a class="reference internal" href="#tabs">Tabs</a></li>
+<li><a class="reference internal" href="#list-upload-examples">List upload examples</a></li>
+<li><a class="reference internal" href="#external-links">External links</a></li>
+<li><a class="reference internal" href="#settings-for-the-xreflink-property">Settings for the xrefLink property</a></li>
+<li><a class="reference internal" href="#overriding-properties">Overriding properties</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model-properties.html"
+                        title="previous chapter">Text and messages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="webconfig-model.html"
+                        title="next chapter">Data and Widget Configuration</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/properties/web-properties.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>web.properties</cite> file configures several attributes for the InterMine web application.</p>
+<dl class="docutils">
+<dt>attributeLink</dt>
+<dd>Used to configure hyperlinks, generally to external dbs.  See &#8220;External Links&#8221; section below</dd>
+<dt>bag.example.identifiers</dt>
+<dd>Text present in the list upload form.  See &#8220;List upload examples&#8221; section below</dd>
+<dt>externallink</dt>
+<dd>Redirect links in query results.  See <a class="reference internal" href="../query-results/redirects.html"><em>Link redirects</em></a></dd>
+<dt>galaxy</dt>
+<dd>See <a class="reference internal" href="../third-party-tools/galaxy.html"><em>Galaxy</em></a></dd>
+<dt>genomicRegionSearch</dt>
+<dd>See <a class="reference internal" href="../region-search/index.html"><em>Region Search</em></a></dd>
+<dt>header.links</dt>
+<dd>links at upper right corner</dd>
+<dt>meta.keywords</dt>
+<dd>will populate meta tag for keywords</dd>
+<dt>meta.description</dt>
+<dd>will populate meta tag for description.  Google uses this in their search results, I think</dd>
+<dt>portal.welcome</dt>
+<dd>the message to show when a user arrives at the webapp via the portal action (eg. &lt;something&gt;/portal.do)</dd>
+<dt>quickSearch.identifiers</dt>
+<dd>Text displayed in search box</dd>
+<dt>theme</dt>
+<dd>Colour scheme for the webapp.  Available options are:  blue, bright_blue, gold, green, grey, brown, ecoli_blue, metabolic, modmine, ratmine and purple</dd>
+<dt>xrefLink</dt>
+<dd>Used to configure hyperlinks for CrossReferences.  See below</dd>
+</dl>
+<div class="section" id="home-page">
+<h2>Home page<a class="headerlink" href="#home-page" title="Permalink to this headline">¶</a></h2>
+<p>Search box (first box on the left)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>begin.searchBox.title</td>
+<td>title of box on left</td>
+</tr>
+<tr class="row-even"><td>begin.searchBox.description</td>
+<td>text in the box on the left</td>
+</tr>
+<tr class="row-odd"><td>begin.searchBox.example</td>
+<td>text in the form field</td>
+</tr>
+</tbody>
+</table>
+<p>List upload box (middle box)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>begin.listBox.title</td>
+<td>Title of box</td>
+</tr>
+<tr class="row-even"><td>begin.listBox.description</td>
+<td>Text in box</td>
+</tr>
+<tr class="row-odd"><td>bag.example.identifiers</td>
+<td>Text in form field</td>
+</tr>
+</tbody>
+</table>
+<p>Third box</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>begin.thirdBox.title</td>
+<td>Title of box if user is new</td>
+</tr>
+<tr class="row-even"><td>begin.thirdBox.visitedTitle</td>
+<td>Title of box if user has visited before</td>
+</tr>
+<tr class="row-odd"><td>begin.thirdBox.description</td>
+<td>Text in box</td>
+</tr>
+<tr class="row-even"><td>begin.thirdBox.linkTitle</td>
+<td>Text for large button</td>
+</tr>
+<tr class="row-odd"><td>begin.thirdBox.link</td>
+<td>URL for large button</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tabs">
+<h2>Tabs<a class="headerlink" href="#tabs" title="Permalink to this headline">¶</a></h2>
+<p>Templates tagged with each category will appear under the appropriate tab.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>begin.tabs.1.id</td>
+<td>Name of category, eg. Genes</td>
+</tr>
+<tr class="row-even"><td>begin.tabs.1.description</td>
+<td>Text for that tab</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="list-upload-examples">
+<h2>List upload examples<a class="headerlink" href="#list-upload-examples" title="Permalink to this headline">¶</a></h2>
+<p>Using the <cite>bag.example.identifiers</cite> key, one can provide a list of keyword examples on the list create/upload page. This could lead to a mixed list of items being updated and only, say Protein or Gene, identifiers being uploaded.</p>
+<p>If one wants to provide different example identifiers per different types, like Genes, Proteins, SNPs, you can do so by using the following key:</p>
+<p><cite>bag.example.identifiers.gene</cite>, <cite>bag.example.identifiers.protein</cite> etc.</p>
+<p>Then, when the user selects a Genes from a dropdown select box for type and choose the Example list link, the text box will be populated keywords associated only with <cite>bag.example.identifiers.gene</cite> key in the config file.</p>
+</div>
+<div class="section" id="external-links">
+<h2>External links<a class="headerlink" href="#external-links" title="Permalink to this headline">¶</a></h2>
+<p>You can add links to other websites by adding entries to the <cite>web.properties</cite> file.</p>
+<p>The format for this property is:</p>
+<div class="highlight-properties"><pre># on the report page - a single identifier
+'attributelink' + unique_name + class + taxonId + attributeName + (url|imageName|text)
+
+# on the list analysis page - a list of identifiers
+'attributelink' + unique_name + class + taxonId + attributeName + 'list' + (url|imageName|text)</pre>
+</div>
+<dl class="docutils">
+<dt>unique_name</dt>
+<dd>used to distinguish between multiple configurations for the same attribute/organism/class combination</dd>
+<dt>class</dt>
+<dd>class of object to link, eg. Protein</dd>
+<dt>taxonId</dt>
+<dd>either a proper id or &#8216;*&#8217; when no assumptions is made regarding the organism</dd>
+<dt>attributeName</dt>
+<dd>which identifier field to pass to the URL, e.g. if attributeName is primaryIdentifier, the value of primary identifier field will be used as the attribute value</dd>
+<dt>list</dt>
+<dd>indicates the link will have a list of identifiers</dd>
+<dt>url</dt>
+<dd>url to link to</dd>
+<dt>imageName</dt>
+<dd>name of logo (optional), must be in /model directory</dd>
+<dt>text</dt>
+<dd>text that will appear next to the logo</dd>
+</dl>
+<p>The value of the attribute (for the current object) is substituted anywhere the string &#8220;&lt;&lt;attributeValue&gt;&gt;&#8221; occurs in the text or the url</p>
+<p>example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">attributelink.flybase.Gene.7227.primaryIdentifier.url</span><span class="o">=</span><span class="s">http://www.flybase.org/.bin/fbidq.html?&lt;&lt;attributeValue&gt;&gt;</span>
+<span class="na">attributelink.flybase.Gene.7227.primaryIdentifier.text</span><span class="o">=</span><span class="s">FlyBase: &lt;&lt;attributeValue&gt;&gt;</span>
+</pre></div>
+</div>
+<p>In this case <cite>Gene</cite> pages for Drosophila melanogaster will have a link that uses the <cite>organismDbId</cite> field.</p>
+<p>A list example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">attributelink.flymine.Gene.*.primaryIdentifier.list.url</span><span class="o">=</span><span class="s">http://www.flymine.org/query/portal.do?externalid=&lt;&lt;attributeValue&gt;&gt;&amp;class=Gene</span>
+<span class="na">attributelink.flymine.Gene.*.primaryIdentifier.list.text</span><span class="o">=</span><span class="s">FlyMine</span>
+<span class="na">attributelink.flymine.Gene.*.primaryIdentifier.list.imageName</span><span class="o">=</span><span class="s">flymine_logo_link.gif</span>
+</pre></div>
+</div>
+<p>Only if a taxonId is specified the code will check if the link to the external db is relevant.</p>
+</div>
+<div class="section" id="settings-for-the-xreflink-property">
+<h2>Settings for the xrefLink property<a class="headerlink" href="#settings-for-the-xreflink-property" title="Permalink to this headline">¶</a></h2>
+<p>You can configure the URLs for querying CrossReference from external sources by adding entries to the {{{web.properties}}} file.</p>
+<p>The format for this property is:</p>
+<div class="highlight-properties"><pre># on the report page
+'xreflink' + dataSource_name + (url|imageName)</pre>
+</div>
+<dl class="docutils">
+<dt>dataSource_name</dt>
+<dd>the name of the external database</dd>
+<dt>url</dt>
+<dd>url to link to</dd>
+<dt>imageName</dt>
+<dd>name of logo (optional), must be in /model directory</dd>
+</dl>
+<p>example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">xreflink.PFAM.url</span><span class="o">=</span><span class="s">http://pfam.sanger.ac.uk/family?</span>
+<span class="na">xreflink.PIRSF.url</span><span class="o">=</span><span class="s">http://pir.georgetown.edu/cgi-bin/ipcSF?id=</span>
+</pre></div>
+</div>
+<p>Cross references represent identifiers used in external databases, eg. FlyBase, UniProt. An object in InterMine which has CrossReference will have a identifier and data source for that cross reference. In order to find the cross reference in that data source, a url is required to link to and the full path should look like url+identifier, e.g. &#8216;&#8217;<a class="reference external" href="http://pfam.sanger.ac.uk/family?PF00001">http://pfam.sanger.ac.uk/family?PF00001</a>&#8216;&#8217;. In web.properties, the first part of the full path could be configured as in &#8220;url&#8221;, and identifier will be added programmatically to the rear of it. The dataSource_name should be consistent with the source name of the CrossReferences in the InterMine database.</p>
+</div>
+<div class="section" id="overriding-properties">
+<h2>Overriding properties<a class="headerlink" href="#overriding-properties" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><cite>intermine/webapp/main/resources/webapp/WEB-INF/global.web.properties</cite> - used by all mines.  Properties set here will be available to everyone, even the test model mine.</li>
+<li><cite>bio/webapp/resources/webapp/WEB-INF/bio.web.properties</cite> - used by all bio-mines.  Properties set here will be available to all mines that use the bio layer.  so not the test model model. Can overwrite properties in the global.web.properties file.</li>
+<li><cite>flymine/webapp/resources/web.properties</cite> - used by a mine.  Properties set here will be available to only that specific mine.  Can create mine-specific properties or overwrite properties in the above two files.</li>
+</ul>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="webconfig-model.html" title="Data and Widget Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model-properties.html" title="Text and messages"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Customise Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

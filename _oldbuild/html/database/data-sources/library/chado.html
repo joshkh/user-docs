@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Chado &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Data Source Library" href="index.html" />
+    <link rel="next" title="Ensembl Core" href="ensembl-core.html" />
+    <link rel="prev" title="Ensembl SNP" href="variation/ensembl-snp.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ensembl-core.html" title="Ensembl Core"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="variation/ensembl-snp.html" title="Ensembl SNP"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Source Library</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chado</a><ul>
+<li><a class="reference internal" href="#converter">Converter</a></li>
+<li><a class="reference internal" href="#chado-tables">Chado tables</a></li>
+<li><a class="reference internal" href="#default-configuration">Default configuration</a></li>
+<li><a class="reference internal" href="#converter-configuration">Converter configuration</a></li>
+<li><a class="reference internal" href="#source-configuration">Source configuration</a></li>
+<li><a class="reference internal" href="#sub-classing-the-converter">Sub-classing the converter</a></li>
+<li><a class="reference internal" href="#current-uses">Current uses</a></li>
+<li><a class="reference internal" href="#implementation-notes-for-the-chado-db-source">Implementation notes for the chado-db source</a><ul>
+<li><a class="reference internal" href="#chado-sequence-module-table-processing">Chado sequence module table processing</a><ul>
+<li><a class="reference internal" href="#reading-the-feature-table">Reading the feature table</a></li>
+<li><a class="reference internal" href="#reading-the-featureloc-table">Reading the featureloc table</a></li>
+<li><a class="reference internal" href="#reading-the-feature-relationship-table">Reading the feature_relationship table</a></li>
+<li><a class="reference internal" href="#reading-the-cvterm-table">Reading the cvterm table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-the-default-chado-source">Using the default chado source</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="variation/ensembl-snp.html"
+                        title="previous chapter">Ensembl SNP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ensembl-core.html"
+                        title="next chapter">Ensembl Core</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/data-sources/library/chado.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="chado">
+<h1>Chado<a class="headerlink" href="#chado" title="Permalink to this headline">¶</a></h1>
+<p>We have developed an InterMine data source that can use a GMOD Chado database as a source for an InterMine warehouse. The eventual aim is to allow import of any Chado database with some configuration.  This will provide a web environment to perform rapid, complex queries on Chado databases with minimal development effort.</p>
+<div class="section" id="converter">
+<h2>Converter<a class="headerlink" href="#converter" title="Permalink to this headline">¶</a></h2>
+<p>The converter for this source is the <cite>ChadoDBConverter</cite> class.  This class controls which <cite>ChadoProcessors</cite> are run.  A <cite>ChadoProcessor</cite> class corresponds to a chado module.  For example, the sequence module is processed by the <cite>SequenceProcessor</cite> and the stock module is processed by the <cite>StockProcessor</cite>.</p>
+</div>
+<div class="section" id="chado-tables">
+<h2>Chado tables<a class="headerlink" href="#chado-tables" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>chado-db</cite> source is able to integrate objects from a Chado database.  Currently only tables from the <cite>Chado sequence module</cite> and <cite>Chado stock modules</cite> are read.</p>
+<p>These tables are queried from the chado database:</p>
+<dl class="docutils">
+<dt><cite>feature</cite></dt>
+<dd>used to create objects in the ObjectStore</dd>
+</dl>
+<ul class="simple">
+<li>The default configuration only supports features that have a Sequence Ontology type (eg. <cite>gene</cite>, <cite>exon</cite>, <cite>chromosome</cite>)</li>
+<li>Each new feature in InterMine will be a sub-class of <cite>SequenceFeature</cite>.</li>
+</ul>
+<dl class="docutils">
+<dt><cite>featureloc</cite></dt>
+<dd>used to create <cite>Location</cite> objects to set <cite>chromosomeLocation</cite> reference in each <cite>SequenceFeature</cite></dd>
+<dt><cite>feature_relationship</cite></dt>
+<dd>used to find <cite>part_of</cite> relationships between features</dd>
+</dl>
+<ul class="simple">
+<li>this information is used to create parent-child references and collections</li>
+<li>examples include setting the <cite>transcripts</cite> collection in the <cite>Exon</cite> objects and the <cite>gene</cite> reference in the <cite>Transcript</cite> class.</li>
+</ul>
+<dl class="docutils">
+<dt><cite>dbxref</cite> and <cite>feature_dbxref</cite></dt>
+<dd>used to create <cite>Synonym</cite> objects for external identifiers of features</dd>
+</dl>
+<ul class="simple">
+<li>the <cite>Synonym`s will be added to the `synonyms</cite> collection of the relevant <cite>SequenceFeature</cite></li>
+</ul>
+<dl class="docutils">
+<dt><cite>featureprop</cite></dt>
+<dd>used to set fields in features based on properties</dd>
+</dl>
+<ul class="simple">
+<li>an example from the FlyBase database: the <cite>SequenceFeature.cytoLocation</cite> field is set using the <cite>cyto_range</cite> feature_prop</li>
+</ul>
+<dl class="docutils">
+<dt><cite>synonym</cite> and <cite>feature_synonym</cite></dt>
+<dd>used to create extra <cite>Synonym</cite> objects for <cite>chado</cite> synonyms and to set fields in features</dd>
+</dl>
+<ul class="simple">
+<li>the <cite>Synonym`s will be added to the `synonyms</cite> collection of the relevant <cite>SequenceFeature</cite></li>
+</ul>
+<dl class="docutils">
+<dt><cite>cvterm</cite> and <cite>feature_cvterm</cite></dt>
+<dd>used to set fields in features and to create synonyms based on CV terms</dd>
+<dt><cite>pub</cite>, <cite>feature_pub</cite> and <cite>db</cite></dt>
+<dd>used to set the <cite>publications</cite> collection in the new <cite>SequenceFeature</cite> objects.</dd>
+</dl>
+<p>Additionally, the <cite>StockProcessor</cite> class reads the tables from the chado stock module, eg. stockcollection, stock, stock_genotype.</p>
+</div>
+<div class="section" id="default-configuration">
+<h2>Default configuration<a class="headerlink" href="#default-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The default configuration of <cite>ChadoDBConverter</cite> is to query the <cite>feature</cite> table to only a limited list of types.  The list can be changed by sub-classing the <cite>ChadoDBConverter</cite> class and overriding the <cite>getFeatureList()</cite> method.  The <cite>featureloc</cite>, <cite>feature_relationship</cite> and <cite>pub</cite> tables will then be queried to create locations, parent-child relationships
+and publications (respectively).</p>
+</div>
+<div class="section" id="converter-configuration">
+<h2>Converter configuration<a class="headerlink" href="#converter-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Sub-classes can control how the Chado tables are used by overriding the <cite>getConfig()</cite> method and returning a configuration map.</p>
+</div>
+<div class="section" id="source-configuration">
+<h2>Source configuration<a class="headerlink" href="#source-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Example source configuration for reading from the &#8216;&#8217;C.elegans&#8217;&#8217; Chado database:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;chado-db-wormbase-c_elegans&quot;</span> <span class="na">type=</span><span class="s">&quot;chado-db&quot;</span> <span class="na">dump=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;source.db.name&quot;</span> <span class="na">value=</span><span class="s">&quot;wormbase&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;genus&quot;</span> <span class="na">value=</span><span class="s">&quot;Caenorhabditis&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;species&quot;</span> <span class="na">value=</span><span class="s">&quot;elegans&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;taxonId&quot;</span> <span class="na">value=</span><span class="s">&quot;6239&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;dataSourceName&quot;</span> <span class="na">value=</span><span class="s">&quot;WormBase&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;dataSetTitle&quot;</span> <span class="na">value=</span><span class="s">&quot;WormBase C.elegans data set&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sub-classing-the-converter">
+<h2>Sub-classing the converter<a class="headerlink" href="#sub-classing-the-converter" title="Permalink to this headline">¶</a></h2>
+<p>The processor classes can be sub-classed to allow organism or database specific configuration.  To do that, create your class (perhaps in <cite>bio/sources/chado-db/main/src/</cite>) set the <cite>processors</cite> property in your source element.  For example for reading the FlyBase Chado database there is a <cite>FlyBaseProcessor</cite> which can be configured like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;chado-db-flybase-dmel&quot;</span> <span class="na">type=</span><span class="s">&quot;chado-db&quot;</span><span class="nt">&gt;</span>
+...
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;processors&quot;</span> <span class="na">value=</span><span class="s">&quot;org.intermine.bio.dataconversion.FlyBaseProcessor&quot;</span><span class="nt">/&gt;</span>
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="current-uses">
+<h2>Current uses<a class="headerlink" href="#current-uses" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.flymine.org">FlyMine</a> uses the <cite>chado-db</cite> source for reading the &#8216;&#8217;Drosophila&#8217;&#8217; genomes from the FlyBase <cite>chado</cite> database.  The <cite>FlyBaseProcessor</cite> sub-class is used for configuration and to handle FlyBase special cases.</p>
+<p><a class="reference external" href="http://intermine.modencode.org">modMine</a> for the modENCODE project uses <cite>ChadoDBSource</cite> for reading &#8216;&#8217;D. melanogaster&#8217;&#8217; from FlyBase and to read &#8216;&#8217;C. elegans&#8217;&#8217; data from the WormBase <cite>chado</cite> database.  The <cite>WormBaseProcessor</cite> sub-class is used for configuration when reading from WormBase.</p>
+</div>
+<div class="section" id="implementation-notes-for-the-chado-db-source">
+<h2>Implementation notes for the chado-db source<a class="headerlink" href="#implementation-notes-for-the-chado-db-source" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>chado-db</cite> source is implemented by the <cite>ChadoDBConverter</cite> class which runs the <cite>ChadoProcessor`s that have been configured in the `project.xml</cite>.  The configuration looks like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;chado-db-some-database&quot;</span> <span class="na">type=</span><span class="s">&quot;chado-db&quot;</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;processors&quot;</span> <span class="na">value=</span><span class="s">&quot;org.intermine.bio.dataconversion.ChadoSequenceProcessor org.intermine.bio.dataconversion.StockProcessor&quot;</span><span class="nt">/&gt;</span>
+  ...
+</pre></div>
+</div>
+<p><cite>ChadoDBConverter</cite>.process() will create an object for each <cite>ChadoProcessor</cite> in turn, then call <cite>ChadoProcessor.process()</cite>.</p>
+<div class="section" id="chado-sequence-module-table-processing">
+<h3>Chado sequence module table processing<a class="headerlink" href="#chado-sequence-module-table-processing" title="Permalink to this headline">¶</a></h3>
+<p><cite>ChadoSequenceProcessor</cite> processes the sequence module from Chado.  The <cite>process()</cite> method handles each table in turn by calling: <cite>processFeatureTable()</cite>, <cite>processFeatureCVTermTable()</cite> etc.</p>
+<p>Each table processing method calls a result set method, eg. <cite>processFeatureTable()</cite> calls <cite>getFeatureTableResultSet()</cite> and then processes each row.  The returned <cite>ResultSet</cite> may not always include all rows from the Chado table.  For example the <cite>getFeatures()</cite> method returns a sub-set of the possible feature types and that list is used to when querying the feature table.</p>
+<p>Generally each row is made into an appropriate object, eg. in <cite>processFeatureTable()</cite>, <cite>feature</cite> table rows correspond to <cite>BioEntity</cite> objects.  Some rows of some tables are ignored (ie. not turned into objects) based on configuration.</p>
+<div class="section" id="reading-the-feature-table">
+<h4>Reading the feature table<a class="headerlink" href="#reading-the-feature-table" title="Permalink to this headline">¶</a></h4>
+<p>Handled by <cite>ChadoSequenceProcessor.processFeatureTable()</cite></p>
+<p>For each feature it calls: <cite>ChadoSequenceProcessor.makeFeatureData()</cite>, which may be overridden by subclasses.  If <cite>makeFeatureData()</cite> returns null (eg. because the sub-class does not need that feature) the row is discarded, otherwise processing of the feature continues.</p>
+<p>Based on the configuration, fields in the <cite>BioEntity</cite> are set using <cite>feature.uniquename</cite> and
+<cite>feature.name</cite> from Chado.</p>
+<p>If the <cite>residues</cite> column in the feature is set, create a <cite>Sequence</cite> object and add it to the new <cite>BioEntity</cite>.</p>
+</div>
+<div class="section" id="reading-the-featureloc-table">
+<h4>Reading the featureloc table<a class="headerlink" href="#reading-the-featureloc-table" title="Permalink to this headline">¶</a></h4>
+<p>Handled by <cite>ChadoSequenceProcessor.processLocationTable()</cite>.</p>
+<p>This method gets passed a result set with start position, end position and information from the <cite>featureloc</cite> table.  For each row from the result set it will:</p>
+<ul class="simple">
+<li>store a <cite>Location</cite> object</li>
+<li>set <cite>chromosomeLocation</cite> in the associated <cite>SequenceFeature</cite></li>
+<li>set the <cite>chromosome</cite> reference in the <cite>SequenceFeature</cite> if the <cite>srcfeature</cite> from the <cite>featureloc</cite> table is a chromosome feature</li>
+</ul>
+</div>
+<div class="section" id="reading-the-feature-relationship-table">
+<h4>Reading the feature_relationship table<a class="headerlink" href="#reading-the-feature-relationship-table" title="Permalink to this headline">¶</a></h4>
+<p>Handled by <cite>ChadoSequenceProcessor.processRelationTable()</cite>.</p>
+<p>This method calls <cite>getFeatureRelationshipResultSet()</cite> to return the relations of interest.  The relations will be used to create references and collections.</p>
+<p>The method will automatically attempt to find and set the appropriate references and collections for <cite>part_of</cite> relations.  As an example, if there is a <cite>part_of</cite> relation in the table between <cite>Gene</cite> and <cite>Transcript</cite> and there <cite>Gene.transcript</cite> reference or a <cite>Gene.transcripts</cite> collection, it will be set.</p>
+<p>There are two modes of operation, controlled by the <cite>subjectFirst</cite> parameters.  If true, order by the <cite>subject_id</cite> of the <cite>feature_relationship</cite> table so we get results like:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="27%" />
+<col width="40%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>gene1_feature_id</td>
+<td>relation_type</td>
+<td>protein1_feature_id</td>
+</tr>
+<tr class="row-even"><td>gene1_feature_id</td>
+<td>relation_type</td>
+<td>protein2_feature_id</td>
+</tr>
+<tr class="row-odd"><td>gene2_feature_id</td>
+<td>relation_type</td>
+<td>protein1_feature_id</td>
+</tr>
+<tr class="row-even"><td>gene2_feature_id</td>
+<td>relation_type</td>
+<td>protein2_feature_id</td>
+</tr>
+</tbody>
+</table>
+<p>(Assuming the unlikely case where two genes are related to two proteins)</p>
+<p>If <cite>subjectFirst</cite> is false we get results like:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="27%" />
+<col width="40%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>gene1_feature_id</td>
+<td>relation_type</td>
+<td>protein1_feature_id</td>
+</tr>
+<tr class="row-even"><td>gene2_feature_id</td>
+<td>relation_type</td>
+<td>protein1_feature_id</td>
+</tr>
+<tr class="row-odd"><td>gene1_feature_id</td>
+<td>relation_type</td>
+<td>protein2_feature_id</td>
+</tr>
+<tr class="row-even"><td>gene2_feature_id</td>
+<td>relation_type</td>
+<td>protein2_feature_id</td>
+</tr>
+</tbody>
+</table>
+<p>The first case is used when we need to set a collection in the gene, the second if we need to set a collection in proteins.</p>
+</div>
+<div class="section" id="reading-the-cvterm-table">
+<h4>Reading the cvterm table<a class="headerlink" href="#reading-the-cvterm-table" title="Permalink to this headline">¶</a></h4>
+<p>Handled by <cite>ChadoSequenceProcessor.processFeatureCVTermTable()</cite></p>
+</div>
+</div>
+</div>
+<div class="section" id="using-the-default-chado-source">
+<h2>Using the default chado source<a class="headerlink" href="#using-the-default-chado-source" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Add the chado database to your MINE_NAME.properties file, eg:</li>
+</ol>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">db.flybase.datasource.class</span><span class="o">=</span><span class="s">org.postgresql.ds.PGPoolingDataSource</span>
+<span class="na">db.flybase.datasource.dataSourceName</span><span class="o">=</span><span class="s">db.flybase</span>
+<span class="na">db.flybase.datasource.serverName</span><span class="o">=</span><span class="s">SERVER_NAME</span>
+<span class="na">db.flybase.datasource.databaseName</span><span class="o">=</span><span class="s">DATABASE_NAME</span>
+<span class="na">db.flybase.datasource.user</span><span class="o">=</span><span class="s">USER_NAME</span>
+<span class="na">db.flybase.datasource.password</span><span class="o">=</span><span class="s">SECRET_PASSWORD</span>
+<span class="na">db.flybase.datasource.maxConnections</span><span class="o">=</span><span class="s">10</span>
+<span class="na">db.flybase.driver</span><span class="o">=</span><span class="s">org.postgresql.Driver</span>
+<span class="na">db.flybase.platform</span><span class="o">=</span><span class="s">PostgreSQL</span>
+</pre></div>
+</div>
+<p>The chado database has to be on the local network.</p>
+<ol class="arabic simple" start="2">
+<li>Add source to project XML file</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;chado-db&quot;</span> <span class="na">type=</span><span class="s">&quot;chado-db&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;source.db.name&quot;</span> <span class="na">value=</span><span class="s">&quot;flybase&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;organisms&quot;</span> <span class="na">value=</span><span class="s">&quot;7227&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;dataSourceName&quot;</span> <span class="na">value=</span><span class="s">&quot;FlyBase&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;converter.class&quot;</span> <span class="na">value=</span><span class="s">&quot;org.intermine.bio.dataconversion.ChadoDBConverter&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;processors&quot;</span> <span class="na">value=</span><span class="s">&quot;org.intermine.bio.dataconversion.SequenceProcessor&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Run the build</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>MINE_NAME/integrate
+<span class="nv">$ </span><span class="o">(</span><span class="nb">cd</span> ../dbmodel <span class="o">&amp;&amp;</span> ant build-db -v<span class="o">)</span>; ant -Dsource<span class="o">=</span>chado-db -v
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../database-building/index.html"><em>Database Building</em></a> for more information on running builds.</p>
+<p>This will load the data using the default chado loader. If you want to load more data you will have to write a custom chado converter. FlyMine uses a FlyBase chado &#8220;processor&#8221; to parse interactions, etc. See <a class="reference external" href="http://https://github.com/intermine/intermine/blob/dev/bio/sources/chado-db/main/src/org/intermine/bio/dataconversion/FlyBaseProcessor.java">FlyBaseProcessor.java</a> for an example.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ensembl-core.html" title="Ensembl Core"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="variation/ensembl-snp.html" title="Ensembl SNP"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" >Data Source Library</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

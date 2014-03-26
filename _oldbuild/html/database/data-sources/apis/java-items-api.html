@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Java Items API &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Items APIs" href="index.html" />
+    <link rel="next" title="Perl Items API" href="perl-items-api.html" />
+    <link rel="prev" title="Items APIs" href="index.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="perl-items-api.html" title="Perl Items API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Items APIs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Items APIs</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Java Items API</a><ul>
+<li><a class="reference internal" href="#usage-in-a-converter">Usage in a Converter</a></li>
+<li><a class="reference internal" href="#item-methods">Item methods</a></li>
+<li><a class="reference internal" href="#creating-items-with-an-itemfactory">Creating Items with an ItemFactory</a></li>
+<li><a class="reference internal" href="#reading-writing-xml">Reading/Writing XML</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Items APIs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="perl-items-api.html"
+                        title="next chapter">Perl Items API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/data-sources/apis/java-items-api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="java-items-api">
+<h1>Java Items API<a class="headerlink" href="#java-items-api" title="Permalink to this headline">¶</a></h1>
+<p>&#8216;Items&#8217; are a data format for the InterMine system, each Item represents a Java data object that will be stored.  They are a convenient way to deal with data that is portable to other languages and has a simple XML format.</p>
+<div class="section" id="usage-in-a-converter">
+<h2>Usage in a Converter<a class="headerlink" href="#usage-in-a-converter" title="Permalink to this headline">¶</a></h2>
+<p>Items are most commonly used in a converter which provides some convenience methods.</p>
+<p>Items are usually manipulated in a converter as part of a source InterMine source.  All converters subclass <cite>DataConverter</cite> or one of its subclasses.  This provides some convenience methods.</p>
+<p>Create an item - this uses an <cite>ItemFactory</cite> (see below) which validates the class name and all fields against the data model:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Item</span> <span class="n">gene</span> <span class="o">=</span> <span class="n">createItem</span><span class="o">(</span><span class="s">&quot;Gene&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Store an item (or collection of items) to the target items database:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">store</span><span class="o">(</span><span class="n">gene</span><span class="o">);</span>
+<span class="n">store</span><span class="o">(</span><span class="n">items</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>For a simple example of a converter see the <cite>wormbase-identifiers</cite> converter.</p>
+</div>
+<div class="section" id="item-methods">
+<h2>Item methods<a class="headerlink" href="#item-methods" title="Permalink to this headline">¶</a></h2>
+<p>Item has methods to set values of attributes, references to other objects and collections of other objects.</p>
+<p>To set an attribute (a field of an Item that is a Java type, e.g. String, Integer) use <cite>setAttribute</cite>).  Note that all attribute types are treated as a String, they will be parsed to the appropriate type later.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">gene</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;symbol&quot;</span><span class="o">,</span> <span class="s">&quot;zen&quot;</span><span class="o">);</span>
+<span class="n">organism</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;taxonId&quot;</span><span class="o">,</span> <span class="s">&quot;7227&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>All items have an identifier generated for them automatically, these are used to reference other Items.  You can set a reference with to an Item identifier or by using the item itself.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">orgIdentifier</span> <span class="o">=</span> <span class="n">organism</span><span class="o">.</span><span class="na">getIdentifier</span><span class="o">();</span>
+<span class="n">gene</span><span class="o">.</span><span class="na">setReference</span><span class="o">(</span><span class="s">&quot;organism&quot;</span><span class="o">,</span> <span class="n">orgIdentifier</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">gene</span><span class="o">.</span><span class="na">setReference</span><span class="o">(</span><span class="s">&quot;organism&quot;</span><span class="o">,</span> <span class="n">organism</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Set collections of other Items:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">publications</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;();</span>
+<span class="n">publications</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pub1</span><span class="o">);</span>
+<span class="n">publications</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pub2</span><span class="o">);</span>
+<span class="n">gene</span><span class="o">.</span><span class="na">setCollection</span><span class="o">(</span><span class="n">publications</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Or add one at a time:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">gene</span><span class="o">.</span><span class="na">addToCollection</span><span class="o">(</span><span class="s">&quot;publications&quot;</span><span class="o">,</span> <span class="n">pub1</span><span class="o">);</span>
+<span class="n">gene</span><span class="o">.</span><span class="na">addToCollection</span><span class="o">(</span><span class="s">&quot;publications&quot;</span><span class="o">,</span> <span class="n">pub2</span><span class="o">.</span><span class="na">getIdentifier</span><span class="o">());</span>
+</pre></div>
+</div>
+<p>Attribute, Reference and ReferenceList (collections) can all be created independently and added to Items, this is sometimes useful in parsers to avoid holding too many Items in memory.</p>
+</div>
+<div class="section" id="creating-items-with-an-itemfactory">
+<h2>Creating Items with an ItemFactory<a class="headerlink" href="#creating-items-with-an-itemfactory" title="Permalink to this headline">¶</a></h2>
+<p>When not used in a Converter you should create Items using an ItemFactory (the Converter does this for you), this validates the class name and all attribute/reference names against the data model.  This requires that you get a Model instance (if there isn&#8217;t already one).</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;genomic&quot;</span><span class="o">);</span>
+<span class="n">ItemFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ItemFactory</span><span class="o">(</span><span class="n">model</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Create an item with the class name.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Item</span> <span class="n">gene</span> <span class="o">=</span> <span class="n">itemFactory</span><span class="o">.</span><span class="na">makeItemForClass</span><span class="o">(</span><span class="s">&quot;Gene&quot;</span><span class="o">);</span>
+<span class="n">Item</span> <span class="n">organism</span> <span class="o">=</span> <span class="n">itemFactory</span><span class="o">.</span><span class="na">makeItemForClass</span><span class="o">(</span><span class="s">&quot;Organism&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-writing-xml">
+<h2>Reading/Writing XML<a class="headerlink" href="#reading-writing-xml" title="Permalink to this headline">¶</a></h2>
+<p>To write a collection of Items to XML use <cite>FullRenderer</cite>:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">FileWriter</span> <span class="n">fw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">));</span>
+<span class="n">fw</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">FullRenderer</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">items</span><span class="o">));</span>
+<span class="n">fw</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>To read an XML file into a List of items use <cite>FullParser</cite>:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">List</span> <span class="n">items</span> <span class="o">=</span> <span class="n">FullRenderer</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">file</span><span class="o">));</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="perl-items-api.html" title="Perl Items API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Items APIs"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" >Items APIs</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

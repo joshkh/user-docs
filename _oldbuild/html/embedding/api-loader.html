@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>InterMine JavaScript API Loader &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Embedding InterMine components" href="index.html" />
+    <link rel="next" title="InterMine JavaScript Library" href="imjs.html" />
+    <link rel="prev" title="Query Results" href="../webapp/query-results/index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="imjs.html" title="InterMine JavaScript Library"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../webapp/query-results/index.html" title="Query Results"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">InterMine JavaScript API Loader</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#how-to-use">How to use</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../webapp/query-results/index.html"
+                        title="previous chapter">Query Results</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="imjs.html"
+                        title="next chapter">InterMine JavaScript Library</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/embedding/api-loader.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="intermine-javascript-api-loader">
+<span id="index-0"></span><h1>InterMine JavaScript API Loader<a class="headerlink" href="#intermine-javascript-api-loader" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="https://github.com/intermine/intermine-api-loader">GitHub repo</a> for source code.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are loading JavaScript libraries on a page you should use a loader (count of 1). Why not use ours?</p>
+</div>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>To simplify loading of CSS and JS libraries. The API Loader automatically works out the order the libraries should be loaded based on dependencies between them. It also skips libraries that already exist on a page or that pass a specific check.</p>
+</div>
+<div class="section" id="how-to-use">
+<h2>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are passing a string or an Array as the first parameter into the library these are &#64;deprecated but still working for backwards compatibility.</p>
+</div>
+<p>First you require the API Loader. You can for example use the following shorthand notation that always points to the latest version.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/api&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>Now you can use the loader by passing in an object that looks for example like so:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">intermine</span><span class="p">.</span><span class="nx">load</span><span class="p">({</span>
+  <span class="s1">&#39;js&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;JSON&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://cdn.intermine.org/js/json3/3.2.2/json3.min.js&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;setImmediate&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://cdn.intermine.org/js/setImmediate/1.0.1/setImmediate.min.js&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;example&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;test&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;async&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://cdn.intermine.org/js/async/0.2.6/async.min.js&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;depends&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;setImmediate&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;jQuery&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://cdn.intermine.org/js/jquery/1.8.2/jquery.min.js&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;depends&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;JSON&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;_&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://cdn.intermine.org/js/underscore.js/1.3.3/underscore-min.js&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;depends&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;JSON&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;Backbone&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s1">&#39;path&#39;</span><span class="o">:</span> <span class="s1">&#39;http://cdn.intermine.org/js/backbone.js/0.9.2/backbone-min.js&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;depends&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;jQuery&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// your libraries have loaded</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The object works like so:</p>
+<ol class="arabic simple">
+<li>You pass in either a <tt class="docutils literal"><span class="pre">js</span></tt> or a <tt class="docutils literal"><span class="pre">css</span></tt> object based on whether you are requesting JavaScript or CSS libraries (or both).</li>
+<li>The key inside the object, like <tt class="docutils literal"><span class="pre">jQuery</span></tt> then refers to your library. If this key is on a <tt class="docutils literal"><span class="pre">window</span></tt> object (as is the case with jQuery library), we won&#8217;t load the library, it already exists.</li>
+<li>If you do not like the previous check and want something more robust, pass a sync function under the <tt class="docutils literal"><span class="pre">test</span></tt> key. Return <tt class="docutils literal"><span class="pre">true</span></tt> if a library should NOT be loaded.</li>
+<li><tt class="docutils literal"><span class="pre">path</span></tt> represents the URL pointing to the library.</li>
+<li>Use <tt class="docutils literal"><span class="pre">depends</span></tt> key passing an Array if a library depends on other libraries in your list. In the example you can see that <tt class="docutils literal"><span class="pre">Backbone</span></tt> depends on <tt class="docutils literal"><span class="pre">jQuery</span></tt> and <tt class="docutils literal"><span class="pre">_</span></tt> (underscore.js). The appropriate loading order will be worked out from this.</li>
+<li>Check the <tt class="docutils literal"><span class="pre">err</span></tt> var passed in the callback function (second parameter).</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="imjs.html" title="InterMine JavaScript Library"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../webapp/query-results/index.html" title="Query Results"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

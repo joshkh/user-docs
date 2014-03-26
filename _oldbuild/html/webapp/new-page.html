@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>New page &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New page</a><ul>
+<li><a class="reference internal" href="#struts-config">Struts config</a></li>
+<li><a class="reference internal" href="#model-properties">model.properties</a></li>
+<li><a class="reference internal" href="#java-controller">Java controller</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/webapp/new-page.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="new-page">
+<h1>New page<a class="headerlink" href="#new-page" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial describes how to add a new page to your InterMine webapp.</p>
+<div class="section" id="struts-config">
+<h2>Struts config<a class="headerlink" href="#struts-config" title="Permalink to this headline">¶</a></h2>
+<p>Add your new page to your struts config located in your /webapp directory.</p>
+<p>struts-config-model.xml</p>
+<p>tiles-defs-model.xml</p>
+<dl class="docutils">
+<dt>/model/dataSummary.jsp</dt>
+<dd>name and location of your new JSP file</dd>
+<dt>org.flymine.web.DataSummaryController</dt>
+<dd>name and location of your new Java file</dd>
+<dt>pageName</dt>
+<dd>must match with the values set in <cite>model.properties</cite></dd>
+</dl>
+</div>
+<div class="section" id="model-properties">
+<h2>model.properties<a class="headerlink" href="#model-properties" title="Permalink to this headline">¶</a></h2>
+<p>Update your <cite>model.properties</cite> file to set which tab to use for this JSP.</p>
+<div class="highlight-xml"><div class="highlight"><pre>dataSummary.title = Data sources loaded into MalariaMine
+dataSummary.tab = dataCategories
+</pre></div>
+</div>
+<p>To create a new tab, follow the instructions on <a class="reference internal" href="layout/index.html"><em>General Layout</em></a></p>
+</div>
+<div class="section" id="java-controller">
+<h2>Java controller<a class="headerlink" href="#java-controller" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Create a new Java class</li>
+<li>It&#8217;s name and location should match what you entered in your Struts configuration files. In the above example, <cite>org.flymine.web.DataSummaryController</cite>.</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* Perform initialisation steps for displaying a tree</span>
+<span class="cm">* @author Mark Woodbridge</span>
+<span class="cm">* @author Kim Rutherford</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

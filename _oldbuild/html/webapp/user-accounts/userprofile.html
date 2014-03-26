@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Userprofile &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="User Accounts" href="index.html" />
+    <link rel="next" title="Open ID" href="open-id.html" />
+    <link rel="prev" title="User Accounts" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="open-id.html" title="Open ID"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="User Accounts"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">User Accounts</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Userprofile</a><ul>
+<li><a class="reference internal" href="#creating-a-new-userprofile-database">Creating a new UserProfile database</a></li>
+<li><a class="reference internal" href="#releasing-a-webapp-with-a-new-production-database">Releasing a webapp with a new production database</a></li>
+<li><a class="reference internal" href="#templates-and-tags">Templates and tags</a></li>
+<li><a class="reference internal" href="#back-ups">Back ups</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">User Accounts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="open-id.html"
+                        title="next chapter">Open ID</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/user-accounts/userprofile.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="userprofile">
+<h1>Userprofile<a class="headerlink" href="#userprofile" title="Permalink to this headline">¶</a></h1>
+<p>The user profile is an InterMine ObjectStore which stores Profile information such as username and password, tags, queries, lists and templates.</p>
+<div class="section" id="creating-a-new-userprofile-database">
+<h2>Creating a new UserProfile database<a class="headerlink" href="#creating-a-new-userprofile-database" title="Permalink to this headline">¶</a></h2>
+<p>First you must create the empty database in Postgres.  Use this command, replacing HOST and USER with the correct values:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>createdb userprofile -h HOST -u USER
+</pre></div>
+</div>
+<p>These commands are needed in the webapp to initialise a userprofile database:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in &lt;MINE_NAME&gt;/webapp</span>
+<span class="nv">$ </span>ant build-db-userprofile
+</pre></div>
+</div>
+</div>
+<div class="section" id="releasing-a-webapp-with-a-new-production-database">
+<h2>Releasing a webapp with a new production database<a class="headerlink" href="#releasing-a-webapp-with-a-new-production-database" title="Permalink to this headline">¶</a></h2>
+<p>If you already have a userprofile database and want to keep the data it contains, you can do this:</p>
+<ol class="arabic simple">
+<li>Verify that the <cite>serialNumber</cite> in the new production db and in the userprofile are different. Only in this case, the upgrading list process updates the lists when the user logs in</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># run in production and userprofile database.  when releasing a new porduct</span>
+<span class="k">select</span> * from intermine_metadata where <span class="nv">key</span><span class="o">=</span><span class="s1">&#39;serialNumber&#39;</span>;
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Release the webapp pointing to the new production db.</li>
+<li>In the <cite>savedbag</cite> table the field <cite>intermine_current</cite> should be set to <cite>false</cite>.</li>
+<li>When the user logs in, the upgrading list process will update the list (using <cite>bagvalues</cite> table)</li>
+</ol>
+<ul class="simple">
+<li>if there are no conflicts the flag will be set to <cite>true</cite> and the user will not have to take any action</li>
+<li>if there are issues (eg. if a gene has merged with another) the flag will be set to <cite>false</cite>, and the user will have to manually upgrade their list.</li>
+</ul>
+</div>
+<div class="section" id="templates-and-tags">
+<h2>Templates and tags<a class="headerlink" href="#templates-and-tags" title="Permalink to this headline">¶</a></h2>
+<p>Default templates and tags are defined in <cite>default-template-queries.xml</cite>.</p>
+<p>These are loaded when you build a userprofile database.</p>
+</div>
+<div class="section" id="back-ups">
+<h2>Back ups<a class="headerlink" href="#back-ups" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>cron job on production runs this script:</li>
+</ol>
+<ul class="simple">
+<li><cite>userprofile_backup_cron</cite></li>
+<li>dumps db, only saves copy if different from previous version</li>
+<li>updates sym links</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>userprofile_backup_cron script runs this script:</li>
+</ol>
+<ul class="simple">
+<li><cite>userprofile_backup</cite></li>
+<li>does the dumping</li>
+</ul>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="open-id.html" title="Open ID"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="User Accounts"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >User Accounts</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

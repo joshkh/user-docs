@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PubMed &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../../index.html" />
+    <link rel="up" title="Publications" href="index.html" />
+    <link rel="next" title="Publications" href="publications.html" />
+    <link rel="prev" title="Publications" href="index.html" /><!-- syntax highlighting -->
+<link href="../../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="publications.html" title="Publications"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Publications"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Publications</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PubMed</a><ul>
+<li><a class="reference internal" href="#types-of-data-loaded">Types of data loaded</a></li>
+<li><a class="reference internal" href="#how-to-download-the-data-files">How to download the data files</a></li>
+<li><a class="reference internal" href="#how-to-load-the-data-into-your-mine">How to load the data into your mine</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Publications</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="publications.html"
+                        title="next chapter">Publications</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/database/data-sources/library/publications/pubmed.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pubmed">
+<h1>PubMed<a class="headerlink" href="#pubmed" title="Permalink to this headline">¶</a></h1>
+<p>Data from pubmed. entire file is downloaded, only taxon IDs set in project.xml will be loaded. if nothing configured, processes all entries.</p>
+<div class="section" id="types-of-data-loaded">
+<h2>Types of data loaded<a class="headerlink" href="#types-of-data-loaded" title="Permalink to this headline">¶</a></h2>
+<p>genes, publications</p>
+</div>
+<div class="section" id="how-to-download-the-data-files">
+<h2>How to download the data files<a class="headerlink" href="#how-to-download-the-data-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2pubmed.gz">ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2pubmed.gz</a></li>
+<li><a class="reference external" href="ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz">ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz</a></li>
+</ul>
+<p>Unzip both files, save <cite>gene2pubmed</cite> under a directory named <cite>pubmed</cite>, e.g. DATA_DIR/pubmed. It&#8217;s suggested to save <cite>gene_info</cite> in a different directory, e.g. DATA_DIR/ncbi-gene, but you can always save both in pubmed directory, see how to config below.</p>
+</div>
+<div class="section" id="how-to-load-the-data-into-your-mine">
+<h2>How to load the data into your mine<a class="headerlink" href="#how-to-load-the-data-into-your-mine" title="Permalink to this headline">¶</a></h2>
+<p>After code refactory and optimization, the current PubMed coverter will make use of id resolver to parse gene information (see how to setup <a class="reference internal" href="../../id-resolvers.html"><em>Id Resolvers</em></a>), whereafter the <cite>infoFile</cite> property was removed from the config.</p>
+<p>If <cite>gene2pubmed</cite> is the only file in DATA_DIR/pubmed directory, you can remove <cite>src.data.dir.includes</cite> property, but do keep it if you place <cite>gene2pubmed</cite> and <cite>gene_info</cite> in pubmed dir at the same time.</p>
+<p>project XML example</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;pubmed-gene&quot;</span> <span class="na">type=</span><span class="s">&quot;pubmed-gene&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir&quot;</span> <span class="na">location=</span><span class="s">&quot;DATA_DIR/pubmed/&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;pubmed.organisms&quot;</span> <span class="na">value=</span><span class="s">&quot;7227&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir.includes&quot;</span> <span class="na">value=</span><span class="s">&quot;gene2pubmed&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>project XML example for InterMine 1.1 and older</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;pubmed-gene&quot;</span> <span class="na">type=</span><span class="s">&quot;pubmed-gene&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir&quot;</span> <span class="na">location=</span><span class="s">&quot;DATA/pubmed/&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;pubmed.organisms&quot;</span> <span class="na">value=</span><span class="s">&quot;7227&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir.includes&quot;</span> <span class="na">value=</span><span class="s">&quot;gene2pubmed&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;infoFile&quot;</span> <span class="na">location=</span><span class="s">&quot;DATA_DIR/ncbi-gene/gene_info&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="publications.html" title="Publications"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Publications"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" >Publications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

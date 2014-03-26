@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>InterMine User Tracking &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Monitoring Site Usage" href="index.html" />
+    <link rel="next" title="Search engines" href="search-engines.html" />
+    <link rel="prev" title="Google Analytics" href="google-analytics.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="search-engines.html" title="Search engines"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="google-analytics.html" title="Google Analytics"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Monitoring Site Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">InterMine User Tracking</a><ul>
+<li><a class="reference internal" href="#usage-page-in-the-webapp">Usage page in the webapp</a></li>
+<li><a class="reference internal" href="#import-export-xml">Import/Export XML</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="google-analytics.html"
+                        title="previous chapter">Google Analytics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="search-engines.html"
+                        title="next chapter">Search engines</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/monitoring-site-usage/trackers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="intermine-user-tracking">
+<h1>InterMine User Tracking<a class="headerlink" href="#intermine-user-tracking" title="Permalink to this headline">¶</a></h1>
+<p>The following user activities are recorded during browsing of all mine webapps, to track the usage:</p>
+<ul class="simple">
+<li>template query executions</li>
+<li>query executions from the QueryBuilder</li>
+<li>list creations by upload, operations (copy, union...) or from result tables</li>
+<li>list executions</li>
+<li>searches by keyword</li>
+<li>user logins</li>
+</ul>
+<p>The trackers, recording all tracks, are defined in the <cite>global.web.properties</cite> file under the property <cite>webapp.trackers</cite>.</p>
+<p>All tracks are saved into specific tables, created automatically, if they don&#8217;t already exist, in the userprofile database.</p>
+<p>The tables are:</p>
+<ul class="simple">
+<li>templatetrack</li>
+<li>querytrack</li>
+<li>listtrack</li>
+<li>searchtrack</li>
+<li>logintrack</li>
+</ul>
+<p>The table are created at the startup of the webapp.</p>
+<p>If some table definitions needed to be updated, the browsing of the webapp is blocked, and a warning message is displayed.</p>
+<p>Run the ant task <cite>update-templatetrack-table</cite> in the webapp directory and then restart the webapp.</p>
+<div class="section" id="usage-page-in-the-webapp">
+<h2>Usage page in the webapp<a class="headerlink" href="#usage-page-in-the-webapp" title="Permalink to this headline">¶</a></h2>
+<p>You can access to the <em>Usage</em> page, via the MyMine page, only if you are a superuser.</p>
+<p>The page shows all tracks grouped in these sections: Template usage, Custom queries executed, Logins, Keyword Searches, List Analysis page views and List Creation.</p>
+<p>Each section contains:</p>
+<ul class="simple">
+<li>a diagram showing the trend of that specific track during the time range selected: 1d, 5d, 1m, 3m, 6m, 1y. The diagrams point out the number of tracks per day (number of template query execution, number the query execution....) without specify wich template or type query(Gene, Protein...) has been executed.</li>
+<li>a table showing the number of tracks for each template, type of query, type of list....</li>
+</ul>
+<p>Furthemore, in the &#8216;&#8217;Template usage&#8217;&#8217; section, there is a pie diagram showing the first 9 most popular templates and their number of executions in the time range selected: last 2 weeks, last month, last 3 months, last year.</p>
+<p>Under the label &#8216;Other&#8217; the number of executions of templates from 10th to 15th position.</p>
+</div>
+<div class="section" id="import-export-xml">
+<h2>Import/Export XML<a class="headerlink" href="#import-export-xml" title="Permalink to this headline">¶</a></h2>
+<p>Import and export XML functionalities allow you to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>export all tracks from the userprofile database into an XML file</li>
+<li>import all tracks from an XML file into the userprofile database</li>
+</ul>
+</div></blockquote>
+<p>The import functionality generates the tracker tables, if these haven&#8217;t been created before.</p>
+<p>When you release a webapp, you may need to recreate the userprofile database without losing all tracks saved until that moment.
+Before running <cite>create-db-userprofile</cite>, execute <cite>write-userprofile-xml</cite> in order to save all the tracks into the <cite>userprofile.xml</cite> file.</p>
+<p>The file has the following structure:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;userprofiles&gt;</span>
+<span class="nt">&lt;tracks&gt;</span>
+<span class="nt">&lt;templatetracks&gt;</span>
+<span class="nt">&lt;templatetrack</span> <span class="na">templatename=</span><span class="s">&quot;fourConstraints&quot;</span> <span class="na">username=</span><span class="s">&quot;butano@flymine.org&quot;</span> <span class="na">sessionidentifier=</span><span class="s">&quot;18FB96389B8C44817780B1B778C6F1C2&quot;</span> <span class="na">timestamp=</span><span class="s">&quot;2011-05-06 14:43:42.779&quot;</span><span class="nt">&gt;&lt;/templatetrack&gt;</span>
+...
+<span class="nt">&lt;/templatetracks&gt;</span>
+<span class="nt">&lt;logintracks&gt;</span>
+<span class="nt">&lt;logintrack</span> <span class="na">username=</span><span class="s">&quot;butano@flymine.org&quot;</span> <span class="na">timestamp=</span><span class="s">&quot;2011-05-17 16:27:38.729&quot;</span><span class="nt">&gt;&lt;/logintrack&gt;</span>
+...
+<span class="nt">&lt;/logintracks&gt;</span>
+<span class="nt">&lt;listtracks&gt;</span>
+<span class="nt">&lt;listtrack</span> <span class="na">type=</span><span class="s">&quot;Company&quot;</span> <span class="na">count=</span><span class="s">&quot;2&quot;</span> <span class="na">buildmode=</span><span class="s">&quot;IDENTIFIERS&quot;</span> <span class="na">event=</span><span class="s">&quot;CREATION&quot;</span> <span class="na">username=</span><span class="s">&quot;butano@flymine.org&quot;</span> <span class="na">sessionidentifier=</span><span class="s">&quot;65C4AD9C3C3EEC86FDB88BAC9EFFC7FF&quot;</span>
+<span class="na">timestamp=</span><span class="s">&quot;2011-05-18 09:42:16.905&quot;</span><span class="nt">&gt;&lt;/listtrack&gt;</span>
+...
+<span class="nt">&lt;/listtracks&gt;</span>
+<span class="nt">&lt;querytracks&gt;</span>
+<span class="nt">&lt;querytrack</span> <span class="na">type=</span><span class="s">&quot;Address&quot;</span> <span class="na">username=</span><span class="s">&quot;butano@flymine.org&quot;</span> <span class="na">sessionidentifier=</span><span class="s">&quot;EDD0090DE148413B1B35E8DFF2FE4CF1&quot;</span> <span class="na">timestamp=</span><span class="s">&quot;2011-05-18 10:40:29.961&quot;</span><span class="nt">&gt;&lt;/querytrack&gt;</span>
+...
+<span class="nt">&lt;/querytracks&gt;</span>
+<span class="nt">&lt;searchtracks&gt;</span>
+<span class="nt">&lt;searchtrack</span> <span class="na">keyword=</span><span class="s">&quot;CompanyA&quot;</span> <span class="na">username=</span><span class="s">&quot;&quot;</span> <span class="na">sessionidentifier=</span><span class="s">&quot;C83EAE50F49A7777E15C69AF31412839&quot;</span> <span class="na">timestamp=</span><span class="s">&quot;2011-05-18 12:38:09.0&quot;</span><span class="nt">&gt;&lt;/searchtrack&gt;</span>
+...
+<span class="nt">&lt;/searchtracks&gt;&lt;/tracks&gt;&lt;/userprofiles&gt;</span>
+</pre></div>
+</div>
+<p>Then run <cite>create-db-userprofile</cite> and <cite>read-userprofile-xml</cite></p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="search-engines.html" title="Search engines"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="google-analytics.html" title="Google Analytics"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Monitoring Site Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

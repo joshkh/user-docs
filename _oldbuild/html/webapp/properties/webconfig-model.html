@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data and Widget Configuration &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Customise Web Application" href="index.html" />
+    <link rel="next" title="Class keys" href="class-keys.html" />
+    <link rel="prev" title="Features" href="web-properties.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="class-keys.html" title="Class keys"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="web-properties.html" title="Features"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Customise Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data and Widget Configuration</a><ul>
+<li><a class="reference internal" href="#field-configuration">Field Configuration</a></li>
+<li><a class="reference internal" href="#displaying-data-on-report-pages">Displaying Data on Report pages</a></li>
+<li><a class="reference internal" href="#export-configuration">Export Configuration</a></li>
+<li><a class="reference internal" href="#widget-configuration">Widget Configuration</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="web-properties.html"
+                        title="previous chapter">Features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="class-keys.html"
+                        title="next chapter">Class keys</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/properties/webconfig-model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-and-widget-configuration">
+<h1>Data and Widget Configuration<a class="headerlink" href="#data-and-widget-configuration" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>webconfig-model.xml</cite> file configures aspects of how data appears on the InterMine webapp.</p>
+<p>This file allows for inheritance - a subclass will inherit from its parent class but only if that subclass has no configuration.  Configuration settings for the parent class do not overwrite settings for the subclass.</p>
+<div class="section" id="field-configuration">
+<h2>Field Configuration<a class="headerlink" href="#field-configuration" title="Permalink to this headline">¶</a></h2>
+<p>You can configure which fields are displayed on report and result pages for each class in your model.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="54%" />
+<col width="7%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute name</th>
+<th class="head">purpose</th>
+<th class="head">required?</th>
+<th class="head">default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>fieldExpr</td>
+<td>field name</td>
+<td>yes</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>label</td>
+<td>human readable name</td>
+<td>no</td>
+<td>generated automagically</td>
+</tr>
+<tr class="row-even"><td>showInInlineCollection</td>
+<td>show field in inline collection (on report pages)</td>
+<td>no</td>
+<td>true</td>
+</tr>
+<tr class="row-odd"><td>showInSummary</td>
+<td>add field to query when user clicks on &#8216;Summary&#8217; button in  QueryBuilder</td>
+<td>no</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>showInResults</td>
+<td>show field in results table</td>
+<td>no</td>
+<td>true</td>
+</tr>
+<tr class="row-odd"><td>outerInSummary</td>
+<td>configure outer-joins when user clicks on &#8216;Summary&#8217; in QueryBuilder</td>
+<td>no</td>
+<td>false</td>
+</tr>
+<tr class="row-even"><td>doNotTruncate</td>
+<td>don&#8217;t truncate display</td>
+<td>no</td>
+<td>false</td>
+</tr>
+<tr class="row-odd"><td>fieldExporter</td>
+<td>specify class to export file field</td>
+<td>no</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>sectionOnRight</td>
+<td>show on the right side of the page</td>
+<td>no</td>
+<td>false</td>
+</tr>
+<tr class="row-odd"><td>sectionTitle</td>
+<td>if sectionOnRight=&#8221;true&#8221;, title for section on right</td>
+<td>no</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>openByDefault</td>
+<td>if sectionOnRight=&#8221;true&#8221;, whether or not this section should be open</td>
+<td>no</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<div class="highlight-xml"><pre>&lt;class className="org.flymine.model.genomic.Protein"&gt;
+  &lt;fields&gt;
+    &lt;fieldconfig fieldExpr="primaryIdentifier"/&gt;
+    &lt;fieldconfig fieldExpr="primaryAccession"/&gt;
+    &lt;fieldconfig fieldExpr="organism.name"/&gt;
+    &lt;fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" /&gt;
+  &lt;/fields&gt;
+  &lt;bagdisplayers&gt;
+   &lt; -- attribute links can now be displayed on protein list analysis pages --&gt;
+   &lt;displayer src="attributeLinkDisplayer.tile"/&gt;
+  &lt;/bagdisplayers&gt;
+&lt;/class&gt;</pre>
+</div>
+</div>
+<div class="section" id="displaying-data-on-report-pages">
+<h2>Displaying Data on Report pages<a class="headerlink" href="#displaying-data-on-report-pages" title="Permalink to this headline">¶</a></h2>
+<p>ReportDisplayers allow custom display of particular data types on report pages, typically to replace default tables with more appropriate presentation of data.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.CytoscapeNetworkDisplayer&quot;</span>
+                 <span class="na">jspName=</span><span class="s">&quot;model/cytoscapeNetworkDisplayer.jsp&quot;</span>
+                 <span class="na">replacesFields=</span><span class="s">&quot;interactions&quot;</span>
+                 <span class="na">placement=</span><span class="s">&quot;Interactions&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="export-configuration">
+<h2>Export Configuration<a class="headerlink" href="#export-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Users can export data from InterMine in comma or tab-delimited files.  InterMine also allows for the addition of custom exporters.  To add a custom exporter, create a Java class to format the data and add an entry to the web config file, for example:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;tableExportConfig</span> <span class="na">id=</span><span class="s">&quot;sequenceExporter&quot;</span> <span class="na">actionPath=</span><span class="s">&quot;/exportAction?type=sequenceExporter&quot;</span>
+                   <span class="na">className=</span><span class="s">&quot;org.intermine.bio.web.export.SequenceHttpExporter&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;tableExportConfig</span> <span class="na">id=</span><span class="s">&quot;gff3Exporter&quot;</span> <span class="na">actionPath=</span><span class="s">&quot;/exportAction?type=gff3Exporter&quot;</span>
+                   <span class="na">className=</span><span class="s">&quot;org.intermine.bio.web.export.GFF3HttpExporter&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="widget-configuration">
+<h2>Widget Configuration<a class="headerlink" href="#widget-configuration" title="Permalink to this headline">¶</a></h2>
+<p>At the bottom of the config file are the configuration entries for widgets.  Please see [wiki:Widgets] for detailed information about how to configure widgets.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;enrichmentwidgetdisplayer</span> <span class="na">id=</span><span class="s">&quot;publication_enrichment&quot;</span>
+                           <span class="na">title=</span><span class="s">&quot;Publication Enrichment&quot;</span>
+                           <span class="na">description=</span><span class="s">&quot;Publications enriched for genes in this list.&quot;</span>
+                           <span class="na">label=</span><span class="s">&quot;Publication&quot;</span>
+                           <span class="na">startClass=</span><span class="s">&quot;Gene&quot;</span>
+                           <span class="na">startClassDisplay=</span><span class="s">&quot;primaryIdentifier&quot;</span>
+                           <span class="na">enrich=</span><span class="s">&quot;publications.title&quot;</span>
+                           <span class="na">enrichIdentifier=</span><span class="s">&quot;publications.pubMedId&quot;</span>
+                           <span class="na">constraints=</span><span class="s">&quot;organism.name=[list],primaryIdentifier  = null&quot;</span>
+                           <span class="na">typeClass=</span><span class="s">&quot;org.intermine.model.bio.Gene&quot;</span>
+                           <span class="na">views=</span><span class="s">&quot;secondaryIdentifier, symbol, organism.name,</span>
+<span class="s">                                 publications.title, publications.firstAuthor,</span>
+<span class="s">                                 publications.journal, publications.year, publications.pubMedId&quot;</span>
+                           <span class="na">externalLink=</span><span class="s">&quot;http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;amp;db=PubMed&amp;amp;dopt=Abstract&amp;amp;list_uids=&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="class-keys.html" title="Class keys"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="web-properties.html" title="Features"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Customise Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

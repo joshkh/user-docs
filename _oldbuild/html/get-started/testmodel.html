@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testmodel &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Get started" href="index.html" />
+    <link rel="next" title="InterMine Tests" href="intermine-tests.html" />
+    <link rel="prev" title="Tutorial - Configure your InterMine webapp!" href="tutorial/webapp.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="intermine-tests.html" title="InterMine Tests"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial/webapp.html" title="Tutorial - Configure your InterMine webapp!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial/webapp.html"
+                        title="previous chapter">Tutorial - Configure your InterMine webapp!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intermine-tests.html"
+                        title="next chapter">InterMine Tests</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/get-started/testmodel.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testmodel">
+<h1>Testmodel<a class="headerlink" href="#testmodel" title="Permalink to this headline">¶</a></h1>
+<p>Create a file called <cite>testmodel.properties</cite></p>
+<ul class="simple">
+<li>This file tells the testmodel application which databases to use.</li>
+<li>You will need to change the properties to your own database server and database username/password.</li>
+<li>Put it in <cite>~/.intermine</cite> with the following contents.</li>
+</ul>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">db.userprofile-test.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.userprofile-test.datasource.databaseName</span><span class="o">=</span><span class="s">userprofile-testmodel</span>
+<span class="na">db.userprofile-test.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.userprofile-test.datasource.password</span><span class="o">=</span><span class="s">PASSWORD</span>
+
+<span class="na">db.unittest.datasource.serverName</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">db.unittest.datasource.databaseName</span><span class="o">=</span><span class="s">unittest</span>
+<span class="na">db.unittest.datasource.user</span><span class="o">=</span><span class="s">USERNAME</span>
+<span class="na">db.unittest.datasource.password</span><span class="o">=</span><span class="s">PASSWORD</span>
+
+<span class="na">project.sitePrefix</span><span class="o">=</span><span class="s">http://www.flymine.org/flymine</span>
+<span class="na">project.releaseVersion</span><span class="o">=</span><span class="s">test</span>
+
+<span class="na">webapp.deploy.url</span><span class="o">=</span><span class="s">http://localhost:8080</span>
+<span class="na">webapp.baseurl</span><span class="o">=</span><span class="s">http://localhost:8080</span>
+<span class="na">webapp.path</span><span class="o">=</span><span class="s">intermine-test</span>
+<span class="na">webapp.manager</span><span class="o">=</span><span class="s">TOMCAT_MANAGER</span>
+<span class="na">webapp.password</span><span class="o">=</span><span class="s">TOMCAT_PASSWORD</span>
+<span class="na">webapp.logdir</span><span class="o">=</span><span class="s">/var/log</span>
+<span class="na">superuser.account</span><span class="o">=</span><span class="s">SUPERUSER_EMAIL</span>
+
+<span class="na">project.rss</span><span class="o">=</span><span class="s">NEWS-FEED</span>
+
+<span class="c"># You don&#39;t need to change these</span>
+<span class="na">webapp.os.alias</span><span class="o">=</span><span class="s">os.unittest</span>
+<span class="na">webapp.userprofile.os.alias</span><span class="o">=</span><span class="s">osw.userprofile-test</span>
+<span class="na">project.standalone</span><span class="o">=</span><span class="s">true</span>
+</pre></div>
+</div>
+<p>Manually create the databases needed by the testmodel application. Execute:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>createdb testmodel-webapp
+<span class="nv">$ </span>createdb testmodel-webapp-userprofile
+</pre></div>
+</div>
+<p>Initialise the two databases:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>testmodel/dbmodel
+<span class="nv">$ </span>ant clean build-db
+<span class="nv">$ </span>ant insert-data-unittest
+<span class="nv">$ </span><span class="nb">cd </span>testmodel/webapp/main
+<span class="nv">$ </span>ant build-db-userprofile
+</pre></div>
+</div>
+<p>Build the testmodel web application and release to the running tomcat:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>testmodel/webapp/main
+<span class="nv">$ </span>ant default release-webapp
+</pre></div>
+</div>
+<p>If you have previously released a webapp to <cite>/intermine-test</cite> you will need to remove it as well:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>testmodel/webapp/main
+<span class="nv">$ </span>ant default remove-webapp release-webapp
+</pre></div>
+</div>
+<p>Browse to <a class="reference external" href="http://localhost:8080/intermine-test">http://localhost:8080/intermine-test</a> to view the web interface for the testmodel application.</p>
+<span class="target" id="index-0"></span></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="intermine-tests.html" title="InterMine Tests"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial/webapp.html" title="Tutorial - Configure your InterMine webapp!"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

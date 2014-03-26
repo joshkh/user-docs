@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Region Search &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Customise Web Application" href="../properties/index.html" />
+    <link rel="prev" title="General Layout" href="../layout/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../properties/index.html" title="Customise Web Application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../layout/index.html" title="General Layout"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Region Search</a><ul>
+<li><a class="reference internal" href="#bioseginstallation">BiosegInstallation</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#region-search-v2">Region Search V2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../layout/index.html"
+                        title="previous chapter">General Layout</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../properties/index.html"
+                        title="next chapter">Customise Web Application</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/region-search/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="region-search">
+<h1>Region Search<a class="headerlink" href="#region-search" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bioseginstallation">
+<h2>BiosegInstallation<a class="headerlink" href="#bioseginstallation" title="Permalink to this headline">¶</a></h2>
+<p>You must have <cite>Bioseg</cite> installed to use the region search.</p>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p><cite>struts-config-model.xml</cite></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/initGenomicRegionSearchOptions&quot;</span> <span class="na">type=</span><span class="s">&quot;org.intermine.bio.web.struts.GenomicRegionSearchOptionsController&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/genomicRegionSearch&quot;</span> <span class="na">forward=</span><span class="s">&quot;genomicRegionSearchOptions.page&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/genomicRegionSearchResults&quot;</span> <span class="na">forward=</span><span class="s">&quot;genomicRegionSearchResults.page&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;action</span> <span class="na">input=</span><span class="s">&quot;/genomicRegionSearchOptionsBase.jsp&quot;</span> <span class="na">path=</span><span class="s">&quot;/genomicRegionSearchAction&quot;</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchForm&quot;</span> <span class="na">scope=</span><span class="s">&quot;request&quot;</span> <span class="na">type=</span><span class="s">&quot;org.intermine.bio.web.struts.GenomicRegionSearchAction&quot;</span> <span class="nt">&gt;</span>
+  <span class="nt">&lt;forward</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchResults&quot;</span> <span class="na">path=</span><span class="s">&quot;/genomicRegionSearchResults.do&quot;</span> <span class="na">redirect=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;forward</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchOptions&quot;</span> <span class="na">path=</span><span class="s">&quot;/genomicRegionSearch.do&quot;</span> <span class="na">redirect=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/genomicRegionSearchAjax&quot;</span> <span class="na">type=</span><span class="s">&quot;org.intermine.bio.web.struts.GenomicRegionSearchAjaxAction&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><cite>tiles-defs-model.xml</cite></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchOptions.page&quot;</span> <span class="na">extends=</span><span class="s">&quot;layout.template&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">&quot;body&quot;</span> <span class="na">value=</span><span class="s">&quot;genomicRegionSearchOptions.tile&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">&quot;pageName&quot;</span> <span class="na">value=</span><span class="s">&quot;genomicRegionSearch&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/definition&gt;</span>
+<span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchOptions.tile&quot;</span> <span class="na">path=</span><span class="s">&quot;/model/genomicRegionSearchOptionsBase.jsp&quot;</span>  <span class="na">controllerUrl=</span><span class="s">&quot;/initGenomicRegionSearchOptions.do&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchResults.page&quot;</span> <span class="na">extends=</span><span class="s">&quot;layout.template&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">&quot;body&quot;</span> <span class="na">value=</span><span class="s">&quot;/model/genomicRegionSearchResultsBase.jsp&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">&quot;pageName&quot;</span> <span class="na">value=</span><span class="s">&quot;genomicRegionSearchResults&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/definition&gt;</span>
+</pre></div>
+</div>
+<p><cite>struts-config-form-model.xml</cite></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;form-bean</span> <span class="na">name=</span><span class="s">&quot;genomicRegionSearchForm&quot;</span> <span class="na">type=</span><span class="s">&quot;org.intermine.bio.web.struts.GenomicRegionSearchForm&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;organism&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;featureTypes&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String[]&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;pasteInput&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;fileInput&quot;</span> <span class="na">type=</span><span class="s">&quot;org.apache.struts.upload.FormFile&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;whichInput&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;dataFormat&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span> <span class="na">initial=</span><span class="s">&quot;isNotInterBaseCoordinate&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;form-property</span> <span class="na">name=</span><span class="s">&quot;extendedRegionSize&quot;</span> <span class="na">type=</span><span class="s">&quot;java.lang.String&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/form-bean&gt;</span>
+</pre></div>
+</div>
+<p><cite>model.properties</cite></p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">genomicRegionSearch.title</span> <span class="o">=</span> <span class="s">Overlap features search from a new list of Genomic Regions</span>
+<span class="na">genomicRegionSearch.isNotMultipart</span> <span class="o">=</span> <span class="s">The request is not a file upload request</span>
+<span class="na">genomicRegionSearch.spanMisformatted</span> <span class="o">=</span> <span class="s">{0} is in a wrong format</span>
+<span class="na">genomicRegionSearch.spanFieldSelection</span> <span class="o">=</span> <span class="s">Please select some {0}</span>
+<span class="na">genomicRegionSearch.noSpanPaste</span> <span class="o">=</span> <span class="s">You need to type/paste in some genomic regions</span>
+<span class="na">genomicRegionSearch.noSpanFile</span> <span class="o">=</span> <span class="s">You need to type/paste in some genomic regions or select a file to upload</span>
+<span class="na">genomicRegionSearch.isNotText</span> <span class="o">=</span> <span class="s">{0} is an invalid file type - file must be in plain text format</span>
+<span class="na">genomicRegionSearch.noSpanFileOrEmpty</span> <span class="o">=</span> <span class="s">The file you specified does not exist or is empty</span>
+<span class="na">genomicRegionSearch.spanInWrongformat</span> <span class="o">=</span> <span class="s">{0} is in a wrong format</span>
+<span class="na">genomicRegionSearch.spanInputType</span> <span class="o">=</span> <span class="s">Input type can&#39;t be solved</span>
+<span class="na">genomicRegionSearch.allRegionInvalid</span> <span class="o">=</span> <span class="s">All regions are invalid. Please do a new search.</span>
+<span class="na">genomicRegionSearch.organismEmpty</span> <span class="o">=</span> <span class="s">Organism is empty, please check the data is loaded.</span>
+
+<span class="na">genomicRegionSearchOptions.tab</span> <span class="o">=</span> <span class="s">genomicRegionSearch</span>
+<span class="na">genomicRegionSearchOptions.title</span> <span class="o">=</span> <span class="s">Genomic Regions Search</span>
+<span class="na">genomicRegionSearchResults.tab</span> <span class="o">=</span> <span class="s">genomicRegionSearch</span>
+<span class="na">genomicRegionSearchResults.title</span> <span class="o">=</span> <span class="s">Genomic Regions Search Results</span>
+
+<span class="na">menu.genomicRegionSearch</span> <span class="o">=</span> <span class="s">Regions</span>
+<span class="na">menu.genomicRegionSearchOptions</span> <span class="o">=</span> <span class="s">Genomic Region Search</span>
+<span class="na">menu.genomicRegionSearchResults</span> <span class="o">=</span> <span class="s">Genomic Region Search Results</span>
+</pre></div>
+</div>
+<p><cite>web.properties</cite></p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">genomicRegionSearch.display</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">genomicRegionSearch.service</span> <span class="o">=</span>
+<span class="na">genomicRegionSearch.optionsJavascript</span> <span class="o">=</span>
+<span class="na">genomicRegionSearch.resultsJavascript</span> <span class="o">=</span>
+<span class="na">genomicRegionSearch.optionsCss</span> <span class="o">=</span>
+<span class="na">genomicRegionSearch.resultsCss</span> <span class="o">=</span>
+<span class="c">## Make sure pre-defined organisms have chromosome location information in the database</span>
+<span class="na">genomicRegionSearch.defaultOrganisms</span> <span class="o">=</span> <span class="s">D. melanogaster</span>
+<span class="c">## Exclude feature types for all organisms, comma separated</span>
+<span class="na">genomicRegionSearch.featureTypesExcluded.global</span> <span class="o">=</span> <span class="s">GeneFlankingRegion,YouNameItClass</span>
+<span class="c">## Exclude feature types for specified organism, semi-colon separated</span>
+<span class="na">genomicRegionSearch.featureTypesExcluded.byOrganism</span> <span class="o">=</span> <span class="s">D. melanogaster:GeneFlankingRegion,YouNameItClass;</span>
+<span class="na">genomicRegionSearch.defaultSpans</span> <span class="o">=</span> <span class="s">2L:14615455..14619002\\n2R:5866646..5868384\\n3R:2578486..2580016</span>
+<span class="na">genomicRegionSearch.caption</span> <span class="o">=</span> <span class="s">Search for features that overlap a list of genome coordinates you enter or upload, e.g. &lt;b&gt;2L:11334..12296&lt;/b&gt;</span>
+<span class="na">genomicRegionSearch.howTo</span> <span class="o">=</span> <span class="s">&lt;ul&gt;\</span>
+<span class="s">                              &lt;li&gt;Genome regions in the following formats are accepted:\</span>
+<span class="s">                                  &lt;ul&gt;\</span>
+<span class="s">                                      &lt;li&gt;&lt;b&gt;chromosome:start..end&lt;/b&gt;, e.g. &lt;i&gt;2L:11334..12296&lt;/i&gt;&lt;/li&gt;\</span>
+<span class="s">                                      &lt;li&gt;&lt;b&gt;chromosome:start-end&lt;/b&gt;, e.g. &lt;i&gt;2R:5866746-5868284&lt;/i&gt; or &lt;i&gt;chrII:14646344-14667746&lt;/i&gt;&lt;/li&gt;\</span>
+<span class="s">                                      &lt;li&gt;&lt;b&gt;tab delimited&lt;/b&gt;&lt;/li&gt;\</span>
+<span class="s">                                  &lt;/ul&gt;\</span>
+<span class="s">                              &lt;li&gt;Both &lt;b&gt;base coordinate&lt;/b&gt; (e.g. BLAST, GFF/GFF3) and &lt;b&gt;interbase coordinate&lt;/b&gt; (e.g. UCSC BED, Chado) systems are supported, users need to explicitely select one. By default, the base coordinate is selected.&lt;/li&gt;\</span>
+<span class="s">                              &lt;li&gt;Each genome region needs to take a &lt;b&gt;new line&lt;/b&gt;.&lt;/li&gt;\</span>
+<span class="s">                          &lt;/ul&gt;</span>
+<span class="c">## Query fields when export results as csv/tsv</span>
+<span class="na">genomicRegionSearch.query.Gene.views</span> <span class="o">=</span> <span class="s">{0}.primaryIdentifier,{0}.symbol,{0}.chromosomeLocation.locatedOn.primaryIdentifier,{0}.chromosomeLocation.start,{0}.chromosomeLocation.end,{0}.organism.shortName</span>
+<span class="na">genomicRegionSearch.query.Gene.sortOrder</span> <span class="o">=</span> <span class="s">{0}.chromosomeLocation.start asc</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Update defaultOrganisms property as needed</li>
+<li>to disable genomic region search, set <cite>genomicRegionSearch.display = false</cite></li>
+<li>also add <cite>genomicRegionSearch</cite> to <cite>layout.fixed</cite>, e.g.</li>
+</ul>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">layout.fixed</span> <span class="o">=</span> <span class="s">begin,template,templates,bag,customQuery,query,error,api,genomicRegionSearch</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>add to &#8216;&#8217;&#8216;genomic_precompute.properties&#8217;&#8216;&#8217;, note: do not duplicate the query number</li>
+</ul>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">precompute.query.30</span> <span class="o">=</span> <span class="s">SELECT a3_.shortName AS a1_, a4_.class AS a2_ FROM org.intermine.model.bio.Organism AS a3_, org.intermine.model.bio.SequenceFeature AS a4_ WHERE a4_.organism CONTAINS a3_</span>
+
+<span class="na">precompute.query.31</span> <span class="o">=</span> <span class="s">SELECT a4_.class AS a1_, a5_.name AS a2_, a5_.description AS a3_ FROM org.intermine.model.bio.SequenceFeature AS a4_, org.intermine.model.bio.SOTerm AS a5_ WHERE a4_.sequenceOntologyTerm CONTAINS a5_</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="region-search-v2">
+<h3>Region Search V2<a class="headerlink" href="#region-search-v2" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Search page</dt>
+<dd>This page can be kept as it is, but the query can be constructed and sent to the server side by webservice. The Structs elements can be removed.</dd>
+<dt>GenomicRegionSearchService</dt>
+<dd><dl class="first last docutils">
+<dt>This class has the methods to:</dt>
+<dd><ul class="first last simple">
+<li>generate data (JSON) for search page</li>
+<li>parse search form and valid input</li>
+<li>generate search queries (one region with one query)</li>
+<li>generate results table and download/galaxy links</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>This class can be basically replaced by webservices + html</p>
+<dl class="docutils">
+<dt>Update IQL query to pathquery</dt>
+<dd>Currently, region query is constructed by lQL (Intermine Query Language) due to lack of implementation on range constraint in pathquery at the time we developed it. pdate IQL to pathqueries and send by webserive, the output will be a list of results tables or a single results table grouped by region.</dd>
+</dl>
+<p>Ref <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchUtil.java#L270-497">https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchUtil.java#L270-497</a></p>
+<dl class="docutils">
+<dt>Query fields:</dt>
+<dd><dl class="first last docutils">
+<dt>In the IQL</dt>
+<dd>Ref <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchUtil.java#L318-323">https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchUtil.java#L318-323</a></dd>
+<dt>In ResultRow</dt>
+<dd>Ref <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchQueryRunner.java#L186-212">https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchQueryRunner.java#L186-212</a></dd>
+<dt>In Results table</dt>
+<dd>Ref <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchService.java#L1106-1112">https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchService.java#L1106-1112</a></dd>
+</dl>
+</dd>
+<dt>Polling</dt>
+<dd>We create a synchronizedMap hold all the query results and put it in http request.On the results page, there is a checker (javascript) checking the size of the map, so a progress bar will be updating. The results table will be generated once 10 results return, the pager will be updated dynamically. he whole part will be replaced by InterMine results table.</dd>
+</dl>
+<p>Ref <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchQueryRunner.java#L129-223">https://github.com/intermine/intermine/blob/dev/bio/webapp/src/org/intermine/bio/web/logic/GenomicRegionSearchQueryRunner.java#L129-223</a></p>
+<dl class="docutils">
+<dt>Results table and download links</dt>
+<dd>Replaced by InterMine results table.</dd>
+</dl>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../properties/index.html" title="Customise Web Application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../layout/index.html" title="General Layout"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

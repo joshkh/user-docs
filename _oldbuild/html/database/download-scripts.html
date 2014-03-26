@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Download Scripts &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Database" href="index.html" />
+    <link rel="next" title="Data Sources" href="data-sources/index.html" />
+    <link rel="prev" title="Database" href="index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="data-sources/index.html" title="Data Sources"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Database"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Database</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data Download Scripts</a><ul>
+<li><a class="reference internal" href="#location">Location</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#data-source-configuration">Data Source Configuration</a></li>
+<li><a class="reference internal" href="#running">Running</a></li>
+<li><a class="reference internal" href="#adding-a-new-source">Adding a new Source</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Database</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="data-sources/index.html"
+                        title="next chapter">Data Sources</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/database/download-scripts.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-download-scripts">
+<h1>Data Download Scripts<a class="headerlink" href="#data-download-scripts" title="Permalink to this headline">¶</a></h1>
+<p>The DataDownloader system uses a plugin architecture to make it more straightforward to download data from arbitrary sources, and to add new sources to the system</p>
+<div class="section" id="location">
+<h2>Location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
+<p>The system is a package located at <cite>bio/scripts/DataDownloader</cite>.</p>
+<p>The package contains:</p>
+<dl class="docutils">
+<dt>lib/DataDownloader</dt>
+<dd>Core libraries</dd>
+<dt>lib/DataDownloader/Source</dt>
+<dd>Source Plugins</dd>
+<dt>config</dt>
+<dd>configuration files</dd>
+<dt>bin</dt>
+<dd>The executable launcher</dd>
+</dl>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Moose</li>
+<li>MooseX::ABC</li>
+<li>MooseX::FollowPBP</li>
+<li>MooseX::FileAttribute</li>
+<li>Net::FTP</li>
+<li>Log::Handler</li>
+<li>DateTime</li>
+<li>Module::Find</li>
+<li>Web::Scraper</li>
+<li>Ouch</li>
+<li>Number::Format</li>
+<li>PerlIO::gzip</li>
+<li>Perl6::Junction</li>
+</ul>
+<p>If you are using Ubuntu (tested on 12.10), you can run the following command to install the packages:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install libpath-class-perl libmoosex-types-path-class-perl liblog-handler-perl liblog-report-perl libdatetime-perl libmoosex-followpbp-perl libyaml-perl libmodule-find-perl libperlio-gzip-perl libouch-perl libnumber-format-perl
+</pre></div>
+</div>
+<p>Other perl modules need to be installed via CPAN:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>cpan
+cpan<span class="o">[</span>1<span class="o">]</span>&gt; install MooseX::ABC
+cpan<span class="o">[</span>2<span class="o">]</span>&gt; install MooseX::FileAttribute
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-source-configuration">
+<h2>Data Source Configuration<a class="headerlink" href="#data-source-configuration" title="Permalink to this headline">¶</a></h2>
+<p>To learn how to configure data sources of your mine, look here for examples:</p>
+<blockquote>
+<div><cite>bio/scripts/DataDownloader/config</cite></div></blockquote>
+<p>The yaml file of your mine is where data download script reads the instruction</p>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>To run a set of data downloads, the following call should suffice:</p>
+<div class="highlight-bash"><div class="highlight"><pre>perl bio/scripts/DataDownloader/bin/download_data -e intermine
+</pre></div>
+</div>
+<p>The Current working directory of the script is immaterial.</p>
+<p>Specific sources can be run by naming them on the command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre>perl bio/scripts/DataDownloader/bin/download_data -e intermine Uniprot GOAnnotation
+</pre></div>
+</div>
+<p>Source names are case-sensitive. You can get a list of the available sources with the
+switch &#8216;&#8211;sources&#8217;.</p>
+</div>
+<div class="section" id="adding-a-new-source">
+<h2>Adding a new Source<a class="headerlink" href="#adding-a-new-source" title="Permalink to this headline">¶</a></h2>
+<p>A source is a class in the &#8216;DataDownloader::Source&#8217; package
+that implements the following method:</p>
+<ul class="simple">
+<li>&#8216;get_data&#8217;: Get all the data for this source</li>
+</ul>
+<p>And accepts the following arguments in its constructor:</p>
+<ul class="simple">
+<li><cite>data_dir =&gt; &#8220;dirname&#8221;</cite> the name of a directory to put data in, preferably in a sub-directory.* <cite>logger =&gt; Log::Handler</cite> A logger to use to log error and debug messages.Exceptions may be thrown by a source at any time. They will be caught and logged. It is the source&#8217;s responsibility to clean up after itself however.</li>
+</ul>
+<p>A template for creating a source is available in the form of an abstract class all Sources are expected to inherit from. This class, <cite>DataDownloader::Source::ABC</cite> makes it simple to add straightforward source downloaders, and provides helpers to make it convenient to add complex ones.</p>
+<p>A minimal source can be seen in the form of <cite>bio/scripts/DataDownloader/lib/DataDownloader/Source/FlyAnatomyOntology.pm</cite>:</p>
+<div class="highlight-perl"><div class="highlight"><pre><span class="nb">package</span> <span class="nn">DataDownloader::Source::</span><span class="n">FlyAnatomyOntology</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="n">Moose</span><span class="p">;</span>
+<span class="n">extends</span> <span class="s">&#39;DataDownloader::Source::ABC&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="n">constant</span> <span class="p">{</span>
+    <span class="n">TITLE</span>  <span class="o">=&gt;</span> <span class="s">&#39;Fly Anatomy Ontology&#39;</span><span class="p">,</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=&gt;</span> <span class="s">&quot;Drosophila Anatomy ontology from FlyBase&quot;</span><span class="p">,</span>
+    <span class="n">SOURCE_LINK</span> <span class="o">=&gt;</span> <span class="s">&quot;http://www.flybase.net/&quot;</span><span class="p">,</span>
+    <span class="n">SOURCE_DIR</span> <span class="o">=&gt;</span> <span class="s">&#39;ontologies/fly-anatomy&#39;</span><span class="p">,</span>
+    <span class="n">SOURCES</span> <span class="o">=&gt;</span> <span class="p">[{</span>
+        <span class="n">FILE</span>   <span class="o">=&gt;</span> <span class="s">&#39;fly_anatomy.obo&#39;</span><span class="p">,</span>
+        <span class="n">SERVER</span> <span class="o">=&gt;</span> <span class="s">&#39;http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/anatomy/gross_anatomy/animal_gross_anatomy/fly&#39;</span><span class="p">,</span>
+    <span class="p">}],</span>
+<span class="p">};</span>
+
+<span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This source fully inherits the behaviour of the &#8216;DataDownloader::Source::ABC&#8217; abstract class,
+and only adds configuration. In this case, it defines a set of constants that describe this source:</p>
+<ul class="simple">
+<li>&#8216;TITLE&#8217;: The human readable name of the source shown in log messages.</li>
+<li>&#8216;DESCRIPTION&#8217;: A Longer description of the data that appears in a version file.</li>
+<li>&#8216;SOURCE_LINK&#8217;: A link to the origin of the material that appears in the version file.</li>
+<li>&#8216;SOURCE_DIR&#8217;: The sub-directory under the &#8216;data_dir&#8217; of the constructor where the new files should be placed.</li>
+</ul>
+<p>And some constants that define the data to fetch:</p>
+<ul class="simple">
+<li>&#8216;SOURCES&#8217;: Any data sources defined by this constant will automatically be added to the queue of files to download.</li>
+</ul>
+<p>Each source is a hash-reference with the following keys:</p>
+<ul class="simple">
+<li>&#8216;FILE&#8217;: The name of the file on the remote server</li>
+<li>&#8216;SERVER&#8217;: The path to the location of the file to fetch.</li>
+</ul>
+<p>Further keys that can be defined include:</p>
+<ul class="simple">
+<li>&#8216;POSTPROCESSOR&#8217;: A code-reference which will called as a method and passed the downloaded file, and the location where it should end up.</li>
+</ul>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="data-sources/index.html" title="Data Sources"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Database"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Database</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

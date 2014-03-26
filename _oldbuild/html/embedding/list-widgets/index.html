@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>List Widgets &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Embedding InterMine components" href="../index.html" />
+    <link rel="next" title="List Widgets Questions &amp; Answers" href="q-and-a.html" />
+    <link rel="prev" title="Embedding InterMine components" href="../index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="q-and-a.html" title="List Widgets Questions &amp; Answers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Embedding InterMine components"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">List Widgets</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#table-widgets">Table widgets</a></li>
+<li><a class="reference internal" href="#graph-chart-widgets">Graph/Chart widgets</a></li>
+<li><a class="reference internal" href="#enrichment-widgets">Enrichment widgets</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#backgroud-population">Backgroud population</a></li>
+<li><a class="reference internal" href="#gene-length-correction-coefficient">Gene length correction coefficient</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#displaying-widgets">Displaying widgets</a><ul>
+<li><a class="reference internal" href="#javascript">JavaScript</a><ul>
+<li><a class="reference internal" href="#widget-service">Widget service</a></li>
+<li><a class="reference internal" href="#choose-a-widget">Choose a widget</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#css">CSS</a></li>
+<li><a class="reference internal" href="#embedding-mine-widgets-on-a-custom-page">Embedding mine widgets on a custom page</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Embedding InterMine components</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="q-and-a.html"
+                        title="next chapter">List Widgets Questions &amp; Answers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/embedding/list-widgets/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="list-widgets">
+<span id="index-0"></span><h1>List Widgets<a class="headerlink" href="#list-widgets" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="q-and-a.html">List Widgets Questions &amp; Answers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="q-and-a.html#source-files">Source files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q-and-a.html#using-a-temporary-list-on-the-fly">Using a temporary list on the fly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q-and-a.html#defining-custom-actions-on-widget-events">Defining custom actions on widget events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="q-and-a.html#showing-a-results-table">Showing a Results Table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enrichment-widgets.html">List enrichment widgets statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enrichment-widgets.html#method">Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enrichment-widgets.html#multiple-test-correction">Multiple Test Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enrichment-widgets.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>There are several list widgets (widgets from now on) available on the InterMine list analysis page, and they are configured in <a class="reference internal" href="../../webapp/properties/webconfig-model.html"><em>Data and Widget Configuration</em></a>.</p>
+<p>There are three categories of widgets:</p>
+<dl class="docutils">
+<dt>table</dt>
+<dd>displays the counts from the list for the collection specified</dd>
+<dt>graph</dt>
+<dd>displays a chart based on a dataset you specify</dd>
+<dt>enrichment</dt>
+<dd>displays the p-values of objects that appear in your list</dd>
+</dl>
+<p>To add a widget to your mine:</p>
+<ol class="arabic simple">
+<li>add config to your <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt> file</li>
+<li>re-release your webapp</li>
+<li>view widget in a list analysis page</li>
+</ol>
+<p>Below are the details on how to configure each widget type.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please read the documentation carefully and check your config file for typos. Most attributes are case sensitive. When the webapp is released, the config is validated and any errors displayed in the home page.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="table-widgets">
+<h3>Table widgets<a class="headerlink" href="#table-widgets" title="Permalink to this headline">¶</a></h3>
+<p>Table widgets display objects and the counts of related objects in your list.</p>
+<div class="figure align-center">
+<img alt="../../_images/table.png" src="../../_images/table.png" />
+</div>
+<p>An example table widget of Orthologues in FlyMine.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="50%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute</th>
+<th class="head">purpose</th>
+<th class="head">example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">id</span></tt></td>
+<td>unique id used by javascript only. Spaces not allowed.</td>
+<td><tt class="docutils literal"><span class="pre">unique_id</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">pathStrings</span></tt></td>
+<td>which collection to use in the widget</td>
+<td><tt class="docutils literal"><span class="pre">Gene.homologues[type=orthologue].homologue.organism</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">exportField</span></tt></td>
+<td>which field from the objects in your list to export</td>
+<td><tt class="docutils literal"><span class="pre">primaryIdentifier</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">typeClass</span></tt></td>
+<td>types of lists that should display this widget. Use the simple class name</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>The following are optional attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="73%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute</th>
+<th class="head">purpose</th>
+<th class="head">example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">title</span></tt></td>
+<td>appears at the top of the widget</td>
+<td><tt class="docutils literal"><span class="pre">Orthologues</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">description</span></tt></td>
+<td>description of the widget</td>
+<td><tt class="docutils literal"><span class="pre">Counts</span> <span class="pre">of</span> <span class="pre">orthologues</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">displayFields</span></tt></td>
+<td>which fields from the objects in the collection (in the above example, <tt class="docutils literal"><span class="pre">Gene.proteins</span></tt>) to display, eg. <tt class="docutils literal"><span class="pre">primaryAccession</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">name</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">columnTitle</span></tt></td>
+<td>heading for the &#8220;count&#8221; column</td>
+<td><tt class="docutils literal"><span class="pre">Orthologues</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">externalLink</span></tt></td>
+<td>link displayed next to first column, identifier will be appended to link</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">externalLinkLabel</span></tt></td>
+<td>label for external link</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">views</span></tt></td>
+<td>path fields display in the query running when the user clicks on the widget</td>
+<td><tt class="docutils literal"><span class="pre">symbol</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="graph-chart-widgets">
+<h3>Graph/Chart widgets<a class="headerlink" href="#graph-chart-widgets" title="Permalink to this headline">¶</a></h3>
+<p>Graph widgets display datasets in graphical format.</p>
+<div class="figure align-center">
+<img alt="../../_images/chart.png" src="../../_images/chart.png" />
+<p class="caption">An example chart widget of BDGP Expression Patterns in FlyMine.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="66%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute</th>
+<th class="head">purpose</th>
+<th class="head">example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>id</td>
+<td>unique id used by javascript only. Spaces not allowed.</td>
+<td><tt class="docutils literal"><span class="pre">unique_id</span></tt></td>
+</tr>
+<tr class="row-odd"><td>graphType</td>
+<td>which type of chart to render</td>
+<td><tt class="docutils literal"><span class="pre">ColumnChart</span></tt>,``BarChart`` or <tt class="docutils literal"><span class="pre">PieChart</span></tt></td>
+</tr>
+<tr class="row-even"><td>startClass</td>
+<td>it&#8217;s the root class for all the paths specified in the configuration <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span></tt></td>
+</tr>
+<tr class="row-odd"><td>typeClass</td>
+<td>type of lists that should display this widget. Use the simple class name.</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span></tt></td>
+</tr>
+<tr class="row-even"><td>categoryPath</td>
+<td>Must be attribute. We can specify the subclass using the syntax <tt class="docutils literal"><span class="pre">path[subclass</span> <span class="pre">type]</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">mRNAExpressionResults.stageRange</span></tt></td>
+</tr>
+<tr class="row-odd"><td>seriesPath</td>
+<td>the series path. This has to be an attribute. We can specify the subclass using the syntax <tt class="docutils literal"><span class="pre">path[subclass</span> <span class="pre">type]</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">mRNAExpressionResults.expressed</span></tt></td>
+</tr>
+<tr class="row-even"><td>seriesValues</td>
+<td>the values of different series. Case sensitive. You can specify boolean values</td>
+<td><tt class="docutils literal"><span class="pre">true,false</span></tt> or <tt class="docutils literal"><span class="pre">Up,Down</span></tt></td>
+</tr>
+<tr class="row-odd"><td>seriesLabels</td>
+<td>the labels displayed on the graphs to distinguish inside a category the different series</td>
+<td><tt class="docutils literal"><span class="pre">Expressed,Not</span> <span class="pre">Expressed</span></tt> or <tt class="docutils literal"><span class="pre">Up,Down</span></tt></td>
+</tr>
+<tr class="row-even"><td>views</td>
+<td>attributes paths displayed when the user clicks an area on the graph</td>
+<td><tt class="docutils literal"><span class="pre">name,organism.name</span></tt></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>All the paths set, will be built starting from that. Specify only the simple name (e.g. <tt class="docutils literal"><span class="pre">Gene</span></tt>). You can choose to set the bag type class or the root class associated to the category path.</td></tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You can specify <strong>only one</strong> class in <tt class="docutils literal"><span class="pre">typeClass</span></tt>. If you need another type, you have to define a new widget.</p>
+</div>
+<p>The following are optional attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="67%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute</th>
+<th class="head">purpose</th>
+<th class="head">example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">title</span></tt></td>
+<td>appears at the top of the widget</td>
+<td><tt class="docutils literal"><span class="pre">BDGP</span> <span class="pre">expression</span> <span class="pre">patterns</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">description</span></tt></td>
+<td>description of the widget</td>
+<td><tt class="docutils literal"><span class="pre">Expression</span> <span class="pre">patterns</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">domainLabel</span></tt></td>
+<td>Label displayed on x-axis in the ColumnChart (on y-axis in the BarChart)</td>
+<td><tt class="docutils literal"><span class="pre">Stage</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">rangeLabel</span></tt></td>
+<td>Label displayed on y-axis in the ColumnChart (on x-axis in the a BarChart)</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span> <span class="pre">count</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">filterLabel</span></tt></td>
+<td>label for filter form field</td>
+<td><tt class="docutils literal"><span class="pre">Organism</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">filters</span></tt></td>
+<td>the values for the filter, set in the dropdown <a class="footnote-reference" href="#id7" id="id3">[2]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">All,KEGG</span> <span class="pre">pathways,Reactome</span> <span class="pre">data</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">listPath</span></tt></td>
+<td>the path used to build the bag constraint <a class="footnote-reference" href="#id8" id="id4">[3]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">FlyAtlasResult.material</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">constraints</span></tt></td>
+<td>separated by comma, case sensitive, must be attributes, operator can be <cite>=</cite> or <cite>!=</cite> <a class="footnote-reference" href="#id9" id="id5">[4]</a></td>
+<td><tt class="docutils literal"><span class="pre">organism.name=[Organism]</span></tt> <a class="footnote-reference" href="#id10" id="id6">[5]</a></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>We can use static values or a grammar to specify the values contained in the list. The default value in general is the first value set in the &#8216;filters&#8217; attribute or the first value returned by the query. With static values, you can add &#8216;All&#8217; meaning no filter applied.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td>Optional if the <tt class="docutils literal"><span class="pre">startClass</span></tt> contains the bag type class.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id9" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>For the values we can use static values or the selected filter value using the syntax: <tt class="docutils literal"><span class="pre">path</span> <span class="pre">constraint</span> <span class="pre">=</span> <span class="pre">[filter</span> <span class="pre">identifier]</span></tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>organism&#8217;s name matching with the value selected in the filter with filterLabel &#8216;Organism&#8217;</td></tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The graphs use <a class="reference external" href="https://developers.google.com/chart/interactive/docs/reference">Google Visualitation API</a>.</p>
+</div>
+</div>
+<div class="section" id="enrichment-widgets">
+<h3>Enrichment widgets<a class="headerlink" href="#enrichment-widgets" title="Permalink to this headline">¶</a></h3>
+<p>Enrichment widgets calculate p-values representing the probability annotation occurred by chance. See <a class="reference internal" href="enrichment-widgets.html"><em>List enrichment widgets statistics</em></a> for more information on how the p-value is calculated.</p>
+<div class="figure align-center">
+<img alt="../../_images/enrichment.png" src="../../_images/enrichment.png" />
+<p class="caption">An example enrichment widget of Gene Ontology in FlyMine.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="60%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute</th>
+<th class="head">purpose</th>
+<th class="head">example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">id</span></tt></td>
+<td>unique id used by JavaScript only. Spaces not allowed.</td>
+<td><tt class="docutils literal"><span class="pre">unique_id</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">startClass</span></tt></td>
+<td>Root class for all the paths specified in the configuration. Use simple name (e.g. Gene)</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">startClassDisplay</span></tt></td>
+<td>Field displayed when user clicks on the widget on &#8216;Matches&#8217; column</td>
+<td><tt class="docutils literal"><span class="pre">primaryIdentifier</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">typeClass</span></tt></td>
+<td>Type of lists that should display this widget. Use the simple class name.</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">enrich</span></tt></td>
+<td>Field to be enriched, displayed in the widget in the firts column <a class="footnote-reference" href="#id13" id="id11">[6]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">goAnnotation.ontologyTerm.parents.name</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">views</span></tt></td>
+<td>attributes paths displayed when the user clicks on <em>View results</em> button <a class="footnote-reference" href="#id13" id="id12">[6]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">symbol,organism.name</span></tt></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id11">1</a>, <a class="fn-backref" href="#id12">2</a>)</em> You have to specify only one field. Specify the subclass using the syntax <tt class="docutils literal"><span class="pre">path[subclass</span> <span class="pre">type]</span></tt>.</td></tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You can specify <strong>only one</strong> class in <tt class="docutils literal"><span class="pre">typeClass</span></tt>. If you need another type, you have to define a new widget.</p>
+</div>
+<p>The following are optional attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="66%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">attribute</th>
+<th class="head">purpose</th>
+<th class="head">example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">title</span></tt></td>
+<td>appears at the top of the widget</td>
+<td><tt class="docutils literal"><span class="pre">Gene</span> <span class="pre">Ontology</span> <span class="pre">Enrichment</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">description</span></tt></td>
+<td>description of the widget</td>
+<td><tt class="docutils literal"><span class="pre">GO</span> <span class="pre">terms</span> <span class="pre">enriched.</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">label</span></tt></td>
+<td>heading for the column</td>
+<td><tt class="docutils literal"><span class="pre">GO</span> <span class="pre">Term</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">externalLink</span></tt></td>
+<td>link displayed next to first column</td>
+<td><tt class="docutils literal"><span class="pre">googie</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">filters</span></tt></td>
+<td>extra filters to add to the display <a class="footnote-reference" href="#id17" id="id14">[7]</a></td>
+<td><tt class="docutils literal"><span class="pre">organism.name=[list]</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">filterLabel</span></tt></td>
+<td>label for filter form field</td>
+<td><tt class="docutils literal"><span class="pre">Ontology</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">enrichIdentifier</span></tt></td>
+<td>identifier for the row displayed, if not specified, enrich field used <a class="footnote-reference" href="#id18" id="id15">[8]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">goAnnotation.ontologyTerm.identifier</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">constraints</span></tt></td>
+<td>constraints separated by comma. The paths have to be attributes. The operator can be <tt class="docutils literal"><span class="pre">=</span></tt> or <tt class="docutils literal"><span class="pre">!=</span></tt> <a class="footnote-reference" href="#id19" id="id16">[9]</a>.</td>
+<td><tt class="docutils literal"><span class="pre">organism.name=[list]</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">constraintsForView</span></tt></td>
+<td>constraints separated by comma used for building the query executed when the user clicks on the widget on &#8216;Matches&#8217; column</td>
+<td><tt class="docutils literal"><span class="pre">results.expressed</span> <span class="pre">=</span> <span class="pre">true</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">correctionCoefficient</span></tt></td>
+<td>set to org.intermine.bio.web.widget.GeneLenghtCorrectionCoefficient to normalize by gene length</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id17" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[7]</a></td><td>Use static values or a grammar to specify the values contained in the list. The default value in general is the first value set in the &#8216;filters&#8217; attribute or the first value returned by the query. With static values, you can add &#8216;All&#8217; meaning no filter applied.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[8]</a></td><td>Specify only one. This has to be an attribute. Used in the results table. Specify the subclass using the syntax <tt class="docutils literal"><span class="pre">path[subclass</span> <span class="pre">type]</span></tt>.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id19" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[9]</a></td><td>Case sensitive. For the values we can use: static values the selected filter value using the syntax: <tt class="docutils literal"><span class="pre">path</span> <span class="pre">contraint</span> <span class="pre">=</span> <span class="pre">[filter</span> <span class="pre">identifier]</span></tt> only the value contained in the list.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>See other mines&#8217; config files for more examples, eg:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">branches/intermod_workshop/flymine/webapp/resources/webapp/WEB-INF/webconfig-model.xml</span></tt> in FlyMine</li>
+<li><tt class="docutils literal"><span class="pre">branches/intermod_workshop/modmine/webapp/resources/webapp/WEB-INF/webconfig-model.xml</span></tt> in modMine</li>
+<li><tt class="docutils literal"><span class="pre">branches/intermod_workshop/metabolicmine/webapp/resources/webapp/WEB-INF/webconfig-model.xml</span></tt> in metabolicMine</li>
+</ul>
+</div>
+<div class="section" id="backgroud-population">
+<h3>Backgroud population<a class="headerlink" href="#backgroud-population" title="Permalink to this headline">¶</a></h3>
+<p>In the enrichement widgets, you can change the reference population.
+The reference population is specific for widget, list and user.
+If you are logged you can save your preference selecting the checkbox &#8216;Save your preference&#8217;.
+The background population selected should include all items contained in the list.</p>
+</div>
+<div class="section" id="gene-length-correction-coefficient">
+<h3>Gene length correction coefficient<a class="headerlink" href="#gene-length-correction-coefficient" title="Permalink to this headline">¶</a></h3>
+<p>Depending on the type of experiment your data comes from, it is sometimes necessary to normalize by gene length in order to get the correct p-values. If your data comes from a genome-wide binding experiment such as ChIP-seq or DamID, binding intervals are more likely to be associated with longer genes than shorter ones, and you should therefore normalize by gene length. This is not the case for experiments such as gene expression studies, where gene length does not play a role in the likelihood that a particular set of genes will be overrepresented in the list.
+If you want normalize by gene length, add the attribute correctionCoefficient set to &#8216;org.intermine.bio.web.widget.GeneLenghtCorrectionCoefficient&#8217;.
+The gene length correction coefficient is applicable only for lists containing genes with a length, so for a list of genes do not have a length the option is not shown.
+If a list contains some genes without a length these genes will be discarded.</p>
+</div>
+</div>
+<div class="section" id="displaying-widgets">
+<h2>Displaying widgets<a class="headerlink" href="#displaying-widgets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="javascript">
+<h3>JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="widget-service">
+<h4>Widget service<a class="headerlink" href="#widget-service" title="Permalink to this headline">¶</a></h4>
+<p>Create a new Widgets instance pointing to a service:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">widgets</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">widgets</span><span class="p">(</span><span class="s2">&quot;http://beta.flymine.org/query/service/&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="choose-a-widget">
+<h4>Choose a widget<a class="headerlink" href="#choose-a-widget" title="Permalink to this headline">¶</a></h4>
+<p>Choose which widget(s) you want to load:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// Load all Widgets:</span>
+<span class="nx">widgets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#all-widgets&#39;</span><span class="p">);</span>
+<span class="c1">// Load a specific Chart Widget:</span>
+<span class="nx">widgets</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="s1">&#39;flyfish&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget-1&#39;</span><span class="p">);</span>
+<span class="c1">// Load a specific Enrichment Widget:</span>
+<span class="nx">widgets</span><span class="p">.</span><span class="nx">enrichment</span><span class="p">(</span><span class="s1">&#39;pathway_enrichment&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget-2&#39;</span><span class="p">);</span>
+<span class="c1">// Load a specific Table Widget:</span>
+<span class="nx">widgets</span><span class="p">.</span><span class="nx">table</span><span class="p">(</span><span class="s1">&#39;interactions&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget-3&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="css">
+<h3>CSS<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Widgets are using <a class="reference external" href="http://twitter.github.com/bootstrap">Twitter Bootstrap</a> CSS framework.</p>
+</div>
+</div>
+<div class="section" id="embedding-mine-widgets-on-a-custom-page">
+<h3>Embedding mine widgets on a custom page<a class="headerlink" href="#embedding-mine-widgets-on-a-custom-page" title="Permalink to this headline">¶</a></h3>
+<p>Following is a documentation describing how to embed widgets not in a mine context.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Online example can be visited at <a class="reference external" href="http://tinkerbin.com/Xb3SZhOK">tinkerbin</a>.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Open up a document in your text editor.</p>
+</li>
+<li><p class="first">Use the <a class="reference internal" href="../api-loader.html"><em>InterMine JavaScript API Loader</em></a> that always gives you the latest version of the widgets. In the <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> element of the page, add the following line:</p>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/api&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Load the Widget Service:</p>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+    <span class="nx">intermine</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s1">&#39;widgets&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">Widgets</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">widgets</span><span class="p">(</span><span class="s1">&#39;http://beta.flymine.org/query/service/&#39;</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">intermine.load</span></tt> represents a block of code that loads the widgets by pointing them to a specific mine.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Use the widget web service to view which widgets are available on the mine, eg: <cite>http://beta.flymine.org/beta/service/widgets/</cite></p>
+</li>
+<li><p class="first">See which lists are available in the mine: <cite>http://beta.flymine.org/query/service/lists</cite></p>
+</li>
+<li><p class="first">Add a widget (from the list in the previous step) to JavaScript. So within the <tt class="docutils literal"><span class="pre">intermine.load</span></tt> block, after creating the <tt class="docutils literal"><span class="pre">Widgets</span></tt> instance, do this:</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// Load all Widgets:</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#all-widgets&#39;</span><span class="p">);</span>
+<span class="c1">// Load a specific Chart Widget:</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="s1">&#39;flyfish&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget-1&#39;</span><span class="p">);</span>
+<span class="c1">// Load a specific Enrichment Widget:</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">enrichment</span><span class="p">(</span><span class="s1">&#39;pathway_enrichment&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget-2&#39;</span><span class="p">);</span>
+<span class="c1">// Load a specific Table Widget:</span>
+<span class="nx">Widgets</span><span class="p">.</span><span class="nx">table</span><span class="p">(</span><span class="s1">&#39;interactions&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#widget-3&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Where the <em>first parameter</em>&#8216; passed is either type of object or name of widget to load. The <em>second</em> is the name of list (public list) to access and <em>third</em> is an element on the page where your widgets will appear. This element needs to obviously exist on the page first. A common one is a div that would look like this: <tt class="docutils literal"><span class="pre">&lt;div</span> <span class="pre">id=&quot;all-widgets&quot;&gt;&lt;/div&gt;</span></tt>.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Add HTML, eg:</p>
+<blockquote>
+<div><div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.intermine.org/api&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+        <span class="nx">intermine</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s1">&#39;widgets&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">Widgets</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">widgets</span><span class="p">(</span><span class="s1">&#39;http://beta.flymine.org/query/service/&#39;</span><span class="p">);</span>
+            <span class="c1">// Load all Widgets:</span>
+            <span class="nx">Widgets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="s1">&#39;myList&#39;</span><span class="p">,</span> <span class="s1">&#39;#all-widgets&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- DIV goes here --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;widget&quot;</span> <span class="na">id=</span><span class="s">&quot;all-widgets&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">You will have noticed that the widgets either pickup a style (CSS) from your HTML page, or they appear unstyled. To style them, you can use a variant of Twitter Bootstrap.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="q-and-a.html" title="List Widgets Questions &amp; Answers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Embedding InterMine components"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

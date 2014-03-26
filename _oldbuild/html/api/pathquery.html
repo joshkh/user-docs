@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The PathQuery API &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="InterMine API Description" href="index.html" />
+    <link rel="next" title="Support" href="../support/index.html" />
+    <link rel="prev" title="InterMine API Description" href="index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../support/index.html" title="Support"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="InterMine API Description"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">InterMine API Description</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The PathQuery API</a><ul>
+<li><a class="reference internal" href="#paths">Paths</a></li>
+<li><a class="reference internal" href="#queries">Queries</a><ul>
+<li><a class="reference internal" href="#the-view-defining-output-columns">The View: Defining Output Columns</a></li>
+<li><a class="reference internal" href="#joins-handling-null-values">Joins: Handling null values</a></li>
+<li><a class="reference internal" href="#constraints-restricting-matching-values">Constraints: Restricting matching values</a><ul>
+<li><a class="reference internal" href="#constraints-on-attributes">Constraints on attributes:</a></li>
+<li><a class="reference internal" href="#multi-value-constraints">Multi-Value Constraints</a></li>
+<li><a class="reference internal" href="#lookup-constraints">Lookup Constraints</a></li>
+<li><a class="reference internal" href="#list-constraints">List Constraints</a></li>
+<li><a class="reference internal" href="#loop-constraints">Loop Constraints</a></li>
+<li><a class="reference internal" href="#type-constraints">Type Constraints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sort-order">Sort Order</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">InterMine API Description</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../support/index.html"
+                        title="next chapter">Support</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/pathquery.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-pathquery-api">
+<h1>The PathQuery API<a class="headerlink" href="#the-pathquery-api" title="Permalink to this headline">¶</a></h1>
+<p>InterMine installations accept queries over their data in a custom format
+known as <em>Path-Queries</em>. This is a graph-based query format which inherits some
+of its semantics and terminology from SQL.</p>
+<div class="section" id="paths">
+<h2>Paths<a class="headerlink" href="#paths" title="Permalink to this headline">¶</a></h2>
+<p>The core concept of <em>Path-Queries</em> is naturally enough the <em>Path</em>, examples of
+which are:
+* <cite>Gene</cite>: A plain root
+* <cite>Gene.symbol</cite>: A root and an attribute
+* <cite>Gene.chromosomeLocation</cite>: A reference to a complex attribute (a reference)
+* <cite>Gene.organism.name</cite>: A chain from a root to an attribute through one or more references.
+* <cite>Gene.pathways.identifier</cite>: A path may potentially match multiple values - there may be several pathway identifiers that match this path for any given gene.
+* <cite>Protein.gene.homologues.homologue.alleles.alleleClass</cite>: Paths may be of arbitrary length.</p>
+<p>In the XML serialization of path-queries, all paths must be completely qualified. In the JSON format a prefix can be specified with the <cite>from</cite> or <cite>root</cite> property.</p>
+</div>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>Queries associate paths with various parts of the query:</p>
+<div class="section" id="the-view-defining-output-columns">
+<h3>The View: Defining Output Columns<a class="headerlink" href="#the-view-defining-output-columns" title="Permalink to this headline">¶</a></h3>
+<p>To define what is retrieved from the data-store, a view is defined. This is simply a list of paths; any information in the data-store graph that matches these paths and satisifies the constraints (see below) will be included in the results.</p>
+<p>eg:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;query</span> <span class="na">model=</span><span class="s">&quot;genomic&quot;</span> <span class="na">view=</span><span class="s">&quot;Organism.name Organism.taxonId&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{from: "Organism", select: ["name", "taxonId"]}</pre>
+</div>
+</div>
+<div class="section" id="joins-handling-null-values">
+<h3>Joins: Handling null values<a class="headerlink" href="#joins-handling-null-values" title="Permalink to this headline">¶</a></h3>
+<p>In any chain of references in a long path such as <cite>Gene.sequence.residues</cite> or <cite>Gene.proteins.proteinDomains.name</cite>, may be null. There are two behaviours supported for dealing with null references (ie. where a gene does not have any sequence attached, or it has not proteins, or those proteins have no protein domains).</p>
+<ul class="simple">
+<li><cite>INNER JOIN</cite>: The default behaviour, this prevents the entire path from matching, so that if the query contains <cite>Gene.symbol</cite> and <cite>Gene.proteins.name</cite> and a gene in the data store has no proteins then that gene will not match at all, no data will be returned for the symbol of that gene - ie. it is a required feature of this query that all genes in the result set have at least one protein (this is a kind of implicit existential constraint).</li>
+<li><cite>OUTER JOIN</cite>: Optional optional behaviour; this allows references in paths to be empty while permitting higher parts of the path to continue to match. So for example if the query contains <cite>Gene.symbol</cite> and <cite>Gene.proteins.name</cite> and a gene in the data store has no proteins then no protein data for that gene will be returned, but the gene will still match the query, and the symbol for that gene will be included in the retrieved results (this makes the proteins optional).</li>
+</ul>
+<p>There are some consequences of using outer joins:</p>
+<ul class="simple">
+<li>Due to the optional nature of the outerjoined data, it is not permitted to sort on attributes in an outerjoined section</li>
+<li>Constraints (see below) cannot be combined in an <cite>or</cite> relationship across join boundaries. So one cannot ask for all genes which are either of a certain length or which have a certain pathway if there is an outer join on pathways.</li>
+</ul>
+<p>eg:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;query</span> <span class="na">model=</span><span class="s">&quot;genomic&quot;</span> <span class="na">view=</span><span class="s">&quot;Gene.symbol Gene.pathways.identifier&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;join</span> <span class="na">path=</span><span class="s">&quot;Gene.pathways&quot;</span> <span class="na">style=</span><span class="s">&quot;OUTER&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/query&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{from: "Gene", select: ["symbol", "pathways.identifier"], joins: ["pathways"]}</pre>
+</div>
+</div>
+<div class="section" id="constraints-restricting-matching-values">
+<h3>Constraints: Restricting matching values<a class="headerlink" href="#constraints-restricting-matching-values" title="Permalink to this headline">¶</a></h3>
+<p>By default all values of a given type match a query unless they are excluded by empty references on an inner joined path. To restrict the result set constraints can be used.</p>
+<div class="section" id="constraints-on-attributes">
+<h4>Constraints on attributes:<a class="headerlink" href="#constraints-on-attributes" title="Permalink to this headline">¶</a></h4>
+<p>The following are examples of constraints on attributes in the data store:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.symbol&quot;</span> <span class="na">op=</span><span class="s">&quot;=&quot;</span> <span class="na">value=</span><span class="s">&quot;eve&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.length&quot;</span> <span class="na">op=</span><span class="s">&quot;&amp;gt;&quot;</span> <span class="na">value=</span><span class="s">&quot;12345&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.homologues.homologue.organism.taxonId&quot;</span> <span class="na">op=</span><span class="s">&quot;!=&quot;</span> <span class="na">value=</span><span class="s">&quot;7227&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.description&quot;</span> <span class="na">op=</span><span class="s">&quot;CONTAINS&quot;</span> <span class="na">value=</span><span class="s">&quot;some term&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The json format allows a couple of different mechanisms for describing constraints:</p>
+<div class="highlight-json"><pre>{
+  select: ["Gene.symbol"],
+  where: {
+    "symbol": "eve",
+    "length": {gt: 12345},
+    "homologues.homologue.organism.taxonId": {"!=": 7227},
+    "description": {contains: "some term"}
+  }
+}</pre>
+</div>
+<p>or:</p>
+<div class="highlight-json"><pre>{
+  select: ["Gene.symbol"],
+  where: [
+    {path: "symbol", op: "=", value: "eve"},
+    {path: "length", op: "&gt;", value: 12345},
+    {path: "homologues.homologue.organism.taxonId", op: "!=", value: 7227},
+    {path: "description", op: "CONTAINS", value: "some term"}
+  ]
+}</pre>
+</div>
+<p>or</p>
+<div class="highlight-json"><pre>{
+  select: ["Gene.symbol"],
+  where: [
+    [ "symbol", "=", "eve" ],
+    [ "length", "&gt;", 12345 ],
+    [ "homologues.homologue.organism.taxonId", "!=", 7227 ],
+    [ "description", "CONTAINS", "some term" ]
+  ]
+}</pre>
+</div>
+</div>
+<div class="section" id="multi-value-constraints">
+<h4>Multi-Value Constraints<a class="headerlink" href="#multi-value-constraints" title="Permalink to this headline">¶</a></h4>
+<p>One can specifiy that a path resolve to a value matching one (or none) of a set of values:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.symbol&quot;</span> <span class="na">op=</span><span class="s">&quot;ONE OF&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;value&gt;</span>eve<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;value&gt;</span>bib<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;value&gt;</span>zen<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/constraint&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  select: ["Gene.proteins.name"],
+  where: {
+    symbol: ["eve", "bib", "zen"]
+  }
+}</pre>
+</div>
+<p>A special sub-type of this kind of constraint is the range constraint:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.chromosomeLocation&quot;</span> <span class="na">op=</span><span class="s">&quot;OVERLAPS&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;value&gt;</span>X:12345..45678<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;value&gt;</span>2L:12345..45678<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;value&gt;</span>3R:12345<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/constraint&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  select: ["Gene.symbol"],
+  where: {
+    chromosomeLocation: {OVERLAPS: ["X:12345..45678", "2L:34567..78654", "3R:12345"]}
+  }
+}</pre>
+</div>
+</div>
+<div class="section" id="lookup-constraints">
+<h4>Lookup Constraints<a class="headerlink" href="#lookup-constraints" title="Permalink to this headline">¶</a></h4>
+<p>Lookup constraints allow convenient constraints over multiple attributes of a value, or querying when you don&#8217;t know the particular attribute you wish to constrain:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constaint</span> <span class="na">path=</span><span class="s">&quot;Gene&quot;</span> <span class="na">op=</span><span class="s">&quot;LOOKUP&quot;</span> <span class="na">value=</span><span class="s">&quot;eve&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  select: ["Gene.symbol"],
+  where: [[ "Gene", "LOOKUP", "eve"]]
+}</pre>
+</div>
+<p>An extra disambiguating value can be supplied. Its meaning depends on context,
+so for example would limit genes to a particular organism:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constaint</span> <span class="na">path=</span><span class="s">&quot;Gene&quot;</span> <span class="na">op=</span><span class="s">&quot;LOOKUP&quot;</span> <span class="na">value=</span><span class="s">&quot;eve&quot;</span> <span class="na">extraValue=</span><span class="s">&quot;D. melanogaster&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  select: ["Gene.symbol"],
+  where: [[ "Gene", "LOOKUP", "eve", "D. melanogaster"]]
+}</pre>
+</div>
+</div>
+<div class="section" id="list-constraints">
+<h4>List Constraints<a class="headerlink" href="#list-constraints" title="Permalink to this headline">¶</a></h4>
+<p>Nodes in the query graph can be constrained by membership in a stored list. This
+type of constraint is similar to multi-value constraints, in that we are looking
+at membership in a set, and also similar to lookup constraints in that we treat
+entities as subjects of the constraints, rather than values of any of the attributes
+of the entities. A simple example is selecting all the proteins for genes in a given
+list:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Protein.genes&quot;</span> <span class="na">op=</span><span class="s">&quot;IN&quot;</span> <span class="na">value=</span><span class="s">&quot;a given list&quot;</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- Or to exclude those records --&gt;</span>
+<span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Protein.genes&quot;</span> <span class="na">op=</span><span class="s">&quot;NOT IN&quot;</span> <span class="na">value=</span><span class="s">&quot;a given list&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  select: ["Protein.*"],
+  where: [["genes", "IN", "a given list"]]
+}</pre>
+</div>
+<p>The only relationships that may be asserted are &#8220;IN&#8221; and &#8220;NOT IN&#8221;.</p>
+</div>
+<div class="section" id="loop-constraints">
+<h4>Loop Constraints<a class="headerlink" href="#loop-constraints" title="Permalink to this headline">¶</a></h4>
+<p>Queries can require that two nodes in the query graph refer (or do not refer)
+to the same entity. This kind of constraint is termed a &#8220;Loop&#8221; constraint.
+An example of this is would be to request all the genes in the pathways a given
+gene is in, so long as they are (or are not) one of the orthologues of the gene
+in question.</p>
+<p>A loop constraint is composed of two paths, and either <cite>=</cite> or <cite>!=</cite>.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.homologues.homologue&quot;</span> <span class="na">op=</span><span class="s">&quot;=&quot;</span> <span class="na">value=</span><span class="s">&quot;Gene.pathways.genes&quot;</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- or --&gt;</span>
+<span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.homologues.homologue&quot;</span> <span class="na">op=</span><span class="s">&quot;!=&quot;</span> <span class="na">value=</span><span class="s">&quot;Gene.pathways.genes&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  select: ["Gene.homologues.homologue.*", "Gene.pathways.genes.*"],
+  where: [
+    ["Gene.symbol", "=", "x"],
+    ["Gene.homologues.homologue", "=", "Gene.pathways.genes"]
+  ]
+}</pre>
+</div>
+<p>Loop constraints must link paths that are not separated by <cite>outer joins</cite>.</p>
+</div>
+<div class="section" id="type-constraints">
+<h4>Type Constraints<a class="headerlink" href="#type-constraints" title="Permalink to this headline">¶</a></h4>
+<p>Type constraints, in addition to limiting the returned results,
+have the side-effect of type-casting the references in their paths
+to the given type, enabling other paths to reference otherwise unrefereable
+fields.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;constraint</span> <span class="na">path=</span><span class="s">&quot;Gene.overlappingFeatures&quot;</span> <span class="na">type=</span><span class="s">&quot;ChromosomeStructureVariation&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{
+  from: "Gene",
+  select: ["symbol", "overlappingFeatures.element1.primaryIdentifier"],
+  where: {
+    overlappingFeatures: "ChromosomeStructureVariation"
+  }
+}</pre>
+</div>
+<p>Type constraints may not participate in the constraint logic, and as such never
+have a <cite>code</cite> associated with them.</p>
+</div>
+</div>
+</div>
+<div class="section" id="sort-order">
+<h2>Sort Order<a class="headerlink" href="#sort-order" title="Permalink to this headline">¶</a></h2>
+<p>The order of the results can be determined through the sort order:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;query</span> <span class="na">model=</span><span class="s">&quot;genomic&quot;</span> <span class="na">view=</span><span class="s">&quot;Gene.symbol&quot;</span> <span class="na">sortOrder=</span><span class="s">&quot;Gene.length DESC Gene.name ASC&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-json"><pre>{select: ["Gene.symbol"], sortOrder: [["length", "DESC"], ["name", "ASC"]]}</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../support/index.html" title="Support"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="InterMine API Description"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >InterMine API Description</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

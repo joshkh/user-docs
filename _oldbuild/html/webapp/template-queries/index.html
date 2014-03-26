@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Template Queries &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Query Results" href="../query-results/index.html" />
+    <link rel="prev" title="List enrichment widgets statistics" href="../../embedding/list-widgets/enrichment-widgets.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../query-results/index.html" title="Query Results"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../embedding/list-widgets/enrichment-widgets.html" title="List enrichment widgets statistics"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Template Queries</a><ul>
+<li><a class="reference internal" href="#dropdowns">Dropdowns</a></li>
+<li><a class="reference internal" href="#auto-completion">Auto-completion</a></li>
+<li><a class="reference internal" href="#optional-constraints">Optional constraints</a></li>
+<li><a class="reference internal" href="#templates-page">Templates page</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../embedding/list-widgets/enrichment-widgets.html"
+                        title="previous chapter">List enrichment widgets statistics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../query-results/index.html"
+                        title="next chapter">Query Results</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/template-queries/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="template-queries">
+<h1>Template Queries<a class="headerlink" href="#template-queries" title="Permalink to this headline">¶</a></h1>
+<p>There are several processes run after the data loading is completed, one of which the objectstore summarisation.  This step counts the number of objects of particular classes, identifies any empty references/collections and collects values to be appear in dropdowns in the query builder and templates. The summarisation process also constructs the indexes needed for &#8220;type-ahead&#8221; autocompletion, this is configured by adding entries to the <cite>objectstoresummary.config.properties</cite></p>
+<div class="section" id="dropdowns">
+<h2>Dropdowns<a class="headerlink" href="#dropdowns" title="Permalink to this headline">¶</a></h2>
+<p>Some fields have only a few different values, and are represented as dropdowns on forms so that users may see all possible values. You can set the maximum number of values to display, the default is 200.</p>
+<p>Also, if your database has tables that should be ignored, you can set this too:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># in objectstoresummary.config.properties</span>
+<span class="na">ignore.counts</span><span class="o">=</span><span class="s">org.intermine.model.bio.GOAnnotation.withText org.intermine.model.bio.Location.subject</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="auto-completion">
+<h2>Auto-completion<a class="headerlink" href="#auto-completion" title="Permalink to this headline">¶</a></h2>
+<p>Fields in template queries and the QueryBuilder can have type-ahead autocompletion to assist in selecting valid terms. As you start to type, possible matches are fetched from the database; the text you have typed can match anywhere within the terms and multiple words can be matched. This is particularly useful for ontology terms or protein domain names.</p>
+<p>You can set up autocompletion by completing these steps:</p>
+<ol class="arabic simple">
+<li>Add all fields you want to be autocompleted to this file, like so:</li>
+</ol>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># in MINE_NAME/dbmodel/resources/objectstoresummary.config.properties</span>
+<span class="na">org.intermine.model.bio.Disease.autocomplete</span> <span class="o">=</span> <span class="s">description</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Add the postprocess to your <cite>MINE_NAME/project.xml</cite> file.</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;post-processing&gt;</span>
+  ...
+  <span class="nt">&lt;post-process</span> <span class="na">name=</span><span class="s">&quot;create-autocomplete-index&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/post-processing&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>In the <cite>/postprocess</cite> directory, run this command:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in malariamine/postprocess</span>
+<span class="nv">$ </span>ant -Daction<span class="o">=</span>create-autocomplete-index
+</pre></div>
+</div>
+<p>This process will add all fields set in this properties file to the autocompletion index.</p>
+<p>Now, when you release your webapp, fields you&#8217;ve configured will suggest similar terms as users are typing in the QueryBuilder or the template form.</p>
+</div>
+<div class="section" id="optional-constraints">
+<h2>Optional constraints<a class="headerlink" href="#optional-constraints" title="Permalink to this headline">¶</a></h2>
+<p>To make a template constraint optional:</p>
+<ol class="arabic simple">
+<li>edit the template in the query builder</li>
+<li>click on the padlock next to the constraint</li>
+<li>select optional:</li>
+</ol>
+<div class="line-block">
+<div class="line">Required - the user must supply a value</div>
+<div class="line">Optional: ON - optional and ON by default</div>
+<div class="line">Optional: OFF - optional and OFF by defaul</div>
+</div>
+</div>
+<div class="section" id="templates-page">
+<h2>Templates page<a class="headerlink" href="#templates-page" title="Permalink to this headline">¶</a></h2>
+<p>To have templates appear on the templates page, create a template as a SuperUser and tag the template with the &#8220;<a class="reference external" href="im:public">im:public</a>&#8221; tag.</p>
+<p>The templates are sorted by most popular first.  If the user is logged in the user&#8217;s most popular templates are shown first.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../query-results/index.html" title="Query Results"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../embedding/list-widgets/enrichment-widgets.html" title="List enrichment widgets statistics"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

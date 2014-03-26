@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Keyword Search &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="General Layout" href="../layout/index.html" />
+    <link rel="prev" title="QueryBuilder" href="../query-builder/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../layout/index.html" title="General Layout"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../query-builder/index.html" title="QueryBuilder"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Keyword Search</a><ul>
+<li><a class="reference internal" href="#config-file">Config file</a></li>
+<li><a class="reference internal" href="#search-results">Search Results</a></li>
+<li><a class="reference internal" href="#search-index">Search Index</a></li>
+<li><a class="reference internal" href="#lucene">Lucene</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../query-builder/index.html"
+                        title="previous chapter">QueryBuilder</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../layout/index.html"
+                        title="next chapter">General Layout</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/keyword-search/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="keyword-search">
+<h1>Keyword Search<a class="headerlink" href="#keyword-search" title="Permalink to this headline">¶</a></h1>
+<p>Indexing the database runs as a post-process step which creates the index in a directory. The index is then zipped and stored in the database, when you deploy a webapp pointing at the database it will extract the index again. For FlyMine indexing takes less than an hour, including a large proportion of the database.</p>
+<p>By default the index will include the text fields of all objects in the database. Each object in the database becomes a document in the index with text attributes attached. You can configure classes to ignore, such as locations and scores that don&#8217;t provide text information. You can also add related information to an object, for example you can configure that the synonyms, pathways and GO terms should be included in the Gene&#8217;s entry.</p>
+<dl class="docutils">
+<dt>fields in the results</dt>
+<dd>determined by WebConfigModel</dd>
+<dt>type</dt>
+<dd>class of object</dd>
+<dt>score</dt>
+<dd>determined by the Lucene search, from 0 to 1</dd>
+<dt>lists</dt>
+<dd>Users can make lists from search results but only if all results are of the same type.</dd>
+</dl>
+<p>To view entire the entire index:  Navigate to search results page without search parameter, eg <a class="reference external" href="http://www.flymine.org/query/keywordSearchResults.do">http://www.flymine.org/query/keywordSearchResults.do</a></p>
+<div class="section" id="config-file">
+<h2>Config file<a class="headerlink" href="#config-file" title="Permalink to this headline">¶</a></h2>
+<p>The config file is located at <cite>MINE_NAME/dbmodel/resources/keyword_search.properties</cite></p>
+<ul>
+<li><p class="first">index.temp.directory</p>
+<blockquote>
+<div><ul class="simple">
+<li>directory for search index</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">index.references.&lt;CLASS_NAME&gt;</p>
+<blockquote>
+<div><ul class="simple">
+<li>eg. index.references.Gene</li>
+<li>index these objects&#8217; references in addition to the normal indexing</li>
+<li>eg. if Gene.pathways is indexed so that when users search for pathways, the associated genes are also returned as search results</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">index.ignore</p>
+<blockquote>
+<div><ul class="simple">
+<li>do not index these classes</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">index.ignore.fields</p>
+<blockquote>
+<div><ul class="simple">
+<li>do not index these fields</li>
+<li>eg <cite>index.ignore.fields = SNP.type SNP.alleles</cite></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">facets</p>
+<blockquote>
+<div><ul class="simple">
+<li>Will appear as filters on the left panel in the search results</li>
+<li>choose <cite>single</cite> for references, <cite>multi</cite> for collections</li>
+<li>Note: you must index any references used as facets. (see: above at &#8216;&#8217;&#8216;index.references&#8217;&#8216;&#8217;).</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">index.boost.&lt;CLASS_NAME&gt;</p>
+<blockquote>
+<div><ul class="simple">
+<li>weight this class heavier than other objects</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">search.debug</p>
+<blockquote>
+<div><ul class="simple">
+<li>debug setting off, used only for testing</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="search-results">
+<h2>Search Results<a class="headerlink" href="#search-results" title="Permalink to this headline">¶</a></h2>
+<p>The fields displayed in the keyword search results are determined by the WebConfigModel file.</p>
+<ul>
+<li><p class="first">If the fields are ClassKeys:</p>
+<blockquote>
+<div><ul class="simple">
+<li>links in blue</li>
+<li>shown at the top</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">If the fields are not ClassKeys:</p>
+<blockquote>
+<div><ul class="simple">
+<li>NOT linked, black text</li>
+<li>shown below the links</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="search-index">
+<h2>Search Index<a class="headerlink" href="#search-index" title="Permalink to this headline">¶</a></h2>
+<p>You can rebuild the search index by running this command in &lt;MINE&gt;/postprocess:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -Daction<span class="o">=</span>create-search-index
+</pre></div>
+</div>
+<p>You need to re-release your webapp.  Take a look in the intermine.log file when it&#8217;s done to see which tables and fields were indexed.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Indexing - Special References:</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - - interface org.intermine.model.bio.Gene = [pathways, proteins.proteinDomains, goAnnotation.ontologyTerm]</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - - interface org.intermine.model.bio.OntologyTerm = [synonyms]</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - - interface org.intermine.model.bio.Protein = [proteinDomains]</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - - interface org.intermine.model.bio.BioEntity = [synonyms, organism, crossReferences]</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Indexing - Facets:</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - - field = Category, name = Category, type = SINGLE</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - - field = organism.shortName, name = Organism, type = SINGLE</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Indexing with and without attribute prefixes:</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Search - Debug mode: true</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Indexing - Temp Dir: /tmp/keywordSearch</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Starting fetcher thread...</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Preparing indexer...</span>
+<span class="na">2013-02-04 09</span><span class="o">:</span><span class="s">26:35 INFO  org.intermine.web.search.KeywordSearch     - Creating search index tmp dir: /tmp/keywordSearch</span>
+</pre></div>
+</div>
+<p>You can view the index to see what&#8217;s actually in it.</p>
+<ol class="arabic simple">
+<li>Prevent the code from deleting the index once it&#8217;s finished. You can do this by commenting out this line: <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/intermine/web/main/src/org/intermine/web/search/KeywordSearch.java#L1906">https://github.com/intermine/intermine/blob/dev/intermine/web/main/src/org/intermine/web/search/KeywordSearch.java#L1906</a> (be sure to put this back!)</li>
+<li>Use luke: <a class="reference external" href="http://www.getopt.org/luke">http://www.getopt.org/luke</a> or similar to view the records in the index.</li>
+</ol>
+</div>
+<div class="section" id="lucene">
+<h2>Lucene<a class="headerlink" href="#lucene" title="Permalink to this headline">¶</a></h2>
+<p>Our search uses Lucene&#8217;s <a class="reference external" href="http://lucene.apache.org/core/3_1_0/api/all/org/apache/lucene/analysis/WhitespaceAnalyzer.html">whitespace analyser</a>, which only uses whitespace to mark word boundaries.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../layout/index.html" title="General Layout"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../query-builder/index.html" title="QueryBuilder"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

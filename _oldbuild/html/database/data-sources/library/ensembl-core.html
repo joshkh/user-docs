@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ensembl Core &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Data Source Library" href="index.html" />
+    <link rel="next" title="FASTA" href="fasta.html" />
+    <link rel="prev" title="Chado" href="chado.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fasta.html" title="FASTA"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="chado.html" title="Chado"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Source Library</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Ensembl Core</a><ul>
+<li><a class="reference internal" href="#generate-items-xml-file">Generate Items XML file</a><ul>
+<li><a class="reference internal" href="#ensembl-data">Ensembl Data</a></li>
+<li><a class="reference internal" href="#update-mine-name-properties">Update &lt;MINE_NAME&gt;.properties</a></li>
+<li><a class="reference internal" href="#install-perl-modules">Install Perl modules</a><ul>
+<li><a class="reference internal" href="#ensembl">Ensembl</a></li>
+<li><a class="reference internal" href="#intermine">InterMine</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-script-to-generate-items-xml">Run Script to Generate Items XML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#load-xml-file-into-intermine-database">Load XML file into InterMine database</a><ul>
+<li><a class="reference internal" href="#add-ensembl-core-to-the-list-of-datasources-to-be-integrated">Add Ensembl core to the list of datasources to be integrated</a></li>
+<li><a class="reference internal" href="#run-intermine-build">Run InterMine build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="chado.html"
+                        title="previous chapter">Chado</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fasta.html"
+                        title="next chapter">FASTA</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/data-sources/library/ensembl-core.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ensembl-core">
+<h1>Ensembl Core<a class="headerlink" href="#ensembl-core" title="Permalink to this headline">¶</a></h1>
+<p>This page describes how to load Ensembl core data into your InterMine-bio database.</p>
+<div class="section" id="generate-items-xml-file">
+<h2>Generate Items XML file<a class="headerlink" href="#generate-items-xml-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ensembl-data">
+<h3>Ensembl Data<a class="headerlink" href="#ensembl-data" title="Permalink to this headline">¶</a></h3>
+<p>First you will need the data from Ensembl, which are available via MySQL databases.  Download the Ensembl MySQL database and create the database locally:</p>
+<blockquote>
+<div><a class="reference external" href="ftp://ftp.ensembl.org/pub/current_mysql">ftp://ftp.ensembl.org/pub/current_mysql</a></div></blockquote>
+<p>for example:
+download homo_sapiens_core_70_37 to a local directory, unzip all gz files, and load it to your MySQL database</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># create a new db in MySQL</span>
+<span class="nv">$ </span>mysql -u DB_USER -p
+mysql&gt; create database homo_sapiens_core_70;
+
+<span class="c"># load data into db</span>
+<span class="nv">$ </span>mysql -u DB_USER -p homo_sapiens_core_70 &lt; homo_sapiens_core_70_37.sql
+<span class="nv">$ </span>mysqlimport -u DB_USER -p homo_sapiens_core_70 -L *.txt -v
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-mine-name-properties">
+<h3>Update &lt;MINE_NAME&gt;.properties<a class="headerlink" href="#update-mine-name-properties" title="Permalink to this headline">¶</a></h3>
+<p>Add the location of the downloaded Ensembl MySQL databases to your mine properties file, for example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># core database</span>
+<span class="na">db.ensembl.9606.core.datasource.serverName</span><span class="o">=</span><span class="s">SERVER_NAME</span>
+<span class="c"># port: uncomment the next line if use different port other than 3306</span>
+<span class="c"># db.ensembl.9606.core.datasource.port=PORT_NUMBER</span>
+<span class="na">db.ensembl.9606.core.datasource.databaseName</span><span class="o">=</span><span class="s">homo_sapiens_core_70</span>
+<span class="na">db.ensembl.9606.core.datasource.species</span><span class="o">=</span><span class="s">homo_sapiens</span>
+<span class="na">db.ensembl.9606.core.datasource.user</span><span class="o">=</span><span class="s">DB_USER</span>
+<span class="na">db.ensembl.9606.core.datasource.password</span><span class="o">=</span><span class="s">DB_PASSWORD</span>
+</pre></div>
+</div>
+<p>These properties are used by the Perl script.</p>
+</div>
+<div class="section" id="install-perl-modules">
+<h3>Install Perl modules<a class="headerlink" href="#install-perl-modules" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ensembl">
+<h4>Ensembl<a class="headerlink" href="#ensembl" title="Permalink to this headline">¶</a></h4>
+<p>InterMine&#8217;s Ensembl converter uses Ensembl&#8217;s Perl API.  Follow Ensembl&#8217;s instructions for how to install the necessary Perl modules:</p>
+<blockquote>
+<div><a class="reference external" href="http://www.ensembl.org/info/docs/api/api_installation.html">http://www.ensembl.org/info/docs/api/api_installation.html</a></div></blockquote>
+</div>
+<div class="section" id="intermine">
+<h4>InterMine<a class="headerlink" href="#intermine" title="Permalink to this headline">¶</a></h4>
+<p>You will also need to install InterMine&#8217;s Perl modules, see <a class="reference internal" href="../../../system-requirements/software/perl.html"><em>Perl</em></a></p>
+</div>
+</div>
+<div class="section" id="run-script-to-generate-items-xml">
+<h3>Run Script to Generate Items XML<a class="headerlink" href="#run-script-to-generate-items-xml" title="Permalink to this headline">¶</a></h3>
+<p>Run this command in <cite>/bio/scripts</cite></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./ensembl.pl <span class="o">[</span>Release Version<span class="o">]</span> MINE_NAME TAXONID DATA_DESTINATION
+</pre></div>
+</div>
+<p>for example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./ensembl.pl flymine 7165 /data/ensembl/current
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="load-xml-file-into-intermine-database">
+<h2>Load XML file into InterMine database<a class="headerlink" href="#load-xml-file-into-intermine-database" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="add-ensembl-core-to-the-list-of-datasources-to-be-integrated">
+<h3>Add Ensembl core to the list of datasources to be integrated<a class="headerlink" href="#add-ensembl-core-to-the-list-of-datasources-to-be-integrated" title="Permalink to this headline">¶</a></h3>
+<p>This is located in the project.xml file, and it should look something like:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;ensembl&quot;</span> <span class="na">type=</span><span class="s">&quot;ensembl-core&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.dir&quot;</span> <span class="na">location=</span><span class="s">&quot;/MY_DATA_DIR/ensembl&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>When you run a database build, every XML file in the directory specificed will be processed and loaded into the database.</p>
+</div>
+<div class="section" id="run-intermine-build">
+<h3>Run InterMine build<a class="headerlink" href="#run-intermine-build" title="Permalink to this headline">¶</a></h3>
+<p>Run a build.  The entry in <cite>project.xml</cite> will instruct the build process to load the XML files you created in the previous step into the database.  For example, run this command in <cite>MINE_NAME/integrate</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v -Dsource<span class="o">=</span>ensembl
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fasta.html" title="FASTA"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="chado.html" title="Chado"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" >Data Source Library</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

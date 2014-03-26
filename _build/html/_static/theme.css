@@ -68,24 +68,18 @@ div.body {
 div.body tt.docutils.literal {
   border-bottom: 1px solid #ddd;
 }
-div.body ul.video {
-  padding: 0;
-  list-style-type: none;
+div.body div.highlight {
+  margin: 1em 2px;
+  border: 1px solid #eee;
 }
-div.body ul.video li {
-  display: inline-block;
-  max-width: 419px;
+div.body div.highlight pre {
+  margin: 0 0.5em;
 }
-div.body ul.video li a img {
-  max-width: 419px;
-}
-
 div.body div.figure {
   background: #f7f7f7;
   box-shadow: 0px 8px 6px -8px #93a1a1;
   position: relative;
   padding: 37px 0 5px 0;
-  margin: 1em 0 1em 0;
 }
 div.body div.figure p.caption {
   position: absolute;
@@ -99,12 +93,6 @@ div.body div.figure p.caption {
   margin: 0;
   padding: 0.2em 0 0.2em 1%;
   text-align: left;
-}
-div.body div.figure p.caption a,
-div.body div.figure p.caption span.pre,
-div.body div.figure p.caption pre {
-  color: #fff !important;
-  background: inherit;
 }
 div.body table.docutils:not(.footnote) {
   margin: 1em 2px;
@@ -139,7 +127,7 @@ div.related ul li {
   float: left;
 }
 div.related ul li.right a {
-  color: #f2fbc3;
+  color: white;
 }
 div.related ul li a {
   margin: 0;
@@ -217,7 +205,7 @@ p {
 }
 div.body a,
 div.sphinxsidebarwrapper a {
-  color: #6b7f01;
+  color: #6f1272;
 }
 h1,
 h2,
@@ -236,13 +224,13 @@ h1 {
   font-size: 34px;
 }
 h2 {
-  margin: 1.5em 0 0.4em 0;
+  margin: 1.3em 0 0.2em 0;
   padding: 0 0 10px 0;
   color: #595455;
   border-bottom: 1px solid #eee;
 }
 h3 {
-  margin: 1.2em 0 -0.1em 0;
+  margin: 1em 0 -0.3em 0;
   padding-bottom: 5px;
 }
 h3,

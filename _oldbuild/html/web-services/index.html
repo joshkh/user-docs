@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Web Services &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="next" title="Embedding InterMine components" href="../embedding/index.html" />
+    <link rel="prev" title="Diagnostic" href="../webapp/diagnostic/index.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../embedding/index.html" title="Embedding InterMine components"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../webapp/diagnostic/index.html" title="Diagnostic"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Web Services</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#api-and-client-libraries">API and Client Libraries</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../webapp/diagnostic/index.html"
+                        title="previous chapter">Diagnostic</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../embedding/index.html"
+                        title="next chapter">Embedding InterMine components</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/web-services/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="web-services">
+<h1>Web Services<a class="headerlink" href="#web-services" title="Permalink to this headline">¶</a></h1>
+<p>InterMine allows, and encourages, programmatic access to
+its features, also known as <em>web services</em>. This allows
+users to automate:</p>
+<ul class="simple">
+<li>Data retrieval (custom queries, templated queries, keyword searches).</li>
+<li>List creation/analysis/management</li>
+<li>User profile management</li>
+<li>Data-model introspection</li>
+</ul>
+<p>For a full listing of web service capabilities please see the
+<a class="reference external" href="http://iodocs.labs.intermine.org">HTTP API documentation</a>.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Install Required Dependenices</dt>
+<dd>If you are reading this page, we make the assumption you know how to write and
+run programs in your language of choice. You will probably want to download
+and install the appropriate client library (see <a class="reference internal" href="#api-and-client-libraries">API and Client Libraries</a>),
+which typically involves the standard package manager for the given platform.</dd>
+<dt>Look at some example code</dt>
+<dd>We assume you are already familiar with the InterMine web interface, as provided
+by sites such as <a class="reference external" href="http://www.flymine.org">FlyMine</a>. Each result table in the web
+interface includes a mechanism for generating code using one of the client libraries
+which generates the same results as those seen in the table (click on the <strong>code</strong>
+button). The generated code is meant to help get you started with the use of the
+client libraries.</dd>
+<dt>Modify the code so it does what you want</dt>
+<dd>Working from the generated stub, you can edit the code to perform your intended task. You
+will probably want to refer to the API documentation for your target
+language (see below).</dd>
+</dl>
+<p>For the kinds of things you will probably be wanting to do, see <a class="reference internal" href="how-do-i.html#howtows"><em>How Do I?</em></a></p>
+</div>
+<div class="section" id="api-and-client-libraries">
+<h2>API and Client Libraries<a class="headerlink" href="#api-and-client-libraries" title="Permalink to this headline">¶</a></h2>
+<p>InterMine exposes its functionality over an HTTP API (generally following RESTful
+principles, but there is a bit of RPC there). Client libraries are available in commonly
+used languages so you can get started quickly. All our code is hosted on <a class="reference external" href="http://www.github.com/intermine">Github</a>,
+and contributions are welcome. All InterMine code is free and open-source, released under
+the LGPL (see <a class="reference internal" href="../about/index.html#legal"><em>Legal</em></a>).</p>
+<p>For information on the underlying API, and the supported libraries, please visit the following links:</p>
+<dl class="docutils">
+<dt>HTTP API</dt>
+<dd>Documentation: <a class="reference external" href="http://iodocs.labs.intermine.org">http://iodocs.labs.intermine.org</a></dd>
+<dt>Java</dt>
+<dd><a class="reference external" href="https://github.com/intermine/intermine/raw/dev/intermine/webservice/client/download/dist/java-intermine-webservice-client.zip">Download</a>
+| <a class="reference external" href="http://intermine.github.io/intermine/">Docs</a>
+| <a class="reference external" href="https://github.com/intermine/intermine/tree/dev/intermine/webservice/client">Source</a></dd>
+<dt>Perl Client</dt>
+<dd><a class="reference external" href="http://search.cpan.org/perldoc?Webservice%3A%3AInterMine">Download | Docs</a>
+| <a class="reference external" href="https://github.com/intermine/intermine-ws-perl">Source</a></dd>
+<dt>Python Client</dt>
+<dd><a class="reference external" href="http://pypi.python.org/pypi/intermine">Download</a>
+| <a class="reference external" href="http://packages.python.org/intermine/">Docs</a>
+| <a class="reference external" href="https://github.com/intermine/intermine-ws-client.py">Source</a></dd>
+<dt>Ruby Client</dt>
+<dd><a class="reference external" href="http://www.rubygems.org/gems/intermine">Download | Docs</a>
+| <a class="reference external" href="https://github.com/intermine/intermine-ws-ruby">Source</a></dd>
+<dt>JavaScript Client (for Browser and node.js)</dt>
+<dd><a class="reference external" href="https://npmjs.org/package/imjs">Download</a>
+| <a class="reference external" href="http://intermine.github.io/imjs//">Docs</a>
+| <a class="reference external" href="https://github.com/intermine/imjs">Source</a></dd>
+</dl>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../embedding/index.html" title="Embedding InterMine components"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../webapp/diagnostic/index.html" title="Diagnostic"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

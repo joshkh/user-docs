@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Acceptance Tests &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Data Integrity Checks" href="index.html" />
+    <link rel="next" title="InterMine performance" href="../performance/index.html" />
+    <link rel="prev" title="Template Comparison" href="template-comparison.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../performance/index.html" title="InterMine performance"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="template-comparison.html" title="Template Comparison"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Data Integrity Checks</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Acceptance Tests</a><ul>
+<li><a class="reference internal" href="#how-to-run-the-tests">How to run the tests</a></li>
+<li><a class="reference internal" href="#types-of-tests">Types of tests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="template-comparison.html"
+                        title="previous chapter">Template Comparison</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../performance/index.html"
+                        title="next chapter">InterMine performance</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/database/data-integrity-checks/acceptance-tests.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="acceptance-tests">
+<h1>Acceptance Tests<a class="headerlink" href="#acceptance-tests" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-run-the-tests">
+<h2>How to run the tests<a class="headerlink" href="#how-to-run-the-tests" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Add a file to <cite>MINE_NAME/integrate/resources</cite>, eg. <cite>flymine_acceptance_test.conf</cite></li>
+<li>run acceptance tests here:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>MINE_NAME/integrate
+<span class="nv">$ </span>ant acceptance-tests
+</pre></div>
+</div>
+<p>The results will be in <cite>MINE_NAME/integrate/build/acceptance_test.html</cite></p>
+</div>
+<div class="section" id="types-of-tests">
+<h2>Types of tests<a class="headerlink" href="#types-of-tests" title="Permalink to this headline">¶</a></h2>
+<p>You can assert that a query returns true:</p>
+<div class="highlight-properties"><pre>assert {
+        sql: select count(*) &gt;= 400000 from goannotation
+}</pre>
+</div>
+<p>Or doesn&#8217;t have any results:</p>
+<div class="highlight-properties"><pre>no-results {
+        sql: select * from datasource where url is null or name is null or description is null
+        note: all fields of data source should be filled in
+}</pre>
+</div>
+<p>Or has at least some results:</p>
+<div class="highlight-properties"><pre>some-results {
+        sql: select * from organism where name = 'Anopheles gambiae'
+        note: We should have an Anopheles gambiae  object but not an Anopheles gambiae PEST one
+}</pre>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../performance/index.html" title="InterMine performance"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="template-comparison.html" title="Template Comparison"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li>
+          <li><a href="index.html" >Data Integrity Checks</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

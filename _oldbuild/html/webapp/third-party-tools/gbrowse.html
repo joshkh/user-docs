@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GBrowse &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Third party tools" href="index.html" />
+    <link rel="next" title="Cytoscape network viewer" href="cytoscape.html" />
+    <link rel="prev" title="Galaxy" href="galaxy.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cytoscape.html" title="Cytoscape network viewer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="galaxy.html" title="Galaxy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Third party tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GBrowse</a><ul>
+<li><a class="reference internal" href="#link-out-to-another-gbrowse">Link out to another GBrowse</a></li>
+<li><a class="reference internal" href="#gbrowse-instance-for-your-mine">GBrowse Instance for your mine</a><ul>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+<li><a class="reference internal" href="#add-gbrowse-project">Add GBrowse project</a></li>
+<li><a class="reference internal" href="#creating-files-for-gbrowse">Creating files for GBrowse</a></li>
+<li><a class="reference internal" href="#loading-into-gbrowse">Loading into GBrowse</a></li>
+<li><a class="reference internal" href="#installing-the-mine-name-conf-file">Installing the MINE_NAME.conf file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="galaxy.html"
+                        title="previous chapter">Galaxy</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cytoscape.html"
+                        title="next chapter">Cytoscape network viewer</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/third-party-tools/gbrowse.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gbrowse">
+<h1>GBrowse<a class="headerlink" href="#gbrowse" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="link-out-to-another-gbrowse">
+<h2>Link out to another GBrowse<a class="headerlink" href="#link-out-to-another-gbrowse" title="Permalink to this headline">¶</a></h2>
+<p>You can link out to an external GBrowse instance. See here for an example: <a class="reference external" href="http://intermine.readthedocs.org/en/latest/webapp/report-page/report-displayers-examples/#gbrowse">http://intermine.readthedocs.org/en/latest/webapp/report-page/report-displayers-examples/#gbrowse</a></p>
+</div>
+<div class="section" id="gbrowse-instance-for-your-mine">
+<h2>GBrowse Instance for your mine<a class="headerlink" href="#gbrowse-instance-for-your-mine" title="Permalink to this headline">¶</a></h2>
+<p>GBrowse is an interactive, generic, web-based genome annotation viewer created as part of the GMOD project.  InterMine is able to export GFF3 and FASTA files suitable for importing into a GBrowse instance.  Links in GBrowse can then refer to InterMine object report pages and the report pages can have links to GBrowse.</p>
+<p>The GBrowse website has installation instructions and a tutorial.  BioPerl is a requirement of GBrowse.</p>
+<div class="section" id="properties">
+<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<p>The dbname, username and password are set in your mine properties file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">project.title</span><span class="o">=</span><span class="s">FlyMine</span>
+<span class="na">project.sitePrefix</span><span class="o">=</span><span class="s">/flymine</span>
+<span class="na">gbrowse.database</span><span class="o">=</span><span class="s">gbrowse</span>
+<span class="na">gbrowse.database.adaptor</span><span class="o">=</span><span class="s">mysql</span>
+<span class="na">gbrowse.database.source</span><span class="o">=</span><span class="s">my-mine-release-1.0</span>
+<span class="na">gbrowse.database.host</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">gbrowse.database.user</span><span class="o">=</span><span class="s">username</span>
+<span class="na">gbrowse.database.password</span><span class="o">=</span><span class="s">password</span>
+<span class="na">gbrowse.database.write.user</span><span class="o">=</span><span class="s">username</span>
+<span class="na">gbrowse.database.write.password</span><span class="o">=</span><span class="s">password</span>
+</pre></div>
+</div>
+<p>The <cite>gbrowse.database.source</cite> property is user visible name of the GBrowse configuration.  It will appear in URLs and on the GBrowse pages.  For example in FlyMine a GBrowse URL could be:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">http</span><span class="o">:</span><span class="s">//www.flymine.org/cgi-bin/gbrowse/flymine-release-11.0/?label=Genes;name=FlyMineInternalID_1090061028;width=750</span>
+</pre></div>
+</div>
+<p>In this case <cite>flymine-release-11.0</cite> is the <cite>gbrowse.database.source</cite>.  This property is also used by GBrowse to choose the configuration file to use from the <cite>gbrowse.config.directory</cite> (see below).  For example if the property is set to <cite>test-mine</cite>, the file will be called <cite>test-mine.conf</cite>.</p>
+<p>The gbrowse.database.write.*, gbrowse.database and gbrowse.database.host properties are used by the <cite>load-gbrowse-data-mysql</cite> target.  The gbrowse.database.user and gbrowse.database.password, gbrowse.database.host, gbrowse.database and gbrowse.database.source properties are used by <cite>ant install-gbrowse-conf</cite> (see below).</p>
+</div>
+<div class="section" id="add-gbrowse-project">
+<h3>Add GBrowse project<a class="headerlink" href="#add-gbrowse-project" title="Permalink to this headline">¶</a></h3>
+<p>Add <cite>/gbrowse</cite> directory to your mine. You can copy FlyMine&#8217;s, simple replace all mentions of FlyMine with the name of your mine.</p>
+</div>
+<div class="section" id="creating-files-for-gbrowse">
+<h3>Creating files for GBrowse<a class="headerlink" href="#creating-files-for-gbrowse" title="Permalink to this headline">¶</a></h3>
+<p>On your local machine, in <cite>MINE_NAME/gbrowse</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant write-gff
+</pre></div>
+</div>
+<p>which writes GFF and FASTA files for each chromosome to the <cite>MINE_NAME/gbrowse/build/gbrowse/data/</cite> directory.</p>
+<p>This command may use more than the default memory available for Java.  See the note about setting <cite>ANT_OPTS</cite>, at the bottom the [wiki:Prerequisites] page to increase the limit.</p>
+</div>
+<div class="section" id="loading-into-gbrowse">
+<h3>Loading into GBrowse<a class="headerlink" href="#loading-into-gbrowse" title="Permalink to this headline">¶</a></h3>
+<p>To load GFF and FASTA files into a local GBrowse schema you need:</p>
+<ul class="simple">
+<li>a machine with GBrowse, BioPerl and MySQL installed</li>
+<li>a &#8216;gbrowse&#8217; database present in MySQL (use: <cite>mysqladmin create gbrowse</cite>)</li>
+<li>set your umask to 0002 (to create files readable to all), which is needed so the the MySQL server can read the files created by the next step</li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">umask </span>0002
+<span class="nv">$ </span>ant load-gbrowse-data-mysql
+</pre></div>
+</div>
+<p>This loads the GFF and FASTA files into a local (MySQL) gbrowse schema.</p>
+<p>If there are problems, run <cite>ant</cite> with the <cite>-v</cite> flag.</p>
+</div>
+<div class="section" id="installing-the-mine-name-conf-file">
+<h3>Installing the MINE_NAME.conf file<a class="headerlink" href="#installing-the-mine-name-conf-file" title="Permalink to this headline">¶</a></h3>
+<p>First make sure that these two properties are in your <cite>MINE_NAME.properties</cite> file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">gbrowse.config.directory</span><span class="o">=</span><span class="s">/etc/apache2/gbrowse.conf</span>
+<span class="na">gbrowse.www.directory</span><span class="o">=</span><span class="s">/var/www/gbrowse</span>
+</pre></div>
+</div>
+<p>The directories will vary depending on where GBrowse is installed.  You can also use any valid <cite>rsync</cite> path, eg. <cite>some_user&#64;some_machine:/some/path/</cite></p>
+<p>Run this in <cite>MINE_NAME/gbrowse</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant install-gbrowse-conf
+</pre></div>
+</div>
+<p>which command copies the a GBrowse configuration file from <cite>MINE_NAME/gbrowse/resources/MINE_NAME.conf</cite> into Apache&#8217;s GBrowse conf directory (as configured with the <cite>gbrowse.config.directory</cite> property).  While being copied the filename is changed to <cite>&lt;source_name&gt;.conf</cite> where <cite>&lt;source_name&gt;</cite> is the value of the <cite>gbrowse.database.source</cite> property.</p>
+<p>You will need to make sure that the <cite>gbrowse.config.directory</cite> is writable by the user.</p>
+<p>Databse host, username and password are also read from the properties and substituted into <cite>&lt;source_name&gt;.conf</cite>.</p>
+<p>GBrowse uses the filename of the configuration file to create the URL to access.  eg. setting gbrowse.database.source to flymine-release-3.0 gives a database that can be accessed at: <a class="reference external" href="http://www.flymine.org/browser/bin/gbrowse/flymine-release-3.0">http://www.flymine.org/browser/bin/gbrowse/flymine-release-3.0</a></p>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cytoscape.html" title="Cytoscape network viewer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="galaxy.html" title="Galaxy"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Third party tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

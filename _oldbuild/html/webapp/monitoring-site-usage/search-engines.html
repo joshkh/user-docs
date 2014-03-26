@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Search engines &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Monitoring Site Usage" href="index.html" />
+    <link rel="next" title="Website Admin" href="../admin/index.html" />
+    <link rel="prev" title="InterMine User Tracking" href="trackers.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../admin/index.html" title="Website Admin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="trackers.html" title="InterMine User Tracking"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Monitoring Site Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Search engines</a><ul>
+<li><a class="reference internal" href="#search-engine-optimisation">Search Engine Optimisation</a></li>
+<li><a class="reference internal" href="#robots-txt">&#8216;&#8217;&#8216;robots.txt&#8217;&#8216;&#8217;</a></li>
+<li><a class="reference internal" href="#nofollow">NOFOLLOW</a></li>
+<li><a class="reference internal" href="#sitemaps">Sitemaps</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trackers.html"
+                        title="previous chapter">InterMine User Tracking</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../admin/index.html"
+                        title="next chapter">Website Admin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/monitoring-site-usage/search-engines.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="search-engines">
+<h1>Search engines<a class="headerlink" href="#search-engines" title="Permalink to this headline">¶</a></h1>
+<p>This document discusses the relationship between your InterMine-based website and search engines.</p>
+<p>If you launch your website, eventually your site will be found and indexed by Google or other search engines.</p>
+<p>Being listed on the search engines is beneficial as it will drive traffic to your site.  However being listed can result in unintended consequences, like exposing &#8220;hidden&#8221; parts of your site.  InterMine provides an easy way to control which parts of the website are indexed by the search engines.</p>
+<div class="section" id="search-engine-optimisation">
+<h2>Search Engine Optimisation<a class="headerlink" href="#search-engine-optimisation" title="Permalink to this headline">¶</a></h2>
+<p>To use each of the search engines&#8217; webmaster tools, you need to include a <cite>CODE</cite> in a meta tag on your website.  You can do this by updating your properties file like so, replacing <cite>CODE</cite> with the value that Google/Microsoft/Yahoo provide:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># MINE.properties</span>
+
+<span class="c"># http://www.google.com/analytics</span>
+<span class="na">google.analytics.id</span><span class="o">=</span><span class="s">CODE</span>
+
+<span class="c"># http://www.google.com/webmasters</span>
+<span class="na">searchengines.google</span><span class="o">=</span><span class="s">CODE</span>
+
+<span class="c"># http://siteexplorer.search.yahoo.com</span>
+<span class="na">searchengines.yahoo</span><span class="o">=</span><span class="s">CODE</span>
+
+<span class="c"># http://www.bing.com/webmaster</span>
+<span class="na">searchengines.msn</span><span class="o">=</span><span class="s">CODE</span>
+</pre></div>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="google-analytics.html"><em>Google Analytics</em></a></p>
+</div>
+</div>
+<div class="section" id="robots-txt">
+<h2>&#8216;&#8217;&#8216;robots.txt&#8217;&#8216;&#8217;<a class="headerlink" href="#robots-txt" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to control what the search engines index is to use a file called robots.txt.  Robots use this file to determine which parts of the site they can visit.  This file should be located in the root of your site, ie. www.flymine.org/robots.txt</p>
+<p>You can also specify which search engines can index your site, e.g. Google or Yahoo.  Here is an example file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">Sitemap</span><span class="o">:</span> <span class="s">sitemap_index.xml</span>
+
+<span class="na">User-agent</span><span class="o">:</span> <span class="s">*</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/</span>
+
+<span class="na">User-agent</span><span class="o">:</span> <span class="s">Googlebot</span>
+<span class="na">Disallow</span><span class="o">:</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/release-8.2/</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/release-8.1/</span>
+
+<span class="na">User-agent</span><span class="o">:</span> <span class="s">Slurp</span>
+<span class="na">Disallow</span><span class="o">:</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/release-8.2/</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/release-8.1/</span>
+
+<span class="na">User-agent</span><span class="o">:</span> <span class="s">msnbot</span>
+<span class="na">Disallow</span><span class="o">:</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/release-8.2/</span>
+<span class="na">Disallow</span><span class="o">:</span> <span class="s">/release-8.1/</span>
+</pre></div>
+</div>
+<p>This file bans all search engine robots except for Google, Yahoo, and MSN.  In addition this file forbids the robots to index files in the release-8.1 and release-8.2 directories.</p>
+<p>Read more about this document on the <a class="reference external" href="http://www.robotstxt.org">http://www.robotstxt.org</a> website.</p>
+</div>
+<div class="section" id="nofollow">
+<h2>NOFOLLOW<a class="headerlink" href="#nofollow" title="Permalink to this headline">¶</a></h2>
+<p>You can restrict access to directories via the robots.txt file, but you can also configure your site to allow or forbid access to specific web pages.</p>
+<p>To prevent the search engine robots from following links on that page, set the noFollow attribute in the InterMineWebApp.properties file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># MYMINE</span>
+<span class="na">mymine.title</span> <span class="o">=</span> <span class="s">MyMine</span>
+<span class="na">mymine.description</span> <span class="o">=</span> <span class="s">Your list of saved lists and queries</span>
+<span class="na">mymine.tab</span> <span class="o">=</span> <span class="s">mymine</span>
+<span class="na">mymine.noFollow</span> <span class="o">=</span> <span class="s">true</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sitemaps">
+<h2>Sitemaps<a class="headerlink" href="#sitemaps" title="Permalink to this headline">¶</a></h2>
+<p>Search engines often have difficulty indexing dynamic websites.  The easiest solution for this is provide a sitemap that indicates which pages should be indexed.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../admin/index.html" title="Website Admin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="trackers.html" title="InterMine User Tracking"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Monitoring Site Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

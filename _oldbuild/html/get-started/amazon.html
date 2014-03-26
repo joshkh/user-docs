@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to set up your InterMine environment on the Amazon Cloud &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Get started" href="index.html" />
+    <link rel="next" title="Data Model" href="../data-model/index.html" />
+    <link rel="prev" title="InterMine Tests" href="intermine-tests.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../data-model/index.html" title="Data Model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intermine-tests.html" title="InterMine Tests"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How to set up your InterMine environment on the Amazon Cloud</a><ul>
+<li><a class="reference internal" href="#pre-requisites">Pre-requisites</a></li>
+<li><a class="reference internal" href="#starting-a-new-instance">Starting a new Instance</a></li>
+<li><a class="reference internal" href="#starting-an-existing-instance">Starting an existing Instance</a></li>
+<li><a class="reference internal" href="#working-with-your-instance">Working with Your Instance</a><ul>
+<li><a class="reference internal" href="#starting-stopping-the-existing-malariamine-web-application">Starting/stopping the existing MalariaMine web application</a></li>
+<li><a class="reference internal" href="#redeploying-malariamine">Redeploying MalariaMine</a></li>
+<li><a class="reference internal" href="#re-building-malariamine">(Re)building MalariaMine</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intermine-tests.html"
+                        title="previous chapter">InterMine Tests</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../data-model/index.html"
+                        title="next chapter">Data Model</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/get-started/amazon.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-set-up-your-intermine-environment-on-the-amazon-cloud">
+<h1>How to set up your InterMine environment on the Amazon Cloud<a class="headerlink" href="#how-to-set-up-your-intermine-environment-on-the-amazon-cloud" title="Permalink to this headline">¶</a></h1>
+<p>Where you should learn how to start your own MalariaMine web application
+on the Amazon Cloud.
+You could also use your InterMine Amazon instance to try building MalariaMine yourself (see <a class="reference external" href="http://intermine.readthedocs.org/en/latest/get-started/tutorial.html">http://intermine.readthedocs.org/en/latest/get-started/tutorial.html</a>)
+or to build your own mine there.</p>
+<div class="section" id="pre-requisites">
+<h2>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
+<p>You need an Amazon account: if you don&#8217;t have one</p>
+<ul class="simple">
+<li>go to <a class="reference external" href="http://aws.amazon.com">http://aws.amazon.com</a></li>
+<li>click on <tt class="docutils literal"><span class="pre">Sign</span> <span class="pre">Up</span></tt></li>
+<li>follow the instructions</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to set up your key pair security mechanism (see for example step 7 below).
+Alternatively you will need your aws-access-key and your aws-secret-key
+to start your instance (not shown here).</p>
+</div>
+</div>
+<div class="section" id="starting-a-new-instance">
+<h2>Starting a new Instance<a class="headerlink" href="#starting-a-new-instance" title="Permalink to this headline">¶</a></h2>
+<p>InterMine is publicly available on Amazon Cloud as an Image (AMI), with an AMI ID <strong>ami-b1c7a9d8</strong>.</p>
+<p>The image contains a ready deployed MalariaMine.</p>
+<ol class="arabic">
+<li><p class="first">sign in at <a class="reference external" href="http://aws.amazon.com">http://aws.amazon.com</a></p>
+</li>
+<li><p class="first">go to the EC2 management console
+AWS console <a class="reference external" href="https://console.aws.amazon.com/console/home">https://console.aws.amazon.com/console/home</a> &#8211;&gt; EC2 console</p>
+</li>
+<li><p class="first">if you don&#8217;t have one, set up a security group which allows access at least to port
+* 22 (SSH)
+* 80 (HTTP)
+* 8080 (TOMCAT)
+you could set up also a few spare ones (20, 21, 8009).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can do this also during step 7, but
+<strong>you cannot change the security group of an instance after starting it for the first time</strong>
+(unless you use a VPC instance, see <a class="reference external" href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html">http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html</a>).</p>
+</div>
+</li>
+<li><p class="first">go to the IMAGES/AMI console</p>
+</li>
+<li><p class="first">set the location on the top header (beside your username) to <em>US East (N. Virginia)</em></p>
+</li>
+<li><p class="first">set the filter to <em>Public Images</em> and search for <tt class="docutils literal"><span class="pre">InterMine</span></tt></p>
+</li>
+<li><p class="first">select <em>BasicIntermine</em> AMI (AMI ID = ami-b1c7a9d8)</p>
+</li>
+<li><p class="first">launch (and configure) instance
+* you can use all default options for the instance characteristics and details, but use the security group you created in step 3.
+* when prompted, create a new key pair (<tt class="docutils literal"><span class="pre">.pem</span></tt> file), or use one that you already own.</p>
+</li>
+<li><p class="first">go to the Instance console</p>
+</li>
+<li><p class="first">select your new instance</p>
+</li>
+<li><p class="first">when public DNS appears (after checks, a couple of minutes), you can open a terminal with</p>
+</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ssh -i your_pem_file ubuntu@the_instance_public_DNS
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-an-existing-instance">
+<h2>Starting an existing Instance<a class="headerlink" href="#starting-an-existing-instance" title="Permalink to this headline">¶</a></h2>
+<p>If you are using an existing Instance, you need to</p>
+<ol class="arabic simple">
+<li>sign in at <a class="reference external" href="http://aws.amazon.com">http://aws.amazon.com</a></li>
+<li>go to the EC2 console (see step 2 above)</li>
+<li>go to the Instance console</li>
+<li>select your instance</li>
+<li>start your instance (Actions &#8211;&gt; Start)</li>
+</ol>
+</div>
+<div class="section" id="working-with-your-instance">
+<h2>Working with Your Instance<a class="headerlink" href="#working-with-your-instance" title="Permalink to this headline">¶</a></h2>
+<p>Open a terminal in Your Instance</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ssh -i your_pem_file ubuntu@the_instance_public_DNS
+</pre></div>
+</div>
+<p>you will land in  <cite>/home/ubuntu</cite></p>
+<p>here you can find these relevant directories:</p>
+<p><tt class="docutils literal"><span class="pre">git/intermine</span></tt> the InterMine code base</p>
+<p><tt class="docutils literal"><span class="pre">.intermine</span></tt> with the properties file</p>
+<p><tt class="docutils literal"><span class="pre">malaria</span></tt> sources for building MalariaMine</p>
+<div class="section" id="starting-stopping-the-existing-malariamine-web-application">
+<h3>Starting/stopping the existing MalariaMine web application<a class="headerlink" href="#starting-stopping-the-existing-malariamine-web-application" title="Permalink to this headline">¶</a></h3>
+<p>In <tt class="docutils literal"><span class="pre">/webapp</span></tt> you&#8217;ll find tomcat6. You can start the webapp using this command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./start.sh
+</pre></div>
+</div>
+<p>Your MalariaMine web application will be then available on</p>
+<blockquote>
+<div><a class="reference external" href="http://the_instance_public_DNS:8080/malariamine">http://the_instance_public_DNS:8080/malariamine</a></div></blockquote>
+<p>To stop the web application:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./stop.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="redeploying-malariamine">
+<h3>Redeploying MalariaMine<a class="headerlink" href="#redeploying-malariamine" title="Permalink to this headline">¶</a></h3>
+<p>In <tt class="docutils literal"><span class="pre">/home/ubuntu/git/intermine/malariamine/webapp</span></tt></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v default remove-webapp release-webapp
+</pre></div>
+</div>
+</div>
+<div class="section" id="re-building-malariamine">
+<h3>(Re)building MalariaMine<a class="headerlink" href="#re-building-malariamine" title="Permalink to this headline">¶</a></h3>
+<p>see <a class="reference external" href="http://intermine.readthedocs.org/en/latest/get-started/tutorial/">http://intermine.readthedocs.org/en/latest/get-started/tutorial/</a></p>
+<p>In <cite>/home/ubuntu/git/intermine/malariamine</cite></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>../bio/scripts/project_build -b -v localhost ~/malariamine-dump
+</pre></div>
+</div>
+<p>You can also follow all the steps in the build as illustrated in <a class="reference internal" href="tutorial/index.html"><em>Tutorial</em></a></p>
+<hr class="docutils" />
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../data-model/index.html" title="Data Model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intermine-tests.html" title="InterMine Tests"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

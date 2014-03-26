@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Report Page &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Report page" href="index.html" />
+    <link rel="next" title="Report Displayers" href="report-displayers.html" />
+    <link rel="prev" title="Report page" href="index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="report-displayers.html" title="Report Displayers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Report page"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Report Page</a><ul>
+<li><a class="reference internal" href="#object-title-s">Object Title(s)</a></li>
+<li><a class="reference internal" href="#custom-header-link">Custom Header Link</a></li>
+<li><a class="reference internal" href="#references-collections">References &amp; Collections</a></li>
+<li><a class="reference internal" href="#inline-lists">Inline Lists</a></li>
+<li><a class="reference internal" href="#custom-displayers">Custom Displayers</a></li>
+<li><a class="reference internal" href="#templates">Templates</a></li>
+<li><a class="reference internal" href="#external-links">External Links</a></li>
+<li><a class="reference internal" href="#data">Data</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Report page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="report-displayers.html"
+                        title="next chapter">Report Displayers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/report-page/report-page.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="report-page">
+<span id="index-0"></span><h1>Report Page<a class="headerlink" href="#report-page" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="object-title-s">
+<h2>Object Title(s)<a class="headerlink" href="#object-title-s" title="Permalink to this headline">¶</a></h2>
+<p>One can edit the appearance of object title(s) through the <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt> file (See <a class="reference internal" href="../properties/model-properties.html"><em>Text and messages</em></a>).</p>
+<p>Let us suppose we want to have a default way of displaying bio entities like gene, protein or probe set. Thus we would look up the entry for bio entity class and add the following configuration:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">className=</span><span class="s">&quot;org.intermine.model.bio.BioEntity&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;headerconfig&gt;</span>
+        <span class="nt">&lt;titles&gt;</span>
+            <span class="nt">&lt;title</span> <span class="na">mainTitles=</span><span class="s">&quot;symbol|primaryIdentifier&quot;</span> <span class="na">numberOfMainTitlesToShow=</span><span class="s">&quot;1&quot;</span> <span class="na">subTitles=</span><span class="s">&quot;*organism.shortName*&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/titles&gt;</span>
+    <span class="nt">&lt;/headerconfig&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<img alt="../../_images/Screenshot4.jpg" src="../../_images/Screenshot4.jpg" />
+<p>We see that the titles are defined within the headerconfig block. Then we have the following fields:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">mainTitles</span></tt></dt>
+<dd>a vertical bar (|) separated list of keys for which we would like to see values.</dd>
+<dt><tt class="docutils literal"><span class="pre">numberOfMainTitlesToShow</span></tt> (optional)</dt>
+<dd>this property is useful if we want to only show a maximum of one value in the title. As per our example the system will first try to resolve the &#8220;symbol&#8221; of the BioEntity, if it is known, we will show just that. However, if a symbol is not provided, then we try to resolve the primaryIdentifier. The system thus follows left-to-right rule when deciding what and how many fields to show. Main titles will always be bold.</dd>
+<dt><tt class="docutils literal"><span class="pre">subTitles</span></tt></dt>
+<dd><p class="first">this is where we define sub titles. Again we can use the vertical bar to define a number of key values to display. Subtitles can be displayed in three ways based on the tags around them that define element formatting:</p>
+<ul class="last simple">
+<li><tt class="docutils literal"><span class="pre">primaryIdentifier</span></tt> (default): the element will be displayed without any formatting applied</li>
+<li><tt class="docutils literal"><span class="pre">*primaryIdentifier*</span></tt>: the element will be in italics, useful for organism names</li>
+<li><tt class="docutils literal"><span class="pre">[primaryIdentifier]</span></tt>: the value will appear in square brackets</li>
+</ul>
+</dd>
+</dl>
+<p>What is important to note, is that classes of objects <em>inherit</em> from their parents, thus unless we provide a different configuration for a, say, Protein title, the formatting from BioEntity will be applied. Fields resolved in the title(s) will be removed from the summary below it.</p>
+</div>
+<div class="section" id="custom-header-link">
+<h2>Custom Header Link<a class="headerlink" href="#custom-header-link" title="Permalink to this headline">¶</a></h2>
+<p>One can have a custom link in the header of the page through the <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt> file.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;headerconfig&gt;</span>
+    <span class="nt">&lt;customlinks&gt;</span>
+        <span class="nt">&lt;customlink</span>
+            <span class="na">url=</span><span class="s">&quot;http://flybase.org/reports/{primaryIdentifier}.html&quot;</span>
+            <span class="na">image=</span><span class="s">&quot;flybase_logo_link.png&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/customlinks&gt;</span>
+<span class="nt">&lt;/headerconfig&gt;</span>
+</pre></div>
+</div>
+<img alt="../../_images/Screenshot4.jpg" src="../../_images/Screenshot4.jpg" />
+<p>The example above has been inserted as a child of the Gene class <tt class="docutils literal"><span class="pre">&lt;class</span> <span class="pre">className=&quot;org.intermine.model.bio.Gene&quot;&gt;</span></tt>. The parameters are as follows:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">url</span></tt></dt>
+<dd>this is where we specify the target of the link. The item in the curly brackets is a variable parameter that will get resolved as a property for the current object.</dd>
+<dt><tt class="docutils literal"><span class="pre">image</span></tt> (optional)</dt>
+<dd>defines a name of the image from &#8220;model/images&#8221; (e.g.: <tt class="docutils literal"><span class="pre">flymine/webapp/resources/webapp/model/images</span></tt>) to resolve.</dd>
+<dt><tt class="docutils literal"><span class="pre">text</span></tt> (optional)</dt>
+<dd>defines a link text that will appear (next to an image if provided). The link will then appear in the top right corner of the header. If no image or text is provided, the link text will default to the URL.</dd>
+</dl>
+</div>
+<div class="section" id="references-collections">
+<h2>References &amp; Collections<a class="headerlink" href="#references-collections" title="Permalink to this headline">¶</a></h2>
+<p>Each object has a number of fields configured in the model, like <tt class="docutils literal"><span class="pre">length</span></tt> or <tt class="docutils literal"><span class="pre">proteins</span></tt> for Gene. The first is a reference to a single value or an object, the latter is a list of values/objects. These then appear on the report page as References and Collections.</p>
+<p>To configure in which category on the page these are to show, follow <a class="reference internal" href="../admin/index.html"><em>Website Admin</em></a>.</p>
+<p>Additionally, one can decide to either show the old style &#8220;inline tables&#8221; or use the new Results Tables JS library when displaying these. To enable the latter, edit your <cite>web.properties</cite> as follows:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">inline.collections.in.tables</span> <span class="o">=</span> <span class="s">true</span>
+</pre></div>
+</div>
+<p>This will display any inline collections in table widgets. Unless <tt class="docutils literal"><span class="pre">use.localstorage</span></tt> is <tt class="docutils literal"><span class="pre">true</span></tt> they will appear expanded but can be collapsed.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">use.localstorage</span> <span class="o">=</span> <span class="s">true</span>
+</pre></div>
+</div>
+<p>Both inline collections and templates will initially appear collapsed. Their state will be tracked using <a class="reference external" href="http://diveintohtml5.info/storage.html">localStorage</a> if available.</p>
+</div>
+<div class="section" id="inline-lists">
+<h2>Inline Lists<a class="headerlink" href="#inline-lists" title="Permalink to this headline">¶</a></h2>
+<p>Inline lists are lists of values in one column of a report page table, displayed in one line. Take &#8216;&#8217;dataSets&#8217;&#8217; on a Gene object as follows:</p>
+<img alt="../../_images/Screenshot.jpg" src="../../_images/Screenshot.jpg" />
+<p>Perhaps we would like to only display the names of data sets available. Then, we would add the following to the Gene class (<tt class="docutils literal"><span class="pre">&lt;class</span> <span class="pre">className=&quot;org.intermine.model.bio.Gene&quot;&gt;</span></tt>) in the <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt> file:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;inlinelist&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">path=</span><span class="s">&quot;dataSets.name&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/inlinelist&gt;</span>
+</pre></div>
+</div>
+<p>The result:</p>
+<img alt="../../_images/Screenshot2.jpg" src="../../_images/Screenshot2.jpg" />
+<p>Let&#8217;s go through the available configuration:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">path</span></tt></dt>
+<dd>refers to the reference or collection and a key (separated by a dot) that refers to a column (key) we want to display.</dd>
+<dt><tt class="docutils literal"><span class="pre">showInHeader</span></tt> (optional)</dt>
+<dd>a boolean attribute that, if set to true, will make the list appear in the header section of the page.</dd>
+<dt><tt class="docutils literal"><span class="pre">lineLength</span></tt> (optional)</dt>
+<dd>defines the number of characters we would like to show in the list, any content after this length will be revealed upon clicking an &#8220;Expand&#8221; link. Bear in mind that the line length will not be exact as it will not split words in half.</dd>
+<dt><tt class="docutils literal"><span class="pre">showLinksToObjects</span></tt> (optional)</dt>
+<dd>by specifying this boolean attribute we can create links from the list to the individual objects the list refers to.</dd>
+</dl>
+<p>If we have not set an inline list to appear in the header section of the page, the list will, by default appear in the category &#8220;Other&#8221; on the report page. If we login to the system we can then (through the report page tagging interface that is revealed to us) tag the list to appear in a specific section.</p>
+</div>
+<div class="section" id="custom-displayers">
+<h2>Custom Displayers<a class="headerlink" href="#custom-displayers" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="report-displayers.html"><em>Report Displayers</em></a> for details on how to create displayers for the report page.</p>
+</div>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>Tag template with the <tt class="docutils literal"><span class="pre">im:report</span></tt> tag. See <a class="reference internal" href="../admin/index.html"><em>Website Admin</em></a>.</p>
+</div>
+<div class="section" id="external-links">
+<h2>External Links<a class="headerlink" href="#external-links" title="Permalink to this headline">¶</a></h2>
+<p>See the External Link section of <a class="reference internal" href="../properties/web-properties.html"><em>Features</em></a></p>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="../properties/webconfig-model.html"><em>Data and Widget Configuration</em></a> for details on how to change the names of class and fields.</p>
+<p>You can also hide collections by tagging them with the <tt class="docutils literal"><span class="pre">im:hidden</span></tt> tag.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="report-displayers.html" title="Report Displayers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Report page"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

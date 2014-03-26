@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>General Layout &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Region Search" href="../region-search/index.html" />
+    <link rel="prev" title="Keyword Search" href="../keyword-search/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../region-search/index.html" title="Region Search"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../keyword-search/index.html" title="Keyword Search"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">General Layout</a><ul>
+<li><a class="reference internal" href="#parts">Parts</a><ul>
+<li><a class="reference internal" href="#logo">Logo</a></li>
+<li><a class="reference internal" href="#menu-tabs">Menu Tabs</a></li>
+<li><a class="reference internal" href="#keyword-search-box">Keyword search box</a></li>
+<li><a class="reference internal" href="#footer">Footer</a></li>
+<li><a class="reference internal" href="#favicon">Favicon</a></li>
+<li><a class="reference internal" href="#other-properties">Other properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#changing-look-and-feel-the-theme">Changing look and feel, the theme</a><ul>
+<li><a class="reference internal" href="#developing-your-own-theme">Developing your own theme</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../keyword-search/index.html"
+                        title="previous chapter">Keyword Search</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../region-search/index.html"
+                        title="next chapter">Region Search</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/layout/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="general-layout">
+<h1>General Layout<a class="headerlink" href="#general-layout" title="Permalink to this headline">¶</a></h1>
+<p>This page describes how to customise the look &amp; feel of the whole InterMine webapp.</p>
+<div class="section" id="parts">
+<h2>Parts<a class="headerlink" href="#parts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="logo">
+<h3>Logo<a class="headerlink" href="#logo" title="Permalink to this headline">¶</a></h3>
+<p>The logo is independent from any themes and is located here <tt class="docutils literal"><span class="pre">MINE_NAME/webapp/resources/webapp/model/images</span> <span class="pre">webapp/resources/webapp/model/images/logo.png</span></tt>. The recommended size is 45px x 43px.</p>
+</div>
+<div class="section" id="menu-tabs">
+<h3>Menu Tabs<a class="headerlink" href="#menu-tabs" title="Permalink to this headline">¶</a></h3>
+<p>The tabs are set in InterMine&#8217;s internationalisation file: <tt class="docutils literal"><span class="pre">intermine/webapp/main/resources/webapp/WEB-INF/classes/InterMineWebApp.properties</span></tt>.</p>
+<p>Each page has a name and a tab, for example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">mymine.tab</span> <span class="o">=</span> <span class="s">mymine</span>
+</pre></div>
+</div>
+<p>In addition to InterMine&#8217;s file, each mine has its own internationalisation file: <cite>MINE_NAME/webapp/resources/model.properties</cite>. Properties set in this file overwrite the ones set in <tt class="docutils literal"><span class="pre">intermine/webapp/main/resources/webapp/WEB-INF/classes/InterMineWebApp.properties</span></tt>. Below is an example of how to add tabs to your mine. Replace &#8220;api&#8221; with the name of your new tab.</p>
+<p>First, add your tab to <cite>intermine/webapp/main/resources/webapp/headMenu.jsp</cite></p>
+<div class="highlight-guess"><div class="highlight"><pre><span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">&quot;api&quot;</span>  <span class="err">&lt;c:if</span> <span class="na">test=</span><span class="s">&quot;</span><span class="cp">${</span><span class="n">tab</span> <span class="o">==</span> <span class="s">&#39;api&#39;</span><span class="cp">}</span><span class="s">&quot;</span><span class="nt">&gt;</span>class=&quot;activelink&quot;<span class="nt">&lt;/c:if&gt;</span>&gt;
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/</span><span class="cp">${</span><span class="n">WEB_PROPERTIES</span><span class="p">[</span><span class="s">&#39;webapp.path&#39;</span><span class="p">]</span><span class="cp">}</span><span class="s">/api.do&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fmt:message</span> <span class="na">key=</span><span class="s">&quot;menu.api&quot;/</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+</div>
+<p>Then add the text for that tab to your <cite>MINE_NAME/webapp/resources/model.properties</cite> file:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># HEADER</span>
+<span class="na">menu.api</span> <span class="o">=</span> <span class="s">API</span>
+</pre></div>
+</div>
+<p>You&#8217;ll need to configure our web framework (Struts) to properly load your JSP page:</p>
+<div class="highlight-xml"><div class="highlight"><pre># in MINE_NAME/webapp/resources/struts-config-model.xml
+<span class="nt">&lt;action</span> <span class="na">path=</span><span class="s">&quot;/api&quot;</span> <span class="na">forward=</span><span class="s">&quot;api.page&quot;</span><span class="nt">/&gt;</span>
+
+# in MINE_NAME/webapp/resources/tiles-defs-model.xml
+<span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">&quot;api.page&quot;</span> <span class="na">extends=</span><span class="s">&quot;layout.template&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">&quot;body&quot;</span> <span class="na">value=</span><span class="s">&quot;api.tile&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;put</span> <span class="na">name=</span><span class="s">&quot;pageName&quot;</span> <span class="na">value=</span><span class="s">&quot;api&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/definition&gt;</span>
+
+<span class="nt">&lt;definition</span> <span class="na">name=</span><span class="s">&quot;api.tile&quot;</span> <span class="na">path=</span><span class="s">&quot;/api.jsp&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Finally, add your JSP file to the <cite>MINE_NAME/webapp/resources/webapp</cite> directory and re-release your webapp.</p>
+</div>
+<div class="section" id="keyword-search-box">
+<h3>Keyword search box<a class="headerlink" href="#keyword-search-box" title="Permalink to this headline">¶</a></h3>
+<p>This search box queries the search index created in the postprocess <tt class="docutils literal"><span class="pre">create-search-index</span></tt>. To change which placeholder identifiers will appear in the box, edit the <cite>quickSearch.identifiers</cite> property in <a class="reference internal" href="../properties/intermine-properties.html"><em>Database and Web application</em></a>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../keyword-search/index.html"><em>Keyword Search</em></a> for details on how to configure the search index.</p>
+</div>
+</div>
+<div class="section" id="footer">
+<h3>Footer<a class="headerlink" href="#footer" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">feedback.destination</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/intermine-properties.html"><em>Database and Web application</em></a> changes the recipient email address for contact form</dd>
+<dt>&nbsp;<tt class="docutils literal"><span class="pre">funding</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/model-properties.html"><em>Text and messages</em></a> changes the &#8220;funded by&#8221; text</dd>
+</dl>
+</div>
+<div class="section" id="favicon">
+<h3>Favicon<a class="headerlink" href="#favicon" title="Permalink to this headline">¶</a></h3>
+<p>Favicon (icon seen next to the url of the webapp in the browser url bar) can be set by adding the following line:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;shortcut icon&quot;</span> <span class="na">type=</span><span class="s">&quot;image/x-icon&quot;</span> <span class="na">href=</span><span class="s">&quot;model/images/favicon.ico&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>Into the <tt class="docutils literal"><span class="pre">webapp/resources/webapp/layout.jsp</span></tt> file and its <tt class="docutils literal"><span class="pre">&lt;/head&gt;</span></tt> section. The favicon itself should be located in <tt class="docutils literal"><span class="pre">&lt;your_mine&gt;/webapp/resources/webapp/model/images/favicon.ico</span></tt>.</p>
+<p>If you want to generate a favicon from an image, use this <a class="reference external" href="http://tools.dynamicdrive.com/favicon/">Dynamic Drive</a> tool.</p>
+</div>
+<div class="section" id="other-properties">
+<h3>Other properties<a class="headerlink" href="#other-properties" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">project.sitePrefix</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/intermine-properties.html"><em>Database and Web application</em></a> configures the link</dd>
+<dt><tt class="docutils literal"><span class="pre">project.title</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/intermine-properties.html"><em>Database and Web application</em></a> configures the name of the mine</dd>
+<dt><tt class="docutils literal"><span class="pre">project.releaseVersion</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/intermine-properties.html"><em>Database and Web application</em></a> configures the version of the mine</dd>
+<dt><tt class="docutils literal"><span class="pre">project.subTitle</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/intermine-properties.html"><em>Database and Web application</em></a> configures the subtitle showing in the header</dd>
+<dt><tt class="docutils literal"><span class="pre">header.links</span></tt></dt>
+<dd>in <a class="reference internal" href="../properties/web-properties.html"><em>Features</em></a> configures the links in upper right corner</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="changing-look-and-feel-the-theme">
+<h2>Changing look and feel, the theme<a class="headerlink" href="#changing-look-and-feel-the-theme" title="Permalink to this headline">¶</a></h2>
+<p>InterMine provides a set of default themes but you can also create your own. All themes are defined in <tt class="docutils literal"><span class="pre">intermine/webapp/main/resources/webapp/themes/*</span></tt>. Explore the folder to see the themes available.</p>
+<p>To switch a theme edit <a class="reference internal" href="../properties/web-properties.html"><em>Features</em></a>:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># web.properties</span>
+<span class="na">theme</span> <span class="o">=</span> <span class="s">purple</span>
+</pre></div>
+</div>
+<p>You need to change this property to the name of the theme you want to use (the directory name), then re-release the webapp. Be sure to run <tt class="docutils literal"><span class="pre">ant-clean</span></tt> to ensure that all of the old files are deleted:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># in &lt;your_mine&gt;/webapp/resources/webapp</span>
+<span class="nv">$ </span>ant clean
+<span class="nv">$ </span>ant default remove-webapp release-webapp
+</pre></div>
+</div>
+<div class="section" id="developing-your-own-theme">
+<h3>Developing your own theme<a class="headerlink" href="#developing-your-own-theme" title="Permalink to this headline">¶</a></h3>
+<p>With CSS knowledge and open source image software such as <a class="reference external" href="http://www.gimp.org">Gimp</a> or <a class="reference external" href="http://www.inkscape.org">Inkscape</a> you can develop your own theme. Each theme directory contains a <tt class="docutils literal"><span class="pre">theme.css</span></tt> file, which is broken down in annotated sections, and image files. The image files are required for displaying menus, headers and backgrounds and can be modified with image software to match your colour scheme. Create a new directory under <tt class="docutils literal"><span class="pre">intermine/webapp/main/resources/webapp/themes/</span></tt>, copy the contents of another theme directory into it and start editing.</p>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../region-search/index.html" title="Region Search"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../keyword-search/index.html" title="Keyword Search"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

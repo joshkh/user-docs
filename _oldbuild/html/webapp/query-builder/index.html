@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QueryBuilder &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Guide to Customising your Web Application" href="../index.html" />
+    <link rel="next" title="Keyword Search" href="../keyword-search/index.html" />
+    <link rel="prev" title="Query Results" href="../query-results/index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../keyword-search/index.html" title="Keyword Search"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../query-results/index.html" title="Query Results"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QueryBuilder</a><ul>
+<li><a class="reference internal" href="#select-a-data-type-to-begin-a-query">Select a Data Type to Begin a Query</a></li>
+<li><a class="reference internal" href="#query-builder">query builder</a></li>
+<li><a class="reference internal" href="#hiding-fields">Hiding fields</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../query-results/index.html"
+                        title="previous chapter">Query Results</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../keyword-search/index.html"
+                        title="next chapter">Keyword Search</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/query-builder/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="querybuilder">
+<h1>QueryBuilder<a class="headerlink" href="#querybuilder" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="select-a-data-type-to-begin-a-query">
+<h2>Select a Data Type to Begin a Query<a class="headerlink" href="#select-a-data-type-to-begin-a-query" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>types in bold</dt>
+<dd>Tag types with <cite>im:preferredBagType</cite> tag.  Use the model browser to tag classes, eg. <a class="reference external" href="http://www.flymine.org/query/tree.do">http://www.flymine.org/query/tree.do</a></dd>
+<dt>intro text</dt>
+<dd>Most text in InterMine can be set in model.properties, see <a class="reference internal" href="../properties/model-properties.html"><em>Text and messages</em></a>.</dd>
+<dt>help text</dt>
+<dd>Set in <cite>classDecriptions.properties</cite> file</dd>
+</dl>
+</div>
+<div class="section" id="query-builder">
+<h2>query builder<a class="headerlink" href="#query-builder" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>SUMMARY</dt>
+<dd>Which columns appear when you click on SUMMARY button are set in WebConfigModel.</dd>
+<dt>autocomplete</dt>
+<dd>Add fields to the ObjectStoreSummaryProperties file to have their form fields autocomplete.</dd>
+</dl>
+</div>
+<div class="section" id="hiding-fields">
+<h2>Hiding fields<a class="headerlink" href="#hiding-fields" title="Permalink to this headline">¶</a></h2>
+<p>In your <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt>, set a property <tt class="docutils literal"><span class="pre">showInQB</span></tt> for a <tt class="docutils literal"><span class="pre">&lt;fieldconfig</span> <span class="pre">/&gt;</span></tt> to <tt class="docutils literal"><span class="pre">true</span></tt> to hide a field from a Class.</p>
+<p>An example of hiding an attribute field:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">className=</span><span class="s">&quot;org.intermine.model.testmodel.Manager&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fields&gt;</span>
+        <span class="nt">&lt;fieldconfig</span> <span class="na">fieldExpr=</span><span class="s">&quot;age&quot;</span> <span class="na">showInQB=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/fields&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<p>An example of hiding a Reference or a Collection field:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;class</span> <span class="na">className=</span><span class="s">&quot;org.intermine.model.testmodel.Manager&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;fields&gt;</span>
+        <span class="nt">&lt;fieldconfig</span> <span class="na">fieldExpr=</span><span class="s">&quot;address&quot;</span> <span class="na">showInQB=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/fields&gt;</span>
+<span class="nt">&lt;/class&gt;</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../keyword-search/index.html" title="Keyword Search"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../query-results/index.html" title="Query Results"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

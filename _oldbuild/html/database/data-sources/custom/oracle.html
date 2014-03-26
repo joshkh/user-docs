@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Oracle Data Source &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../index.html" />
+    <link rel="up" title="Writing Your Own Data Source" href="index.html" />
+    <link rel="next" title="Items APIs" href="../apis/index.html" />
+    <link rel="prev" title="Writing Your Own Data Source" href="index.html" /><!-- syntax highlighting -->
+<link href="../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../apis/index.html" title="Items APIs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Writing Your Own Data Source"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Writing Your Own Data Source</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Oracle Data Source</a><ul>
+<li><a class="reference internal" href="#database-properties">Database Properties</a></li>
+<li><a class="reference internal" href="#data-source">Data Source</a></li>
+<li><a class="reference internal" href="#data-converter">Data Converter</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Writing Your Own Data Source</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../apis/index.html"
+                        title="next chapter">Items APIs</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/database/data-sources/custom/oracle.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="oracle-data-source">
+<h1>Oracle Data Source<a class="headerlink" href="#oracle-data-source" title="Permalink to this headline">¶</a></h1>
+<p>You can load data from Oracle directly into an InterMine instance. The JDBC driver is already in the classpath:  <cite>intermine/objectstore/main/lib ojdbc14.jar</cite></p>
+<div class="section" id="database-properties">
+<h2>Database Properties<a class="headerlink" href="#database-properties" title="Permalink to this headline">¶</a></h2>
+<p>Add this to your mine properties file, these are the values that are going to be passed to Oracle in the connection string:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="na">db.mysourcedb.datasource.class</span><span class="o">=</span><span class="s">oracle.jdbc.pool.OracleDataSource</span>
+<span class="na">db.mysourcedb.datasource.dataSourceName</span><span class="o">=</span><span class="s">db.sgd</span>
+<span class="na">db.mysourcedb.datasource.serverName</span><span class="o">=</span><span class="s">HOSTNAME</span>
+<span class="na">db.mysourcedb.datasource.databaseName</span><span class="o">=</span><span class="s">XE</span>
+<span class="na">db.mysourcedb.datasource.user</span><span class="o">=</span><span class="s">USER</span>
+<span class="na">db.mysourcedb.datasource.password</span><span class="o">=</span><span class="s">PWD</span>
+<span class="na">db.mysourcedb.datasource.maxConnections</span><span class="o">=</span><span class="s">10</span>
+<span class="na">db.mysourcedb.driver</span><span class="o">=</span><span class="s">oracle.jdbc.driver.OracleDriver</span>
+<span class="na">db.mysourcedb.datasource.driverType</span><span class="o">=</span><span class="s">thin</span>
+<span class="na">db.mysourcedb.datasource.portNumber</span><span class="o">=</span><span class="s">1521</span>
+<span class="na">db.mysourcedb.platform</span><span class="o">=</span><span class="s">Oracle</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-source">
+<h2>Data Source<a class="headerlink" href="#data-source" title="Permalink to this headline">¶</a></h2>
+<p>Create a new source with a <cite>db</cite> source_type, eg:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./bio/scripts/make_source MySource db
+</pre></div>
+</div>
+<p>Add this source to your project.xml file.  The value, <cite>mysourcedb</cite> in this example, tells the build system to get the database information from the <cite>db.mysourcedb</cite> entry in your properties file.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;mysource&quot;</span> <span class="na">type=</span><span class="s">&quot;mysource&quot;</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;source.db.name&quot;</span> <span class="na">value=</span><span class="s">&quot;mysourcedb&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-converter">
+<h2>Data Converter<a class="headerlink" href="#data-converter" title="Permalink to this headline">¶</a></h2>
+<p>You can now connect to Oracle in your source.  In your converter, get the connection to the database</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">// a database has been initialised from properties starting with db.sgd</span>
+<span class="n">Connection</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">getDatabase</span><span class="o">().</span><span class="na">getConnection</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>Run a query to retrieve your data</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;SELECT feature_no, dbxref_id FROM feature WHERE feature_type = &#39;gene&#39;&quot;</span><span class="o">;</span>
+<span class="n">Statement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span>
+<span class="n">ResultSet</span> <span class="n">res</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span><span class="n">query</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Iterate through results and convert each row to an InterMine object.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">// loop through each row of results</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+     <span class="c1">// create a gene</span>
+     <span class="n">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">createItem</span><span class="o">(</span><span class="s">&quot;Gene&quot;</span><span class="o">);</span>
+
+     <span class="c1">// set gene fields from results</span>
+     <span class="n">item</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;primaryIdentifier&quot;</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;dbxref_id&quot;</span><span class="o">));</span>
+     <span class="n">item</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;secondaryIdentifier&quot;</span><span class="o">,</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;feature_name&quot;</span><span class="o">));</span>
+
+     <span class="c1">// store item in database</span>
+     <span class="n">store</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../apis/index.html" title="Items APIs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Writing Your Own Data Source"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="index.html" >Writing Your Own Data Source</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

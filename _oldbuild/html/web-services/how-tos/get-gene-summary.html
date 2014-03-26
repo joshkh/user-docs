@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How Do I Get a Summary of a Gene? &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/web-services/how-tos/get-gene-summary.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-do-i-get-a-summary-of-a-gene">
+<h1>How Do I Get a Summary of a Gene?<a class="headerlink" href="#how-do-i-get-a-summary-of-a-gene" title="Permalink to this headline">¶</a></h1>
+<p>You need to make a request to the <cite>query/results</cite> resource:</p>
+<p>You can make either a GET or a POST request - it may be better to make POST
+requests if your query gets large. The query format must be provided as an
+XML document in the InterMine <a class="reference external" href="http://www.flymine.org/query/service/schema/query.xsd">PathQuery XML format</a>, and to write meaningful
+queries you will need to know a bit about the data model. For these reasons
+we recommend you consider using the client libraries below. But if you do
+want to make the request using a tool such as <cite>curl</cite>, it would look like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">QUERY</span><span class="o">=</span><span class="s1">&#39;&lt;query model=&quot;genomic&quot;</span>
+<span class="s1">   view=&quot;Gene.symbol Gene.name Gene.primaryIdentifier Gene.length Gene.chromosome.primaryIdentifier</span>
+<span class="s1">         Gene.chromosomeLocation.start Gene.chromosomeLocation.end&quot;&gt;</span>
+<span class="s1">      &lt;constraint path=&quot;Gene.symbol&quot; op=&quot;=&quot; value=&quot;eve&quot;/&gt;</span>
+<span class="s1">      &lt;/query&gt;&#39;</span>
+curl --data-urlencode <span class="nv">query</span><span class="o">=</span><span class="s2">&quot;$QUERY&quot;</span> http://www.flymine.org/query/service/query/results
+</pre></div>
+</div>
+<p>This can be done much more concisely using the other tools, such as
+the Perl client libaries. Notice that here the library uses introspection
+of the data model to provide the appropriate fields.:</p>
+<div class="highlight-perl"><div class="highlight"><pre><span class="k">use</span> <span class="mf">5.12.0</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">Webservice::</span><span class="n">InterMine</span> <span class="mf">1.0301</span><span class="p">;</span>
+
+<span class="k">my</span> <span class="nv">$flymine</span> <span class="o">=</span> <span class="n">get_service</span><span class="p">(</span><span class="s">&#39;www.flymine.org/query&#39;</span><span class="p">);</span>
+<span class="k">my</span> <span class="nv">$eve</span> <span class="o">=</span> <span class="nv">$flymine</span><span class="o">-&gt;</span><span class="nb">select</span><span class="p">(</span><span class="s">&#39;Gene.*&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">where</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=&gt;</span> <span class="s">&#39;eve&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
+
+<span class="n">say</span> <span class="nv">$eve</span><span class="o">-&gt;</span><span class="p">{</span><span class="n">name</span><span class="p">};</span>
+<span class="n">say</span> <span class="nv">$eve</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Similar faclities are available in the Python client:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">intermine.webservice</span> <span class="kn">import</span> <span class="n">Service</span>
+
+<span class="n">flymine</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="s">&#39;www.flymine.org/query&#39;</span><span class="p">)</span>
+<span class="n">eve</span> <span class="o">=</span> <span class="n">flymine</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Gene</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">&#39;eve&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">eve</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">eve</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And in Ruby:</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;intermine/service&#39;</span>
+
+<span class="n">flymine</span> <span class="o">=</span> <span class="no">Service</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;www.flymine.org/query&#39;</span><span class="p">)</span>
+<span class="n">eve</span> <span class="o">=</span> <span class="n">flymine</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Gene&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="ss">:symbol</span> <span class="o">=&gt;</span> <span class="s1">&#39;eve&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">first</span>
+
+<span class="nb">puts</span> <span class="n">eve</span><span class="o">.</span><span class="n">name</span>
+<span class="nb">puts</span> <span class="n">eve</span>
+</pre></div>
+</div>
+<p>And in JavaScript:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">intermine</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;imjs&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">flymine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">intermine</span><span class="p">.</span><span class="nx">Service</span><span class="p">({</span><span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;www.flymine.org/query&#39;</span><span class="p">});</span>
+<span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="nx">flymine</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="s1">&#39;eve&#39;</span><span class="p">);</span>
+
+<span class="c1">// Only expecting a single match, but the method</span>
+<span class="c1">// yields a list of matches.</span>
+<span class="nx">search</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">matches</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">matches</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">gene</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gene</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">gene</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

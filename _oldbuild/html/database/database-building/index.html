@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Database Building &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Database" href="../index.html" />
+    <link rel="next" title="project_build script" href="build-script.html" />
+    <link rel="prev" title="Id Resolvers" href="../data-sources/id-resolvers.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="build-script.html" title="project_build script"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../data-sources/id-resolvers.html" title="Id Resolvers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Database</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../data-sources/id-resolvers.html"
+                        title="previous chapter">Id Resolvers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="build-script.html"
+                        title="next chapter">project_build script</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/database/database-building/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="database-building">
+<h1>Database Building<a class="headerlink" href="#database-building" title="Permalink to this headline">¶</a></h1>
+<p>A &#8216;build&#8217; of a mine is a complete data loading run starting from an empty database. It is recommended that you use the <a class="reference internal" href="build-script.html"><em>project_build script</em></a>. The build script runs the data integration and any post-processing steps.</p>
+<p>Each mine has an integrate project that reads the project.xml file and builds the data warehouse. This steps through each <cite>source</cite> defined in the project.xml file and transates the specified data from a source format and loads it into the production database. Data integration is governed by primary keys, any conflicts are resolved by a priorities config file.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build-script.html">project_build script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-script.html#command-line-options">Command line options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-script.html#running-a-single-datasource">Running a Single Datasource</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data-integration.html">Data Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model-merging.html">Model Merging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model-merging.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-merging.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="primary-keys.html">Primary Keys</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="primary-keys.html#data-source-keys-configuration-files">Data source keys configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primary-keys.html#defining-keys-in-a-central-file">Defining keys in a central file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="primary-keys.html#global-primary-key-configuration-file">Global primary key configuration file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-keys.html#using-global-keys-in-each-source">Using global keys in each source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="priority-config.html">Priority Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="priority-config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="priority-config.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="priority-config.html#validation">Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="post-processing/index.html">Post processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="post-processing/index.html#sequence-features">Sequence Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-chromosome-locations-and-lengths">create-chromosome-locations-and-lengths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#transfer-sequences">transfer-sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-references">create-references</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-intron-features">create-intron-features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="post-processing/index.html#overlapping-and-flanking-features">Overlapping and Flanking Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-intergenic-region-features">create-intergenic-region-features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-bioseg-location-index">create-bioseg-location-index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-overlap-view">create-overlap-view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-gene-flanking-features">create-gene-flanking-features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="post-processing/index.html#data">Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#do-sources">do-sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="post-processing/index.html#webapp">Webapp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-search-index">create-search-index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-attribute-indexes">create-attribute-indexes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#summarise-objectstore">summarise-objectstore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="post-processing/index.html#create-autocomplete-index">create-autocomplete-index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<span class="target" id="index-0"></span></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="build-script.html" title="project_build script"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../data-sources/id-resolvers.html" title="Id Resolvers"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Database</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

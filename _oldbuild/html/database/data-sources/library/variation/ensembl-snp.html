@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ensembl SNP &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../../index.html" />
+    <link rel="up" title="Variation" href="index.html" />
+    <link rel="next" title="Chado" href="../chado.html" />
+    <link rel="prev" title="Variation" href="index.html" /><!-- syntax highlighting -->
+<link href="../../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../chado.html" title="Chado"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Variation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Variation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Ensembl SNP</a><ul>
+<li><a class="reference internal" href="#types-of-data-loaded">Types of data loaded</a></li>
+<li><a class="reference internal" href="#how-to-download-the-data">How to download the data</a></li>
+<li><a class="reference internal" href="#how-to-load-the-data-into-your-mine">How to load the data into your mine</a><ul>
+<li><a class="reference internal" href="#update-mine-name-properties">Update &lt;MINE_NAME&gt;.properties</a></li>
+<li><a class="reference internal" href="#add-ensembl-snp-to-the-list-of-datasources-to-be-integrated">Add Ensembl snp to the list of datasources to be integrated</a></li>
+<li><a class="reference internal" href="#run-intermine-build">Run InterMine build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Variation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../chado.html"
+                        title="next chapter">Chado</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/database/data-sources/library/variation/ensembl-snp.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ensembl-snp">
+<h1>Ensembl SNP<a class="headerlink" href="#ensembl-snp" title="Permalink to this headline">¶</a></h1>
+<p>Load SNP data from a downloaded mysql database</p>
+<div class="section" id="types-of-data-loaded">
+<h2>Types of data loaded<a class="headerlink" href="#types-of-data-loaded" title="Permalink to this headline">¶</a></h2>
+<p>SNPs</p>
+</div>
+<div class="section" id="how-to-download-the-data">
+<h2>How to download the data<a class="headerlink" href="#how-to-download-the-data" title="Permalink to this headline">¶</a></h2>
+<p>First you will need the variation data from Ensembl, which are available via MySQL databases.  Download the Ensembl MySQL database and create the database locally:</p>
+<blockquote>
+<div><a class="reference external" href="ftp://ftp.ensembl.org/pub/current_mysql">ftp://ftp.ensembl.org/pub/current_mysql</a></div></blockquote>
+<p>for example:
+download homo_sapiens_variation_70_37 to a local directory, unzip all gz files, and load it to your MySQL database</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># create a new db in MySQL</span>
+<span class="nv">$ </span>mysql -u DB_USER -p
+mysql&gt; create database homo_sapiens_variation_70;
+
+<span class="c"># load data into db</span>
+<span class="nv">$ </span>mysql -u DB_USER -p homo_sapiens_core_70 &lt; homo_sapiens_variation_70_37.sql
+<span class="nv">$ </span>mysqlimport -u DB_USER -p homo_sapiens_variation_70 -L *.txt -v
+</pre></div>
+</div>
+<p>Variation db can be big and takes long time to query due to left joins and order bys on huge amount of snps by chromsomes. One way to optimise the speed is to create precomputed tables to run the left join and order by in one go. It will improve the performance of queries in converter by several folds. The process will normally take ~1.5hr to complete for Human SNPs:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># precompute tables</span>
+<span class="nv">$ </span>mysql -u DB_USER -p
+mysql&gt; use homo_sapiens_variation_70;
+
+mysql&gt; CREATE TABLE mM_snp_tmp_no_order_chr_all SELECT vf.variation_feature_id, vf.variation_name, vf.variation_id, vf.allele_string, sr.name AS seq_region_name, vf.map_weight, vf.seq_region_start, vf.seq_region_end, vf.seq_region_strand, s.name AS source_name, vf.validation_status, vf.consequence_types AS variation_feature_consequence_types, tv.cdna_start,tv.consequence_types AS transcript_variation_consequence_types,tv.pep_allele_string,tv.feature_stable_id, tv.sift_prediction, tv.sift_score, tv.polyphen_prediction, tv.polyphen_score FROM seq_region sr, <span class="nb">source </span>s, variation_feature vf  LEFT JOIN <span class="o">(</span>transcript_variation tv<span class="o">)</span> ON <span class="o">(</span>vf.variation_feature_id <span class="o">=</span> tv.variation_feature_id AND tv.consequence_types NOT IN <span class="o">(</span><span class="s1">&#39;5KB_downstream_variant&#39;</span>, <span class="s1">&#39;5KB_upstream_variant&#39;</span>,<span class="s1">&#39;500B_downstream_variant&#39;</span>,<span class="s1">&#39;2KB_upstream_variant&#39;</span><span class="o">))</span> WHERE vf.seq_region_id <span class="o">=</span> sr.seq_region_id AND vf.source_id <span class="o">=</span> s.source_id;
+
+mysql&gt; CREATE TABLE mM_snp_tmp_ordered_chr_all SELECT * FROM mM_snp_tmp_no_order_chr_all ORDER BY seq_region_name, variation_id;
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-load-the-data-into-your-mine">
+<h2>How to load the data into your mine<a class="headerlink" href="#how-to-load-the-data-into-your-mine" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="update-mine-name-properties">
+<h3>Update &lt;MINE_NAME&gt;.properties<a class="headerlink" href="#update-mine-name-properties" title="Permalink to this headline">¶</a></h3>
+<p>Add the location of the downloaded Ensembl MySQL databases to your mine properties file, for example:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># variation database</span>
+<span class="na">db.ensembl.9606.variation.datasource.serverName</span><span class="o">=</span><span class="s">SERVER_NAME</span>
+<span class="c"># port: uncomment the next line if use different prot other than 3306</span>
+<span class="c"># db.ensembl.9606.variation.datasource.port=PORT_NUMBER</span>
+<span class="na">db.ensembl.9606.variation.datasource.databaseName</span><span class="o">=</span><span class="s">homo_sapiens_variation_70</span>
+<span class="na">db.ensembl.9606.variation.datasource.species</span><span class="o">=</span><span class="s">homo_sapiens</span>
+<span class="na">db.ensembl.9606.variation.datasource.user</span><span class="o">=</span><span class="s">DB_USER</span>
+<span class="na">db.ensembl.9606.variation.datasource.password</span><span class="o">=</span><span class="s">DB_PASSWORD</span>
+</pre></div>
+</div>
+<p>These properties are used by the Perl script.</p>
+</div>
+<div class="section" id="add-ensembl-snp-to-the-list-of-datasources-to-be-integrated">
+<h3>Add Ensembl snp to the list of datasources to be integrated<a class="headerlink" href="#add-ensembl-snp-to-the-list-of-datasources-to-be-integrated" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;ensembl-snp&quot;</span> <span class="na">type=</span><span class="s">&quot;ensembl-snp-db&quot;</span> <span class="na">dump=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;source.db.name&quot;</span> <span class="na">value=</span><span class="s">&quot;ensembl.9606.variation&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;organism&quot;</span> <span class="na">value=</span><span class="s">&quot;9606&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;sources&quot;</span> <span class="na">value=</span><span class="s">&quot;Ensembl&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-intermine-build">
+<h3>Run InterMine build<a class="headerlink" href="#run-intermine-build" title="Permalink to this headline">¶</a></h3>
+<p>Run a build.  The entry in <cite>project.xml</cite> will instruct the build process to load the XML files you created in the previous step into the database.  For example, run this command in <cite>MINE_NAME/integrate</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant -v -Dsource<span class="o">=</span>ensembl-snp
+</pre></div>
+</div>
+<span class="target" id="index-0"></span></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../chado.html" title="Chado"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Variation"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" >Variation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

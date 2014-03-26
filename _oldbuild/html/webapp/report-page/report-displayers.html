@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Report Displayers &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Report page" href="index.html" />
+    <link rel="next" title="Report Displayers Examples" href="report-displayers-examples.html" />
+    <link rel="prev" title="Report Page" href="report-page.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="report-displayers-examples.html" title="Report Displayers Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="report-page.html" title="Report Page"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Report Displayers</a><ul>
+<li><a class="reference internal" href="#configuring-displayers">Configuring displayers</a></li>
+<li><a class="reference internal" href="#useful-displayers">Useful displayers</a></li>
+<li><a class="reference internal" href="#creating-a-new-displayer">Creating a new Displayer</a><ul>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="report-page.html"
+                        title="previous chapter">Report Page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="report-displayers-examples.html"
+                        title="next chapter">Report Displayers Examples</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/webapp/report-page/report-displayers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="report-displayers">
+<span id="index-0"></span><h1>Report Displayers<a class="headerlink" href="#report-displayers" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Report Displayers can only be embedded on a report page and not elsewhere, furthermore they are tightly knit to the Java system. Check out <a class="reference internal" href="../../embedding/report-widgets.html"><em>Report Widgets</em></a> for a more flexible arrangement.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="report-displayers-examples.html"><em>Report Displayers Examples</em></a>.</p>
+</div>
+<p>Report displayers allow custom display of particular data types on report pages (only), typically to replace default tables with more appropriate presentation of data. Widgets:</p>
+<ol class="arabic simple">
+<li>Use a simple framework to add a JSP for display and optionally Java code to run queries, hold caches, etc.</li>
+<li>Are assigned to the <strong>summary</strong> section at the top of the page or a particular <strong>data category</strong></li>
+<li>Can <strong>replace fields</strong> from the report page to override default display of attributes or collections</li>
+<li>Are configured in the <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt> file in your Mine</li>
+</ol>
+<p>This page describes how to configure your Mine to include widgets for common data types and how to create your own custom widget.</p>
+<div class="section" id="configuring-displayers">
+<h2>Configuring displayers<a class="headerlink" href="#configuring-displayers" title="Permalink to this headline">¶</a></h2>
+<p>Configuration is placed in a <tt class="docutils literal"><span class="pre">&lt;reportdisplayers&gt;</span></tt> section of <tt class="docutils literal"><span class="pre">webconfig-model.xml</span></tt>:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;reportdisplayers&gt;</span>
+    <span class="nt">&lt;reportdisplayer</span> <span class="na">javaClass=</span><span class="s">&quot;org.intermine.bio.web.displayer.GeneOntologyDisplayer&quot;</span>
+        <span class="na">jspName=</span><span class="s">&quot;model/geneOntologyDisplayer.jsp&quot;</span>
+        <span class="na">replacesFields=</span><span class="s">&quot;goAnnotation,ontologyAnnotations&quot;</span>
+        <span class="na">placement=</span><span class="s">&quot;Function&quot;</span>
+        <span class="na">types=</span><span class="s">&quot;Gene&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/reportdisplayers&gt;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">javaClass</span></tt></dt>
+<dd>an optional Java class to run before display, typically this performs database queries or creates data structures used by the JSP. The class should extend <tt class="docutils literal"><span class="pre">ReportDisplayer</span></tt> and implement a <tt class="docutils literal"><span class="pre">display()</span></tt> method.</dd>
+<dt><tt class="docutils literal"><span class="pre">jspName</span></tt></dt>
+<dd>the JSP file used to display output</dd>
+<dt><tt class="docutils literal"><span class="pre">replacesFields</span></tt></dt>
+<dd>a comma separated list of fields that should not appear on the report page when the displayer is used</dd>
+<dt><tt class="docutils literal"><span class="pre">showImmediately</span></tt></dt>
+<dd>set to <tt class="docutils literal"><span class="pre">true</span></tt> to display the displayer immediately as the page loads, without waiting (<tt class="docutils literal"><span class="pre">false</span></tt> by default)</dd>
+<dt><tt class="docutils literal"><span class="pre">placement</span></tt></dt>
+<dd>the section on the report page the displayer should appear in, can be &#8216;summary&#8217; or a valid data category name.</dd>
+<dt><tt class="docutils literal"><span class="pre">types</span></tt></dt>
+<dd>a comma separated list of class names for this displayer can be used</dd>
+<dt><tt class="docutils literal"><span class="pre">parameters</span></tt></dt>
+<dd>this is a JSON string used to pass arbitrary parameters to particular displayers, you can make use of this for detailed configuration of any displayers you write. For example, the <tt class="docutils literal"><span class="pre">trunk/bio/webapp/src/org/intermine/bio/web/displayer/HomologueDisplayer.java</span></tt> is passed a list of data sets to displayer homologues from: <tt class="docutils literal"><span class="pre">parameters=&quot;{'dataSets':</span> <span class="pre">['TreeFam</span> <span class="pre">data</span> <span class="pre">set',</span> <span class="pre">'KEGG</span> <span class="pre">orthologues</span> <span class="pre">data</span> <span class="pre">set']}&quot;</span></tt>.</dd>
+</dl>
+</div>
+<div class="section" id="useful-displayers">
+<h2>Useful displayers<a class="headerlink" href="#useful-displayers" title="Permalink to this headline">¶</a></h2>
+<p>There are several displayers for common data types that may be useful in many Mines. To enable these just copy the configuration from FlyMine&#8217;s <tt class="docutils literal"><span class="pre">trunk/flymine/webapp/resources/webapp/WEB-INF/webconfig-model.xml</span></tt>.</p>
+<p>For examples of the common displayers and configuration details please see ReportDisplayerGallery.</p>
+</div>
+<div class="section" id="creating-a-new-displayer">
+<h2>Creating a new Displayer<a class="headerlink" href="#creating-a-new-displayer" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;ve loaded some new data into your Mine or have some great ideas about presenting data from the common data loaders you can create a new displayer.  Here are brief instructions, take a look at the many examples for more details.</p>
+<ol class="arabic simple">
+<li>Create a Java class <a class="footnote-reference" href="#id2" id="id1">[1]</a> in <tt class="docutils literal"><span class="pre">&lt;mine&gt;/webapp/src/org/intermine/web/displayers</span></tt> that inherits from <tt class="docutils literal"><span class="pre">org.intermine.web.displayer.ReportDisplayer</span></tt>.</li>
+<li>Implement <tt class="docutils literal"><span class="pre">public</span> <span class="pre">void</span> <span class="pre">display(HttpServletRequest</span> <span class="pre">request,</span> <span class="pre">ReportObject</span> <span class="pre">reportObject)</span></tt> to perform any queries or processing required and put results on the request.</li>
+<li>Create a JSP file in <tt class="docutils literal"><span class="pre">&lt;mine&gt;/webapp/resources/webapp/model</span></tt> to display the results.</li>
+<li>Add configuration to <tt class="docutils literal"><span class="pre">&lt;mine&gt;/webapp/resources/webapp/WEB-INF/webconfig-model.xml</span></tt> to set up the <tt class="docutils literal"><span class="pre">javaClass</span></tt> and <tt class="docutils literal"><span class="pre">jspName</span></tt> created above and set the <tt class="docutils literal"><span class="pre">types</span></tt> for which the displayer should appear and the <em>summary</em> or a data category (aspect) as the <tt class="docutils literal"><span class="pre">placement</span></tt> for the displayer. Optionally set any fields in the report page that should be hidden when this displayer is used.</li>
+</ol>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p>As we use AJAX to load the displayers to speed up the initial load of a Report page, JavaScript calls to when a document is ready are executed immediately as the page has finished loading already. Specifically when using GoogleCharts API, one needs to amend the initial loading code with a callback like for example so:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">google</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s2">&quot;visualization&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;packages&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;corechart&quot;</span><span class="p">],</span> <span class="s2">&quot;callback&quot;</span><span class="o">:</span> <span class="nx">drawFlyAtlasChart</span><span class="p">});</span>
+</pre></div>
+</div>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>ReportDisplayer makes available a variable called <tt class="docutils literal"><span class="pre">im</span></tt> which is the <tt class="docutils literal"><span class="pre">InterMineAPI</span></tt> which provides access to config and query execution classes.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="report-displayers-examples.html" title="Report Displayers Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="report-page.html" title="Report Page"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Guide to Customising your Web Application</a> &raquo;</li>
+          <li><a href="index.html" >Report page</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Upgrade Instructions &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Support" href="index.html" />
+    <link rel="next" title="About Us" href="../about/index.html" />
+    <link rel="prev" title="Contact us" href="../about/contact-us.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../about/index.html" title="About Us"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../about/contact-us.html" title="Contact us"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Support</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Upgrade Instructions</a><ul>
+<li><a class="reference internal" href="#upgrade-to-intermine-1-3">Upgrade to InterMine 1.3</a></li>
+<li><a class="reference internal" href="#upgrade-to-intermine-1-2-1">Upgrade to InterMine 1.2.1</a></li>
+<li><a class="reference internal" href="#upgrade-to-intermine-1-2">Upgrade to InterMine 1.2</a></li>
+<li><a class="reference internal" href="#upgrade-to-intermine-1-1">Upgrade to InterMine 1.1</a><ul>
+<li><a class="reference internal" href="#model-changes">Model Changes</a><ul>
+<li><a class="reference internal" href="#interactions">Interactions</a></li>
+<li><a class="reference internal" href="#gene-ontology">Gene Ontology</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#identifiers">Identifiers</a></li>
+<li><a class="reference internal" href="#configuration-updates">Configuration Updates</a></li>
+<li><a class="reference internal" href="#tomcat-7-0">Tomcat 7.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../about/contact-us.html"
+                        title="previous chapter">Contact us</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../about/index.html"
+                        title="next chapter">About Us</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/support/upgrade.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="upgrade-instructions">
+<h1>Upgrade Instructions<a class="headerlink" href="#upgrade-instructions" title="Permalink to this headline">¶</a></h1>
+<p>To pull changes in your local repository and merge them into your working files:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git pull upstream
+</pre></div>
+</div>
+<p>If you don&#8217;t have a git repo yet, see <a class="reference internal" href="../git/index.html"><em>Get the Software</em></a> for details.</p>
+<p>If you host a copy of the <a class="reference external" href="https://github.com/intermine/CDN">CDN</a>, then you should also pull in changes from
+that repository.</p>
+<div class="section" id="upgrade-to-intermine-1-3">
+<h2>Upgrade to InterMine 1.3<a class="headerlink" href="#upgrade-to-intermine-1-3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Remove all duplicate entries from web.xml</li>
+<li>Model changes:<ul>
+<li>DataSet now has a publication reference</li>
+<li>AnnotationExtension has been moved from GOAnnotation to GOEvidence.</li>
+</ul>
+</li>
+</ul>
+<p>Also, we have changed our GO parser a bit. Each line in a gene annotation file now corresponds with an Evidence object. In prior releases, each Evidence object was unique, e.g. only a single evidence code per gene / GO term pair.</p>
+</div>
+<div class="section" id="upgrade-to-intermine-1-2-1">
+<h2>Upgrade to InterMine 1.2.1<a class="headerlink" href="#upgrade-to-intermine-1-2-1" title="Permalink to this headline">¶</a></h2>
+<p>If you have your own home page (begin.jsp), you must manually make this change: <a class="reference external" href="https://github.com/intermine/intermine/commit/501e221ff1804d387cd3de7e69d99fc2fd943d41">501e221</a></p>
+<p>This is a fix for the keyword search - when users submit a blank search form, see <a class="reference external" href="https://github.com/intermine/intermine/issues/329">Issue #329</a></p>
+<p>There are no model or configuration changes in this release.</p>
+</div>
+<div class="section" id="upgrade-to-intermine-1-2">
+<h2>Upgrade to InterMine 1.2<a class="headerlink" href="#upgrade-to-intermine-1-2" title="Permalink to this headline">¶</a></h2>
+<p>The core data model has not been changed, so you should be able to release a webapp
+using InterMine 1.2 code without making any changes.</p>
+</div>
+<div class="section" id="upgrade-to-intermine-1-1">
+<h2>Upgrade to InterMine 1.1<a class="headerlink" href="#upgrade-to-intermine-1-1" title="Permalink to this headline">¶</a></h2>
+<p>The core model of InterMine has changed in release 1.1 so you may encounter more errors than usual.</p>
+<dl class="docutils">
+<dt>update integration keys</dt>
+<dd>You may need to update your integration keys if they are using a class or field
+that&#8217;s been changed.</dd>
+<dt>update custom converter</dt>
+<dd>If you are storing data using a class or field that&#8217;s been changed, you will have
+to change your code to use the new model. See below for the complete list of model
+changes.</dd>
+<dt>template queries</dt>
+<dd>You will have to update your templates to use the new model</dd>
+<dt>interaction viewer</dt>
+<dd>Widget uses the new model - will not work until you build a database with the new code</dd>
+</dl>
+<div class="section" id="model-changes">
+<h3>Model Changes<a class="headerlink" href="#model-changes" title="Permalink to this headline">¶</a></h3>
+<p>Updated to latest version of Sequence Ontology, 2.5</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">old</th>
+<th class="head">new</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Comment.text</td>
+<td>Comment.description</td>
+</tr>
+<tr class="row-odd"><td>Gene.ncbiGeneNumber</td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-even"><td>&#8211;</td>
+<td>Gene.description</td>
+</tr>
+<tr class="row-odd"><td>&#8211;</td>
+<td>Gene.briefDescription</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="interactions">
+<h4>Interactions<a class="headerlink" href="#interactions" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="37%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">class</th>
+<th class="head">old</th>
+<th class="head">new</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="7">Interaction</td>
+<td>gene</td>
+<td>gene1</td>
+</tr>
+<tr class="row-odd"><td>interactingGenes</td>
+<td>gene2</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>details.type</td>
+</tr>
+<tr class="row-odd"><td>role</td>
+<td>details.role1</td>
+</tr>
+<tr class="row-even"><td>&#8211;</td>
+<td>details.role2</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>details.name</td>
+</tr>
+<tr class="row-even"><td>shortName</td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">InteractionRegion</td>
+<td>primaryIdentifier</td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>&#8211;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gene-ontology">
+<h4>Gene Ontology<a class="headerlink" href="#gene-ontology" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="25%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">class</th>
+<th class="head">old</th>
+<th class="head">new</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="3">GOAnnotation</td>
+<td>withText</td>
+<td>evidence.withText</td>
+</tr>
+<tr class="row-odd"><td>with</td>
+<td>evidence.with</td>
+</tr>
+<tr class="row-even"><td>&#8211;</td>
+<td>annotationExtension</td>
+</tr>
+<tr class="row-odd"><td>OntologyTerm</td>
+<td>&#8211;</td>
+<td>crossReferences <a class="footnote-reference" href="#id2" id="id1">[1]</a></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>used for Uberon</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="identifiers">
+<h3>Identifiers<a class="headerlink" href="#identifiers" title="Permalink to this headline">¶</a></h3>
+<p>We have several [wiki:Homologue new homologue data converters] available in this InterMine release.
+However, some of these new data sources use Ensembl IDs. If you want to load the model organism
+database identifier instead (important for interoperation with other InterMines), you should use the
+Entrez Gene ID resolver:</p>
+<ol class="arabic simple">
+<li>Download the identifier file - <a class="reference external" href="ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz">ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz</a></li>
+<li>Unzip the file</li>
+<li>Add the path to properties file:</li>
+</ol>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># in ~/.intermine/MINE_NAME.properties</span>
+<span class="na">resolver.entrez.file</span><span class="o">=</span><span class="s">/DATA_DIR/ncbi/gene_info</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-updates">
+<h3>Configuration Updates<a class="headerlink" href="#configuration-updates" title="Permalink to this headline">¶</a></h3>
+<p>Web services uses the <cite>webapp.baseurl</cite> property to run queries, so be sure this is the valid URL for
+your mine. Otherwise you will get an &#8220;Unable to construct query&#8221; error on the query results page.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># in ~/.intermine/MINE_NAME.properties</span>
+<span class="c"># used by web services for running queries, needs to be valid</span>
+<span class="na">webapp.baseurl</span><span class="o">=</span><span class="s">http://localhost:8080</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tomcat-7-0">
+<h3>Tomcat 7.0<a class="headerlink" href="#tomcat-7-0" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to use Tomcat 7.0 with InterMine 1.1, add this property:</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># in ~/.intermine/MINE_NAME.properties</span>
+<span class="na">webapp.tomcat.version</span><span class="o">=</span><span class="s">7</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../about/index.html" title="About Us"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../about/contact-us.html" title="Contact us"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Support</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

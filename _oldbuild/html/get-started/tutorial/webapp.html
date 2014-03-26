@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial - Configure your InterMine webapp! &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../index.html" />
+    <link rel="up" title="Get started" href="../index.html" />
+    <link rel="next" title="Testmodel" href="../testmodel.html" />
+    <link rel="prev" title="Data files to integrate" href="test-data.html" /><!-- syntax highlighting -->
+<link href="../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../testmodel.html" title="Testmodel"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="test-data.html" title="Data files to integrate"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial - Configure your InterMine webapp!</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#general-layout">General Layout</a><ul>
+<li><a class="reference internal" href="#header">Header</a><ul>
+<li><a class="reference internal" href="#logo">Logo</a></li>
+<li><a class="reference internal" href="#ant-targets">ant targets</a></li>
+<li><a class="reference internal" href="#subtitle-and-release-version">Subtitle and Release version</a></li>
+<li><a class="reference internal" href="#how-do-i-know-which-property-to-change">How do I know which property to change?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#keyword-search">Keyword Search</a></li>
+<li><a class="reference internal" href="#footer">Footer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#home-page">Home page</a><ul>
+<li><a class="reference internal" href="#boxes">Boxes</a><ul>
+<li><a class="reference internal" href="#intermine-bio-and-mine-webapp">InterMine, bio and mine /webapp</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-your-own">Use your own</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="test-data.html"
+                        title="previous chapter">Data files to integrate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../testmodel.html"
+                        title="next chapter">Testmodel</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/get-started/tutorial/webapp.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial-configure-your-intermine-webapp">
+<h1>Tutorial - Configure your InterMine webapp!<a class="headerlink" href="#tutorial-configure-your-intermine-webapp" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial aims to cover the basics of configuring an InterMine webapp.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In general, customisation of InterMine is accomplished by updating the appropriate configuration file and redeploying the webapp. A few features are updated via tagging as well. See <a class="reference internal" href="../../webapp/index.html"><em>Guide to Customising your Web Application</em></a> for the full documentation on the webapp.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You should have completed the previous tutorial and have successfully deployed the webapp.</p>
+</div>
+<p>This tutorial is intended to give a general idea of what you can customise in InterMine and how to do it. We&#8217;re going to go through each section of the webapp and give step by step instructions on how to configure different parts of the page. This is a detailed tutorial and should take you a few hours to complete &#8211; however it is not meant to be comprehensive. Where topics aren&#8217;t covered, there are links provided for more information. If you have a question that you don&#8217;t see answered, try searching the documentation or taking a look at the index. Intermine has an active developer&#8217;s <a class="reference internal" href="../../support/mailing-list.html"><em>Mailing list</em></a> as well.</p>
+<div class="topic">
+<p class="topic-title first">Tomcat</p>
+<p>You will need to have Tomcat running for this tutorial.</p>
+<p>If your webapp is under heavy usage or development, Tomcat may run out of memory. See <a class="reference internal" href="../../system-requirements/software/tomcat.html"><em>Tomcat</em></a> for details on how to update your settings to adjust the amount of memory available to Tomcat.</p>
+<p>If Tomcat has run out of memory, it may not shut down correctly. Memory handling seems to have greatly improved with Tomcat 7 however.</p>
+</div>
+</div>
+<div class="section" id="general-layout">
+<h2>General Layout<a class="headerlink" href="#general-layout" title="Permalink to this headline">¶</a></h2>
+<p>Each web page in InterMine has the same header and footer. The header contains everything at the top of the page, including the navigation tabs and the keyword search. The footer contains the contact form and InterMine logo.</p>
+<div class="figure align-center">
+<img alt="../../_images/header-footer.png" src="../../_images/header-footer.png" />
+<p class="caption">Header and footer of FlyMine website</p>
+</div>
+<p>Let&#8217;s start configuring our mine by updating these common sections of our web application.</p>
+<div class="section" id="header">
+<h3>Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="logo">
+<h4>Logo<a class="headerlink" href="#logo" title="Permalink to this headline">¶</a></h4>
+<p>First, let&#8217;s update the logo of your site. The logo should be 45x43 and named <cite>logo.png</cite>, for example:</p>
+<div class="figure align-center">
+<img alt="../../_images/logo.png" src="../../_images/logo.png" />
+<p class="caption">FlyMine&#8217;s logo</p>
+</div>
+<ol class="arabic simple">
+<li>Copy your image into this directory: <cite>MINE_NAME/webapp/resources/webapp/model/images</cite>. (If you don&#8217;t have a logo for your mine yet, you can still test updating your mine by using the FlyMine logo above.)</li>
+<li>Deploy your webapp with this command:</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant default remove-webapp release-webapp
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Refresh your browser</li>
+</ol>
+<div class="figure align-center">
+<img alt="../../_images/new-logo.png" src="../../_images/new-logo.png" />
+<p class="caption">Updated logo</p>
+</div>
+<p>You should see your new logo in the top left corner of your webapp. If you don&#8217;t, try clearing your browser&#8217;s cache.</p>
+</div>
+<div class="section" id="ant-targets">
+<h4>ant targets<a class="headerlink" href="#ant-targets" title="Permalink to this headline">¶</a></h4>
+<p>If your changes are still not being reflected in your webapp, add the <cite>clean</cite> target:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant clean; ant default remove-webapp release-webapp
+</pre></div>
+</div>
+<p>This removes all temporary directories so you are certain your new files are being used. The <cite>clean-all</cite> target removes
+temporary directories from all dependencies as well.</p>
+<p>See <a class="reference internal" href="../../system-requirements/software/ant.html"><em>Ant</em></a> for a list of all ant targets.</p>
+</div>
+<div class="section" id="subtitle-and-release-version">
+<h4>Subtitle and Release version<a class="headerlink" href="#subtitle-and-release-version" title="Permalink to this headline">¶</a></h4>
+<p>Next to the name of your mine in the header is the release version and subtitle for your mine:</p>
+<div class="figure align-center">
+<img alt="../../_images/subtitle.png" src="../../_images/subtitle.png" />
+<p class="caption">Title, release version and subtitle</p>
+</div>
+<p>These values are set in <a class="reference internal" href="../../webapp/properties/intermine-properties.html"><em>Database and Web application</em></a> file. This is the same properties file you updated in the previous tutorial. The subtitle and release versions are populated by the properties <cite>project.subTitle</cite> and <cite>project.releaseVersion</cite>, respectively. Update these properties to a different value and redeploy your webapp using the commands given above. Once you have successfully released your webapp, you should see your new subtitle.</p>
+<ol class="arabic simple">
+<li>Open the properties file in your favourite text editor.</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>emacs ~/.intermine/malariamine.properties
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Update the values of the subtitle and release version. Save your work.</li>
+</ol>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># text that appears in the header and elsewhere</span>
+<span class="na">project.title</span><span class="o">=</span><span class="s">MalariaMine</span>
+<span class="na">project.subTitle</span><span class="o">=</span><span class="s">An example of InterMine.bio with data from &lt;i&gt;Plasmodium falciparum&lt;/i&gt;</span>
+<span class="na">project.releaseVersion</span><span class="o">=</span><span class="s">tutorialx</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Redeploy your webapp</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>ant default remove-webapp release-webapp
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Navigate to your mine&#8217;s home page and see the updated values: <a class="reference external" href="http://localhost:8080/malaria">http://localhost:8080/malaria</a></li>
+</ol>
+<div class="figure align-center">
+<img alt="../../_images/new-subtitle.png" src="../../_images/new-subtitle.png" />
+<p class="caption">Updated release version and subtitle</p>
+</div>
+<p>That&#8217;s it! Well done! The majority of mine configuration will be accomplished this way - update a property in a text file and redeploy the webapp.</p>
+<p>See <a class="reference internal" href="../../webapp/properties/intermine-properties.html"><em>Database and Web application</em></a> for the full list of properties this file controls.</p>
+</div>
+<div class="section" id="how-do-i-know-which-property-to-change">
+<h4>How do I know which property to change?<a class="headerlink" href="#how-do-i-know-which-property-to-change" title="Permalink to this headline">¶</a></h4>
+<p>Now you know how to change properties and configure your mine. How then do you know <em>which</em> property to change? There are a few resources available to you:</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="../../webapp/index.html"><em>Guide to Customising your Web Application</em></a></dt>
+<dd>A detailed listing of everything you can configure in the InterMine webapp. It&#8217;s grouped by InterMine webpage, e.g. Home Page, so you should be able to find what you need easily.</dd>
+<dt>Google</dt>
+<dd>The search for this site is quite good although you can still use Google, e.g. here&#8217;s <a class="reference external" href="http://google.com/?q=logo+site%3Aintermine.readthedocs.org">a Google search for help with logos</a>.</dd>
+<dt>Table of Contents / Index</dt>
+<dd>On the upper right hand corner of every page are links to the Index and the table of contents. Both are fairly comprehensive.</dd>
+<dt>Ask us!</dt>
+<dd>A quick email to the dev <a class="reference internal" href="../../support/mailing-list.html"><em>Mailing list</em></a> usually proves to be quite helpful too.</dd>
+</dl>
+<div class="topic">
+<p class="topic-title first">Show all properties</p>
+<p>You can also see and edit the values of every property set for your mine.</p>
+<ol class="arabic simple">
+<li>Log in as the superuser for your mine. (See <a class="reference internal" href="../../webapp/admin/index.html"><em>Website Admin</em></a> for details on how to do this.)</li>
+<li>Change the last part of the URL in your browser to be <cite>showProperties.do</cite>, e.g. <a class="reference external" href="http://localhost:8080/malaria/showProperties.do">http://localhost:8080/malaria/showProperties.do</a></li>
+</ol>
+<p>This lists of all properties that are used in your webapp. You can update the values for each property and instantly see how the webapp is changed, without worrying about breaking anything. (The changes only last for that session, to permanently change a value you&#8217;ll need to update the appropriate config file.)</p>
+</div>
+</div>
+</div>
+<div class="section" id="keyword-search">
+<h3>Keyword Search<a class="headerlink" href="#keyword-search" title="Permalink to this headline">¶</a></h3>
+<p>InterMine&#8217;s keyword search uses a Lucene-based index created at build-time. Every field in the database is indexed unless you configure a table or column to be skipped. You can also configure facets / categories to help your users mine the search results. See <a class="reference internal" href="../../webapp/keyword-search/index.html"><em>Keyword Search</em></a> for details on how to configure the keyword search.</p>
+<div class="topic">
+<p class="topic-title first">The first search</p>
+<p>When the first search is executed after a webapp is released, the search index is:</p>
+<ol class="arabic simple">
+<li>Retrieved from the database</li>
+<li>Written to temp files</li>
+<li>Loaded into memory for use by the webapp</li>
+</ol>
+<p>This can take up to a minute. Our release scripts include a command to run this search so that the index is preloaded.</p>
+</div>
+<p>The search box contains example identifiers to help your users know which types of search terms to use. To update the default value, set the <cite>quicksearch.example.identifiers</cite> property in the <a class="reference internal" href="../../webapp/properties/web-properties.html"><em>web.properties</em></a> file. Redeploy your webapp to see your changes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Lucene index can become quite large, depending on the size of the database. FlyMine&#8217;s index is ~2G, so make certain you have plenty of room.</p>
+</div>
+</div>
+<div class="section" id="footer">
+<h3>Footer<a class="headerlink" href="#footer" title="Permalink to this headline">¶</a></h3>
+<p>The footer is positioned at the bottom of every page in the InterMine webapp. It contains the contact link and the funding message.</p>
+<div class="figure align-center">
+<img alt="../../_images/funding.png" src="../../_images/funding.png" />
+<p class="caption">Funding message in footer</p>
+</div>
+<p>To update the funding message, change the <cite>funding</cite> property in <a class="reference internal" href="../../webapp/properties/model-properties.html"><em>Text and messages</em></a>. Redeploy your webapp to see your changes.</p>
+<div class="highlight-properties"><div class="highlight"><pre><span class="c"># Model specific internationalisation properties</span>
+<span class="c"># this file merges with InterMineWebApp.properties</span>
+
+<span class="na">funding</span> <span class="o">=</span> <span class="s">InterMine is funded by the &lt;a href=&quot;http://www.wellcome.ac.uk/&quot; target=&quot;_new&quot; title=&quot;Wellcome Trust&quot;&gt;&lt;img src=&quot;images/wellcome-ico.png&quot; border=&quot;0&quot; /&gt;&lt;/a&gt; and interoperation is funded by &lt;a href=&quot;http://www.nih.gov/&quot; target=&quot;_new&quot; title=&quot;US National Institutes of Health&quot;&gt;&lt;img src=&quot;images/logo_nih.gif&quot; height=&quot;30px&quot; width=&quot;257px&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>Here is the bit of code in footer.jsp that renders that message: <a class="reference external" href="https://github.com/intermine/intermine/blob/dev/intermine/webapp/main/resources/webapp/footer.jsp#L31">https://github.com/intermine/intermine/blob/dev/intermine/webapp/main/resources/webapp/footer.jsp#L31</a></p>
+<p>The <a class="reference internal" href="../../webapp/properties/model-properties.html"><em>model.properties</em></a> is the third configuration file you&#8217;ve edited today, there are four main files that control most of the behaviour in your InterMine webapp.</p>
+<div class="topic">
+<p class="topic-title first">InterMine properties files</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="../../webapp/properties/intermine-properties.html"><em>~/.intermine/malariamine.properties</em></a></dt>
+<dd>database and webapp names and locations. includes passwords and shouldn&#8217;t be in source control.</dd>
+<dt><a class="reference internal" href="../../webapp/properties/web-properties.html"><em>web.properties</em></a></dt>
+<dd>webapp behaviour, e.g. link outs, tabs on home page</dd>
+<dt><a class="reference internal" href="../../webapp/properties/model-properties.html"><em>model.properties</em></a></dt>
+<dd>text displayed on webapp, e.g. error messages</dd>
+<dt><a class="reference internal" href="../../webapp/properties/webconfig-model.html"><em>webconfig-model.xml</em></a></dt>
+<dd>webapp functionality, e.g. custom export types, widgets, data display</dd>
+</dl>
+</div>
+<p>See <a class="reference internal" href="../../webapp/layout/index.html"><em>General Layout</em></a> for more details on how to update the header, footer and colour scheme of your InterMine webapp. Next we&#8217;ll customise your home page.</p>
+</div>
+</div>
+<div class="section" id="home-page">
+<h2>Home page<a class="headerlink" href="#home-page" title="Permalink to this headline">¶</a></h2>
+<p>Most everything on the home page is customisable. You can edit the text and set which RSS news feed to use. If you want something very different, you can create and use your own home page.</p>
+<div class="section" id="boxes">
+<h3>Boxes<a class="headerlink" href="#boxes" title="Permalink to this headline">¶</a></h3>
+<p>You can customise the text in the three boxes that appear on the top of the home page. Let&#8217;s edit the example given in the middle box marked <cite>Analyse</cite>.</p>
+<div class="figure align-center">
+<img alt="../../_images/homepage-boxes.png" src="../../_images/homepage-boxes.png" />
+<p class="caption">Three boxes at the top of the home page</p>
+</div>
+<p>Notice the text box already has an example, <cite>e.g. X, Y, Z</cite>. This is the default example and it&#8217;s set by <cite>begin.listBox.example</cite> in an InterMine properties file, <cite>global.web.properties</cite>.</p>
+<p>Add <cite>begin.listBox.example</cite> to your mine&#8217;s <a class="reference internal" href="../../webapp/properties/web-properties.html"><em>Features</em></a> file and redeploy your webapp to see your changes.</p>
+<div class="section" id="intermine-bio-and-mine-webapp">
+<h4>InterMine, bio and mine /webapp<a class="headerlink" href="#intermine-bio-and-mine-webapp" title="Permalink to this headline">¶</a></h4>
+<p>In Intermine there are 3 webapp projects: InterMine, bio and mine. You shouldn&#8217;t ever have to change the files in InterMine and bio, you&#8217;ll only ever update your mine&#8217;s files. When the webapp is compiled, the build system starts with the InterMine webapp project, then merges bio into that. Finally your mine&#8217;s webapp is added. The files and properties set in bio override any in the InterMine project. Your mine&#8217;s files and properties override any in bio or InterMine.</p>
+<p>Therefore when you set <cite>begin.listBox.example</cite> in your properties file, it overrode the same property set in the InterMine properties file. This will be true of any property.</p>
+</div>
+</div>
+<div class="section" id="use-your-own">
+<h3>Use your own<a class="headerlink" href="#use-your-own" title="Permalink to this headline">¶</a></h3>
+<p>The text and settings are configurable, but you may want a different layout for your home page.</p>
+<ol class="arabic simple">
+<li>Copy <cite>begin.jsp</cite> from <cite>intermine/webapp</cite> into your own webapp directory: <cite>MINE_NAME/webapp/resources/webapp/model</cite>.</li>
+<li>Edit your begin.jsp</li>
+<li>Redeploy your webapp to show your change</li>
+</ol>
+<p>We saw in the previous section that properties override InterMine properties. The same holds true for JSP pages.</p>
+<p>Note: Changes made to the home page, or whichever page you updated, will not be reflected in your custom copy.</p>
+<p>See <a class="reference internal" href="../../webapp/homepage/index.html"><em>Home page</em></a> for more details on how to update your home page.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../testmodel.html" title="Testmodel"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="test-data.html" title="Data files to integrate"
+             >previous</a> |</li>
+        <li><a href="../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Get started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

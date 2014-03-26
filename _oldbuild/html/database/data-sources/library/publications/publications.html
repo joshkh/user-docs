@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Publications &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../../../../index.html" />
+    <link rel="up" title="Publications" href="index.html" />
+    <link rel="next" title="Variation" href="../variation/index.html" />
+    <link rel="prev" title="PubMed" href="pubmed.html" /><!-- syntax highlighting -->
+<link href="../../../../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../variation/index.html" title="Variation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pubmed.html" title="PubMed"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Publications</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Publications</a><ul>
+<li><a class="reference internal" href="#types-of-data-loaded">Types of data loaded</a></li>
+<li><a class="reference internal" href="#how-to-download-the-data">How to download the data</a></li>
+<li><a class="reference internal" href="#how-to-load-the-data-into-your-mine">How to load the data into your mine</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pubmed.html"
+                        title="previous chapter">PubMed</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../variation/index.html"
+                        title="next chapter">Variation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/database/data-sources/library/publications/publications.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="publications">
+<h1>Publications<a class="headerlink" href="#publications" title="Permalink to this headline">¶</a></h1>
+<p>All publications are referred to by PubMed id by other sources.  This source should be included at the end of the build.  It will query all PubMed ids from the database, fetch details from the Entrez web service and fill in Publication objects.</p>
+<div class="section" id="types-of-data-loaded">
+<h2>Types of data loaded<a class="headerlink" href="#types-of-data-loaded" title="Permalink to this headline">¶</a></h2>
+<p>None, the publciation records already in the database are updated.</p>
+</div>
+<div class="section" id="how-to-download-the-data">
+<h2>How to download the data<a class="headerlink" href="#how-to-download-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Data is fetched from the NCBI web site for publication records already in the InterMine database.</p>
+</div>
+<div class="section" id="how-to-load-the-data-into-your-mine">
+<h2>How to load the data into your mine<a class="headerlink" href="#how-to-load-the-data-into-your-mine" title="Permalink to this headline">¶</a></h2>
+<p>project XML example</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;source</span> <span class="na">name=</span><span class="s">&quot;update-publications&quot;</span> <span class="na">type=</span><span class="s">&quot;update-publications&quot;</span> <span class="na">dump=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;src.data.file&quot;</span> <span class="na">location=</span><span class="s">&quot;build/publications.xml&quot;</span><span class="nt">/&gt;</span>
+  <span class="c">&lt;!-- &lt;property name=&quot;cacheDirName&quot; value=&quot;build/&quot;/&gt; --&gt;</span>
+  <span class="c">&lt;!-- &lt;property name=&quot;loadFullRecord&quot; value=&quot;true&quot;/&gt; --&gt;</span>
+<span class="nt">&lt;/source&gt;</span>
+</pre></div>
+</div>
+<p>properties:</p>
+<ol class="arabic simple">
+<li>cacheDirName - the directory to generate publication cache files, default value &#8220;build/&#8221;</li>
+<li>loadFullRecord - load MeSH terms and abstract, value &#8220;true&#8221;/&#8221;false&#8221;</li>
+</ol>
+<span class="target" id="index-0"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../variation/index.html" title="Variation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pubmed.html" title="PubMed"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Database</a> &raquo;</li>
+          <li><a href="../../index.html" >Data Sources</a> &raquo;</li>
+          <li><a href="../index.html" >Data Source Library</a> &raquo;</li>
+          <li><a href="index.html" >Publications</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

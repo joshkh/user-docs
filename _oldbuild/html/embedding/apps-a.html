@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Apps/A &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="up" title="Embedding InterMine components" href="index.html" />
+    <link rel="next" title="Apps/B" href="apps-b.html" />
+    <link rel="prev" title="List enrichment widgets statistics" href="list-widgets/enrichment-widgets.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="apps-b.html" title="Apps/B"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="list-widgets/enrichment-widgets.html" title="List enrichment widgets statistics"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Apps/A</a><ul>
+<li><a class="reference internal" href="#middleware">Middleware</a></li>
+<li><a class="reference internal" href="#developing-an-app">Developing an App</a></li>
+<li><a class="reference internal" href="#q-a">Q &amp; A</a><ul>
+<li><a class="reference internal" href="#how-do-i-change-which-file-will-export-my-root-app">How do I change which file will export my root <tt class="docutils literal"><span class="pre">App</span></tt>?</a></li>
+<li><a class="reference internal" href="#how-can-i-use-modules-across-folders">How can I use modules across folders?</a></li>
+<li><a class="reference internal" href="#i-am-using-require-js-and-the-app-just-blew-up">I am using <tt class="docutils literal"><span class="pre">require.js</span></tt> and the app just blew up</a></li>
+<li><a class="reference internal" href="#a-source-file-i-am-using-is-not-compiling">A source file I am using is not compiling</a></li>
+<li><a class="reference internal" href="#why-do-you-keep-talking-about-a-middleware">Why do you keep talking about a middleware</a></li>
+<li><a class="reference internal" href="#why-the-name-apps-a">Why the name Apps/A?</a></li>
+<li><a class="reference internal" href="#which-language-should-i-use-for-the-app">Which language should I use for the app?</a></li>
+<li><a class="reference internal" href="#why-is-the-config-in-javascript-if-my-app-can-be-in-script">Why is the config in JavaScript if my App can be in *Script?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="list-widgets/enrichment-widgets.html"
+                        title="previous chapter">List enrichment widgets statistics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apps-b.html"
+                        title="next chapter">Apps/B</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/embedding/apps-a.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apps-a">
+<span id="index-0"></span><h1>Apps/A<a class="headerlink" href="#apps-a" title="Permalink to this headline">¶</a></h1>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.2.3.</span></p>
+<p>This document describes how to develop and host your own Apps.</p>
+<div class="section" id="middleware">
+<h2>Middleware<a class="headerlink" href="#middleware" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/intermine/apps-a-middleware">Apps/A Middleware</a> is a glue that makes serving Apps possible. It depends on <a class="reference external" href="http://nodejs.org/">Node.js</a> so make sure it is installed. Afterwards either checkout or download &amp; unzip the repo then install its dependencies and run the example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>wget https://github.com/intermine/apps-a-middleware/archive/master.zip
+<span class="nv">$ </span>unzip master.zip
+<span class="nv">$ </span><span class="nb">cd </span>apps-a-middleware-master/
+<span class="nv">$ </span>npm install
+<span class="nv">$ PORT</span><span class="o">=</span>1234 node example/index.js
+</pre></div>
+</div>
+<p>Visiting 127.0.0.1:1234 should now show a bunch of Apps on a page. They are coming from <a class="reference external" href="https://github.com/intermine/intermine-apps-a">InterMine Apps/A Sources</a>. The next section will describe how to develop a custom app like one of those on the page.</p>
+</div>
+<div class="section" id="developing-an-app">
+<h2>Developing an App<a class="headerlink" href="#developing-an-app" title="Permalink to this headline">¶</a></h2>
+<p>The middleware accepts one or more paths to a directory with Apps. Above, we have seen an example of loading such a directory. Let us have a look at one of the Apps, a <tt class="docutils literal"><span class="pre">publications-displayer</span></tt>.</p>
+<p>The middleware knows of and can load this App because we have created a folder that has a name that can be used in a URL. If we were to add spaces, for example, that would be a big no no.</p>
+<p>Next we have a configuration stashed away in a <tt class="docutils literal"><span class="pre">config.js</span></tt> file. This file <tt class="docutils literal"><span class="pre">exports</span></tt> config in a JSON-like syntax. It will have a header with some properties like author, tile, description etc. The more interesting point is the <tt class="docutils literal"><span class="pre">dependencies</span></tt> section. <a class="reference internal" href="api-loader.html"><em>InterMine JavaScript API Loader</em></a> describes how this section works. It is here that you define what kind of CSS and JS dependencies your App has. These will be automatically resolved before loading the App on a page.</p>
+<p>You can fill the file&#8217;s <tt class="docutils literal"><span class="pre">config</span></tt> section to show whoever embeds your App what sort of configuration they should be providing. The idea is as follows:</p>
+<ol class="arabic simple">
+<li>The App&#8217;s config should cover dependencies and show example config with comments.</li>
+<li>The middleware should provide mine specific settings, like pathQueries to run.</li>
+<li>The client instantiating the App should provide &#8220;page&#8221;-specific settings like which specific Gene we want to show visualization for etc.</li>
+</ol>
+<p>Next up is the body of the App in a <tt class="docutils literal"><span class="pre">presenter.[js|ts|ls|coffee]</span></tt> file. The extensions allure to the fact that you can use the following languages to write your App in:</p>
+<ol class="arabic simple">
+<li>plain vanilla JavaScript</li>
+<li><a class="reference external" href="http://www.typescriptlang.org/">TypeScript</a>; including having type definitions in a separate file like <tt class="docutils literal"><span class="pre">lib.d.ts</span></tt> and targeting <a class="reference external" href="http://kangax.github.io/es5-compat-table/">ECMAScript 5</a></li>
+<li><a class="reference external" href="http://livescript.net/">LiveScript</a></li>
+<li><a class="reference external" href="http://coffeescript.org/">CoffeeScript</a></li>
+</ol>
+<p>This file will have all the logic needed to &#8220;do something&#8221;. It needs to fulfill the following interface:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">App</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="kd">function</span> <span class="nx">App</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">templates</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="nx">App</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{};</span>
+
+    <span class="k">return</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="p">})();</span>
+</pre></div>
+</div>
+<p>Or the same in TypeScript:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kr">export</span> <span class="kr">class</span> <span class="nx">App</span> <span class="p">{</span>
+
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">config</span><span class="o">:</span> <span class="nb">Object</span><span class="p">,</span> <span class="nx">templates</span><span class="o">:</span> <span class="nb">Object</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="nx">render</span><span class="p">(</span><span class="nx">target</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or the same in CoffeeScript:</p>
+<div class="highlight-coffeescript"><div class="highlight"><pre><span class="k">class</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">App</span>
+
+    <span class="nv">constructor: </span><span class="nf">(config, templates) -&gt;</span>
+
+    <span class="nv">render: </span><span class="nf">(target) -&gt;</span>
+</pre></div>
+</div>
+<p>Or the same in LiveScript:</p>
+<div class="highlight-livescript"><div class="highlight"><pre><span class="k">class</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">App</span>
+
+    <span class="nf">(config, templates) -&gt;</span>
+
+    <span class="nv">render: </span><span class="nf">(target) -&gt;</span>
+</pre></div>
+</div>
+<p>The constructor takes two parameters:</p>
+<dl class="docutils">
+<dt>config</dt>
+<dd>This is an amalgamated config that the user and the middleware have provided.</dd>
+<dt>templates</dt>
+<dd>This will be an Object containing a map from template name to an object. More on them later.</dd>
+</dl>
+<p>The render function takes just one parameter:</p>
+<dl class="docutils">
+<dt>target</dt>
+<dd>A string that tell you where to render/display your content to.</dd>
+</dl>
+<p>Next up are templates. They are the place where you put your HTML that will be rendered. You have a choice between two templating languages:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://github.com/sstephenson/eco">eco</a> which allows you to use CoffeScript logic inside the template. To use this language save the file as <tt class="docutils literal"><span class="pre">*.eco</span></tt>. An eco template wraps all the logic needed to execute it, as an example:</li>
+</ol>
+<div class="highlight-coffeescript"><div class="highlight"><pre><span class="k">class</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">App</span>
+
+    <span class="nv">constructor: </span><span class="nf">(config, @templates) -&gt;</span>
+
+    <span class="nv">render: </span><span class="nf">(target) -&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">target</span><span class="p">).</span><span class="nx">html</span> <span class="nx">@templates</span><span class="p">[</span><span class="nx">template_name_with_extension</span><span class="p">]</span> <span class="p">{</span> <span class="s">&#39;some&#39;</span><span class="o">:</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="o">:</span> <span class="p">[</span> <span class="s">&#39;here&#39;</span> <span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><a class="reference external" href="http://twitter.github.io/hogan.js/">Hogan.js</a> is an implementation of the language <a class="reference external" href="http://mustache.github.io/mustache.5.html">mustache</a>. To use this variant, save your file as <tt class="docutils literal"><span class="pre">*.hogan</span></tt>. You still need to include a reference to the Hogan library in your App and then initialize and use them as follows:</li>
+</ol>
+<div class="highlight-coffeescript"><div class="highlight"><pre><span class="k">class</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">App</span>
+
+    <span class="nv">constructor: </span><span class="nf">(config, @templates) -&gt;</span>
+
+    <span class="nv">render: </span><span class="nf">(target) -&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">target</span><span class="p">).</span><span class="nx">html</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Hogan</span><span class="p">.</span><span class="nx">Template</span><span class="p">(</span><span class="nx">@templates</span><span class="p">[</span><span class="s">&#39;template.hogan&#39;</span><span class="p">])).</span><span class="nx">render</span> <span class="p">{</span> <span class="s">&#39;some&#39;</span><span class="o">:</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="o">:</span> <span class="p">[</span> <span class="s">&#39;here&#39;</span> <span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally we might want to style our app. Usually a main style will be defined by a CSS framework required in the config file, but there is always place for that special something. To define a custom style <em>guaranteed</em> to be applicable to your App only, save a CSS or <a class="reference external" href="http://learnboost.github.io/stylus/">Stylus</a> file as <tt class="docutils literal"><span class="pre">style.[css|styl]</span></tt>.</p>
+<p>To run it all refer to the <tt class="docutils literal"><span class="pre">example/index.js</span></tt> and <tt class="docutils literal"><span class="pre">example/public/index.html</span></tt> files in the middleware repo.</p>
+</div>
+<div class="section" id="q-a">
+<h2>Q &amp; A<a class="headerlink" href="#q-a" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-do-i-change-which-file-will-export-my-root-app">
+<h3>How do I change which file will export my root <tt class="docutils literal"><span class="pre">App</span></tt>?<a class="headerlink" href="#how-do-i-change-which-file-will-export-my-root-app" title="Permalink to this headline">¶</a></h3>
+<p>Extend your <tt class="docutils literal"><span class="pre">config.js</span></tt> with the following key, value pair:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;appRoot&quot;</span><span class="o">:</span> <span class="s2">&quot;app/index&quot;</span> <span class="c1">// points to say index.js in &quot;app&quot; folder</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-can-i-use-modules-across-folders">
+<h3>How can I use modules across folders?<a class="headerlink" href="#how-can-i-use-modules-across-folders" title="Permalink to this headline">¶</a></h3>
+<p>Use the <a class="reference external" href="http://addyosmani.com/writing-modular-js/">CommonJS Modules/1.1</a> require pattern, for example as follows (in TypeScript):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kr">import</span> <span class="nx">models</span> <span class="o">=</span> <span class="nx">module</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">pete</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">models</span><span class="p">.</span><span class="nx">Person</span><span class="p">(</span><span class="s1">&#39;pete&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And in <tt class="docutils literal"><span class="pre">models.ts</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kr">export</span> <span class="kr">class</span> <span class="nx">Person</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Take a look at the <tt class="docutils literal"><span class="pre">choose-list</span></tt> app in the <tt class="docutils literal"><span class="pre">intermine-apps-a</span></tt> repo. It shows an example of how different modules can be required.</p>
+</div>
+</div>
+<div class="section" id="i-am-using-require-js-and-the-app-just-blew-up">
+<h3>I am using <tt class="docutils literal"><span class="pre">require.js</span></tt> and the app just blew up<a class="headerlink" href="#i-am-using-require-js-and-the-app-just-blew-up" title="Permalink to this headline">¶</a></h3>
+<p>Each app gets its own internal implementation of require to load its and only its modules. If you have something on <tt class="docutils literal"><span class="pre">window.require</span></tt> it will not get overwritten but it will also not be used by us. Your apps see our version of require, not any other higher up. This is so that multiple apps can live peacefully on a page without deviating from the require spec and having our own prefixes and app silos.</p>
+<p>In the future, we will also want to get the compiled app once into the browser and then require it multiple times on a page if need be. Using vanilla module loader would then not work as we would not be getting new instances of modules per app instance.</p>
+<p>Suggestions are welcome.</p>
+</div>
+<div class="section" id="a-source-file-i-am-using-is-not-compiling">
+<h3>A source file I am using is not compiling<a class="headerlink" href="#a-source-file-i-am-using-is-not-compiling" title="Permalink to this headline">¶</a></h3>
+<p>Check the <a class="reference external" href="https://github.com/intermine/apps-a-middleware/blob/master/builder/rules.coffee#L5-L14">head of the following file</a> to see the regex rules that the builder uses when going through your app sources.</p>
+<p>For example:</p>
+<div class="highlight-coffeescript"><div class="highlight"><pre><span class="nv">rules = </span><span class="p">[</span>
+    <span class="p">[</span> <span class="sr">/^((presenter|app)(\.coffee))|(\/(.*)\.coffee)/g</span><span class="p">,</span> <span class="s">&#39;module&#39;</span><span class="p">,</span> <span class="s">&#39;coffeescript&#39;</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="sr">/^((presenter|app)(\.js))|(\/(.*)\.js)/g</span><span class="p">,</span> <span class="s">&#39;module&#39;</span><span class="p">,</span> <span class="s">&#39;generic&#39;</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="sr">/^((presenter|app)(\.ls))|(\/(.*)\.ls)/g</span><span class="p">,</span> <span class="s">&#39;module&#39;</span><span class="p">,</span> <span class="s">&#39;livescript&#39;</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="sr">/^((presenter|app)(\.ts))|(\/([^\.]*)\.ts)/g</span><span class="p">,</span> <span class="s">&#39;module&#39;</span><span class="p">,</span> <span class="s">&#39;typescript&#39;</span> <span class="p">]</span> <span class="c1"># skip `.d.ts`</span>
+    <span class="p">[</span> <span class="sr">/^(.*)\.css/g</span><span class="p">,</span> <span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="s">&#39;generic&#39;</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="sr">/^(.*)\.styl/g</span><span class="p">,</span> <span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="s">&#39;stylus&#39;</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="sr">/^(.*)\.eco/g</span><span class="p">,</span> <span class="s">&#39;template&#39;</span><span class="p">,</span> <span class="s">&#39;eco&#39;</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="sr">/^(.*)\.hogan/g</span><span class="p">,</span> <span class="s">&#39;template&#39;</span><span class="p">,</span> <span class="s">&#39;hogan&#39;</span> <span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Would like to add another rule/filetype? Define its rule and add a new handler in <tt class="docutils literal"><span class="pre">apps-a-middleware/builder/types</span></tt>.</p>
+</div>
+<div class="section" id="why-do-you-keep-talking-about-a-middleware">
+<h3>Why do you keep talking about a middleware<a class="headerlink" href="#why-do-you-keep-talking-about-a-middleware" title="Permalink to this headline">¶</a></h3>
+<p>Well, the service you are using extends any existing service you are offering to your users. It would not make much sense to fire up a new service instance per &#8220;a thing&#8221; that you want to offer to your users. By using a middleware concept, you create one Node.js service on one port and it offers various functionalities as specified by its middlewares.</p>
+</div>
+<div class="section" id="why-the-name-apps-a">
+<h3>Why the name Apps/A?<a class="headerlink" href="#why-the-name-apps-a" title="Permalink to this headline">¶</a></h3>
+<p>You can just call it &#8220;apps&#8221;, but as a developer you need some form of a namespace to go on, so we use the Latin alphabet for suffixes. In the future/different version will be called Apps/B and so on.</p>
+</div>
+<div class="section" id="which-language-should-i-use-for-the-app">
+<h3>Which language should I use for the app?<a class="headerlink" href="#which-language-should-i-use-for-the-app" title="Permalink to this headline">¶</a></h3>
+<p>Down to your preference:</p>
+<dl class="docutils">
+<dt>JavaScript</dt>
+<dd>Oldie but goldie. There is no compilation step involved so what you see is what you get.</dd>
+<dt>CoffeeScript</dt>
+<dd>Sports a pythonesque syntax and makes common operations for you (far) easier. Your code is less verbose. The source you see gets compiled to JavaScript so if you run into problems you are still debugging JS.</dd>
+<dt>TypeScript</dt>
+<dd>You get the added benefit of types if you want to use them. This is beneficial especially if you have an editor with &#8220;IntelliSense&#8221; like <a class="reference external" href="https://www.jetbrains.com/webstorm/">WebStorm</a>. Ultimately this is where a lot of JavaScript is headed with classes and modules. You write more code but you can also define interfaces for what you expect to be provided to you. If you work with multiple different people this might be beneficial as they might be alerted when they break something.</dd>
+</dl>
+</div>
+<div class="section" id="why-is-the-config-in-javascript-if-my-app-can-be-in-script">
+<h3>Why is the config in JavaScript if my App can be in <a href="#id1"><span class="problematic" id="id2">*</span></a>Script?<a class="headerlink" href="#why-is-the-config-in-javascript-if-my-app-can-be-in-script" title="Permalink to this headline">¶</a></h3>
+<p>This is so they can see what the example config looks like. Someone embedding your App does not need your implementation language, but they can/should know vanilla JavaScript.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="apps-b.html" title="Apps/B"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="list-widgets/enrichment-widgets.html" title="List enrichment widgets statistics"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li>
+          <li><a href="index.html" >Embedding InterMine components</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

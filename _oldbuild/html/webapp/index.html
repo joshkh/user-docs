@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guide to Customising your Web Application &mdash; InterMine  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="InterMine  documentation" href="../index.html" />
+    <link rel="next" title="Home page" href="homepage/index.html" />
+    <link rel="prev" title="Query performance (precomputed tables)" href="../database/performance/precomputing.html" /><!-- syntax highlighting -->
+<link href="../_static/pygments/radek.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="homepage/index.html" title="Home page"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../database/performance/precomputing.html" title="Query performance (precomputed tables)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Guide to Customising your Web Application</a><ul>
+<li><a class="reference internal" href="#overwrite-any-jsp">Overwrite any JSP</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../database/performance/precomputing.html"
+                        title="previous chapter">Query performance (precomputed tables)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="homepage/index.html"
+                        title="next chapter">Home page</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/webapp/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="guide-to-customising-your-web-application">
+<h1>Guide to Customising your Web Application<a class="headerlink" href="#guide-to-customising-your-web-application" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="homepage/index.html">Home page</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="homepage/index.html#boxes-customization">Boxes Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homepage/index.html#popular-templates-customization">Popular Templates Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homepage/index.html#featured-lists">Featured Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homepage/index.html#rss-blog-feed">RSS/Blog Feed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="report-page/index.html">Report page</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="report-page/report-page.html">Report Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page/report-displayers.html">Report Displayers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page/report-displayers-examples.html">Report Displayers Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report-page/webapp-tables.html">Webapp Tables CSS &amp; HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedding/report-widgets.html">Report Widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lists/index.html">Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lists/lists-page.html">Lists page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lists/list-upload.html">List upload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lists/list-analysis/index.html">List analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedding/list-widgets/index.html">List Widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="template-queries/index.html">Template Queries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="template-queries/index.html#dropdowns">Dropdowns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="template-queries/index.html#auto-completion">Auto-completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="template-queries/index.html#optional-constraints">Optional constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="template-queries/index.html#templates-page">Templates page</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="query-results/index.html">Query Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#export">export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#column-headers">column headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#links">links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#weird-brackets">weird brackets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#the-initial-page-size">The initial Page Size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#the-initial-state-of-sub-tables">The initial state of Sub-Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#cell-formatters">Cell Formatters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-results/index.html#branding">Branding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="query-builder/index.html">QueryBuilder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="query-builder/index.html#select-a-data-type-to-begin-a-query">Select a Data Type to Begin a Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-builder/index.html#query-builder">query builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query-builder/index.html#hiding-fields">Hiding fields</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keyword-search/index.html">Keyword Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keyword-search/index.html#config-file">Config file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keyword-search/index.html#search-results">Search Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keyword-search/index.html#search-index">Search Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keyword-search/index.html#lucene">Lucene</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="layout/index.html">General Layout</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="layout/index.html#parts">Parts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout/index.html#changing-look-and-feel-the-theme">Changing look and feel, the theme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="region-search/index.html">Region Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="region-search/index.html#bioseginstallation">BiosegInstallation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="properties/index.html">Customise Web Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="properties/intermine-properties.html">Database and Web application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties/model-properties.html">Text and messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties/web-properties.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties/webconfig-model.html">Data and Widget Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties/class-keys.html">Class keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="properties/javascript-options.html">Setting Javascript Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data-categories/index.html">Data Categories</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data-categories/index.html#aspects-xml">Aspects.xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-categories/index.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-categories/index.html#data-page-tab">Data page/tab</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="help/index.html">Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="help/index.html#top-links">Top Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help/index.html#take-a-tour-link">Take a tour link</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help/index.html#contextual-help-the-on-each-page">Contextual help, the <cite>?</cite> on each page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help/index.html#data-definitions">Data definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linking-in/index.html">Linking in to your mine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#link-directly-to-query-results">Link directly to query results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#link-to-list-analysis-page">Link to List Analysis page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#query-builder">Query builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#report-page">Report page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#link-into-mine-with-orthologues">Link into Mine with Orthologues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#convert-any-identifiers-to-genes">Convert any identifiers to Genes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linking-in/index.html#more-examples">More examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="third-party-tools/index.html">Third party tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="third-party-tools/galaxy.html">Galaxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="third-party-tools/gbrowse.html">GBrowse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="third-party-tools/cytoscape.html">Cytoscape network viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="third-party-tools/heatmap.html">Heatmap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring-site-usage/index.html">Monitoring Site Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitoring-site-usage/google-analytics.html">Google Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring-site-usage/trackers.html">InterMine User Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring-site-usage/search-engines.html">Search engines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin/index.html">Website Admin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="admin/index.html#templates">Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin/index.html#tagging">Tagging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-accounts/index.html">User Accounts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user-accounts/userprofile.html">Userprofile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-accounts/open-id.html">Open ID</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance/index.html">Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="performance/index.html#setting-up-your-own-content-delivery-network">Setting up your own Content Delivery Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostic/index.html">Diagnostic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="diagnostic/index.html#restart-tomcat">Restart Tomcat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostic/index.html#verify-mine-properties-file">Verify MINE.properties file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostic/index.html#verify-tomcat-config">Verify Tomcat config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostic/index.html#force-recompile">Force recompile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostic/index.html#re-release-webapp">Re-release webapp</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overwrite-any-jsp">
+<h2>Overwrite any JSP<a class="headerlink" href="#overwrite-any-jsp" title="Permalink to this headline">¶</a></h2>
+<p>When the webapp is compiled, the order of projects is:</p>
+<ol class="arabic simple">
+<li>intermine/webapp</li>
+<li>bio/webapp        &lt;&#8211; overwrites files in intermine/webapp</li>
+<li>MINE_NAME/webapp &lt;&#8211; overwrites files in intermine/webapp and bio/webapp</li>
+</ol>
+<p>You can overwrite any JSP in the intermine or bio/webapp projects by having a JSP of the same name in your mine&#8217;s webapp directory.  The danger of this is that you will have to upgrade these JSPs manually.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="homepage/index.html" title="Home page"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../database/performance/precomputing.html" title="Query performance (precomputed tables)"
+             >previous</a> |</li>
+        <li><a href="../index.html">InterMine  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+                &copy; Copyright 2012, University of Cambridge.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
